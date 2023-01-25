@@ -1,0 +1,25 @@
+@model Acme.Samples.Pages.Components.DatoSolSetting.UpdateDatosSolSettingViewModel
+
+
+<abp-script src="/Pages/Components/DatoSolSetting/Default.js" />
+
+
+<h4>Configuracion de datos SOL</h4>
+<hr>
+<abp-card>
+    <abp-card-header>
+        <abp-card-title>Datos SOL</abp-card-title>
+    </abp-card-header>
+    <abp-card-body>
+        <form method="post" id="formSol">
+            <abp-row>
+                <abp-column>
+                    <abp-input asp-for="User"></abp-input>
+                    <abp-input asp-for="Password"></abp-input>
+                </abp-column>
+            </abp-row>
+            <hr class="mt-2">
+            <abp-button button-type="Primary" type="submit">Guardar</abp-button>
+        </form>
+    </abp-card-body>
+</abp-card>

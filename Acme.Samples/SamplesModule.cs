@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using Acme.Samples.Data;
 using Acme.Samples.Localization;
 using Acme.Samples.Menus;
+using Acme.Samples.Settings;
 using OpenIddict.Validation.AspNetCore;
 using Volo.Abp;
 using Volo.Abp.Uow;
@@ -48,6 +49,7 @@ using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
+using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
 
 namespace Acme.Samples;
 
@@ -147,8 +149,17 @@ public class SamplesModule : AbpModule
         ConfigureVirtualFiles(hostingEnvironment);
         ConfigureLocalization();
         ConfigureEfCore(context);
+        ConfigureSettingsContributor();
     }
 
+    private void ConfigureSettingsContributor()
+    {
+        Configure<SettingManagementPageOptions>(options =>
+        {
+            options.Contributors.Add(new DatosSettingsPageContributor());
+        });
+    }
+    
     private void ConfigureAuthentication(ServiceConfigurationContext context)
     {
         context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
