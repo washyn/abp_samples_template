@@ -1,0 +1,27 @@
+@page
+@using EasyAbp.LoggingManagement.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@inject IHtmlLocalizer<LoggingManagementResource> L
+@model EasyAbp.LoggingManagement.Web.Pages.LoggingManagement.SystemLogs.DetailModalModel
+@{
+    Layout = null;
+}
+<abp-dynamic-form abp-model="SystemLog" data-ajaxForm="true" asp-page="DetailModal" data-check-form-on-close="false">
+    <abp-modal>
+        <abp-modal-header title="@L["SystemLog"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-form-content />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Close)"></abp-modal-footer>
+    </abp-modal>
+</abp-dynamic-form>
+
+<script>
+    $(function () {
+        $("#SystemLog_Level").val(currentDetailModalData.level)
+        $("#SystemLog_LogName").val(currentDetailModalData.logName)
+        $("#SystemLog_LogValue").val(JSON.stringify(JSON.parse(currentDetailModalData.logValue), null, 4))
+        $("#SystemLog_Time").val(currentDetailModalData.time)
+    })
+</script>
