@@ -15,7 +15,14 @@
             <abp-row>
                 <abp-column>
                     <abp-input asp-for="User"></abp-input>
-                    <abp-input asp-for="Password"></abp-input>
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label"></label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" autocomplete="new-password" asp-for="Password" />
+                            <button class="btn btn-secondary" type="button" id="PasswordVisibilityButton"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                        </div>
+                        <span asp-validation-for="Password"></span>
+                    </div>
                 </abp-column>
             </abp-row>
             <hr class="mt-2">
