@@ -93,7 +93,26 @@ $(function () {
             // },
         ]
     }));
+
     
+    $('#clear-button').click(function (e) {
+        // not works
+        // $(".auto-complete-select").trigger("reset").trigger("change");
+        // $("#QueryModel_UserId").trigger("reset").trigger("change");
+        // $selectEl.val('');
+        // $selectEl.trigger('reset.select2');
+        // $selectEl.trigger('change.select2');
+        // $selectEl.val('');
+        // $selectEl.trigger('reset.select2');
+        // $selectEl.trigger('change.select2');
+        // let $selectEl = $('#QueryModel_UserId');
+        // let $selectEl = $('#auto-complete-select');
+        // $selectEl.val('');
+        // $selectEl.trigger('reset.select2');
+        // $selectEl.trigger('change.select2');
+        $form.resetForm();
+        dataTable.ajax.reload();
+    })
     $('#search-button').click(function (e) {
         dataTable.ajax.reload()
     })
