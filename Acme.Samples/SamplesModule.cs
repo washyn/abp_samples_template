@@ -50,6 +50,8 @@ using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
+using Volo.Abp.AuditLogging;
+using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
 
 namespace Acme.Samples;
@@ -300,6 +302,7 @@ public class SamplesModule : AbpModule
              * Documentation: https://docs.abp.io/en/abp/latest/Entity-Framework-Core#add-default-repositories
              */
             options.AddDefaultRepositories(includeAllEntities: true);
+            options.AddRepository<AuditLogAction,  EfCoreRepository<SamplesDbContext, AuditLogAction, Guid>>();
         });
 
         Configure<AbpDbContextOptions>(options =>
