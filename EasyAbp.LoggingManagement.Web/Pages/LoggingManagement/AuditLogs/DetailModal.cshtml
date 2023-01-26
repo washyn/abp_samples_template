@@ -1,0 +1,65 @@
+@page
+@using EasyAbp.LoggingManagement.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@inject IHtmlLocalizer<LoggingManagementResource> L
+@model EasyAbp.LoggingManagement.Web.Pages.LoggingManagement.AuditLogs.DetailModalModel
+@{
+    Layout = null;
+}
+<abp-modal size="ExtraLarge">
+    <abp-modal-header title="@L["SystemLog"].Value"></abp-modal-header>
+    <abp-modal-body>
+        @* render data *@
+        <abp-row>
+            <abp-column size="_3"><strong>Url</strong></abp-column>
+            <abp-column size="_9">@Model.Model.Url</abp-column>
+            <hr class="m-2">
+            <abp-column size="_3"><strong>Exceptions</strong></abp-column>
+            <abp-column size="_9">@Model.Model.Exceptions</abp-column>
+            <hr class="m-2">
+            <abp-column size="_3"><strong>ApplicationName</strong></abp-column>
+            <abp-column size="_9">@Model.Model.ApplicationName</abp-column>
+            <hr class="m-2">
+            <abp-column size="_3"><strong>BrowserInfo</strong></abp-column>
+            <abp-column size="_9">@Model.Model.BrowserInfo</abp-column>
+            <hr class="m-2">
+            <abp-column size="_3"><strong>ClientId</strong></abp-column>
+            <abp-column size="_9">@Model.Model.ClientId</abp-column>
+            <hr class="m-2">
+            <abp-column size="_3"><strong>CorrelationId</strong></abp-column>
+            <abp-column size="_9">@Model.Model.CorrelationId</abp-column>
+            <hr class="m-2">
+            <abp-column size="_3"><strong>ExecutionDuration</strong></abp-column>
+            <abp-column size="_9">@Model.Model.ExecutionDuration</abp-column>
+            <hr class="m-2">
+            <abp-column size="_3"><strong>ExecutionTime</strong></abp-column>
+            <abp-column size="_9">@Model.Model.ExecutionTime</abp-column>
+            <hr class="m-2">
+            <abp-column size="_3"><strong>TenantId</strong></abp-column>
+            <abp-column size="_9">@Model.Model.TenantId</abp-column>
+            <hr class="m-2">
+            <abp-column size="_3"><strong>TenantName</strong></abp-column>
+            <abp-column size="_9">@Model.Model.TenantName</abp-column>
+            <hr class="m-2">
+            <abp-column size="_3"><strong>UserId</strong></abp-column>
+            <abp-column size="_9">@Model.Model.UserId</abp-column>
+            <hr class="m-2">
+            <abp-column size="_3"><strong>UserName</strong></abp-column>
+            <abp-column size="_9">@Model.Model.UserName</abp-column>
+            <hr class="m-2">
+            <abp-column size="_3"><strong>ClientIpAddress</strong></abp-column>
+            <abp-column size="_9">@Model.Model.ClientIpAddress</abp-column>
+        </abp-row>
+    </abp-modal-body>
+    <abp-modal-footer buttons="@(AbpModalButtons.Close)"></abp-modal-footer>
+</abp-modal>
+
+@* <script> *@
+@*     $(function () { *@
+@*         $("#SystemLog_Level").val(currentDetailModalData.level) *@
+@*         $("#SystemLog_LogName").val(currentDetailModalData.logName) *@
+@*         $("#SystemLog_LogValue").val(JSON.stringify(JSON.parse(currentDetailModalData.logValue), null, 4)) *@
+@*         $("#SystemLog_Time").val(currentDetailModalData.time) *@
+@*     }) *@
+@* </script> *@

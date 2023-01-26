@@ -5,6 +5,7 @@ using Acme.Samples.Data;
 using Acme.Samples.Localization;
 using Acme.Samples.Menus;
 using Acme.Samples.Settings;
+using EasyAbp.LoggingManagement.Web;
 using OpenIddict.Validation.AspNetCore;
 using Volo.Abp;
 using Volo.Abp.Uow;
@@ -53,6 +54,7 @@ using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
 
 namespace Acme.Samples;
 
+[DependsOn(typeof(LoggingManagementWebModule))]
 [DependsOn(
     // ABP Framework packages
     typeof(AbpAspNetCoreMvcModule),

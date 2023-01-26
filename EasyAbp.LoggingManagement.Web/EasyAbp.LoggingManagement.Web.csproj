@@ -4,10 +4,21 @@
     <TargetFramework>net6.0</TargetFramework>
     <!-- <Nullable>enable</Nullable> -->
     <ImplicitUsings>enable</ImplicitUsings>
+
+
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <IsPackable>true</IsPackable>
+    <OutputType>Library</OutputType>
+    <RootNamespace>EasyAbp.LoggingManagement.Web</RootNamespace>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+
   </PropertyGroup>
 
 
   <ItemGroup>
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain" Version="6.0.3" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain.Shared" Version="6.0.3" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="6.0.3" />
     <PackageReference Include="Volo.Abp.AutoMapper" Version="6.0.3" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="6.0.3" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="6.0.3" />
@@ -25,6 +36,24 @@
   <ItemGroup>
     <EmbeddedResource Include="EasyAbp\LoggingManagement\Localization\*.json" />
     <Content Remove="EasyAbp\LoggingManagement\Localization\*.json" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\**\*.css" />
+    <EmbeddedResource Include="Pages\**\*.js" />
+    <EmbeddedResource Include="Components\**\*.js" />
+    <EmbeddedResource Include="Components\**\*.css" />
+    <EmbeddedResource Include="wwwroot\**\*.*" />
+    <Content Remove="Pages\**\*.css" />
+    <Content Remove="Pages\**\*.js" />
+    <Content Remove="Components\**\*.js" />
+    <Content Remove="Components\**\*.css" />
+    <Content Remove="wwwroot\**\*.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

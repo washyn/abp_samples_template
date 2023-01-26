@@ -107,4 +107,8 @@
     <Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EasyAbp.LoggingManagement.Web\EasyAbp.LoggingManagement.Web.csproj" />
+  </ItemGroup>
+
 </Project>

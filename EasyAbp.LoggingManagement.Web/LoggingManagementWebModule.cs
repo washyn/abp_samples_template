@@ -9,9 +9,15 @@ using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 using EasyAbp.LoggingManagement.Permissions;
+using Volo.Abp.Auditing;
+using Volo.Abp.AuditLogging;
+using Volo.Abp.AuditLogging.EntityFrameworkCore;
 
 namespace EasyAbp.LoggingManagement.Web
 {
+    [DependsOn(typeof(AbpAuditLoggingDomainModule))]
+    [DependsOn(typeof(AbpAuditLoggingDomainSharedModule))]
+    [DependsOn(typeof(AbpAuditLoggingEntityFrameworkCoreModule))]
     [DependsOn(
         typeof(LoggingManagementApplicationContractsModule),
         typeof(AbpAspNetCoreMvcUiThemeSharedModule),
@@ -47,7 +53,7 @@ namespace EasyAbp.LoggingManagement.Web
             context.Services.AddAutoMapperObjectMapper<LoggingManagementWebModule>();
             Configure<AbpAutoMapperOptions>(options =>
             {
-                options.AddMaps<LoggingManagementWebModule>(validate: true);
+                options.AddMaps<LoggingManagementWebModule>(validate: false);
             });
 
             Configure<RazorPagesOptions>(options =>
