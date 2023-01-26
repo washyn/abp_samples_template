@@ -49,50 +49,48 @@
         </abp-row>
     </abp-card-header>
     <abp-card-body>
-        <abp-card-body>
-            <form data-ajaxForm="true" asp-page="Index" id="formQuery">
-                <div class="mb-3">
-                    <label asp-for="QueryModel.UserId"></label>
-                    <select asp-for="QueryModel.UserId"
-                            class="auto-complete-select form-select"
-                            data-autocomplete-api-url="/api/identity/users"
-                            data-autocomplete-display-property="name"
-                            data-autocomplete-value-property="id"
-                            data-autocomplete-items-property="items"
-                            data-autocomplete-filter-param-name="filter"
-                            data-autocomplete-allow-clear="true">
-                    </select>
-                    <span asp-validation-for="QueryModel.UserId"></span>
-                </div>
-                <abp-row>
-                    <abp-column>
-                        <abp-input asp-for="QueryModel.StartTime"/>
-                    </abp-column>
-                    <abp-column>
-                        <abp-input asp-for="QueryModel.EndTime"/>
-                    </abp-column>
-                </abp-row>
-                <abp-row>
-                    <abp-column><abp-input asp-for="QueryModel.MinExecutionDuration"/></abp-column>
-                    <abp-column><abp-input asp-for="QueryModel.MaxExecutionDuration"/></abp-column>
-                </abp-row>
-                <div class="mb-3">
-                    <label asp-for="QueryModel.HasException"></label>
-                    <abp-radio asp-for="QueryModel.HasException" asp-items="selectItems" inline="true"/>
-                </div>
-                @* <abp-input asp-for="QueryModel.HasException"/> *@
-                <abp-row>
-                    <abp-column size-md="_6">
-                    </abp-column>
-                    <abp-column size-md="_6" class="text-end">
-                        @* <abp-button id="search-button" button-type="Outline_Primary" text="@L["Search"].Value"/> *@
-                    </abp-column>
-                </abp-row>
-                <div class="d-grid">
-                    <abp-button id="search-button" button-type="Outline_Primary" text="@L["Search"].Value"/>
-                </div>
-            </form>
-        </abp-card-body>
+        <form data-ajaxForm="true" asp-page="Index" id="formQuery">
+            <div class="mb-3">
+                <label asp-for="QueryModel.UserId"></label>
+                <select asp-for="QueryModel.UserId"
+                        class="auto-complete-select form-select"
+                        data-autocomplete-api-url="/api/identity/users"
+                        data-autocomplete-display-property="name"
+                        data-autocomplete-value-property="id"
+                        data-autocomplete-items-property="items"
+                        data-autocomplete-filter-param-name="filter"
+                        data-autocomplete-allow-clear="true">
+                </select>
+                <span asp-validation-for="QueryModel.UserId"></span>
+            </div>
+            <abp-row>
+                <abp-column>
+                    <abp-input asp-for="QueryModel.StartTime"/>
+                </abp-column>
+                <abp-column>
+                    <abp-input asp-for="QueryModel.EndTime"/>
+                </abp-column>
+            </abp-row>
+            @* <abp-row> *@
+            @*     <abp-column><abp-input asp-for="QueryModel.MinExecutionDuration"/></abp-column> *@
+            @*     <abp-column><abp-input asp-for="QueryModel.MaxExecutionDuration"/></abp-column> *@
+            @* </abp-row> *@
+            <div class="mb-3">
+                <label asp-for="QueryModel.HasException"></label>
+                <abp-radio asp-for="QueryModel.HasException" asp-items="selectItems" inline="true"/>
+            </div>
+            @* <abp-input asp-for="QueryModel.HasException"/> *@
+            <abp-row>
+                <abp-column size-md="_6">
+                </abp-column>
+                <abp-column size-md="_6" class="text-end">
+                    @* <abp-button id="search-button" button-type="Outline_Primary" text="@L["Search"].Value"/> *@
+                </abp-column>
+            </abp-row>
+            <div class="d-grid">
+                <abp-button id="search-button" button-type="Outline_Primary" text="@L["Search"].Value"/>
+            </div>
+        </form>
         <abp-table striped-rows="true" id="AuditLogTable" class="nowrap">
         </abp-table>
     </abp-card-body>

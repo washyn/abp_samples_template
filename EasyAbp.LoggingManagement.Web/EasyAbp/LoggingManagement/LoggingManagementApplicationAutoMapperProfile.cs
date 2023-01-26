@@ -12,6 +12,8 @@ namespace EasyAbp.LoggingManagement
              * Alternatively, you can split your mapping configurations
              * into multiple profile classes for a better organization. */
             CreateMap<AuditLogDto, AuditLog>().ReverseMap();
+            CreateMap<EntityChangeDto, EntityChange>().ReverseMap();
+            CreateMap<EntityPropertyChange, EntityPropertyChangeDto>().ReverseMap();
         }
     }
 }

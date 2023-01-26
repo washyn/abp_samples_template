@@ -303,6 +303,8 @@ public class SamplesModule : AbpModule
              */
             options.AddDefaultRepositories(includeAllEntities: true);
             options.AddRepository<AuditLogAction,  EfCoreRepository<SamplesDbContext, AuditLogAction, Guid>>();
+            options.AddRepository<EntityChange,  EfCoreRepository<SamplesDbContext, EntityChange, Guid>>();
+            options.AddRepository<EntityPropertyChange,  EfCoreRepository<SamplesDbContext, EntityPropertyChange, Guid>>();
         });
 
         Configure<AbpDbContextOptions>(options =>
