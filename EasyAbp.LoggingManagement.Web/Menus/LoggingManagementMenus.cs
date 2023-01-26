@@ -8,5 +8,6 @@
         //public const string Home = Prefix + ".MyNewMenuItem";
 
         public const string SystemLogs = Prefix + ".SystemLogs";
+        public const string AuditLogs = Prefix + ".AuditLogs";
     }
 }

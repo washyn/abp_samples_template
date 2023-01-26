@@ -33,6 +33,12 @@ $(function () {
                                     abp.log.debug(data);
                                     detailModal.open({id: data.record.id});
                                 }
+                            },
+                            {
+                                text: l('DetailPage'),
+                                action: function (data) {
+                                    window.location = "/LoggingManagement/AuditLogs/Detail?id=" + data.record.id;
+                                }
                             }
                         ]
                 }

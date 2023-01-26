@@ -29,6 +29,9 @@ namespace EasyAbp.LoggingManagement.Web.Menus
                 loggingManagementMenuItem.AddItem(
                     new ApplicationMenuItem(LoggingManagementMenus.SystemLogs, l["Menu:SystemLogs"], "/LoggingManagement/SystemLogs")
                 );
+                loggingManagementMenuItem.AddItem(
+                    new ApplicationMenuItem(LoggingManagementMenus.AuditLogs, l["Menu:AuditLogs"], "/LoggingManagement/AuditLogs")
+                );
             }
             
             if (!loggingManagementMenuItem.Items.IsNullOrEmpty())
