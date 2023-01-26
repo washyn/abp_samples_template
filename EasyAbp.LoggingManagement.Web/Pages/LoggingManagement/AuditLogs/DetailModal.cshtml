@@ -1,0 +1,95 @@
+@page
+@using EasyAbp.LoggingManagement.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@inject IHtmlLocalizer<LoggingManagementResource> L
+@model EasyAbp.LoggingManagement.Web.Pages.LoggingManagement.AuditLogs.DetailModalModel
+@{
+    Layout = null;
+}
+<abp-modal size="ExtraLarge">
+    <abp-modal-header title="@L["SystemLog"].Value"></abp-modal-header>
+    <abp-modal-body>
+        <abp-tabs>
+            <abp-tab title="General">
+                <br>
+                <abp-row>
+                    <abp-column size="_3"><strong>Url</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.Url</abp-column>
+                    <hr class="m-2">
+                    <abp-column size="_3"><strong>Exceptions</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.Exceptions</abp-column>
+                    <hr class="m-2">
+                    <abp-column size="_3"><strong>ApplicationName</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.ApplicationName</abp-column>
+                    <hr class="m-2">
+                    <abp-column size="_3"><strong>BrowserInfo</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.BrowserInfo</abp-column>
+                    <hr class="m-2">
+                    <abp-column size="_3"><strong>ClientId</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.ClientId</abp-column>
+                    <hr class="m-2">
+                    <abp-column size="_3"><strong>CorrelationId</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.CorrelationId</abp-column>
+                    <hr class="m-2">
+                    <abp-column size="_3"><strong>ExecutionDuration</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.ExecutionDuration</abp-column>
+                    <hr class="m-2">
+                    <abp-column size="_3"><strong>ExecutionTime</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.ExecutionTime</abp-column>
+                    <hr class="m-2">
+                    <abp-column size="_3"><strong>TenantId</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.TenantId</abp-column>
+                    <hr class="m-2">
+                    <abp-column size="_3"><strong>TenantName</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.TenantName</abp-column>
+                    <hr class="m-2">
+                    <abp-column size="_3"><strong>UserId</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.UserId</abp-column>
+                    <hr class="m-2">
+                    <abp-column size="_3"><strong>UserName</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.UserName</abp-column>
+                    <hr class="m-2">
+                    <abp-column size="_3"><strong>ClientIpAddress</strong></abp-column>
+                    <abp-column size="_9">@Model.AuditLog.ClientIpAddress</abp-column>
+                </abp-row>
+            </abp-tab>
+            <abp-tab title="Acciones">
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        @* <td>ServiceName</td> *@
+                        <td>MethodName</td>
+                        <td>Parameters</td>
+                        <td>ExecutionTime</td>
+                        <td>ExecutionDuration</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.LogActions)
+                        {
+                            <tr>
+                                @* <td>@item.ServiceName</td> *@
+                                <td>@item.MethodName</td>
+                                <td>@item.Parameters</td>
+                                <td>@item.ExecutionTime</td>
+                                <td>@item.ExecutionDuration</td>
+                                @* <td>@item.ExtraProperties</td> *@
+                            </tr>
+                        }                    
+                    </tbody>
+                </table>
+            </abp-tab>
+        </abp-tabs>
+    </abp-modal-body>
+    <abp-modal-footer buttons="@(AbpModalButtons.Close)"></abp-modal-footer>
+</abp-modal>
+
+@* <script> *@
+@*     $(function () { *@
+@*         $("#SystemLog_Level").val(currentDetailModalData.level) *@
+@*         $("#SystemLog_LogName").val(currentDetailModalData.logName) *@
+@*         $("#SystemLog_LogValue").val(JSON.stringify(JSON.parse(currentDetailModalData.logValue), null, 4)) *@
+@*         $("#SystemLog_Time").val(currentDetailModalData.time) *@
+@*     }) *@
+@* </script> *@
