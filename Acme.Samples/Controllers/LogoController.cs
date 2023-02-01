@@ -5,7 +5,14 @@ using Volo.Abp;
 using Volo.Abp.Application.Services;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Content;
+using Volo.Abp.DependencyInjection;
 using Volo.Abp.Http;
+using Volo.Abp.Localization;
+using Volo.Abp.MultiTenancy;
+using Volo.Abp.SettingManagement;
+using Volo.Abp.Settings;
+using Volo.Abp.Threading;
+using Volo.Abp.Ui.Branding;
 
 namespace Acme.Samples.Controllers;
 
@@ -30,7 +37,7 @@ public class LogoController : AbpController
         var hasFile = !string.IsNullOrEmpty(model.Logo?.FileName);
         _logger.LogDebug("hasFile");
         _logger.LogDebug(hasFile.ToString());
-        var obj = new LogoDto();
+        var obj = new UpdateLogoSettingDto();
         await using var memoryStream = new MemoryStream();
         if (model.Logo != null && model.Logo.Length > 0)
         {
@@ -39,40 +46,98 @@ public class LogoController : AbpController
                     
             obj.LogoContent = new RemoteStreamContent(memoryStream, fileName: model.Logo.FileName, contentType: model.Logo.ContentType);
         }
-        await _logoAppService.CreateLogoAsync(obj);
+        await _logoAppService.UpdateLogoAsync(obj);
         await memoryStream.DisposeAsync();
     }
 }
+
+
+public class LogoSettingDefinitionProvider : SettingDefinitionProvider
+{
+    public const string LogoSettingName = "LogoSettingName";
+    public override void Define(ISettingDefinitionContext context)
+    {
+        context.Add(new SettingDefinition(LogoSettingName, 
+            string.Empty)
+        );
+    }
+}
+
 
 [RemoteService(IsEnabled = false)]
 public class LogoAppService : ApplicationService
 {
     private readonly IWebHostEnvironment _webHostEnvironment;
+    private readonly ISettingProvider _settingProvider;
+    private readonly ISettingManager _settingManager;
     private const string LogoFoler = "logos";
-    public LogoAppService(IWebHostEnvironment webHostEnvironment)
+    public LogoAppService(IWebHostEnvironment webHostEnvironment, 
+        ISettingProvider settingProvider,
+        ISettingManager settingManager)
     {
         _webHostEnvironment = webHostEnvironment;
+        _settingProvider = settingProvider;
+        _settingManager = settingManager;
     }
-    
-    public async Task CreateLogoAsync(LogoDto logoDto)
+
+    public async Task<LogoSettingDto> GetAsync()
+    {
+        var settingsDto = new LogoSettingDto
+        {
+            LogoUrl = await SettingProvider.GetOrNullAsync(LogoSettingDefinitionProvider.LogoSettingName),
+        };
+
+        if (CurrentTenant.IsAvailable)
+        {
+            settingsDto.LogoUrl = await _settingManager.GetOrNullForTenantAsync(LogoSettingDefinitionProvider.LogoSettingName, CurrentTenant.GetId(), false);
+        }
+
+        return settingsDto;
+    }
+
+    public async Task UpdateLogoAsync(UpdateLogoSettingDto updateLogoSettingDto)
     {
         var fullPath = Path.Combine(_webHostEnvironment.WebRootPath, LogoFoler);
         Directory.CreateDirectory(fullPath);
-        // using (var sw = File.Create(Path.Combine(fullPath, logoDto.LogoContent.FileName)))
-        // {
-        //     await logoDto.LogoContent.GetStream().CopyToAsync(sw);
-        // }
-
-        var ext = Path.GetExtension(logoDto.LogoContent.FileName);
-        using (var sw = File.Create(Path.Combine(fullPath, Path.Combine(GuidGenerator.Create() + ext))))
+        var ext = Path.GetExtension(updateLogoSettingDto.LogoContent.FileName);
+        // var fileName = Path.Combine(GuidGenerator.Create() + ext);
+        var fileName = updateLogoSettingDto.LogoContent.FileName;
+        var fullLogoPath = "/" + LogoFoler +"/"+ fileName;
+        using (var sw = File.Create(Path.Combine(fullPath, fileName)))
         {
-            await logoDto.LogoContent.GetStream().CopyToAsync(sw);
+            await updateLogoSettingDto.LogoContent.GetStream().CopyToAsync(sw);
+            await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id,
+                LogoSettingDefinitionProvider.LogoSettingName, fullLogoPath);
         }
     }
 }
 
 
-public class LogoDto
+public class LogoSettingDto
+{
+    public string LogoUrl { get; set; }
+}
+
+
+[Dependency(ReplaceServices = true)]
+public class ExampleBrandingProvider : DefaultBrandingProvider
+{
+    private readonly LogoAppService _logoAppService;
+    public override string AppName => "";
+    public override string LogoUrl  => GetLogoUrl();
+
+    public ExampleBrandingProvider(LogoAppService logoAppService)
+    {
+        _logoAppService = logoAppService;
+    }
+
+    public string GetLogoUrl()
+    {
+        return _logoAppService.GetAsync().GetAwaiter().GetResult().LogoUrl;
+    }
+}
+
+public class UpdateLogoSettingDto
 {
     [Required]
     public RemoteStreamContent LogoContent { get; set; }
@@ -81,14 +146,13 @@ public class LogoDto
 public class LogoViewModel
 {
     [Required]
-    [MaxFileSize(maxFileSize: 1 * 1024 * 1024)]
+    [MaxFileSize(maxFileSize: (1024 * 1024))]
     [AllowedExtensions(new string[] {".jpg", ".png", ".jpeg"})]
     public IFormFile Logo { get; set; }
 }
 
 
 #region Attributes validation
-
 
 public class MaxFileSizeAttribute : ValidationAttribute
 {
@@ -120,7 +184,6 @@ public class MaxFileSizeAttribute : ValidationAttribute
         return ValidationResult.Success;
     }
 }
-
 
 public class AllowedExtensionsAttribute : ValidationAttribute
 {
@@ -175,4 +238,5 @@ public class AllowedContentTypeAttribute : ValidationAttribute
         return ValidationResult.Success;
     }
 }
+
 #endregion
