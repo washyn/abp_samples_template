@@ -1,7 +1,5 @@
 ﻿@page
 @using Microsoft.AspNetCore.Mvc.Localization
-@using Acme.Samples.Localization
-@inject IHtmlLocalizer<SamplesResource> L
 @model Acme.Samples.Pages.IndexModel
 
 @section styles {
@@ -14,11 +12,11 @@
     <abp-card>
         <abp-card-header>
             <abp-card-title>
-                @L["Welcome_Title"]
+                Welcome_Title
             </abp-card-title>
         </abp-card-header>
         <abp-card-body>            
-            @L["Welcome_Text"]
+            Welcome_Text
         </abp-card-body>
     </abp-card>
 

@@ -2,10 +2,6 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using Acme.Samples.Data;
-using Acme.Samples.Localization;
-using Acme.Samples.Menus;
-using Acme.Samples.Settings;
-using EasyAbp.LoggingManagement.Web;
 using OpenIddict.Validation.AspNetCore;
 using Volo.Abp;
 using Volo.Abp.Uow;
@@ -56,7 +52,6 @@ using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
 
 namespace Acme.Samples;
 
-[DependsOn(typeof(LoggingManagementWebModule))]
 [DependsOn(
     // ABP Framework packages
     typeof(AbpAspNetCoreMvcModule),
@@ -114,14 +109,7 @@ public class SamplesModule : AbpModule
 
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
-        context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
-        {
-            options.AddAssemblyResource(
-                typeof(SamplesResource)
-            );
-        });
-
-		PreConfigure<OpenIddictBuilder>(builder =>
+        PreConfigure<OpenIddictBuilder>(builder =>
 		{
 			builder.AddValidation(options =>
 			{
@@ -160,7 +148,6 @@ public class SamplesModule : AbpModule
     {
         Configure<SettingManagementPageOptions>(options =>
         {
-            options.Contributors.Add(new DatosSettingsPageContributor());
         });
     }
     
@@ -204,13 +191,6 @@ public class SamplesModule : AbpModule
     {
         Configure<AbpLocalizationOptions>(options =>
         {
-            options.Resources
-                .Add<SamplesResource>("en")
-                .AddBaseTypes(typeof(AbpValidationResource))
-                .AddVirtualJson("/Localization/Samples");
-
-            options.DefaultResourceType = typeof(SamplesResource);
-
             options.Languages.Add(new LanguageInfo("en", "en", "English"));
             options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
             options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
@@ -232,11 +212,6 @@ public class SamplesModule : AbpModule
             options.Languages.Add(new LanguageInfo("es", "es", "Español"));
             options.Languages.Add(new LanguageInfo("el", "el", "Ελληνικά"));
         });
-
-        Configure<AbpExceptionLocalizationOptions>(options =>
-        {
-            options.MapCodeNamespace("Samples", typeof(SamplesResource));
-        });
     }
 
     private void ConfigureVirtualFiles(IWebHostEnvironment hostingEnvironment)
@@ -256,7 +231,6 @@ public class SamplesModule : AbpModule
     {
         Configure<AbpNavigationOptions>(options =>
         {
-            options.MenuContributors.Add(new SamplesMenuContributor());
         });
     }
 

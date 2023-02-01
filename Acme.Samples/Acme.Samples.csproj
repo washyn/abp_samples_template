@@ -83,11 +83,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="Localization\Samples\*.json" />
-    <EmbeddedResource Include="Localization\Samples\*.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Logs\**" />
     <Content Remove="Logs\**" />
     <EmbeddedResource Remove="Logs\**" />
@@ -105,10 +100,6 @@
 
   <ItemGroup>
     <Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\EasyAbp.LoggingManagement.Web\EasyAbp.LoggingManagement.Web.csproj" />
   </ItemGroup>
 
 </Project>
