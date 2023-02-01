@@ -17,10 +17,9 @@ public class LogoSettingPageContributor : ISettingPageContributor
 {
     public Task ConfigureAsync(SettingPageCreationContext context)
     {
-        context.Groups.Add(
-            new SettingPageGroup("LogoSettingId", 
-                "Confuguracion de logo", 
-                typeof(LogoSettingViewComponent)));
+        context.Groups.AddFirst(new SettingPageGroup("LogoSettingId", 
+            "Confuguracion de logo", 
+            typeof(LogoSettingViewComponent)));
         return Task.CompletedTask;
     }
 
