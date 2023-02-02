@@ -1,5 +1,6 @@
 @using Acme.Samples.Pages.Components.LogoSetting
 <abp-script src="/Pages/Components/LogoSetting/Default.js" />
+<abp-style src="/Pages/Components/LogoSetting/Default.css" />
 
 
 <h4>Configuración de logo</h4>
@@ -9,12 +10,12 @@
         <abp-card-title>Configuración de logo</abp-card-title>
     </abp-card-header>
     <abp-card-body>
-        <form method="post" enctype="multipart/form-data" id="@nameof(LogoSettingViewComponent)" ac>
+        <form method="post" enctype="multipart/form-data" id="@nameof(LogoSettingViewComponent)">
             <abp-row>
                 <abp-column>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Cambiar logo de applicación</label>
-                        <input class="form-control" type="file" id="formFile" accept="image/*">
+                        <input class="form-control" name="logo" type="file" id="formFile" accept="image/*">
                     </div>
                 </abp-column>
             </abp-row>

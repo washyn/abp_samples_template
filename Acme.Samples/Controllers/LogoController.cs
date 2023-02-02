@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
@@ -29,7 +30,7 @@ public class LogoController : AbpController
         _logoAppService = logoAppService;
     }
 
-    [RequestSizeLimit(1024 * 1024)]
+    [RequestSizeLimit(LogoSettingDefinitionProvider.MaxLogoLogoFileSize)]
     [Route("upload")]
     [HttpPost]
     public async Task UploadLogo([FromForm] LogoViewModel model)
@@ -43,7 +44,7 @@ public class LogoController : AbpController
         {
             await model.Logo.CopyToAsync(memoryStream);
             memoryStream.Position = 0;
-                    
+            
             obj.LogoContent = new RemoteStreamContent(memoryStream, fileName: model.Logo.FileName, contentType: model.Logo.ContentType);
         }
         await _logoAppService.UpdateLogoAsync(obj);
@@ -55,6 +56,7 @@ public class LogoController : AbpController
 public class LogoSettingDefinitionProvider : SettingDefinitionProvider
 {
     public const string LogoSettingName = "LogoSettingName";
+    public const int MaxLogoLogoFileSize = 1024 * 1024 * 5;
     public override void Define(ISettingDefinitionContext context)
     {
         context.Add(new SettingDefinition(LogoSettingName, 
@@ -146,7 +148,7 @@ public class UpdateLogoSettingDto
 public class LogoViewModel
 {
     [Required]
-    [MaxFileSize(maxFileSize: (1024 * 1024))]
+    [MaxFileSize(maxFileSize: LogoSettingDefinitionProvider.MaxLogoLogoFileSize)]
     [AllowedExtensions(new string[] {".jpg", ".png", ".jpeg"})]
     public IFormFile Logo { get; set; }
 }
