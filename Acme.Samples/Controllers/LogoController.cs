@@ -102,7 +102,6 @@ public class LogoAppService : ApplicationService
         var fullPath = Path.Combine(_webHostEnvironment.WebRootPath, LogoFoler);
         Directory.CreateDirectory(fullPath);
         var ext = Path.GetExtension(updateLogoSettingDto.LogoContent.FileName);
-        // var fileName = Path.Combine(GuidGenerator.Create() + ext);
         var fileName = updateLogoSettingDto.LogoContent.FileName;
         var fullLogoPath = "/" + LogoFoler +"/"+ fileName;
         using (var sw = File.Create(Path.Combine(fullPath, fileName)))
@@ -125,7 +124,7 @@ public class LogoSettingDto
 public class ExampleBrandingProvider : DefaultBrandingProvider
 {
     private readonly LogoAppService _logoAppService;
-    public override string AppName => "";
+    public override string AppName => LogoHasVal ?string.Empty : "AppName";
     public override string LogoUrl  => GetLogoUrl();
 
     public ExampleBrandingProvider(LogoAppService logoAppService)
@@ -133,6 +132,7 @@ public class ExampleBrandingProvider : DefaultBrandingProvider
         _logoAppService = logoAppService;
     }
 
+    private bool LogoHasVal => !string.IsNullOrEmpty(GetLogoUrl());
     public string GetLogoUrl()
     {
         return _logoAppService.GetAsync().GetAwaiter().GetResult().LogoUrl;
