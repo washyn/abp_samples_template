@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
 
-namespace Acme.Samples.Pages.Components.LogoSetting;
+namespace LogoManagment.Pages.Components.LogoSetting;
 
 public class LogoSettingViewComponent : AbpViewComponent
 {
@@ -11,7 +13,6 @@ public class LogoSettingViewComponent : AbpViewComponent
         return View("~/Pages/Components/LogoSetting/Default.cshtml");
     }
 }
-
 
 public class LogoSettingPageContributor : ISettingPageContributor
 {

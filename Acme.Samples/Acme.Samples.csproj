@@ -15,7 +15,12 @@
     <Compile Remove="Logs\**" />
     <Content Remove="Logs\**" />
     <EmbeddedResource Remove="Logs\**" />
+    <EmbeddedResource Include="wwwroot\logo-script.js" />
+    <EmbeddedResource Include="wwwroot\logo-style.css" />
     <None Remove="Logs\**" />
+    <None Update="Pages\Components\LogoSetting\Default.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +34,14 @@
 
   <ItemGroup>
     <Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Components\LogoSetting\Default.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LogoManagment\LogoManagment.csproj" />
   </ItemGroup>
 
 </Project>

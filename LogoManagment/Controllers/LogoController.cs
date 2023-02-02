@@ -1,21 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Drawing;
-using JetBrains.Annotations;
+using System.IO;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Volo.Abp;
 using Volo.Abp.Application.Services;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Content;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Http;
-using Volo.Abp.Localization;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
-using Volo.Abp.Threading;
 using Volo.Abp.Ui.Branding;
+using System.Linq;
 
-namespace Acme.Samples.Controllers;
+namespace LogoManagment.Controllers;
 
 [Route("logo")]
 public class LogoController : AbpController
@@ -65,9 +66,14 @@ public class LogoSettingDefinitionProvider : SettingDefinitionProvider
     }
 }
 
+public interface ILogoAppService : IApplicationService
+{
+    Task<LogoSettingDto> GetAsync();
+    Task UpdateLogoAsync(UpdateLogoSettingDto updateLogoSettingDto);
+}
 
 [RemoteService(IsEnabled = false)]
-public class LogoAppService : ApplicationService
+public class LogoAppService : ApplicationService, ILogoAppService
 {
     private readonly IWebHostEnvironment _webHostEnvironment;
     private readonly ISettingProvider _settingProvider;

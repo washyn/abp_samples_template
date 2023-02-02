@@ -1,5 +1,4 @@
 ﻿using Acme.Samples.Data;
-using Acme.Samples.Pages.Components.LogoSetting;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
@@ -147,7 +146,7 @@ public class TemplateModules : AbpModule
     {
         Configure<SettingManagementPageOptions>(options =>
         {
-            options.Contributors.Add(new LogoSettingPageContributor());
+
         });
     }
     
