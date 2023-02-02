@@ -16,7 +16,16 @@
             </abp-card-title>
         </abp-card-header>
         <abp-card-body>            
-            Welcome_Text
+            
+            <select
+                class="auto-complete-select form-select"
+                data-autocomplete-api-url="/api/identity/users"
+                data-autocomplete-display-property="name"
+                data-autocomplete-value-property="id"
+                data-autocomplete-items-property="items"
+                data-autocomplete-filter-param-name="filter"
+                data-autocomplete-allow-clear="true">
+            </select>
         </abp-card-body>
     </abp-card>
 

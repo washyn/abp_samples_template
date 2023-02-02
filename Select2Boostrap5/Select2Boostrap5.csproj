@@ -40,4 +40,9 @@
     
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Select2Localization\Select2Localization.csproj" />
+  </ItemGroup>
+
+
 </Project>

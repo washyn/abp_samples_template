@@ -31,4 +31,8 @@
     <Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Select2Boostrap5\Select2Boostrap5.csproj" />
+  </ItemGroup>
+
 </Project>
