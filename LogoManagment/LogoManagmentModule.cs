@@ -9,10 +9,10 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
+using Volo.Abp.VirtualFileSystem;
 
 namespace LogoManagment
 {
-    //TODO: add as embebed resource, js and css, and remove from acme samples
     [DependsOn(typeof(AbpAspNetCoreMvcUiThemeSharedModule))]
     [DependsOn(typeof(AbpAspNetCoreMvcModule))]
     [DependsOn(typeof(Volo.Abp.Settings.AbpSettingsModule))]
@@ -20,6 +20,11 @@ namespace LogoManagment
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            Configure<AbpVirtualFileSystemOptions>(options =>
+            {
+                options.FileSets.AddEmbedded<LogoManagmentModule>();
+            });
+            
             Configure<SettingManagementPageOptions>(options =>
             {
                 options.Contributors.Add(new LogoSettingPageContributor());
