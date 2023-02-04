@@ -23,7 +23,7 @@ using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
 using Volo.Abp.VirtualFileSystem;
 
 namespace LogoManagment.Controllers;
-// TODO: improve with suport multitenat, and front ui resizer, and remove old file when update setting.
+// TODO: improve with suport multitenat, and front ui resizer image cropper.
 [Route("logo")]
 public class LogoController : AbpController
 {
@@ -58,6 +58,11 @@ public class LogoController : AbpController
             await model.Logo.CopyToAsync(memoryStream);
             memoryStream.Position = 0;
             var fileName = GenerateFileName(model.Logo.FileName);
+            var last = await GetLogoCurrent();
+            if (!string.IsNullOrEmpty(last))
+            {
+                await _blobContainer.DeleteAsync(last);
+            }
             await _blobContainer.SaveAsync(fileName, memoryStream);
             await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id, LogoSettingDefinitionProvider.LogoSettingName, fileName);
         }
@@ -70,12 +75,8 @@ public class LogoController : AbpController
     {
         Response.Headers.Add("Accept-Ranges", "bytes");
         Response.ContentType = MimeTypes.Application.OctetStream;
-        
-        var logo = await _settingProvider.GetOrNullAsync(LogoSettingDefinitionProvider.LogoSettingName);
-        if (CurrentTenant.IsAvailable)
-        {
-            logo = await _settingManager.GetOrNullForTenantAsync(LogoSettingDefinitionProvider.LogoSettingName, CurrentTenant.GetId(), false);
-        }
+
+        var logo = await GetLogoCurrent();
         
         if (string.IsNullOrEmpty(logo))
         {
@@ -88,6 +89,16 @@ public class LogoController : AbpController
         var remoteStream1 = new RemoteStreamContent(res);
         await res.FlushAsync();
         return remoteStream1;
+    }
+
+    private async Task<string> GetLogoCurrent()
+    {
+        var logo = await _settingProvider.GetOrNullAsync(LogoSettingDefinitionProvider.LogoSettingName);
+        if (CurrentTenant.IsAvailable)
+        {
+            logo = await _settingManager.GetOrNullForTenantAsync(LogoSettingDefinitionProvider.LogoSettingName, CurrentTenant.GetId(), false);
+        }
+        return logo;
     }
     
     private string GenerateFileName(string fileName)
