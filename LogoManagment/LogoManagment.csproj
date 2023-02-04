@@ -32,6 +32,7 @@
       <PackageReference Include="Volo.Abp.Swashbuckle" Version="$(AbpVersion)" />
       <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="$(AbpVersion)" />
       <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(AbpVersion)" />
+      <PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="$(AbpVersion)" />
   </ItemGroup>
 
   <ItemGroup>
@@ -66,8 +67,12 @@
     <Content Remove="Pages\**\*.css" />
     <Content Remove="Pages\**\*.js" />
     <Content Remove="wwwroot\**\*.*" />
-    
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="images\laptop_mac-24px.png" />
+    <EmbeddedResource Include="images\laptop_mac-24px.png" />
+  </ItemGroup>
+  
 
 </Project>

@@ -1,63 +1,107 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Volo.Abp;
-using Volo.Abp.Application.Services;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Content;
-using Volo.Abp.DependencyInjection;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
 using Volo.Abp.Ui.Branding;
 using System.Linq;
+using LogoManagment.Pages.Components.LogoSetting;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.Authorization.Permissions;
+using Volo.Abp.BlobStoring;
+using Volo.Abp.Http;
+using Volo.Abp.Localization;
+using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
+using Volo.Abp.VirtualFileSystem;
 
 namespace LogoManagment.Controllers;
-
+// TODO: improve with suport multitenat, and front ui resizer, and remove old file when update setting.
 [Route("logo")]
 public class LogoController : AbpController
 {
     private readonly ILogger<LogoController> _logger;
-    private readonly LogoAppService _logoAppService;
+    private readonly IBlobContainer<LogoPictureContainer> _blobContainer;
+    private readonly IVirtualFileProvider _virtualFileProvider;
+    private readonly ISettingProvider _settingProvider;
+    private readonly ISettingManager _settingManager;
 
     public LogoController(ILogger<LogoController> logger,
-        LogoAppService logoAppService)
+        IBlobContainer<LogoPictureContainer> blobContainer,
+        IVirtualFileProvider virtualFileProvider,
+        ISettingProvider settingProvider,
+        ISettingManager settingManager)
     {
         _logger = logger;
-        _logoAppService = logoAppService;
+        _blobContainer = blobContainer;
+        _virtualFileProvider = virtualFileProvider;
+        _settingProvider = settingProvider;
+        _settingManager = settingManager;
     }
 
     [RequestSizeLimit(LogoSettingDefinitionProvider.MaxLogoLogoFileSize)]
+    [MaxFileSize(LogoSettingDefinitionProvider.MaxLogoLogoFileSize)]
     [Route("upload")]
     [HttpPost]
     public async Task UploadLogo([FromForm] LogoViewModel model)
     {
-        var hasFile = !string.IsNullOrEmpty(model.Logo?.FileName);
-        _logger.LogDebug("hasFile");
-        _logger.LogDebug(hasFile.ToString());
-        var obj = new UpdateLogoSettingDto();
         await using var memoryStream = new MemoryStream();
         if (model.Logo != null && model.Logo.Length > 0)
         {
             await model.Logo.CopyToAsync(memoryStream);
             memoryStream.Position = 0;
-            
-            obj.LogoContent = new RemoteStreamContent(memoryStream, fileName: model.Logo.FileName, contentType: model.Logo.ContentType);
+            var fileName = GenerateFileName(model.Logo.FileName);
+            await _blobContainer.SaveAsync(fileName, memoryStream);
+            await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id, LogoSettingDefinitionProvider.LogoSettingName, fileName);
         }
-        await _logoAppService.UpdateLogoAsync(obj);
         await memoryStream.DisposeAsync();
     }
+    
+    [ResponseCache(Duration = 60)]
+    [HttpGet]
+    public async Task<IRemoteStreamContent> GetLogo()
+    {
+        Response.Headers.Add("Accept-Ranges", "bytes");
+        Response.ContentType = MimeTypes.Application.OctetStream;
+        
+        var logo = await _settingProvider.GetOrNullAsync(LogoSettingDefinitionProvider.LogoSettingName);
+        if (CurrentTenant.IsAvailable)
+        {
+            logo = await _settingManager.GetOrNullForTenantAsync(LogoSettingDefinitionProvider.LogoSettingName, CurrentTenant.GetId(), false);
+        }
+        
+        if (string.IsNullOrEmpty(logo))
+        {
+            var stream = _virtualFileProvider.GetFileInfo("/images/laptop_mac-24px.png").CreateReadStream();
+            var remoteStream = new RemoteStreamContent(stream);
+            await stream.FlushAsync();
+            return remoteStream;
+        }
+        var res = await _blobContainer.GetAsync(logo);
+        var remoteStream1 = new RemoteStreamContent(res);
+        await res.FlushAsync();
+        return remoteStream1;
+    }
+    
+    private string GenerateFileName(string fileName)
+    {
+        var ext = Path.GetExtension(fileName);
+        var newFileName = GuidGenerator.Create() + ext;
+        return newFileName;
+    }
 }
-
 
 public class LogoSettingDefinitionProvider : SettingDefinitionProvider
 {
     public const string LogoSettingName = "LogoSettingName";
-    public const int MaxLogoLogoFileSize = 1024 * 1024 * 5;
+    public const int MaxLogoLogoFileSize = 1024 * 1024 * 2;
     public override void Define(ISettingDefinitionContext context)
     {
         context.Add(new SettingDefinition(LogoSettingName, 
@@ -66,89 +110,62 @@ public class LogoSettingDefinitionProvider : SettingDefinitionProvider
     }
 }
 
-public interface ILogoAppService : IApplicationService
+public class LogoSettingPageContributor : ISettingPageContributor
 {
-    Task<LogoSettingDto> GetAsync();
-    Task UpdateLogoAsync(UpdateLogoSettingDto updateLogoSettingDto);
-}
-
-[RemoteService(IsEnabled = false)]
-public class LogoAppService : ApplicationService, ILogoAppService
-{
-    private readonly IWebHostEnvironment _webHostEnvironment;
-    private readonly ISettingProvider _settingProvider;
-    private readonly ISettingManager _settingManager;
-    private const string LogoFoler = "logos";
-    public LogoAppService(IWebHostEnvironment webHostEnvironment, 
-        ISettingProvider settingProvider,
-        ISettingManager settingManager)
+    public async Task ConfigureAsync(SettingPageCreationContext context)
     {
-        _webHostEnvironment = webHostEnvironment;
-        _settingProvider = settingProvider;
-        _settingManager = settingManager;
-    }
-
-    public async Task<LogoSettingDto> GetAsync()
-    {
-        var settingsDto = new LogoSettingDto
+        if (await CheckPermissionsAsync(context))
         {
-            LogoUrl = await SettingProvider.GetOrNullAsync(LogoSettingDefinitionProvider.LogoSettingName),
-        };
-
-        if (CurrentTenant.IsAvailable)
-        {
-            settingsDto.LogoUrl = await _settingManager.GetOrNullForTenantAsync(LogoSettingDefinitionProvider.LogoSettingName, CurrentTenant.GetId(), false);
-        }
-
-        return settingsDto;
-    }
-
-    public async Task UpdateLogoAsync(UpdateLogoSettingDto updateLogoSettingDto)
-    {
-        var fullPath = Path.Combine(_webHostEnvironment.WebRootPath, LogoFoler);
-        Directory.CreateDirectory(fullPath);
-        var ext = Path.GetExtension(updateLogoSettingDto.LogoContent.FileName);
-        var fileName = updateLogoSettingDto.LogoContent.FileName;
-        var fullLogoPath = "/" + LogoFoler +"/"+ fileName;
-        using (var sw = File.Create(Path.Combine(fullPath, fileName)))
-        {
-            await updateLogoSettingDto.LogoContent.GetStream().CopyToAsync(sw);
-            await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id,
-                LogoSettingDefinitionProvider.LogoSettingName, fullLogoPath);
+            context.Groups.AddFirst(new SettingPageGroup("LogoSettingId", 
+                "Confuguracion de logo", 
+                typeof(LogoSettingViewComponent)));
         }
     }
+
+    public async Task<bool> CheckPermissionsAsync(SettingPageCreationContext context)
+    {
+        var authorizationService = context.ServiceProvider.GetRequiredService<IAuthorizationService>();
+        return await authorizationService.IsGrantedAsync(LogoPermissions.Logo.Default);
+    }
 }
 
-
-public class LogoSettingDto
+public static class LogoPermissions
 {
-    public string LogoUrl { get; set; }
+    public const string GroupName = "LogoGroup";
+    public static class Logo
+    {
+        public const string Default = GroupName + ".Logo";
+    }
 }
 
+public class LogoPermissionDefinitionProvider : PermissionDefinitionProvider
+{
+    public override void Define(IPermissionDefinitionContext context)
+    {
+        var eventHubGroup = context.AddGroup(LogoPermissions.GroupName, L("Configuración de logo"));
+        var logoPermissions = eventHubGroup.AddPermission(LogoPermissions.Logo.Default, L("Permiso para cambiar de logo"));
+    }
+    private static LocalizableString L(string name)
+    {
+        return LocalizableString.Create<LogoResource>(name);
+    }
+}
 
-[Dependency(ReplaceServices = true)]
+[LocalizationResourceName("Logo")]
+public class LogoResource
+{
+}
+
+[BlobContainerName("logo-pictures")]
+public class LogoPictureContainer
+{
+}
+
 public class ExampleBrandingProvider : DefaultBrandingProvider
 {
-    private readonly LogoAppService _logoAppService;
-    public override string AppName => LogoHasVal ?string.Empty : "AppName";
-    public override string LogoUrl  => GetLogoUrl();
-
-    public ExampleBrandingProvider(LogoAppService logoAppService)
-    {
-        _logoAppService = logoAppService;
-    }
-
-    private bool LogoHasVal => !string.IsNullOrEmpty(GetLogoUrl());
-    public string GetLogoUrl()
-    {
-        return _logoAppService.GetAsync().GetAwaiter().GetResult().LogoUrl;
-    }
-}
-
-public class UpdateLogoSettingDto
-{
-    [Required]
-    public RemoteStreamContent LogoContent { get; set; }
+    public override string AppName => "";
+    public override string LogoUrl  => "/logo";
+    public override string LogoReverseUrl  => "/logo";
 }
 
 public class LogoViewModel
