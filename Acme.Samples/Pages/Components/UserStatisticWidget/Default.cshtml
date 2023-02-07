@@ -1,0 +1,31 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Button
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Card
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Grid
+@model Acme.Samples.Pages.Components.UserStatisticWidget.UserStatisticUpdateViewModel
+<abp-card>
+    <abp-card-header>
+        User Statistics
+    </abp-card-header>
+    <abp-card-body>
+        <form action="" class="filterForm">
+            <abp-row>
+                <abp-column size="_4">
+                    <input class="form-control" asp-for="StartDate"/>
+                </abp-column>
+                <abp-column size="_4">
+                    <input class="form-control" asp-for="EndDate"/>
+                </abp-column>
+                <abp-column size="_4">
+                    <abp-button button-type="Outline_Secondary" text="Refresh" class="refreshButton"></abp-button>
+                </abp-column>
+            </abp-row>
+        </form>
+        <br>
+        <div class="row">
+            <div class="col">
+                <canvas class="UserStatisticChart"></canvas>
+            </div>
+        </div>
+    </abp-card-body>
+</abp-card>
