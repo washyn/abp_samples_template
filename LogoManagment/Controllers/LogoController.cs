@@ -64,7 +64,7 @@ public class LogoController : AbpController
                 await _blobContainer.DeleteAsync(last);
             }
             await _blobContainer.SaveAsync(fileName, memoryStream);
-            await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id, LogoSettingDefinitionProvider.LogoSettingName, fileName);
+            await _settingManager.SetGlobalAsync(LogoSettingDefinitionProvider.LogoSettingName, fileName);
         }
         await memoryStream.DisposeAsync();
     }
