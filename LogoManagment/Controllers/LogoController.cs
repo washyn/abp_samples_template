@@ -128,7 +128,7 @@ public class LogoSettingPageContributor : ISettingPageContributor
         if (await CheckPermissionsAsync(context))
         {
             context.Groups.AddFirst(new SettingPageGroup("LogoSettingId", 
-                "Confuguracion de logo", 
+                "Configuración de logo", 
                 typeof(LogoSettingViewComponent)));
         }
     }

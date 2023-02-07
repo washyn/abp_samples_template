@@ -63,6 +63,16 @@ namespace LogoManagment
                     }
                 );
             });
+
+            Configure<AbpBundlingOptions>(options =>
+            {
+                options.ScriptBundles
+                    .Configure(typeof(Volo.Abp.SettingManagement.Web.Pages.SettingManagement.IndexModel).FullName,
+                        configuration =>
+                        {
+                            configuration.AddFiles("/Pages/Components/LogoSetting/Default.js");
+                        });
+            });
         }
     }
 }

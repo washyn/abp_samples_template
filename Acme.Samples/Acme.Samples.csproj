@@ -40,4 +40,8 @@
     <ProjectReference Include="..\LogoManagment\LogoManagment.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Components\LogoSetting\Default.cshtml" />
+  </ItemGroup>
+
 </Project>
