@@ -36,4 +36,8 @@
     <Folder Include="Migrations" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LogoManagment\LogoManagment.csproj" />
+  </ItemGroup>
+
 </Project>

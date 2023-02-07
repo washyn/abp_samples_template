@@ -4,5 +4,7 @@ namespace Acme.Samples.Pages;
 
 public class IndexModel : AbpPageModel
 {
-    
+    public IndexModel()
+    {
+    }
 }
