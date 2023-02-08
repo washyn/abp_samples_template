@@ -56,6 +56,13 @@
     "@abp/core" "~6.0.3"
     bootstrap "^5.1.3"
 
+"@abp/chart.js@6.0.3":
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/@abp/chart.js/-/chart.js-6.0.3.tgz#017103c465b59cdb8605755d4e8d4cf6127f8cc9"
+  integrity sha512-7nM06iRCV6JDg/wMY20zZU5kMDnoV+mlek5pEYThIqf+ta3h7fnHSUAZf3OZiKAsQg+Akjv98Xvt4nyww93yhQ==
+  dependencies:
+    chart.js "^3.7.0"
+
 "@abp/core@~6.0.3":
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/@abp/core/-/core-6.0.3.tgz#3c5a210773914e33579fb4ff92ce01d314eb3bbe"
@@ -461,6 +468,11 @@ camelcase@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-3.0.0.tgz#32fc4b9fcdaf845fcdf7e73bb97cac2261f0ab0a"
   integrity sha512-4nhGqUkc4BqbBBB4Q6zLuD7lzzrHYrjKGeYaEji/3tFR5VdJu9v+LilhGIVe8wxEJPPOeWo7eg8dwY13TZ1BNg==
+
+chart.js@^3.7.0:
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-3.9.1.tgz#3abf2c775169c4c71217a107163ac708515924b8"
+  integrity sha512-Ro2JbLmvg83gXF5F4sniaQ+lTbSv18E+TIf2cOeiH1Iqd2PGFOtem+DUufMZsCJwFE7ywPOpfXFBwRTGq7dh6w==
 
 chokidar@^2.0.0:
   version "2.1.8"

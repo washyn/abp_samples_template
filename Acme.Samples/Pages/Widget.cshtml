@@ -34,8 +34,24 @@
             <abp-column size="_6" class="mb-3">
                 <vc:user-statistic-widget model="argWidged2"></vc:user-statistic-widget>
             </abp-column>
+            <abp-column size="_6" class="mb-3">
+                <vc:images-widget></vc:images-widget>
+            </abp-column>
+            @* <abp-column size="_6" class="mb-3"> *@
+            @*     <vc:images-widget></vc:images-widget> *@
+            @* </abp-column> *@
+            @* <abp-column size="_6" class="mb-3"> *@
+            @*     <vc:images-widget></vc:images-widget> *@
+            @* </abp-column> *@
+            @* <abp-column size="_6" class="mb-3"> *@
+            @*     <vc:images-widget></vc:images-widget> *@
+            @* </abp-column> *@
         </abp-row>
         <hr>
         @* ... *@
+        @* @Html.Partial() *@
+        @* @Html.RenderPartial() *@
+        <partial/>
+        @* <partial view-data="@("")"/> *@
     </abp-card-body>
 </abp-card>
