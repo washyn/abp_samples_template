@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Acme.Samples.Pages.Components.UserAvatar;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using Volo.Abp.Account.Web;
 using Volo.Abp.Account.Web.ProfileManagement;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.BlobStoring;
-using Volo.Abp.BlobStoring.Database;
 using Volo.Abp.BlobStoring.FileSystem;
 using Volo.Abp.Content;
 using Volo.Abp.Localization;
@@ -14,7 +16,7 @@ using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Acme.Samples.Pages.Components.ProfileManagement.UserAvatar;
+namespace Acme.Samples.Pages.Components.ProfileManagement.ProfilePictureSetting;
 
 [Route("account/profile-picture-file")]
 public class ProfilePictureController : AbpController
@@ -46,7 +48,8 @@ public class ProfilePictureController : AbpController
         await _settingManager.SetForCurrentUserAsync(ProfilePictureSettings.ProfilePictureFile, id);
     }
     
-    
+    // [ResponseCache(Location = ResponseCacheLocation.Client, Duration = 120, VaryByQueryKeys = new []{"id"})]
+    [ResponseCache(Duration = 120)]
     [Route("{id:guid:required}")]
     [HttpGet]
     public async Task<IRemoteStreamContent> GetProfilePicture(Guid id)
@@ -70,7 +73,7 @@ public class ProfilePictureSettingDefinitionProvider : SettingDefinitionProvider
 {
     public override void Define(ISettingDefinitionContext context)
     {
-        context.Add(new SettingDefinition(ProfilePictureSettings.ProfilePictureFile));
+        context.Add(new SettingDefinition(ProfilePictureSettings.ProfilePictureFile, "9385f872-7563-3a64-2bd2-3a0801e89e21"));
     }
 }
     
@@ -102,7 +105,7 @@ public class UserAvatarViewComponent : ViewComponent
         {
             model.FileName = "9385f872-7563-3a64-2bd2-3a0801e89e21";
         }
-        return View("~/Pages/Components/ProfileManagement/UserAvatar/Default.cshtml",model);
+        return View("~/Pages/Components/ProfileManagement/ProfilePictureSetting/Default.cshtml",model);
     }
 }
 
@@ -175,7 +178,7 @@ public class UserProfileAvatarModule : AbpModule
                 .Configure(typeof(Volo.Abp.Account.Web.Pages.Account.ManageModel).FullName,
                     configuration =>
                     {
-                        configuration.AddFiles("/Pages/Components/ProfileManagement/UserAvatar/Default.js");
+                        configuration.AddFiles("/Pages/Components/ProfileManagement/ProfilePictureSetting/Default.js");
                     });
         });
 
@@ -190,6 +193,11 @@ public class UserProfileAvatarModule : AbpModule
                     fileSystem.BasePath = hosting.WebRootPath;
                 });
             });
+        });
+        
+        Configure<AbpToolbarOptions>(options =>
+        {
+            options.Contributors.Add(new UserAvatarToolbarContributor());
         });
     }
 }

@@ -1,4 +1,4 @@
-﻿using Acme.Samples.Pages.Components.ProfileManagement.UserAvatar;
+﻿using Acme.Samples.Pages.Components.ProfileManagement.ProfilePictureSetting;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 
