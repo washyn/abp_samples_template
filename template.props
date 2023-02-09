@@ -73,5 +73,11 @@
                 analyzers; native</PrivateAssets>
         </PackageReference>
     </ItemGroup>
-
+    <ItemGroup>
+        <PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="$(AbpVersion)" />
+        <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain.Shared" Version="$(AbpVersion)" />
+        <PackageReference Include="Volo.Abp.BlobStoring.Database.Domain" Version="$(AbpVersion)" />
+        <PackageReference Include="Volo.Abp.BlobStoring.Database.EntityFrameworkCore" Version="$(AbpVersion)" />
+    </ItemGroup>
+    
 </Project>

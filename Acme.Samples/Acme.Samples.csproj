@@ -17,6 +17,17 @@
     <Content Remove="Logs\**" />
     <EmbeddedResource Remove="Logs\**" />
     <None Remove="Logs\**" />
+    <Content Update="Pages\Components\ProfileManagement\UserAvatar\Default.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="images\**" />
+    <Content Remove="images\**" />
+    <EmbeddedResource Remove="images\**" />
+    <None Remove="images\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +45,7 @@
 
   <ItemGroup>
     <Folder Include="Migrations" />
+    <Folder Include="wwwroot\host\profile-pictures" />
   </ItemGroup>
 
 </Project>
