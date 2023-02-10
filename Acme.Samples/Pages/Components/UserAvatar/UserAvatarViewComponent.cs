@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Account.Web.Modules.Account.Components.Toolbar.UserLoginLink;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
+using Volo.Abp.Features;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Users;
 
@@ -25,17 +26,24 @@ public class UserAvatarViewComponent : AbpViewComponent
 
 public class UserAvatarToolbarContributor : IToolbarContributor
 {
-    public virtual Task ConfigureToolbarAsync(IToolbarConfigurationContext context)
+    public virtual async Task ConfigureToolbarAsync(IToolbarConfigurationContext context)
     {
         if (context.Toolbar.Name != StandardToolbars.Main)
         {
-            return Task.CompletedTask;
+            return;
         }
-
         if (context.ServiceProvider.GetRequiredService<ICurrentUser>().IsAuthenticated)
         {
-            context.Toolbar.Items.Add(new ToolbarItem(typeof(UserAvatarViewComponent)));
+            if (await FeatureIsAvailable(context))
+            {
+                context.Toolbar.Items.Add(new ToolbarItem(typeof(UserAvatarViewComponent)));
+            }
         }
-        return Task.CompletedTask;
+    }
+    
+    private async Task<bool> FeatureIsAvailable(IToolbarConfigurationContext context)
+    {
+        var feature = context.ServiceProvider.GetRequiredService<IFeatureChecker>();
+        return await feature.IsEnabledAsync(ProfilePictureFeature.Feature);
     }
 }

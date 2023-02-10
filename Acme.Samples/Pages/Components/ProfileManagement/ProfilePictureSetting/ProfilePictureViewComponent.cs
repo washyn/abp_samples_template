@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Acme.Samples.Pages.Components.UserAvatar;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Volo.Abp.Account.Web;
@@ -10,14 +11,17 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.BlobStoring.FileSystem;
 using Volo.Abp.Content;
+using Volo.Abp.Features;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
+using Volo.Abp.Validation.StringValues;
 using Volo.Abp.VirtualFileSystem;
 
 namespace Acme.Samples.Pages.Components.ProfileManagement.ProfilePictureSetting;
 
+[Authorize]
 [Route("account/profile-picture-file")]
 public class ProfilePictureController : AbpController
 {
@@ -34,6 +38,7 @@ public class ProfilePictureController : AbpController
         _settingManager = settingManager;
     }
     
+    [RequiresFeature(ProfilePictureFeature.Feature)]
     [HttpPost]
     public async Task UploadPicture([FromForm]UpdateProfilePictureViewModel model)
     {
@@ -48,8 +53,8 @@ public class ProfilePictureController : AbpController
         await _settingManager.SetForCurrentUserAsync(ProfilePictureSettings.ProfilePictureFile, id);
     }
     
-    // [ResponseCache(Location = ResponseCacheLocation.Client, Duration = 120, VaryByQueryKeys = new []{"id"})]
-    [ResponseCache(Duration = 120)]
+    // [ResponseCache(Duration = 120)]
+    [RequiresFeature(ProfilePictureFeature.Feature)]
     [Route("{id:guid:required}")]
     [HttpGet]
     public async Task<IRemoteStreamContent> GetProfilePicture(Guid id)
@@ -83,17 +88,43 @@ public static class ProfilePictureSettings
     public const string ProfilePictureFile = Prefix + ".ProfilePictureFile";
 }
 
+public static class ProfilePictureFeature
+{
+    private const string GroupName = "App";
+    public const string Feature = GroupName + ".ProfilePicture";
+
+}
+public class ProfilePictureFeatureDefinitionProvider : FeatureDefinitionProvider
+{
+    public override void Define(IFeatureDefinitionContext context)
+    {
+        var myGroup = context.AddGroup("ProfilePicture", L("Imagen de perfil"));
+
+        myGroup.AddFeature(
+            ProfilePictureFeature.Feature,
+            defaultValue: "false",
+            displayName: L("Caracteristica de seleccionar imagen de perfil"),
+            description: L("Permite seleccionar una imagen de perfil"),
+            valueType: new ToggleStringValueType()
+        );
+    }
+    private static LocalizableString L(string name)
+    {
+        return LocalizableString.Create<ProfilePictureResource>(name);
+    }
+}
+
 #endregion
 public class UpdateProfilePictureViewModel
 {
     [Required]
     public IFormFile File { get; set; }
 }
-public class UserAvatarViewComponent : ViewComponent
+public class ProfilePictureViewComponent : ViewComponent
 {
     private readonly ISettingManager _settingManager;
 
-    public UserAvatarViewComponent(ISettingManager settingManager)
+    public ProfilePictureViewComponent(ISettingManager settingManager)
     {
         _settingManager = settingManager;
     }
@@ -109,20 +140,27 @@ public class UserAvatarViewComponent : ViewComponent
     }
 }
 
-public class UserAvatarPageContributor : IProfileManagementPageContributor
+public class ProfilePicturePageContributor : IProfileManagementPageContributor
 {
-    public Task ConfigureAsync(ProfileManagementPageCreationContext context)
+    public async Task ConfigureAsync(ProfileManagementPageCreationContext context)
     {
         var l = context.ServiceProvider.GetRequiredService<IStringLocalizer<ProfilePictureResource>>();
+        if (await FeatureIsAvailable(context))
+        {
+            context.Groups.Add(
+                new ProfileManagementPageGroup(
+                    "Account.ProfilePicture",
+                    l["Imagen de perfil"],
+                    typeof(ProfilePictureViewComponent)
+                )
+            );
+        }
+    }
 
-        context.Groups.Add(
-            new ProfileManagementPageGroup(
-                "Account.ProfilePicture",
-                l["Imagen de perfil"],
-                typeof(UserAvatarViewComponent)
-            )
-        );
-        return Task.CompletedTask;
+    private async Task<bool> FeatureIsAvailable(ProfileManagementPageCreationContext context)
+    {
+        var feature = context.ServiceProvider.GetRequiredService<IFeatureChecker>();
+        return await feature.IsEnabledAsync(ProfilePictureFeature.Feature);
     }
 }
 
@@ -169,7 +207,7 @@ public class UserProfileAvatarModule : AbpModule
 
         Configure<ProfileManagementPageOptions>(options =>
         {
-            options.Contributors.AddFirst(new UserAvatarPageContributor());
+            options.Contributors.AddFirst(new ProfilePicturePageContributor());
         });
 
         Configure<AbpBundlingOptions>(options =>
