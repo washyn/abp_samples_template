@@ -174,8 +174,8 @@ public class ShowProfilePictureViewModel
 
 public enum TypeProfilePicture
 {
-    Default,
-    Upload,
+    Default = 0,
+    Upload = 1,
 }
 
 [LocalizationResourceName("UserAvatar")]
