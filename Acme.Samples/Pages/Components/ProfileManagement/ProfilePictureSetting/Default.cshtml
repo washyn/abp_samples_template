@@ -1,4 +1,9 @@
-﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using Acme.Samples.Pages.Components.ProfileManagement.ProfilePictureSetting
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Alert
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Button
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Card
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Grid
 @using Volo.Abp.SettingManagement
 @inject ISettingManager SettingManager
 @model Acme.Samples.Pages.Components.ProfileManagement.ProfilePictureSetting.ShowProfilePictureViewModel
@@ -6,23 +11,54 @@
     var url = $"/account/profile-picture-file/{Model.FileName}";
 }
 
-<h4>Imagen de perfil</h4>
-<hr class="my-4">
+<abp-card>
+    <abp-card-header>
+        <abp-card-title>Imagen de perfil</abp-card-title>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row>
+            <abp-column>
+                <div class="form-group">
+                    <label>Imagen de perfil actual</label>
+                    <br>
+                    <img id="CurrentProfilePicture" alt="Imagen de perfil" src="@url">
+                </div>
+            </abp-column>
+        </abp-row>
+        <hr>
+        <abp-row>
+            <abp-column>
+                <abp-radio asp-for="PictureType" inline="true"></abp-radio>
+            </abp-column>
+        </abp-row>
+        <hr>
+        <form method="post" enctype="multipart/form-data" id="@nameof(ProfilePictureViewComponent)">
+            <abp-row>
+                <abp-column>
+                    <h5>Cambiar imagen de perfil</h5>
+                    <div class="form-group">
+                        <label for="formFile" class="form-label">Cambiar imagen de perfil <span>*</span> </label>
+                        <input class="form-control" name="file" type="file" lang="es" id="formFile" accept="image/*" required="required">
+                    </div>
+                </abp-column>
+            </abp-row>
+            
+            <abp-row>
+                <abp-column>
+                    <div class="imageContainer">
+                        <img id="image">
+                    </div>
+                </abp-column>
+            </abp-row>
+            
+            <hr class="mt-2">
+            <abp-button button-type="Primary" type="submit" id="SaveProfilePicture">Guardar cambios</abp-button>
+        </form>
+    </abp-card-body>
+</abp-card>
 
-@* TODO: improve this ui add image croper and OK... *@
-@* addd feature manage *@
 <form id="ChangeProfilePictureForm" method="post" enctype="multipart/form-data">
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                <label>Imagen de perfil actual</label>
-                <br>
-                <img id="CurrentProfilePicture" src="@url">
-            </div>
-        </div>
-    </div>
-    <hr>
-
+    
     @* <div class="row"> *@
     @*     <div class="col"> *@
     @*         <div class="custom-checkbox custom-control mb-2"> *@
@@ -67,46 +103,20 @@
     @*     </div> *@
     @* </div> *@
     
-    <div id="formUpload">
-        @* <div class="custom-file"> *@
-        @*     <input type="file" class="custom-file-input" id="validatedCustomFile" required name="file"> *@
-        @*     <label class="custom-file-label" for="validatedCustomFile">Choose file...</label> *@
-        @* </div> *@
+    @* <div id="formUpload"> *@
+    @* <div class="custom-file"> *@
+    @*     <input type="file" class="custom-file-input" id="validatedCustomFile" required name="file"> *@
+    @*     <label class="custom-file-label" for="validatedCustomFile">Choose file...</label> *@
+    @* </div> *@
         
-        @* <div class="custom-file"> *@
-        @*     <input type="file" class="custom-file-input" id="customFile" name="file"> *@
-        @*     <label class="custom-file-label" for="customFile">Choose file</label> *@
-        @* </div> *@
+    @* <div class="custom-file"> *@
+    @*     <input type="file" class="custom-file-input" id="customFile" name="file"> *@
+    @*     <label class="custom-file-label" for="customFile">Choose file</label> *@
+    @* </div> *@
         
-        @* <div class="custom-file"> *@
-        @*     <input type="file" class="custom-file-input" id="customFileLang" lang="es" name="file"> *@
-        @*     <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label> *@
-        @* </div> *@
-        
-        <input type="file" lang="es" name="file"/>
-        <abp-button text="Guardar cambios" button-type="Primary" type="button" id="SaveButton"></abp-button>
-    </div>
+    @* <div class="custom-file"> *@
+    @*     <input type="file" class="custom-file-input" id="customFileLang" lang="es" name="file"> *@
+    @*     <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label> *@
+    @* </div> *@
+    @* </div> *@
 </form>
-
-
-@* <h4>Configuración de logo</h4> *@
-@* <hr> *@
-@* <abp-card> *@
-@*     <abp-card-header> *@
-@*         <abp-card-title>Configuración de logo</abp-card-title> *@
-@*     </abp-card-header> *@
-@*     <abp-card-body> *@
-@*         <form method="post" enctype="multipart/form-data" id="@nameof(LogoSettingViewComponent)"> *@
-@*             <abp-row> *@
-@*                 <abp-column> *@
-@*                     <div class="mb-3"> *@
-@*                         <label for="formFile" class="form-label">Cambiar logo de applicación <span>*</span> </label> *@
-@*                         <input class="form-control" name="logo" type="file" id="formFile" accept="image/*" required="required"> *@
-@*                     </div> *@
-@*                 </abp-column> *@
-@*             </abp-row> *@
-@*             <hr class="mt-2"> *@
-@*             <abp-button button-type="Primary" type="submit">Guardar</abp-button> *@
-@*         </form> *@
-@*     </abp-card-body> *@
-@* </abp-card> *@

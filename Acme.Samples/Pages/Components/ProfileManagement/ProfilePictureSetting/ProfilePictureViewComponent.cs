@@ -167,6 +167,15 @@ public class ProfilePicturePageContributor : IProfileManagementPageContributor
 public class ShowProfilePictureViewModel
 {
     public string FileName { get; set; }
+    
+    [EnumDataType(typeof(TypeProfilePicture))]
+    public TypeProfilePicture PictureType { get; set; }
+}
+
+public enum TypeProfilePicture
+{
+    Default,
+    Upload,
 }
 
 [LocalizationResourceName("UserAvatar")]
