@@ -12,6 +12,7 @@ using Volo.Abp.BlobStoring;
 using Volo.Abp.BlobStoring.FileSystem;
 using Volo.Abp.Content;
 using Volo.Abp.Features;
+using Volo.Abp.Http;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement;
@@ -57,18 +58,16 @@ public class ProfilePictureController : AbpController
     [RequiresFeature(ProfilePictureFeature.Feature)]
     [Route("{id:guid:required}")]
     [HttpGet]
-    public async Task<IRemoteStreamContent> GetProfilePicture(Guid id)
+    public async Task<IActionResult> GetProfilePicture(Guid id)
     {
-        HttpContext.Response.Headers.Add("content-type","image/jpeg");
+        var imageMime = "image/*";
         var file = await _container.GetOrNullAsync(id.ToString());
         if (file is null)
         {
             var stream = _fileProvider.GetFileInfo("/images/9385f872-7563-3a64-2bd2-3a0801e89e21.jpeg").CreateReadStream();
-            var remoteStream = new RemoteStreamContent(stream);
-            await stream.FlushAsync();
-            return remoteStream;
+            return File(await stream.GetAllBytesAsync(), imageMime);
         }
-        return new RemoteStreamContent(file);
+        return File(await file.GetAllBytesAsync(), imageMime);;
     }
 }
 
