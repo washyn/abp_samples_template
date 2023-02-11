@@ -26,11 +26,11 @@
             </abp-column>
         </abp-row>
         <hr>
-        <abp-row>
-            <abp-column>
-                <abp-radio asp-for="PictureType" inline="true"></abp-radio>
-            </abp-column>
-        </abp-row>
+        @* <abp-row> *@
+        @*     <abp-column> *@
+        @*         <abp-radio asp-for="PictureType" inline="true"></abp-radio> *@
+        @*     </abp-column> *@
+        @* </abp-row> *@
         <hr>
         <form method="post" enctype="multipart/form-data" id="@nameof(ProfilePictureViewComponent)">
             <abp-row>
@@ -56,51 +56,3 @@
         </form>
     </abp-card-body>
 </abp-card>
-
-<form id="ChangeProfilePictureForm" method="post" enctype="multipart/form-data">
-    
-    @* <div class="row"> *@
-    @*     <div class="col"> *@
-    @*         <div class="custom-checkbox custom-control mb-2"> *@
-    @*             <input type="radio" name="pptype" id="Radio_UseDefault" value="use-default" class="custom-control-input pp-type-selector"> *@
-    @*             <label class="custom-control-label" for="Radio_UseDefault">Usar avatar por defecto</label> *@
-    @*         </div> *@
-    @*         <div class="custom-checkbox custom-control mb-2"> *@
-    @*             <input type="radio" name="pptype" id="Radio_UseGravatar" value="use-gravatar" class="custom-control-input pp-type-selector"> *@
-    @*             <label class="custom-control-label" for="Radio_UseGravatar">Usar Gravatar</label> *@
-    @*         </div> *@
-    @*         <div class="custom-checkbox custom-control mb-2"> *@
-    @*             <input type="radio" name="pptype" id="Radio_UploadFile" value="use-picture" class="custom-control-input pp-type-selector" checked="'checked'"> *@
-    @*             <label class="custom-control-label" for="Radio_UploadFile">Subir archivo</label> *@
-    @*         </div> *@
-    @*     </div> *@
-    @* </div> *@
-    @* *@
-    @* <div class="row " id="UploadPPContainer"> *@
-    @*     <div class="col"> *@
-    @*         <h3>Cambiar imagen de perfil</h3> *@
-    @*         <div class="form-group"><label for="Picture">Seleccione una nueva imagen</label><input accept="image/*" type="file" id="Picture" name="Picture" class="form-control "><span class="text-danger field-validation-valid" data-valmsg-for="Picture" data-valmsg-replace="true"></span></div> *@
-    @* *@
-    @*         <div class="general-image-container"> *@
-    @*             <img id="image"> *@
-    @*         </div> *@
-    @* *@
-    @*         <span id="CursorInfo" class="mt-2 hidden-section">Mueva el cursor sobre las imágenes para ver el estilo redondeado.</span> *@
-    @* *@
-    @*         <div class="image-process-section"> *@
-    @*             <ul class="sample-images clearfix mt-2"> *@
-    @*                 <li class="big"></li> *@
-    @*                 <li class="medium"></li> *@
-    @*                 <li class="small"></li> *@
-    @*             </ul> *@
-    @*         </div> *@
-    @*     </div> *@
-    @* </div> *@
-    @* *@
-    @* <div class="mt-2 row"> *@
-    @*     <div class="col"> *@
-    @*         <button id="SaveProfilePicture" class="btn btn-primary" type="button" data-busy-text="Procesando..."><span>Guardar cambios</span></button> *@
-    @*     </div> *@
-    @* </div> *@
-   
-</form>

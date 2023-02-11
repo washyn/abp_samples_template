@@ -3,16 +3,13 @@ using Acme.Samples.Pages.Components.UserAvatar;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
-using Volo.Abp.Account.Web;
 using Volo.Abp.Account.Web.ProfileManagement;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.BlobStoring.FileSystem;
-using Volo.Abp.Content;
 using Volo.Abp.Features;
-using Volo.Abp.Http;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement;
@@ -166,11 +163,9 @@ public class ProfilePicturePageContributor : IProfileManagementPageContributor
 public class ShowProfilePictureViewModel
 {
     public string FileName { get; set; }
-    
-    [EnumDataType(typeof(TypeProfilePicture))]
-    public TypeProfilePicture PictureType { get; set; }
 }
 
+// Improve: can be use for improve...
 public enum TypeProfilePicture
 {
     Default = 0,
