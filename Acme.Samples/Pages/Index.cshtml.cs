@@ -4,5 +4,6 @@ namespace Acme.Samples.Pages;
 
 public class IndexModel : AbpPageModel
 {
-    
+    public Guid RolId { get; set; }
+    public Guid EntityId { get; set; }
 }
