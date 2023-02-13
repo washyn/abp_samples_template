@@ -6,9 +6,6 @@ namespace Acme.Samples.Pages;
 
 public class IndexModel : AbpPageModel
 {
-    private readonly ICustomSelectEntityChange _change;
-    public Guid RolId { get; set; }
-
     [EasySelector(
         getListedDataSourceUrl: "/api/app/custom-select-entity-change",
         getSingleDataSourceUrl: "/api/app/custom-select-entity-change/{id}",
@@ -18,11 +15,10 @@ public class IndexModel : AbpPageModel
         hideSubText: false,
         runScriptOnWindowLoad: true)]
     public Guid EntityId { get; set; } 
-        // = Guid.Parse("3bf3cf48-5b05-80d3-1281-3a02aae229bb");
-    public Guid Ations { get; set; }
+        = Guid.Parse("285cf911-8988-7c57-98d5-3a08fd68db24");
 
-    public IndexModel(ICustomSelectEntityChange change)
+
+    public IndexModel()
     {
-        _change = change;
     }
 }

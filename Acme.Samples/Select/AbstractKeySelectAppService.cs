@@ -4,13 +4,15 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Acme.Samples.Select;
+using Volo.Abp;
 using Volo.Abp.Application.Dtos;
+using Volo.Abp.Application.Services;
 using Volo.Abp.Auditing;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.ObjectMapping;
 
-namespace Volo.Abp.Application.Services;
+namespace Acme.Samples.Select;
 
 // public abstract class AbstractKeyReadOnlyAppService<TEntity, TEntityDto, TKey>
 //     : AbstractKeyReadOnlyAppService<TEntity, TEntityDto, TEntityDto, TKey, PagedAndSortedResultRequestDto>

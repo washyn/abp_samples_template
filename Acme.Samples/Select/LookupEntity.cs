@@ -1,5 +1,5 @@
 ﻿using Volo.Abp.Application.Dtos;
-namespace Acme.Samples.Select;
+namespace Volo.Abp.Application.Services;
 
 public class LookupEntity<TKey>
 {
@@ -10,4 +10,10 @@ public class LookupEntity<TKey>
 public class LookupRequestDto : PagedResultRequestDto
 {
     public string Filter { get; set; }
+}
+
+// improve: if entity implements tris aply sorting
+public interface IHasOrder
+{
+    int Order { get; }
 }

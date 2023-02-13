@@ -1,7 +1,5 @@
 ﻿using Volo.Abp.Application.Dtos;
-using Volo.Abp.Application.Services;
-
-namespace Acme.Samples.Select;
+namespace Volo.Abp.Application.Services;
 // por default TKey es in en el tempalte se removio porque da error...
 public interface ICustomSelectAppService<TKey>
     : IApplicationService
