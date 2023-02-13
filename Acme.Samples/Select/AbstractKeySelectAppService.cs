@@ -237,37 +237,19 @@ public abstract class AbstractKeyReadOnlyAppService<TEntity, TGetOutputDto, TGet
 
 public abstract class AbstractKeyCustomSelectAppService<TEntity, TKey>
     : ApplicationService
-    , ICustomSelectAppService<TKey>
+    // , ICustomSelectAppService<TKey>
     where TEntity : class, IEntity
 {
     protected IReadOnlyRepository<TEntity> ReadOnlyRepository { get; }
 
     // protected virtual string GetPolicyName { get; set; }
-    //
     // protected virtual string GetListPolicyName { get; set; }
 
     protected AbstractKeyCustomSelectAppService(IReadOnlyRepository<TEntity> repository)
     {
         ReadOnlyRepository = repository;
     }
-    public virtual async Task<LookupEntity<TKey>> GetAsync(TKey id)
-    {
-        throw new NotImplementedException(); // TODO: implementar despues...
-    }
 
-    // TODO: mover al que no es abstrac key
-    public virtual async Task<PagedResultDto<LookupEntity<TKey>>> GetListAsync(LookupRequestDto input)
-    {
-        var query = await CreateFilteredQueryAsync(input);
-        var totalCount = await AsyncExecuter.CountAsync(query);
-        query = ApplyPaging(query, input);
-        var entities = await AsyncExecuter.ToListAsync(query);
-        
-        return new PagedResultDto<LookupEntity<TKey>>(
-            totalCount,
-            entities
-        );
-    }
     // public virtual async Task<TGetOutputDto> GetAsync(TKey id)
     // {
     //     await CheckGetPolicyAsync();
@@ -349,47 +331,6 @@ public abstract class AbstractKeyCustomSelectAppService<TEntity, TKey>
     //     throw new AbpException("No sorting specified but this query requires sorting. Override the ApplyDefaultSorting method for your application service derived from AbstractKeyReadOnlyAppService!");
     // }
     //
-    /// <summary>
-    /// Should apply paging if needed.
-    /// </summary>
-    /// <param name="query">The query.</param>
-    /// <param name="input">The input.</param>
-    protected virtual IQueryable<LookupEntity<TKey>> ApplyPaging(IQueryable<LookupEntity<TKey>> query, LookupRequestDto input)
-    {
-        //Try to use paging if available
-        if (input is IPagedResultRequest pagedInput)
-        {
-            return query.PageBy(pagedInput);
-        }
-    
-        //Try to limit query result if available
-        if (input is ILimitedResultRequest limitedInput)
-        {
-            return query.Take(limitedInput.MaxResultCount);
-        }
-    
-        //No paging
-        return query;
-    }
-    
-    // /// <summary>
-    // /// This method should create <see cref="IQueryable{TEntity}"/> based on given input.
-    // /// It should filter query if needed, but should not do sorting or paging.
-    // /// Sorting should be done in <see cref="ApplySorting"/> and paging should be done in <see cref="ApplyPaging"/>
-    // /// methods.
-    // /// </summary>
-    // /// <param name="input">The input.</param>
-    // protected virtual async Task<IQueryable<TEntity>> CreateFilteredQueryAsync(LookupRequestDto input)
-    // {
-    //     return await ReadOnlyRepository.GetQueryableAsync();
-    // }
-
-    protected virtual async Task<IQueryable<LookupEntity<TKey>>> CreateFilteredQueryAsync(LookupRequestDto input)
-    {
-        // return await ReadOnlyRepository.GetQueryableAsync();
-        throw new NotImplementedException();
-    }
-    
     // /// <summary>
     // /// Maps <typeparamref name="TEntity"/> to <typeparamref name="TGetOutputDto"/>.
     // /// It internally calls the <see cref="MapToGetOutputDto"/> by default.

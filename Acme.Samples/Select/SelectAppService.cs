@@ -108,7 +108,9 @@ public abstract class SelectAppService<TEntity, TGetOutputDto, TGetListOutputDto
 
 
 public abstract class CustomSelectAppService<TEntity, TKey>
-    : AbstractKeyCustomSelectAppService<TEntity, TKey>
+    // : AbstractKeyCustomSelectAppService<TEntity, TKey>
+    : ApplicationService
+    , ICustomSelectAppService<TKey>
     where TEntity : class, IEntity<TKey>
     // where TGetOutputDto : IEntityDto<TKey>
     // where TGetListOutputDto : IEntityDto<TKey>
@@ -116,16 +118,98 @@ public abstract class CustomSelectAppService<TEntity, TKey>
     protected IReadOnlyRepository<TEntity, TKey> Repository { get; }
     
     protected CustomSelectAppService(IReadOnlyRepository<TEntity, TKey> repository)
-        : base(repository)
     {
         Repository = repository;
     }
 
-    // protected override async Task<TEntity> GetEntityByIdAsync(TKey id)
-    // {
-    //     return await Repository.GetAsync(id);
-    // }
-    //
+    public virtual async Task<LookupEntity<TKey>> GetAsync(TKey id)
+    {
+        throw new NotImplementedException();
+        // var entity = await GetEntityByIdAsync(id);
+        // return await MapToGetOutputDtoAsync(entity);
+    }
+    
+    public virtual async Task<PagedResultDto<LookupEntity<TKey>>> GetListAsync(LookupRequestDto input)
+    {
+        // var query = await CreateFilteredQueryAsync(input);
+        // var totalCount = await AsyncExecuter.CountAsync(query);
+        // query = ApplyPaging(query, input);
+        // var entities = await AsyncExecuter.ToListAsync(query);
+        //
+        // return new PagedResultDto<LookupEntity<TKey>>(
+        //     totalCount,
+        //     entities
+        // );
+        
+        var query = ApplyFilter(await GetSelectQueryable(), input.Filter);
+        var totalCount = await AsyncExecuter.CountAsync(query);
+        query = ApplyPaging(query, input);
+        var entities = await AsyncExecuter.ToListAsync(query);
+        return new PagedResultDto<LookupEntity<TKey>>(totalCount, entities);
+    }
+    
+    protected async Task<TEntity> GetEntityByIdAsync(TKey id)
+    {
+        return await Repository.GetAsync(id);
+    }
+    
+    /// <summary>
+    /// Should apply paging if needed.
+    /// </summary>
+    /// <param name="query">The query.</param>
+    /// <param name="input">The input.</param>
+    protected virtual IQueryable<LookupEntity<TKey>> ApplyPaging(IQueryable<LookupEntity<TKey>> query, LookupRequestDto input)
+    {
+        //Try to use paging if available
+        if (input is IPagedResultRequest pagedInput)
+        {
+            return query.PageBy(pagedInput);
+        }
+    
+        //Try to limit query result if available
+        if (input is ILimitedResultRequest limitedInput)
+        {
+            return query.Take(limitedInput.MaxResultCount);
+        }
+    
+        //No paging
+        return query;
+    }
+    
+    /// <summary>
+    /// This method should create <see cref="IQueryable{TEntity}"/> based on given input.
+    /// It should filter query if needed, but should not do sorting or paging.
+    /// Sorting should be done in <see cref="ApplySorting"/> and paging should be done in <see cref="ApplyPaging"/>
+    /// methods.
+    /// </summary>
+    /// <param name="input">The input.</param>
+    protected virtual async Task<IQueryable<LookupEntity<TKey>>> CreateFilteredQueryAsync(LookupRequestDto input)
+    {
+        // return await Repository.GetQueryableAsync();
+        // throw new NotImplementedException();
+        var temp = await Repository.GetQueryableAsync();
+        return temp.Select(a => new LookupEntity<TKey>()
+            {
+                Id = a.Id,
+                DisplayName = a.Id.ToString()
+            });
+    }
+    
+    public virtual async Task<IQueryable<LookupEntity<TKey>>> GetSelectQueryable()
+    {
+        var queryAble = await Repository.GetQueryableAsync();
+        return queryAble.Select(a => new LookupEntity<TKey>()
+        {
+            Id = a.Id,
+            DisplayName = a.Id.ToString()
+        });
+    }
+    
+    public virtual IQueryable<LookupEntity<TKey>> ApplyFilter(IQueryable<LookupEntity<TKey>> query, string filterText)
+    {
+        return query.WhereIf(!string.IsNullOrEmpty(filterText), entity => entity.DisplayName.Contains(filterText));
+    }
+    
     // protected override IQueryable<TEntity> ApplyDefaultSorting(IQueryable<TEntity> query)
     // {
     //     if (typeof(TEntity).IsAssignableTo<ICreationAuditedObject>())
@@ -139,26 +223,26 @@ public abstract class CustomSelectAppService<TEntity, TKey>
     // }
 }
 
+public class CustomSelectEntityChange : CustomSelectAppService<EntityPropertyChange, Guid>
+{
+    public CustomSelectEntityChange(IReadOnlyRepository<EntityPropertyChange, Guid> repository) : base(repository)
+    {
+    }
+    // esto se deberia implementar si se quiere customizar el display name
+    public override async Task<IQueryable<LookupEntity<Guid>>> GetSelectQueryable()
+    {
+        var temp = await Repository.GetQueryableAsync();
+        return temp.Select(a => new LookupEntity<Guid>()
+        {
+            Id = a.Id,
+            DisplayName = a.NewValue
+        });
+    }
+}
 
-// public class SelectTestRoleAppService : CustomSelectAppService<EntityPropertyChange, Guid>
-// {
-//     public SelectTestRoleAppService(IReadOnlyRepository<EntityPropertyChange, Guid> repository) : base(repository)
-//     {
-//     }
-//
-//     protected override async Task<EntityPropertyChange> GetEntityByIdAsync(Guid id)
-//     {
-//         throw new NotImplementedException();
-//     }
-//
-//     protected override async Task<IQueryable<LookupEntity<Guid>>> CreateFilteredQueryAsync(LookupRequestDto input)
-//     {
-//         var temp = await Repository.GetQueryableAsync();
-//         var queryable = temp.Select(a => new LookupEntity<Guid>()
-//         {
-//             Id = a.Id,
-//             DisplayName = a.NewValue
-//         });
-//         return queryable;
-//     }
-// }
+public class CustomSelectEntityAppService : CustomSelectAppService<EntityChange, Guid>
+{
+    public CustomSelectEntityAppService(IReadOnlyRepository<EntityChange, Guid> repository) : base(repository)
+    {
+    }
+}
