@@ -1,5 +1,5 @@
-﻿using EasyAbp.Abp.TagHelperPlus.EasySelector;
-using Volo.Abp.Application.Services;
+﻿using Acme.Samples.Select;
+using EasyAbp.Abp.TagHelperPlus.EasySelector;
 using Volo.Abp.AspNetCore.Mvc.UI.RazorPages;
 
 namespace Acme.Samples.Pages;

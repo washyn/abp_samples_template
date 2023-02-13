@@ -1,7 +1,5 @@
 ﻿using Volo.Abp.Application.Dtos;
-
 namespace Acme.Samples.Select;
-
 
 public class LookupEntity<TKey>
 {
