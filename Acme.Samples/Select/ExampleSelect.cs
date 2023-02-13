@@ -2,7 +2,6 @@
 using Volo.Abp.Auditing;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.Domain.Repositories;
-using Volo.Abp.Identity;
 
 namespace Acme.Samples.Select;
 
@@ -27,21 +26,4 @@ public class AuditLogSelectAppService : SelectAppService<AuditLog, Guid>
 
 public interface IAuditLogSelectAppService : ISelectAppService<Guid>
 {
-}
-
-public class UserSelectAppService : SelectAppService<IdentityUser, Guid>
-{
-    public UserSelectAppService(IReadOnlyRepository<IdentityUser, Guid> repository) : base(repository)
-    {
-    }
-
-    protected override async Task<IQueryable<LookupEntity<Guid>>> GetSelectQueryable()
-    {
-        var queryable = await Repository.GetQueryableAsync();
-        return queryable.Select(a => new LookupEntity<Guid>()
-        {
-            Id = a.Id,
-            DisplayName = a.Name + ' ' + a.Email
-        });
-    }
 }

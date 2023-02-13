@@ -16,17 +16,17 @@ public class IndexModel : AbpPageModel
         runScriptOnWindowLoad: true)]
     public Guid EntityId { get; set; } 
         = Guid.Parse("285cf911-8988-7c57-98d5-3a08fd68db24");
-
-
+    
+    // /api/app/example-abstract-entity-select
     [EasySelector(
-        getListedDataSourceUrl: "/api/app/user-select",
-        getSingleDataSourceUrl: "/api/app/user-select/{id}",
+        getListedDataSourceUrl: "/api/app/example-abstract-entity-select",
+        getSingleDataSourceUrl: "/api/app/example-abstract-entity-select/{id}",
         keyPropertyName: "id",
         textPropertyName: "displayName",
         itemListPropertyName: "items",
         hideSubText: false,
         runScriptOnWindowLoad: true)]
-    public Guid UserId { get; set; } = Guid.Parse("6681ad2f-7e06-8de9-92d1-3a08fd1ad53c");
+    public string TipoMedida { get; set; } = "ZZ";
     
     public IndexModel()
     {

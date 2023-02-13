@@ -1,12 +1,30 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.Application.Services;
-using Volo.Abp.Auditing;
-using Volo.Abp.AuditLogging;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
 namespace Volo.Abp.Application.Services;
+
+#region Entities
+
+public class LookupEntity<TKey>
+{
+    public TKey Id { get; set; }
+    public string DisplayName { get; set; }
+}
+
+public class LookupRequestDto : PagedResultRequestDto
+{
+    public string Filter { get; set; }
+}
+
+// improve: if entity implements tris aply sorting
+// TODO: improve for use store, and independent of repository
+public interface IHasOrder
+{
+    int Order { get; }
+}
+
+#endregion
 
 public interface ISelectAppService<TKey>
     : IApplicationService
@@ -16,23 +34,15 @@ public interface ISelectAppService<TKey>
     Task<PagedResultDto<LookupEntity<TKey>>> GetListAsync(LookupRequestDto input);
 }
 
-public abstract class SelectAppService<TEntity, TKey>
-    : ApplicationService
-        , ISelectAppService<TKey>
-    where TEntity : class, IEntity<TKey>
+public abstract class AbstractEntitySelectAppService<TKey>
+: ApplicationService
+,ISelectAppService<TKey>
 {
-    protected IReadOnlyRepository<TEntity, TKey> Repository { get; }
-
-    protected SelectAppService(IReadOnlyRepository<TEntity, TKey> repository)
-    {
-        Repository = repository;
-    }
-    
     public virtual async Task<LookupEntity<TKey>> GetAsync(TKey id)
     {
         return await GetSelectItemAsync(id);
     }
-    
+
     public virtual async Task<PagedResultDto<LookupEntity<TKey>>> GetListAsync(LookupRequestDto input)
     {
         var query = ApplyFilter(await GetSelectQueryable(), input.Filter);
@@ -42,18 +52,13 @@ public abstract class SelectAppService<TEntity, TKey>
         var entities = await AsyncExecuter.ToListAsync(query);
         return new PagedResultDto<LookupEntity<TKey>>(totalCount, entities);
     }
-
+    
     protected virtual async Task<LookupEntity<TKey>> GetSelectItemAsync(TKey id)
     {
         var query = await GetSelectQueryable();
         return await AsyncExecuter.FirstAsync(query, entity => entity.Id.Equals(id));
     }
     
-    protected async Task<TEntity> GetEntityByIdAsync(TKey id)
-    {
-        return await Repository.GetAsync(id);
-    }
-
     /// <summary>
     /// Should apply paging if needed.
     /// </summary>
@@ -77,11 +82,35 @@ public abstract class SelectAppService<TEntity, TKey>
         return query;
     }
     
+    protected virtual async Task<IQueryable<LookupEntity<TKey>>> GetSelectQueryable()
+    {
+        throw new NotImplementedException();
+    }
+
+    protected virtual IQueryable<LookupEntity<TKey>> ApplyFilter(IQueryable<LookupEntity<TKey>> query, string filterText)
+    {
+        return query.WhereIf(!string.IsNullOrEmpty(filterText), 
+            entity => entity.DisplayName.ToLowerInvariant().Contains(filterText)
+                      || entity.Id.ToString().ToLowerInvariant().Contains(filterText));
+    }
+}
+
+public abstract class SelectAppService<TEntity, TKey>
+    : AbstractEntitySelectAppService<TKey>
+    where TEntity : class, IEntity<TKey>
+{
+    protected IReadOnlyRepository<TEntity, TKey> Repository { get; }
+
+    protected SelectAppService(IReadOnlyRepository<TEntity, TKey> repository)
+    {
+        Repository = repository;
+    }
+    
     /// <summary>
     /// Override this for customize display name
     /// </summary>
     /// <returns></returns>
-    protected virtual async Task<IQueryable<LookupEntity<TKey>>> GetSelectQueryable()
+    protected override async Task<IQueryable<LookupEntity<TKey>>> GetSelectQueryable()
     {
         var queryAble = await Repository.GetQueryableAsync();
         Logger.LogWarning("Select by default display name show Id.");
@@ -92,13 +121,7 @@ public abstract class SelectAppService<TEntity, TKey>
             })
             .AsNoTracking();
     }
-
-    protected virtual IQueryable<LookupEntity<TKey>> ApplyFilter(IQueryable<LookupEntity<TKey>> query, string filterText)
-    {
-        return query.WhereIf(!string.IsNullOrEmpty(filterText), entity => entity.DisplayName.Contains(filterText));
-    }
-
-
+    
     // protected virtual IQueryable<TEntity> ApplyOrderSorting(IQueryable<TEntity> query)
     // {
     //     if (typeof(TEntity).IsAssignableTo<IHasOrder>())
