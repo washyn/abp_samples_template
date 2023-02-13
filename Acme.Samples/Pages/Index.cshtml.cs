@@ -6,4 +6,5 @@ public class IndexModel : AbpPageModel
 {
     public Guid RolId { get; set; }
     public Guid EntityId { get; set; }
+    public Guid Ations { get; set; }
 }
