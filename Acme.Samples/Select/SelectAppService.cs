@@ -21,7 +21,7 @@ public class LookupRequestDto : PagedResultRequestDto
 // TODO: improve for use store, and independent of repository
 public interface IHasOrder
 {
-    int Order { get; }
+    int DisplayOrder { get; }
 }
 
 #endregion
@@ -126,7 +126,7 @@ public abstract class SelectAppService<TEntity, TKey>
     // {
     //     if (typeof(TEntity).IsAssignableTo<IHasOrder>())
     //     {
-    //         return query.OrderByDescending(e => ((IHasOrder)e).Order);
+    //         return query.OrderByDescending(e => ((IHasOrder)e).DisplayOrder);
     //     }
     //
     //     return query;

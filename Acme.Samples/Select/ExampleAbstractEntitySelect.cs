@@ -1,10 +1,15 @@
-﻿using Volo.Abp.Application.Services;
+﻿using Microsoft.AspNetCore.Mvc;
+using Volo.Abp;
+using Volo.Abp.Application.Dtos;
+using Volo.Abp.Application.Services;
+using Volo.Abp.AspNetCore.Mvc;
 
 namespace Acme.Samples.Select;
 
+[RemoteService(isEnabled: false)]
 public class ExampleAbstractEntitySelectAppService
     : AbstractEntitySelectAppService<string>
-, ISelectAppService<string>
+, IExampleAbstractEntitySelectAppService
 {
     protected override Task<IQueryable<LookupEntity<string>>> GetSelectQueryable()
     {
@@ -13,6 +18,34 @@ public class ExampleAbstractEntitySelectAppService
             Id = a.Codigo,
             DisplayName = a.Descripcion
         }));
+    }
+}
+
+public interface IExampleAbstractEntitySelectAppService : ISelectAppService<string>
+{
+    
+}
+
+[Route("api/app/example-abstract-entity-select")]
+public class ExampleAbstractEntitySelectController : AbpController, IExampleAbstractEntitySelectAppService
+{
+    private readonly IExampleAbstractEntitySelectAppService _appService;
+    
+    public ExampleAbstractEntitySelectController(IExampleAbstractEntitySelectAppService appService)
+    {
+        _appService = appService;
+    }
+    
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<LookupEntity<string>> GetAsync(string id)
+    {
+        return await _appService.GetAsync(id);
+    }
+    [HttpGet]
+    public async Task<PagedResultDto<LookupEntity<string>>> GetListAsync(LookupRequestDto input)
+    {
+        return await _appService.GetListAsync(input);
     }
 }
 
