@@ -61,13 +61,3 @@ public interface ICustomSelectAppService<TKey>
 
     Task<PagedResultDto<LookupEntity<TKey>>> GetListAsync(LookupRequestDto input);
 }
-
-//
-// public async Task<PagedResultDto<LookupEntity<Guid>>> GetListAsync(LookupRequestDto input)
-// {
-//     var count = await _repo.GetCountSelectListAsync(input.Filter);
-//     var data = await _repo.GetPagedSelectListAsync(input.Filter, input.SkipCount, input.MaxResultCount);
-//     return new PagedResultDto<LookupEntity<Guid>>(count, data);
-// }
-//
-// public Task<LookupEntity<Guid>> GetAsync(Guid id)

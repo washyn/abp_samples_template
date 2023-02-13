@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Acme.Samples.Select;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Auditing;
 using Volo.Abp.AuditLogging;
@@ -112,8 +113,6 @@ public abstract class CustomSelectAppService<TEntity, TKey>
     : ApplicationService
     , ICustomSelectAppService<TKey>
     where TEntity : class, IEntity<TKey>
-    // where TGetOutputDto : IEntityDto<TKey>
-    // where TGetListOutputDto : IEntityDto<TKey>
 {
     protected IReadOnlyRepository<TEntity, TKey> Repository { get; }
     
@@ -127,20 +126,22 @@ public abstract class CustomSelectAppService<TEntity, TKey>
         throw new NotImplementedException();
         // var entity = await GetEntityByIdAsync(id);
         // return await MapToGetOutputDtoAsync(entity);
+        // var query = await GetSelectQueryable();
+        // return await GetSelectItemAsync(id);
+    }
+    
+    public virtual async Task<LookupEntity<TKey>> GetSelectItemAsync(TKey id)
+    {
+        var query = await GetSelectQueryable();
+        // return await query.FirstAsync(a => a.Id.Equals(id));
+        // AsyncExecuter.FirstAsync()
+        // return await query.Where(a => a.Id.Equals(id)).FirstAsync();
+        var res = await AsyncExecuter.FirstAsync(query, entity => entity.Id.Equals(id));
+        return res;
     }
     
     public virtual async Task<PagedResultDto<LookupEntity<TKey>>> GetListAsync(LookupRequestDto input)
     {
-        // var query = await CreateFilteredQueryAsync(input);
-        // var totalCount = await AsyncExecuter.CountAsync(query);
-        // query = ApplyPaging(query, input);
-        // var entities = await AsyncExecuter.ToListAsync(query);
-        //
-        // return new PagedResultDto<LookupEntity<TKey>>(
-        //     totalCount,
-        //     entities
-        // );
-        
         var query = ApplyFilter(await GetSelectQueryable(), input.Filter);
         var totalCount = await AsyncExecuter.CountAsync(query);
         query = ApplyPaging(query, input);
@@ -152,7 +153,7 @@ public abstract class CustomSelectAppService<TEntity, TKey>
     {
         return await Repository.GetAsync(id);
     }
-    
+
     /// <summary>
     /// Should apply paging if needed.
     /// </summary>
@@ -175,26 +176,7 @@ public abstract class CustomSelectAppService<TEntity, TKey>
         //No paging
         return query;
     }
-    
-    /// <summary>
-    /// This method should create <see cref="IQueryable{TEntity}"/> based on given input.
-    /// It should filter query if needed, but should not do sorting or paging.
-    /// Sorting should be done in <see cref="ApplySorting"/> and paging should be done in <see cref="ApplyPaging"/>
-    /// methods.
-    /// </summary>
-    /// <param name="input">The input.</param>
-    protected virtual async Task<IQueryable<LookupEntity<TKey>>> CreateFilteredQueryAsync(LookupRequestDto input)
-    {
-        // return await Repository.GetQueryableAsync();
-        // throw new NotImplementedException();
-        var temp = await Repository.GetQueryableAsync();
-        return temp.Select(a => new LookupEntity<TKey>()
-            {
-                Id = a.Id,
-                DisplayName = a.Id.ToString()
-            });
-    }
-    
+
     public virtual async Task<IQueryable<LookupEntity<TKey>>> GetSelectQueryable()
     {
         var queryAble = await Repository.GetQueryableAsync();
@@ -202,7 +184,7 @@ public abstract class CustomSelectAppService<TEntity, TKey>
         {
             Id = a.Id,
             DisplayName = a.Id.ToString()
-        });
+        }).AsNoTracking();
     }
     
     public virtual IQueryable<LookupEntity<TKey>> ApplyFilter(IQueryable<LookupEntity<TKey>> query, string filterText)
@@ -223,7 +205,8 @@ public abstract class CustomSelectAppService<TEntity, TKey>
     // }
 }
 
-public class CustomSelectEntityChange : CustomSelectAppService<EntityPropertyChange, Guid>
+#region Examples
+public class CustomSelectEntityChange : CustomSelectAppService<EntityPropertyChange, Guid>, ICustomSelectEntityChange
 {
     public CustomSelectEntityChange(IReadOnlyRepository<EntityPropertyChange, Guid> repository) : base(repository)
     {
@@ -240,9 +223,7 @@ public class CustomSelectEntityChange : CustomSelectAppService<EntityPropertyCha
     }
 }
 
-public class CustomSelectEntityAppService : CustomSelectAppService<EntityChange, Guid>
+public interface ICustomSelectEntityChange : ICustomSelectAppService<Guid>
 {
-    public CustomSelectEntityAppService(IReadOnlyRepository<EntityChange, Guid> repository) : base(repository)
-    {
-    }
 }
+#endregion
