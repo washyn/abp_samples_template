@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Acme.Samples.Pages;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
@@ -17,6 +18,7 @@ public class SamplesDbContext : AbpDbContext<SamplesDbContext>
     {
     }
 
+    public DbSet<CatalogEntity> CatalogEntities { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

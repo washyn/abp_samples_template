@@ -9,7 +9,7 @@ namespace Acme.Samples.Select;
 [RemoteService(isEnabled: false)]
 public class ExampleAbstractEntitySelectAppService
     : AbstractEntitySelectAppService<string>
-, IExampleAbstractEntitySelectAppService
+        , IExampleAbstractEntitySelectAppService
 {
     protected override Task<IQueryable<LookupEntity<string>>> GetSelectQueryable()
     {
@@ -370,5 +370,153 @@ public class TipoUnidadMedidaComercial
             }
         };
         return a.AsQueryable();
+    }
+}
+
+public class TipoTributo
+{
+    public string Codigo { get; set; }
+    public string Descripcion { get; set; }
+    public string Nombre { get; set; }
+    public string CodigoInternacional { get; set; }
+        
+    public static List<TipoTributo> GetValues()
+    {
+        // [
+        // {
+        //     "codigo": "1000",
+        //     "descripcion": "IGV Impuesto General a las Ventas",
+        //     "codigo_internacional": "VAT",
+        //     "nombre": "IGV"
+        // },
+        // {
+        //     "codigo": "1016",
+        //     "descripcion": "Impuesto a la Venta Arroz Pilado",
+        //     "codigo_internacional": "VAT",
+        //     "nombre": "IVAP"
+        // },
+        // {
+        //     "codigo": "2000",
+        //     "descripcion": "ISC Impuesto Selectivo al Consumo",
+        //     "codigo_internacional": "EXC",
+        //     "nombre": "ISC"
+        // },
+        // {
+        //     "codigo": "3000",
+        //     "descripcion": "Impuesto a la Renta",
+        //     "codigo_internacional": "TOX",
+        //     "nombre": "IR"
+        // },
+        // {
+        //     "codigo": "7152",
+        //     "descripcion": "Impuesto a la bolsa plastica",
+        //     "codigo_internacional": "OTH",
+        //     "nombre": "ICBPER"
+        // },
+        // {
+        //     "codigo": "9995",
+        //     "descripcion": "Exportación",
+        //     "codigo_internacional": "FRE",
+        //     "nombre": "EXP"
+        // },
+        // {
+        //     "codigo": "9996",
+        //     "descripcion": "Gratuito",
+        //     "codigo_internacional": "FRE",
+        //     "nombre": "GRA"
+        // },
+        // {
+        //     "codigo": "9997",
+        //     "descripcion": "Exonerado",
+        //     "codigo_internacional": "VAT",
+        //     "nombre": "EXO"
+        // },
+        // {
+        //     "codigo": "9998",
+        //     "descripcion": "Inafecto",
+        //     "codigo_internacional": "FRE",
+        //     "nombre": "INA"
+        // },
+        // {
+        //     "codigo": "9999",
+        //     "descripcion": "Otros tributos",
+        //     "codigo_internacional": "OTH",
+        //     "nombre": "OTROS"
+        // }
+        // ]
+
+        return new List<TipoTributo>()
+        {
+            new TipoTributo
+            {
+                Codigo = "1000",
+                Descripcion = "IGV Impuesto General a las Ventas",
+                CodigoInternacional = "VAT",
+                Nombre = "IGV"
+            },
+            new TipoTributo
+            {
+                Codigo = "1016",
+                Descripcion = "Impuesto a la Venta Arroz Pilado",
+                CodigoInternacional = "VAT",
+                Nombre = "IVAP"
+            },
+            new TipoTributo
+            {
+                Codigo = "2000",
+                Descripcion = "ISC Impuesto Selectivo al Consumo",
+                CodigoInternacional = "EXC",
+                Nombre = "ISC"
+            },
+            new TipoTributo
+            {
+                Codigo = "3000",
+                Descripcion = "Impuesto a la Renta",
+                CodigoInternacional = "TOX",
+                Nombre = "IR"
+            },
+            new TipoTributo
+            {
+                Codigo = "7152",
+                Descripcion = "Impuesto a la bolsa plastica",
+                CodigoInternacional = "OTH",
+                Nombre = "ICBPER"
+            },
+            new TipoTributo
+            {
+                Codigo = "9995",
+                Descripcion = "Exportación",
+                CodigoInternacional = "FRE",
+                Nombre = "EXP"
+            },
+            new TipoTributo
+            {
+                Codigo = "9996",
+                Descripcion = "Gratuito",
+                CodigoInternacional = "FRE",
+                Nombre = "GRA"
+            },
+            new TipoTributo
+            {
+                Codigo = "9997",
+                Descripcion = "Exonerado",
+                CodigoInternacional = "VAT",
+                Nombre = "EXO"
+            },
+            new TipoTributo
+            {
+                Codigo = "9998",
+                Descripcion = "Inafecto",
+                CodigoInternacional = "FRE",
+                Nombre = "INA"
+            },
+            new TipoTributo
+            {
+                Codigo = "9999",
+                Descripcion = "Otros tributos",
+                CodigoInternacional = "OTH",
+                Nombre = "OTROS"
+            }
+        };
     }
 }

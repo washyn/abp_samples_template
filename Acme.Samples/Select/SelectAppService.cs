@@ -12,6 +12,13 @@ public class LookupEntity<TKey>
     public string DisplayName { get; set; }
 }
 
+public class LookupEntityOrderable<TKey> : IHasOrder
+{
+    public TKey Id { get; set; }
+    public string DisplayName { get; set; }
+    public int DisplayOrder { get; set; }
+}
+
 public class LookupRequestDto : PagedResultRequestDto
 {
     public string Filter { get; set; }
@@ -19,9 +26,14 @@ public class LookupRequestDto : PagedResultRequestDto
 
 // improve: if entity implements tris aply sorting
 // TODO: improve for use store, and independent of repository
-public interface IHasOrder
+public interface IHasOrder: IHasOrder<int>
 {
-    int DisplayOrder { get; }
+    int DisplayOrder { get; set; }
+}
+
+public interface IHasOrder<T>
+{
+    T DisplayOrder { get; set; }
 }
 
 #endregion

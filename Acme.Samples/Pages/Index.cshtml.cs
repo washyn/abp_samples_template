@@ -14,7 +14,7 @@ public class IndexModel : AbpPageModel
         itemListPropertyName: "items",
         hideSubText: false,
         runScriptOnWindowLoad: true)]
-    public Guid EntityId { get; set; } 
+    public Guid EEntityId { get; set; } 
         = Guid.Parse("285cf911-8988-7c57-98d5-3a08fd68db24");
     
     // /api/app/example-abstract-entity-select

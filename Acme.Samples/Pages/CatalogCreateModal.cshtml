@@ -1,0 +1,26 @@
+﻿@page
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Acme.Samples.Pages.CatalogCreateModal
+
+@{
+    Layout = null;
+    var isChild = !string.IsNullOrEmpty(Model.ParentCode);
+}
+
+<abp-modal size="Large">
+    <abp-modal-header title="Crear"></abp-modal-header>
+    <form asp-page="CatalogCreateModal">
+        <abp-modal-body>
+            <abp-input asp-for="Model.Code"></abp-input>
+            <abp-input asp-for="Model.Description"></abp-input>
+            <abp-input asp-for="Model.ExtraDescription"></abp-input>
+            <abp-input asp-for="Model.DisplayOrder"></abp-input>
+            @if (isChild)
+            {
+                <abp-input asp-for="Model.ParentCode"></abp-input>
+                <abp-input asp-for="Model.Grouper"></abp-input>
+            }
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel | AbpModalButtons.Save)"></abp-modal-footer>
+    </form>
+</abp-modal>
