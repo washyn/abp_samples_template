@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.SettingManagement;
@@ -18,10 +16,9 @@ using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Localization;
 using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
-using Volo.Abp.VirtualFileSystem;
 
 namespace LogoManagment.Controllers;
-// TODO: improve with suport multitenat
+
 [Authorize]
 [Route("logo")]
 public class LogoController : AbpController
