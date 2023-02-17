@@ -1,2 +1,6 @@
 ﻿@model string
-<img src="/account/profile-picture-file/@Model" class="mx-2" alt="Avatar" height="40">
+@{
+    var url = string.IsNullOrEmpty(Model) ? "/account/profile-picture-file/default" :
+    $"/account/profile-picture-file/{Model}";
+}
+<img src="@url" class="mx-2" alt="Avatar" height="40">

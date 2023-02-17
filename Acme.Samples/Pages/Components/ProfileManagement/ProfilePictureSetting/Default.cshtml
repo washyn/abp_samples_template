@@ -8,7 +8,7 @@
 @inject ISettingManager SettingManager
 @model Acme.Samples.Pages.Components.ProfileManagement.ProfilePictureSetting.ShowProfilePictureViewModel
 @{
-    var url = $"/account/profile-picture-file/{Model.FileName}";
+    var url = string.IsNullOrEmpty(Model.FileName) ? $"/account/profile-picture-file/default" : $"/account/profile-picture-file/{Model.FileName}";
 }
 
 <abp-card>
@@ -18,21 +18,12 @@
     <abp-card-body>
         <abp-row>
             <abp-column>
-                <div class="form-group">
-                    <label>Imagen de perfil actual</label>
-                    <br>
-                    <img id="CurrentProfilePicture" alt="Imagen de perfil" src="@url">
-                </div>
+               <h6>Imagen de perfil</h6>
+                <img id="ProfilePicture" alt="Imagen de perfil" class="image-cropper-container" src="@url">
             </abp-column>
         </abp-row>
         <hr>
-        @* <abp-row> *@
-        @*     <abp-column> *@
-        @*         <abp-radio asp-for="PictureType" inline="true"></abp-radio> *@
-        @*     </abp-column> *@
-        @* </abp-row> *@
-        @* <hr> *@
-        <form method="post" enctype="multipart/form-data" id="@nameof(ProfilePictureViewComponent)">
+        <div id="@nameof(ProfilePictureViewComponent)">
             <abp-row>
                 <abp-column>
                     <h5>Cambiar imagen de perfil</h5>
@@ -43,16 +34,9 @@
                 </abp-column>
             </abp-row>
             
-            @* <abp-row> *@
-            @*     <abp-column> *@
-            @*         <div class="imageContainer"> *@
-            @*             <img id="image"> *@
-            @*         </div> *@
-            @*     </abp-column> *@
-            @* </abp-row> *@
-            
             <hr class="mt-2">
-            <abp-button button-type="Primary" type="submit" id="SaveProfilePicture">Guardar cambios</abp-button>
-        </form>
+            <abp-button button-type="Primary" type="button" id="SaveProfilePicture">Guardar</abp-button>
+            <abp-button button-type="Secondary" type="button" id="RestoreDefault">Reestabler</abp-button>
+        </div>
     </abp-card-body>
 </abp-card>

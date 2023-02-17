@@ -6,6 +6,8 @@ using Microsoft.Extensions.Localization;
 using Volo.Abp.Account.Web.ProfileManagement;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Packages.CropperJs;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.BlobStoring.FileSystem;
@@ -21,6 +23,7 @@ namespace Acme.Samples.Pages.Components.ProfileManagement.ProfilePictureSetting;
 
 [Authorize]
 [Route("account/profile-picture-file")]
+[RequiresFeature(ProfilePictureFeature.Feature)]
 public class ProfilePictureController : AbpController
 {
     private readonly IBlobContainer<ProfilePictureContainer> _container;
@@ -36,7 +39,6 @@ public class ProfilePictureController : AbpController
         _settingManager = settingManager;
     }
     
-    [RequiresFeature(ProfilePictureFeature.Feature)]
     [HttpPost]
     public async Task UploadPicture([FromForm]UpdateProfilePictureViewModel model)
     {
@@ -51,9 +53,7 @@ public class ProfilePictureController : AbpController
         await _settingManager.SetForCurrentUserAsync(ProfilePictureSettings.ProfilePictureFile, id);
     }
     
-    // [ResponseCache(Duration = 120)]
-    [RequiresFeature(ProfilePictureFeature.Feature)]
-    [Route("{id:guid:required}")]
+    [Route("{id}")]
     [HttpGet]
     public async Task<IActionResult> GetProfilePicture(Guid id)
     {
@@ -61,8 +61,7 @@ public class ProfilePictureController : AbpController
         var file = await _container.GetOrNullAsync(id.ToString());
         if (file is null)
         {
-            var stream = _fileProvider.GetFileInfo("/images/9385f872-7563-3a64-2bd2-3a0801e89e21.jpeg").CreateReadStream();
-            return File(await stream.GetAllBytesAsync(), imageMime);
+            return BadRequest();
         }
         return File(await file.GetAllBytesAsync(), imageMime);;
     }
@@ -73,6 +72,16 @@ public class ProfilePictureController : AbpController
     {
         await _settingManager.SetForCurrentUserAsync(ProfilePictureSettings.ProfilePictureFile, string.Empty);
     }
+    
+    [ResponseCache(Duration = 60*60*24)] // 24 hours
+    [Route("default")]
+    [HttpGet]
+    public async Task<IActionResult> GetDefaultImage()
+    {
+        var imageMime = "image/*";
+        var stream = _fileProvider.GetFileInfo(ProfilePictureSettings.PathFileName).CreateReadStream();
+        return File(await stream.GetAllBytesAsync(), imageMime);
+    }
 }
 
 #region SettingDefinitions
@@ -81,14 +90,15 @@ public class ProfilePictureSettingDefinitionProvider : SettingDefinitionProvider
 {
     public override void Define(ISettingDefinitionContext context)
     {
-        context.Add(new SettingDefinition(ProfilePictureSettings.ProfilePictureFile, "9385f872-7563-3a64-2bd2-3a0801e89e21"));
+        context.Add(new SettingDefinition(ProfilePictureSettings.ProfilePictureFile, string.Empty));
     }
 }
-    
+
 public static class ProfilePictureSettings
 {
     private const string Prefix = "ProfilePicture";
     public const string ProfilePictureFile = Prefix + ".ProfilePictureFile";
+    public const string PathFileName = "/images/9385f872-7563-3a64-2bd2-3a0801e89e21.jpeg";
 }
 
 public static class ProfilePictureFeature
@@ -135,10 +145,6 @@ public class ProfilePictureViewComponent : ViewComponent
     {
         var model = new ShowProfilePictureViewModel();
         model.FileName = await _settingManager.GetOrNullForCurrentUserAsync(ProfilePictureSettings.ProfilePictureFile);
-        if (string.IsNullOrEmpty(model.FileName))
-        {
-            model.FileName = "9385f872-7563-3a64-2bd2-3a0801e89e21";
-        }
         return View("~/Pages/Components/ProfileManagement/ProfilePictureSetting/Default.cshtml",model);
     }
 }
@@ -172,13 +178,6 @@ public class ShowProfilePictureViewModel
     public string FileName { get; set; }
 }
 
-// Improve: can be use for improve...
-public enum TypeProfilePicture
-{
-    Default = 0,
-    Upload = 1,
-}
-
 [LocalizationResourceName("UserAvatar")]
 public class ProfilePictureResource
 {
@@ -194,11 +193,6 @@ public class ProfilePictureContainer
 [DependsOn(typeof(Volo.Abp.Localization.AbpLocalizationModule))]
 [DependsOn(typeof(Volo.Abp.Account.Web.AbpAccountWebModule))]
 [DependsOn(typeof(Volo.Abp.Settings.AbpSettingsModule))]
-
-[DependsOn(typeof(Volo.Abp.BlobStoring.Database.BlobStoringDatabaseDomainSharedModule))]
-[DependsOn(typeof(Volo.Abp.BlobStoring.Database.BlobStoringDatabaseDomainModule))]
-[DependsOn(typeof(Volo.Abp.BlobStoring.Database.EntityFrameworkCore.BlobStoringDatabaseEntityFrameworkCoreModule))]
-
 [DependsOn(typeof(AbpVirtualFileSystemModule))]
 public class UserProfileAvatarModule : AbpModule
 {
@@ -226,16 +220,39 @@ public class UserProfileAvatarModule : AbpModule
                 .Configure(typeof(Volo.Abp.Account.Web.Pages.Account.ManageModel).FullName,
                     configuration =>
                     {
-                        configuration.AddFiles("/Pages/Components/ProfileManagement/ProfilePictureSetting/Default.js");
+                        configuration.AddContributors(typeof(CropperJsScriptContributor));
+                        configuration.AddFiles("/Pages/Components/ProfileManagement/ProfilePictureSetting/Default.cshtml.js");
+                    });
+            
+            options.StyleBundles
+                .Configure(typeof(Volo.Abp.Account.Web.Pages.Account.ManageModel).FullName,
+                    configuration =>
+                    {
+                        // this not works... not add
+                        // configuration.AddContributors(typeof(CropperJsStyleContributor));
+                        // configuration.AddFiles("/Pages/Components/ProfileManagement/ProfilePictureSetting/Default.cshtml.css");
                     });
         });
+        #region TODO change this, check how works in abp 6
 
+        Configure<AbpBundlingOptions>(options =>
+        {
+            options.StyleBundles.Configure(
+                BasicThemeBundles.Styles.Global,
+                bundle =>
+                {
+                    bundle.AddContributors(typeof(CropperJsStyleContributor));
+                    bundle.AddFiles("/Pages/Components/ProfileManagement/ProfilePictureSetting/Default.cshtml.css");
+                }
+            );
+        });
+
+        #endregion
         var hosting = context.Services.GetHostingEnvironment();
         Configure<AbpBlobStoringOptions>(options =>
         {
             options.Containers.ConfigureDefault(container =>
             {
-                // container.UseDatabase();
                 container.UseFileSystem(fileSystem =>
                 {
                     fileSystem.BasePath = hosting.WebRootPath;
