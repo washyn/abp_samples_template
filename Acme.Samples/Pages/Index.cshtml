@@ -4,10 +4,39 @@
 
 @section styles {
     <abp-style src="/Pages/Index.cshtml.css" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.css'>
 }
 @section scripts {
     <abp-script src="/Pages/Index.cshtml.js" />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.js'></script>
 }
+
+
+
+<abp-card>
+    <abp-card-header>
+        <abp-card-title>
+            Welcome_Title
+        </abp-card-title>
+    </abp-card-header>
+    <abp-card-body>            
+        <di class="imageContainer">
+            <img src="" alt="" id="imageToChange">
+        </di>
+        <br>
+        <div class="form-group">
+            <label for="" class="">File image</label>
+            <input type="file" class="form-control" id="fileImageInput" accept="image/*">
+        </div>
+        <hr class="py-2">
+        <abp-button text="Guardar" button-type="Primary" id="saveButton"></abp-button>
+        <abp-button text="Reestablecer a imagen por defecto" id="restoreDefault" button-type="Secondary"></abp-button>
+    </abp-card-body>
+</abp-card>
+
+
+<br>
+
 <div class="container">
     <abp-card>
         <abp-card-header>

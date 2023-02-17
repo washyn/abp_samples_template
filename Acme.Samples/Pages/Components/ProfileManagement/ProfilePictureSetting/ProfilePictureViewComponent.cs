@@ -66,6 +66,13 @@ public class ProfilePictureController : AbpController
         }
         return File(await file.GetAllBytesAsync(), imageMime);;
     }
+    
+    [Route("default")]
+    [HttpPost]
+    public async Task SetDefaultImage()
+    {
+        await _settingManager.SetForCurrentUserAsync(ProfilePictureSettings.ProfilePictureFile, string.Empty);
+    }
 }
 
 #region SettingDefinitions
