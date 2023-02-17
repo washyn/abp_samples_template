@@ -1,5 +1,6 @@
 @using LogoManagment.Pages.Components.LogoSetting
-<abp-script src="/Pages/Components/LogoSetting/Default.js" />
+<abp-script src="/Pages/Components/LogoSetting/Default.cshtml.js"></abp-script>
+<abp-style src="/Pages/Components/LogoSetting/Default.cshtml.css"></abp-style>
 
 <h4>Configuración de logo</h4>
 <hr>
@@ -8,17 +9,21 @@
         <abp-card-title>Configuración de logo</abp-card-title>
     </abp-card-header>
     <abp-card-body>
-        <form method="post" enctype="multipart/form-data" id="@nameof(LogoSettingViewComponent)">
-            <abp-row>
-                <abp-column>
+        <div id="@nameof(LogoSettingViewComponent)">
+            <img src="/logo" id="logoImage" class="image-cropper-container" alt="Logo image">
+        </div>
+        <hr>
+        <abp-row>
+            <abp-column>
+                <form>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Cambiar logo de applicación <span>*</span> </label>
                         <input class="form-control" name="logo" type="file" id="formFile" accept="image/*" required="required">
                     </div>
-                </abp-column>
-            </abp-row>
-            <hr class="mt-2">
-            <abp-button button-type="Primary" type="submit">Guardar</abp-button>
-        </form>
+                </form>
+            </abp-column>
+        </abp-row>
+        <hr class="mt-2">
+        <abp-button button-type="Primary" type="button" id="SaveButton">Guardar</abp-button>
     </abp-card-body>
 </abp-card>

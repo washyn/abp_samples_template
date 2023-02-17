@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Packages.CropperJs;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.BlobStoring;
@@ -41,7 +42,9 @@ namespace LogoManagment
             {
                 options.Contributors.Add(new LogoSettingPageContributor());
             });
-            
+
+            #region Scripts and styles
+
             Configure<AbpBundlingOptions>(options =>
             {
                 options.StyleBundles.Configure(
@@ -49,6 +52,7 @@ namespace LogoManagment
                     bundle =>
                     {
                         bundle.AddFiles("/logo-style.css");
+                        bundle.Contributors.Add(typeof(CropperJsStyleContributor));
                     }
                 );
             });
@@ -59,10 +63,32 @@ namespace LogoManagment
                     StandardBundles.Scripts.Global,
                     bundle =>
                     {
-                        bundle.AddFiles("/logo-script.js");
+                        // bundle.AddFiles("/logo-script.js");
+                        bundle.Contributors.Add(typeof(CropperJsScriptContributor));
                     }
                 );
             });
+            
+            // Configure<AbpBundlingOptions>(options =>
+            // {
+            //     options.StyleBundles
+            //         .Configure(typeof(Volo.Abp.SettingManagement.Web.Pages.SettingManagement.IndexModel).FullName,
+            //             configuration =>
+            //             {
+            //                 configuration.Contributors.Add(typeof(CropperJsStyleContributor));
+            //                 configuration.AddFiles("/Pages/Components/LogoSetting/Default.cshtml.css");
+            //             });
+            //     
+            //     options.ScriptBundles
+            //         .Configure(typeof(Volo.Abp.SettingManagement.Web.Pages.SettingManagement.IndexModel).FullName,
+            //             configuration =>
+            //             {
+            //                 configuration.Contributors.Add(typeof(CropperJsScriptContributor));
+            //                 configuration.AddFiles("/Pages/Components/LogoSetting/Default.cshtml.js");
+            //             });
+            // });
+            
+            #endregion
         }
     }
 }

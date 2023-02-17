@@ -6,28 +6,25 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.Content;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Settings;
-using Volo.Abp.Ui.Branding;
 using System.Linq;
 using LogoManagment.Pages.Components.LogoSetting;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.BlobStoring;
-using Volo.Abp.Http;
 using Volo.Abp.Localization;
 using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
 using Volo.Abp.VirtualFileSystem;
 
 namespace LogoManagment.Controllers;
-// TODO: improve with suport multitenat, and front ui resizer image cropper.
+// TODO: improve with suport multitenat
+[Authorize]
 [Route("logo")]
 public class LogoController : AbpController
 {
-    private readonly ILogger<LogoController> _logger;
     private readonly IBlobContainer<LogoPictureContainer> _blobContainer;
     private readonly IVirtualFileProvider _virtualFileProvider;
     private readonly ISettingProvider _settingProvider;
@@ -39,59 +36,47 @@ public class LogoController : AbpController
         ISettingProvider settingProvider,
         ISettingManager settingManager)
     {
-        _logger = logger;
         _blobContainer = blobContainer;
         _virtualFileProvider = virtualFileProvider;
         _settingProvider = settingProvider;
         _settingManager = settingManager;
     }
-
-    [RequestSizeLimit(LogoSettingDefinitionProvider.MaxLogoLogoFileSize)]
-    [MaxFileSize(LogoSettingDefinitionProvider.MaxLogoLogoFileSize)]
-    [Route("upload")]
+    
     [HttpPost]
     public async Task UploadLogo([FromForm] LogoViewModel model)
     {
+        ValidateModel();
         await using var memoryStream = new MemoryStream();
-        if (model.Logo != null && model.Logo.Length > 0)
-        {
-            await model.Logo.CopyToAsync(memoryStream);
-            memoryStream.Position = 0;
-            var fileName = GenerateFileName(model.Logo.FileName);
-            var last = await GetLogoCurrent();
-            if (!string.IsNullOrEmpty(last))
-            {
-                await _blobContainer.DeleteAsync(last);
-            }
-            await _blobContainer.SaveAsync(fileName, memoryStream);
-            await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id, LogoSettingDefinitionProvider.LogoSettingName, fileName);
-        }
+        await model.Logo.CopyToAsync(memoryStream);
+        memoryStream.Position = 0;
+        var fileName = GenerateFileName(model.Logo.FileName);
+        var last = await GetCurrentLogo();
+        await _blobContainer.DeleteAsync(last);
+        await _blobContainer.SaveAsync(fileName, memoryStream);
         await memoryStream.DisposeAsync();
+        // await _settingManager.SetGlobalAsync(LogoSettingDefinitionProvider.LogoSettingName, fileName);
+        await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id, LogoSettingDefinitionProvider.LogoSettingName, fileName);
     }
     
-    [ResponseCache(Duration = 60)]
+    // [ResponseCache(Duration = 60*60*24)] // second minute hour
+    [AllowAnonymous]
     [HttpGet]
-    public async Task<IRemoteStreamContent> GetLogo()
+    public async Task<IActionResult> GetApplicationLogo()
     {
-        Response.Headers.Add("Accept-Ranges", "bytes");
-        Response.ContentType = MimeTypes.Application.OctetStream;
-
-        var logo = await GetLogoCurrent();
-        
+        var logo = await GetCurrentLogo();
         if (string.IsNullOrEmpty(logo))
         {
-            var stream = _virtualFileProvider.GetFileInfo("/images/laptop_mac-24px.png").CreateReadStream();
-            var remoteStream = new RemoteStreamContent(stream);
-            await stream.FlushAsync();
-            return remoteStream;
+            return NotFound();
         }
-        var res = await _blobContainer.GetAsync(logo);
-        var remoteStream1 = new RemoteStreamContent(res);
-        await res.FlushAsync();
-        return remoteStream1;
+        var res = await _blobContainer.GetOrNullAsync(logo);
+        if (res is null)
+        {
+            return NotFound();
+        }
+        return File(res, "image/*");
     }
-
-    private async Task<string> GetLogoCurrent()
+    
+    private async Task<string> GetCurrentLogo()
     {
         var logo = await _settingProvider.GetOrNullAsync(LogoSettingDefinitionProvider.LogoSettingName);
         if (CurrentTenant.IsAvailable)
@@ -112,12 +97,10 @@ public class LogoController : AbpController
 public class LogoSettingDefinitionProvider : SettingDefinitionProvider
 {
     public const string LogoSettingName = "LogoSettingName";
-    public const int MaxLogoLogoFileSize = 1024 * 1024 * 2;
+    public const int MaxLogoLogoFileSize = 1024 * 1024 * 1; // 1 mb
     public override void Define(ISettingDefinitionContext context)
     {
-        context.Add(new SettingDefinition(LogoSettingName, 
-            string.Empty)
-        );
+        context.Add(new SettingDefinition(LogoSettingName, string.Empty));
     }
 }
 
@@ -127,8 +110,8 @@ public class LogoSettingPageContributor : ISettingPageContributor
     {
         if (await CheckPermissionsAsync(context))
         {
-            context.Groups.AddFirst(new SettingPageGroup("LogoSettingId", 
-                "Confuguracion de logo", 
+            context.Groups.Add(new SettingPageGroup("LogoSettingId", 
+                "Configuración de logo", 
                 typeof(LogoSettingViewComponent)));
         }
     }
@@ -162,7 +145,7 @@ public class LogoPermissionDefinitionProvider : PermissionDefinitionProvider
     }
 }
 
-[LocalizationResourceName("Logo")]
+[LocalizationResourceName("LogoResource")]
 public class LogoResource
 {
 }
@@ -172,18 +155,12 @@ public class LogoPictureContainer
 {
 }
 
-public class ExampleBrandingProvider : DefaultBrandingProvider
-{
-    public override string AppName => "";
-    public override string LogoUrl  => "/logo";
-    public override string LogoReverseUrl  => "/logo";
-}
+
 
 public class LogoViewModel
 {
     [Required]
     [MaxFileSize(maxFileSize: LogoSettingDefinitionProvider.MaxLogoLogoFileSize)]
-    [AllowedExtensions(new string[] {".jpg", ".png", ".jpeg"})]
     public IFormFile Logo { get; set; }
 }
 
