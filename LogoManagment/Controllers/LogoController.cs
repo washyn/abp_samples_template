@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Threading.Tasks;
@@ -26,19 +27,12 @@ namespace LogoManagment.Controllers;
 public class LogoController : AbpController
 {
     private readonly IBlobContainer<LogoPictureContainer> _blobContainer;
-    private readonly IVirtualFileProvider _virtualFileProvider;
-    private readonly ISettingProvider _settingProvider;
     private readonly ISettingManager _settingManager;
 
-    public LogoController(ILogger<LogoController> logger,
-        IBlobContainer<LogoPictureContainer> blobContainer,
-        IVirtualFileProvider virtualFileProvider,
-        ISettingProvider settingProvider,
+    public LogoController(IBlobContainer<LogoPictureContainer> blobContainer,
         ISettingManager settingManager)
     {
         _blobContainer = blobContainer;
-        _virtualFileProvider = virtualFileProvider;
-        _settingProvider = settingProvider;
         _settingManager = settingManager;
     }
     
@@ -50,9 +44,12 @@ public class LogoController : AbpController
         await model.Logo.CopyToAsync(memoryStream);
         memoryStream.Position = 0;
         var fileName = GenerateFileName(model.Logo.FileName);
-        var last = await GetCurrentLogo();
-        await _blobContainer.DeleteAsync(last);
-        await _blobContainer.SaveAsync(fileName, memoryStream);
+        var lastLogo = await GetCurrentLogo();
+        if (!lastLogo.IsNullOrEmpty())
+        {
+            await _blobContainer.DeleteAsync(lastLogo);
+        }
+        await _blobContainer.SaveAsync(fileName, memoryStream, overrideExisting: true);
         await memoryStream.DisposeAsync();
         // await _settingManager.SetGlobalAsync(LogoSettingDefinitionProvider.LogoSettingName, fileName);
         await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id, LogoSettingDefinitionProvider.LogoSettingName, fileName);
@@ -78,7 +75,7 @@ public class LogoController : AbpController
     
     private async Task<string> GetCurrentLogo()
     {
-        var logo = await _settingProvider.GetOrNullAsync(LogoSettingDefinitionProvider.LogoSettingName);
+        var logo = await _settingManager.GetOrNullGlobalAsync(LogoSettingDefinitionProvider.LogoSettingName);
         if (CurrentTenant.IsAvailable)
         {
             logo = await _settingManager.GetOrNullForTenantAsync(LogoSettingDefinitionProvider.LogoSettingName, CurrentTenant.GetId(), false);
@@ -96,11 +93,11 @@ public class LogoController : AbpController
 
 public class LogoSettingDefinitionProvider : SettingDefinitionProvider
 {
-    public const string LogoSettingName = "LogoSettingName";
+    public const string LogoSettingName = "Setting.LogoSettingName";
     public const int MaxLogoLogoFileSize = 1024 * 1024 * 1; // 1 mb
     public override void Define(ISettingDefinitionContext context)
     {
-        context.Add(new SettingDefinition(LogoSettingName, string.Empty));
+        context.Add(new SettingDefinition(LogoSettingName, LogoSettingName));
     }
 }
 
