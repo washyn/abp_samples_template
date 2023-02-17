@@ -42,23 +42,27 @@
     
     butonSave.addEventListener('click', e => {
         e.preventDefault();
-        cropper.getCroppedCanvas({ width: 200, height: 200 }).toBlob(function (blob) {
-            let formData = new FormData();
-            formData.append("file", blob, uploadInput.files[0].name);
-            abp.ajax({
-                type: 'POST',
-                url: '/account/profile-picture-file',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success() {
-                    // abp.notify.success("Upload success.");
-                    window.location.reload();
-                },
-                error() {
-                    abp.notify.warn("Upload error.");
-                },
+        if (uploadInput.files.length){
+            cropper.getCroppedCanvas({ width: 200, height: 200 }).toBlob(function (blob) {
+                let formData = new FormData();
+                formData.append("file", blob, uploadInput.files[0].name);
+                abp.ajax({
+                    type: 'POST',
+                    url: '/account/profile-picture-file',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success() {
+                        // abp.notify.success("Upload success.");
+                        window.location.reload();
+                    },
+                    error() {
+                        abp.notify.warn("Upload error.");
+                    },
+                });
             });
-        });
+        }else{
+            abp.notify.warn("Select one file first.");
+        }
     });
 });
