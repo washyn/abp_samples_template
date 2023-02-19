@@ -17,7 +17,7 @@ public class AuditLogSelectAppService : SelectAppService<AuditLog, Guid>
     {
     }
 
-    protected override async Task<IQueryable<LookupEntity<Guid>>> GetSelectQueryable()
+    protected override async Task<IQueryable<LookupEntity<Guid>>> CreateSelectQueryAsync()
     {
         var temp = await Repository.GetQueryableAsync();
         return temp.Select(a => new LookupEntity<Guid>()
@@ -43,13 +43,13 @@ public class AuditLogSelectController : AbpController, IAuditLogSelectAppService
     }
     [Route("{id}")]
     [HttpGet]
-    public async Task<LookupEntity<Guid>> GetAsync(Guid id)
+    public async Task<LookupDto<Guid>> GetAsync(Guid id)
     {
         return await _appService.GetAsync(id);
     }
 
     [HttpGet]
-    public async Task<PagedResultDto<LookupEntity<Guid>>> GetListAsync(LookupRequestDto input)
+    public async Task<PagedResultDto<LookupDto<Guid>>> GetListAsync(LookupRequestDto input)
     {
         return await _appService.GetListAsync(input);
     }

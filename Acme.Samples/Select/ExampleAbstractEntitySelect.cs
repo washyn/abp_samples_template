@@ -11,12 +11,12 @@ public class ExampleAbstractEntitySelectAppService
     : AbstractEntitySelectAppService<string>
         , IExampleAbstractEntitySelectAppService
 {
-    protected override Task<IQueryable<LookupEntity<string>>> GetSelectQueryable()
+    protected override Task<IQueryable<LookupEntity<string>>> CreateSelectQueryAsync()
     {
         return Task.FromResult(TipoUnidadMedidaComercial.GetValues().Select(a => new LookupEntity<string>()
         {
             Id = a.Codigo,
-            DisplayName = a.Descripcion
+            DisplayName = a.Descripcion,
         }));
     }
 }
@@ -38,12 +38,12 @@ public class ExampleAbstractEntitySelectController : AbpController, IExampleAbst
     
     [HttpGet]
     [Route("{id}")]
-    public async Task<LookupEntity<string>> GetAsync(string id)
+    public async Task<LookupDto<string>> GetAsync(string id)
     {
         return await _appService.GetAsync(id);
     }
     [HttpGet]
-    public async Task<PagedResultDto<LookupEntity<string>>> GetListAsync(LookupRequestDto input)
+    public async Task<PagedResultDto<LookupDto<string>>> GetListAsync(LookupRequestDto input)
     {
         return await _appService.GetListAsync(input);
     }

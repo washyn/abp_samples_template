@@ -24,10 +24,24 @@ public class IndexModel : AbpPageModel
         keyPropertyName: "id",
         textPropertyName: "displayName",
         itemListPropertyName: "items",
+        // alternativeTextPropertyName: "",
         hideSubText: false,
         runScriptOnWindowLoad: true)]
     public string TipoMedida { get; set; } = "ZZ";
     
+    
+    [EasySelector(
+        getListedDataSourceUrl: "/api/app/example-select-orderable",
+        getSingleDataSourceUrl: "/api/app/example-select-orderable/{id}",
+        keyPropertyName: "id",
+        textPropertyName: "displayName",
+        itemListPropertyName: "items",
+        // alternativeTextPropertyName: "",
+        hideSubText: false,
+        runScriptOnWindowLoad: true)]
+    public string SelectOrderable { get; set; }
+
+
     public IndexModel()
     {
     }

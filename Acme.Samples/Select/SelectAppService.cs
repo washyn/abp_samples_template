@@ -6,18 +6,27 @@ namespace Volo.Abp.Application.Services;
 
 #region Entities
 
+
+public class LookupEntityCatalog<TKey> : LookupEntity<TKey>, IHasDisplayOrder
+{
+    public int DisplayOrder { get; set; }
+}
+
 public class LookupEntity<TKey>
 {
     public TKey Id { get; set; }
     public string DisplayName { get; set; }
+    public string AlternativeText { get; set; }
 }
 
-public class LookupEntityOrderable<TKey> : IHasOrder
+public class LookupDto<TKey>
 {
     public TKey Id { get; set; }
     public string DisplayName { get; set; }
-    public int DisplayOrder { get; set; }
+    public string AlternativeText { get; set; }
 }
+
+
 
 public class LookupRequestDto : PagedResultRequestDto
 {
@@ -26,14 +35,25 @@ public class LookupRequestDto : PagedResultRequestDto
 
 // improve: if entity implements tris aply sorting
 // TODO: improve for use store, and independent of repository
-public interface IHasOrder: IHasOrder<int>
+// public interface IHasOrder: IHasOrder<int>
+// {
+//     int DisplayOrder { get; set; }
+// }
+//
+// public interface IHasOrder<T>
+// {
+//     T DisplayOrder { get; set; }
+// }
+// public class LookupEntityOrderable<TKey> : IHasOrder
+// {
+//     public TKey Id { get; set; }
+//     public string DisplayName { get; set; }
+//     public int DisplayOrder { get; set; }
+// }
+
+public interface IHasDisplayOrder
 {
     int DisplayOrder { get; set; }
-}
-
-public interface IHasOrder<T>
-{
-    T DisplayOrder { get; set; }
 }
 
 #endregion
@@ -41,42 +61,70 @@ public interface IHasOrder<T>
 public interface ISelectAppService<TKey>
     : IApplicationService
 {
-    Task<LookupEntity<TKey>> GetAsync(TKey id);
+    Task<LookupDto<TKey>> GetAsync(TKey id);
 
-    Task<PagedResultDto<LookupEntity<TKey>>> GetListAsync(LookupRequestDto input);
+    Task<PagedResultDto<LookupDto<TKey>>> GetListAsync(LookupRequestDto input);
 }
 
-public abstract class AbstractEntitySelectAppService<TKey>
-: ApplicationService
-,ISelectAppService<TKey>
-{
-    public virtual async Task<LookupEntity<TKey>> GetAsync(TKey id)
-    {
-        return await GetSelectItemAsync(id);
-    }
 
-    public virtual async Task<PagedResultDto<LookupEntity<TKey>>> GetListAsync(LookupRequestDto input)
+public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity>
+    : ApplicationService
+        , ISelectAppService<TKey>
+    where TLookupEntity : LookupEntity<TKey>
+{
+    
+    #region Publics
+    public virtual async Task<LookupDto<TKey>> GetAsync(TKey id)
     {
-        var query = ApplyFilter(await GetSelectQueryable(), input.Filter);
+        var entity = await GetEntityByIdAsync(id);
+        return MapToGetOutputDto(entity);
+    }
+    public virtual async Task<PagedResultDto<LookupDto<TKey>>> GetListAsync(LookupRequestDto input)
+    {
+        var query = await CreateSelectQueryAsync();
+        query = ApplyFilter(query, input);
         var totalCount = await AsyncExecuter.CountAsync(query);
-        // query = ApplyOrderSorting(query);
+        query = ApplySorting(query);
         query = ApplyPaging(query, input);
         var entities = await AsyncExecuter.ToListAsync(query);
-        return new PagedResultDto<LookupEntity<TKey>>(totalCount, entities);
+        var entityDtos = await MapToGetListOutputDtosAsync(entities);
+        return new PagedResultDto<LookupDto<TKey>>(totalCount, entityDtos);
     }
     
-    protected virtual async Task<LookupEntity<TKey>> GetSelectItemAsync(TKey id)
+    #endregion
+
+    #region Maps
+
+    protected virtual LookupDto<TKey> MapToGetOutputDto(LookupEntity<TKey> entity)
     {
-        var query = await GetSelectQueryable();
+        return new LookupDto<TKey>()
+        {
+            Id = entity.Id,
+            DisplayName = entity.DisplayName,
+            AlternativeText = entity.AlternativeText,
+        };
+    }
+    protected virtual async Task<List<LookupDto<TKey>>> MapToGetListOutputDtosAsync(List<TLookupEntity> entities)
+    {
+        return entities.Select(a => new LookupDto<TKey>()
+        {
+            Id = a.Id,
+            DisplayName = a.DisplayName,
+            AlternativeText = a.AlternativeText,
+        }).ToList();
+    }
+
+    #endregion
+
+    #region Select queriable
+    
+    protected virtual async Task<TLookupEntity> GetEntityByIdAsync(TKey id)
+    {
+        var query = await CreateSelectQueryAsync();
         return await AsyncExecuter.FirstAsync(query, entity => entity.Id.Equals(id));
     }
     
-    /// <summary>
-    /// Should apply paging if needed.
-    /// </summary>
-    /// <param name="query">The query.</param>
-    /// <param name="input">The input.</param>
-    protected virtual IQueryable<LookupEntity<TKey>> ApplyPaging(IQueryable<LookupEntity<TKey>> query, LookupRequestDto input)
+    protected virtual IQueryable<TLookupEntity> ApplyPaging(IQueryable<TLookupEntity> query, LookupRequestDto input)
     {
         //Try to use paging if available
         if (input is IPagedResultRequest pagedInput)
@@ -93,46 +141,59 @@ public abstract class AbstractEntitySelectAppService<TKey>
         //No paging
         return query;
     }
-    
-    protected virtual async Task<IQueryable<LookupEntity<TKey>>> GetSelectQueryable()
+    private IQueryable<TLookupEntity> ApplySorting(IQueryable<TLookupEntity> query)
+    {
+        if (typeof(TLookupEntity).IsAssignableTo<IHasDisplayOrder>())
+        {
+            return query.OrderByDescending(e => ((IHasDisplayOrder)e).DisplayOrder);
+        }
+        return query;
+    }
+    protected virtual IQueryable<TLookupEntity> ApplyFilter(IQueryable<TLookupEntity> query, LookupRequestDto input)
+    {
+        return query.WhereIf(!string.IsNullOrEmpty(input.Filter), 
+            entity => entity.DisplayName.Contains(input.Filter)
+                      || entity.Id.ToString().Contains(input.Filter));
+    }
+    protected virtual async Task<IQueryable<TLookupEntity>> CreateSelectQueryAsync()
     {
         throw new NotImplementedException();
     }
-
-    protected virtual IQueryable<LookupEntity<TKey>> ApplyFilter(IQueryable<LookupEntity<TKey>> query, string filterText)
-    {
-        return query.WhereIf(!string.IsNullOrEmpty(filterText), 
-            entity => entity.DisplayName.ToLowerInvariant().Contains(filterText)
-                      || entity.Id.ToString().ToLowerInvariant().Contains(filterText));
-    }
-}
-
-public abstract class SelectAppService<TEntity, TKey>
-    : AbstractEntitySelectAppService<TKey>
-    where TEntity : class, IEntity<TKey>
-{
-    protected IReadOnlyRepository<TEntity, TKey> Repository { get; }
-
-    protected SelectAppService(IReadOnlyRepository<TEntity, TKey> repository)
-    {
-        Repository = repository;
-    }
     
-    /// <summary>
-    /// Override this for customize display name
-    /// </summary>
-    /// <returns></returns>
-    protected override async Task<IQueryable<LookupEntity<TKey>>> GetSelectQueryable()
-    {
-        var queryAble = await Repository.GetQueryableAsync();
-        Logger.LogWarning("Select by default display name show Id.");
-        return queryAble.Select(a => new LookupEntity<TKey>()
-            {
-                Id = a.Id,
-                DisplayName = a.Id.ToString()
-            })
-            .AsNoTracking();
-    }
+    #endregion
+    
+    
+    
+    // protected virtual IQueryable<TEntity> ApplySorting(IQueryable<TEntity> query, TGetListInput input)
+    // {
+    //     //Try to sort query if available
+    //     if (input is ISortedResultRequest sortInput)
+    //     {
+    //         if (!sortInput.Sorting.IsNullOrWhiteSpace())
+    //         {
+    //             return query.OrderBy(sortInput.Sorting);
+    //         }
+    //     }
+    //
+    //     //IQueryable.Task requires sorting, so we should sort if Take will be used.
+    //     if (input is ILimitedResultRequest)
+    //     {
+    //         return ApplyDefaultSorting(query);
+    //     }
+    //
+    //     //No sorting
+    //     return query;
+    // }
+    //
+    // protected virtual IQueryable<TEntity> ApplyDefaultSorting(IQueryable<TEntity> query)
+    // {
+    //     if (typeof(TEntity).IsAssignableTo<IHasCreationTime>())
+    //     {
+    //         return query.OrderByDescending(e => ((IHasCreationTime)e).CreationTime);
+    //     }
+    //
+    //     throw new AbpException("No sorting specified but this query requires sorting. Override the ApplyDefaultSorting method for your application service derived from AbstractKeyReadOnlyAppService!");
+    // }
     
     // protected virtual IQueryable<TEntity> ApplyOrderSorting(IQueryable<TEntity> query)
     // {
@@ -165,4 +226,38 @@ public abstract class SelectAppService<TEntity, TKey>
     //         return query.OrderByDescending(e => e.Id);
     //     }
     // }
+}
+
+public abstract class AbstractEntitySelectAppService<TKey>
+    : AbstractEntitySelectAppService<TKey, LookupEntity<TKey>>
+{
+
+}
+
+public abstract class SelectAppService<TEntity, TKey>
+    : AbstractEntitySelectAppService<TKey>
+    where TEntity : class, IEntity<TKey>
+{
+    protected IReadOnlyRepository<TEntity, TKey> Repository { get; }
+
+    protected SelectAppService(IReadOnlyRepository<TEntity, TKey> repository)
+    {
+        Repository = repository;
+    }
+    
+    /// <summary>
+    /// Override this for customize display name.
+    /// </summary>
+    /// <returns></returns>
+    protected override async Task<IQueryable<LookupEntity<TKey>>> CreateSelectQueryAsync()
+    {
+        var queryAble = await Repository.GetQueryableAsync();
+        Logger.LogWarning("Select by default display name show Id.");
+        return queryAble.Select(a => new LookupEntity<TKey>()
+            {
+                Id = a.Id,
+                DisplayName = a.Id.ToString(),
+            })
+            .AsNoTracking();
+    }
 }
