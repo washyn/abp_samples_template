@@ -1,0 +1,21 @@
+﻿@page
+@model Acme.Samples.Pages.SunatCatalog.Index
+
+@{
+    // Layout = null;
+}
+
+<abp-select asp-for="TipoDocumento"></abp-select>
+<abp-select asp-for="TipoTributo"></abp-select>
+<abp-select asp-for="UnidadMedida"></abp-select>
+
+<hr>
+
+<h5>Items</h5>
+
+<ul>
+    @foreach (var item in Model.List)
+    {
+        <li>@item.Codigo - @item.Descripcion</li>
+    }
+</ul>
