@@ -7,11 +7,6 @@ namespace Volo.Abp.Application.Services;
 #region Entities
 
 
-public class LookupEntityCatalog<TKey> : LookupEntity<TKey>, IHasDisplayOrder
-{
-    public int DisplayOrder { get; set; }
-}
-
 public class LookupEntity<TKey>
 {
     public TKey Id { get; set; }
@@ -27,33 +22,14 @@ public class LookupDto<TKey>
 }
 
 
-
 public class LookupRequestDto : PagedResultRequestDto
 {
     public string Filter { get; set; }
 }
 
-// improve: if entity implements tris aply sorting
-// TODO: improve for use store, and independent of repository
-// public interface IHasOrder: IHasOrder<int>
-// {
-//     int DisplayOrder { get; set; }
-// }
-//
-// public interface IHasOrder<T>
-// {
-//     T DisplayOrder { get; set; }
-// }
-// public class LookupEntityOrderable<TKey> : IHasOrder
-// {
-//     public TKey Id { get; set; }
-//     public string DisplayName { get; set; }
-//     public int DisplayOrder { get; set; }
-// }
-
-public interface IHasDisplayOrder
+public interface IHasDisplayOrder<T>
 {
-    int DisplayOrder { get; set; }
+    T DisplayOrder { get; set; }
 }
 
 #endregion
@@ -67,7 +43,7 @@ public interface ISelectAppService<TKey>
 }
 
 
-public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity>
+public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TOrder>
     : ApplicationService
         , ISelectAppService<TKey>
     where TLookupEntity : LookupEntity<TKey>
@@ -143,9 +119,9 @@ public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity>
     }
     private IQueryable<TLookupEntity> ApplySorting(IQueryable<TLookupEntity> query)
     {
-        if (typeof(TLookupEntity).IsAssignableTo<IHasDisplayOrder>())
+        if (typeof(TLookupEntity).IsAssignableTo<IHasDisplayOrder<TOrder>>())
         {
-            return query.OrderByDescending(e => ((IHasDisplayOrder)e).DisplayOrder);
+            return query.OrderByDescending(e => ((IHasDisplayOrder<TOrder>)e).DisplayOrder);
         }
         return query;
     }
@@ -161,75 +137,17 @@ public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity>
     }
     
     #endregion
-    
-    
-    
-    // protected virtual IQueryable<TEntity> ApplySorting(IQueryable<TEntity> query, TGetListInput input)
-    // {
-    //     //Try to sort query if available
-    //     if (input is ISortedResultRequest sortInput)
-    //     {
-    //         if (!sortInput.Sorting.IsNullOrWhiteSpace())
-    //         {
-    //             return query.OrderBy(sortInput.Sorting);
-    //         }
-    //     }
-    //
-    //     //IQueryable.Task requires sorting, so we should sort if Take will be used.
-    //     if (input is ILimitedResultRequest)
-    //     {
-    //         return ApplyDefaultSorting(query);
-    //     }
-    //
-    //     //No sorting
-    //     return query;
-    // }
-    //
-    // protected virtual IQueryable<TEntity> ApplyDefaultSorting(IQueryable<TEntity> query)
-    // {
-    //     if (typeof(TEntity).IsAssignableTo<IHasCreationTime>())
-    //     {
-    //         return query.OrderByDescending(e => ((IHasCreationTime)e).CreationTime);
-    //     }
-    //
-    //     throw new AbpException("No sorting specified but this query requires sorting. Override the ApplyDefaultSorting method for your application service derived from AbstractKeyReadOnlyAppService!");
-    // }
-    
-    // protected virtual IQueryable<TEntity> ApplyOrderSorting(IQueryable<TEntity> query)
-    // {
-    //     if (typeof(TEntity).IsAssignableTo<IHasOrder>())
-    //     {
-    //         return query.OrderByDescending(e => ((IHasOrder)e).DisplayOrder);
-    //     }
-    //
-    //     return query;
-    // }
-    //
-    // protected virtual IQueryable<LookupEntity<TKey>> ApplyOrderSorting(IQueryable<LookupEntity<TKey>> query)
-    // {
-    //     if (typeof(LookupEntity<TKey>).IsAssignableTo<IHasOrder>())
-    //     {
-    //         return query.OrderByDescending(e => ((IHasOrder)e).Order);
-    //     }
-    //
-    //     return query;
-    // }
-    //
-    // protected override IQueryable<TEntity> ApplyDefaultSorting(IQueryable<TEntity> query)
-    // {
-    //     if (typeof(TEntity).IsAssignableTo<ICreationAuditedObject>())
-    //     {
-    //         return query.OrderByDescending(e => ((ICreationAuditedObject)e).CreationTime);
-    //     }
-    //     else
-    //     {
-    //         return query.OrderByDescending(e => e.Id);
-    //     }
-    // }
 }
 
 public abstract class AbstractEntitySelectAppService<TKey>
     : AbstractEntitySelectAppService<TKey, LookupEntity<TKey>>
+{
+
+}
+
+public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity>
+    : AbstractEntitySelectAppService<TKey, TLookupEntity, TKey>
+    where TLookupEntity : LookupEntity<TKey>
 {
 
 }

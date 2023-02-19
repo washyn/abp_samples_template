@@ -2,21 +2,27 @@
 
 namespace Acme.Samples.Select;
 
-public class SunatCatalogEntity : LookupEntity<string>, IHasDisplayOrder
+
+public class CatalogEntity<TKey> : LookupEntity<TKey>, IHasDisplayOrder<int>
 {
     public int DisplayOrder { get; set; }
 }
 
-// typing for display order
-public class ExampleSelectOrderable : AbstractEntitySelectAppService<string, SunatCatalogEntity>, IExampleSelectOrderable
+public class SunatCatalogEntity : LookupEntity<string>, IHasDisplayOrder<int>
 {
-    protected override Task<IQueryable<SunatCatalogEntity>> CreateSelectQueryAsync()
+    public int DisplayOrder { get; set; }
+}
+
+
+public class ExampleSelectOrderable : AbstractEntitySelectAppService<string, CatalogEntity<string>, int>, IExampleSelectOrderable
+{
+    protected override Task<IQueryable<CatalogEntity<string>>> CreateSelectQueryAsync()
     {
-        var data = TipoTributoOrderable.GetValues().Select(a => new SunatCatalogEntity()
+        var data = TipoTributoOrderable.GetValues().Select(a => new CatalogEntity<string>()
         {
             Id = a.Codigo,
             DisplayName = a.Descripcion,
-            DisplayOrder = a.DisplayOrder, 
+            DisplayOrder = a.DisplayOrder,
         });
         return Task.FromResult(data.AsQueryable());
     }
@@ -27,7 +33,7 @@ public interface IExampleSelectOrderable : ISelectAppService<string>
     
 }
 
-public class TipoTributoOrderable : IHasDisplayOrder
+public class TipoTributoOrderable : IHasDisplayOrder<int>
 {
     public string Codigo { get; set; }
     public string Descripcion { get; set; }
@@ -40,7 +46,7 @@ public class TipoTributoOrderable : IHasDisplayOrder
         {
             new TipoTributoOrderable
             {
-                DisplayOrder = 12,
+                DisplayOrder = 1,
                 Codigo = "1000",
                 Descripcion = "IGV Impuesto General a las Ventas",
                 CodigoInternacional = "VAT",
@@ -55,7 +61,6 @@ public class TipoTributoOrderable : IHasDisplayOrder
             },
             new TipoTributoOrderable
             {
-                DisplayOrder = 11,
                 Codigo = "2000",
                 Descripcion = "ISC Impuesto Selectivo al Consumo",
                 CodigoInternacional = "EXC",
@@ -63,7 +68,6 @@ public class TipoTributoOrderable : IHasDisplayOrder
             },
             new TipoTributoOrderable
             {
-                DisplayOrder = 10,
                 Codigo = "3000",
                 Descripcion = "Impuesto a la Renta",
                 CodigoInternacional = "TOX",
@@ -71,7 +75,7 @@ public class TipoTributoOrderable : IHasDisplayOrder
             },
             new TipoTributoOrderable
             {
-                DisplayOrder = 9,
+                DisplayOrder = 435,
                 Codigo = "7152",
                 Descripcion = "Impuesto a la bolsa plastica",
                 CodigoInternacional = "OTH",
@@ -93,7 +97,6 @@ public class TipoTributoOrderable : IHasDisplayOrder
             },
             new TipoTributoOrderable
             {
-                DisplayOrder = 8,
                 Codigo = "9997",
                 Descripcion = "Exonerado",
                 CodigoInternacional = "VAT",
@@ -101,7 +104,6 @@ public class TipoTributoOrderable : IHasDisplayOrder
             },
             new TipoTributoOrderable
             {
-                DisplayOrder = 7,
                 Codigo = "9998",
                 Descripcion = "Inafecto",
                 CodigoInternacional = "FRE",
@@ -109,7 +111,6 @@ public class TipoTributoOrderable : IHasDisplayOrder
             },
             new TipoTributoOrderable
             {
-                DisplayOrder = 5,
                 Codigo = "9999",
                 Descripcion = "Otros tributos",
                 CodigoInternacional = "OTH",
