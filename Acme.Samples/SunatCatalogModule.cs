@@ -14,7 +14,7 @@ public class SunatCatalogModule : AbpModule
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            
+            options.FileSets.AddEmbedded<SunatCatalogModule>();
         });
     }
 }
@@ -130,15 +130,20 @@ public class CatalogData : ISingletonDependency
 
 public class FileNames
 {
-    // var stream = _fileProvider.GetFileInfo(ProfilePictureSettings.PathFileName).CreateReadStream();
     public const string Folder = "/SunatCatalogFiles/";
     public class Catalog
     {
-        // N° 01 - Tipo de documento
+        /// <summary>
+        /// N° 01 - Tipo de documento
+        /// </summary>
         public const string TIPO_DE_DOCUMENTO_01 = Folder + "01.json";
-        // 03 - Tipo de unidad de medida comercial
+        /// <summary>
+        /// 03 - Tipo de unidad de medida comercial
+        /// </summary>
         public const string TIPO_DE_UNIDAD_DE_MEDIDA_COMERCIAL_03 = Folder + "03.json";
-        // N° 05 - Código de tipos de tributos y otros conceptos
+        /// <summary>
+        /// N° 05 - Código de tipos de tributos y otros conceptos
+        /// </summary>
         public const string CODIGO_DE_TIPOS_DE_TRIBUTOS_Y_OTROS_CONCEPTOS_05 = Folder + "05.json";
     }
 }
