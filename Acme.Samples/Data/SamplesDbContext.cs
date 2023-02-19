@@ -17,8 +17,6 @@ public class SamplesDbContext : AbpDbContext<SamplesDbContext>
         : base(options)
     {
     }
-
-    public DbSet<CatalogEntity> CatalogEntities { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
