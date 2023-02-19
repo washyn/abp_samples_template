@@ -3,22 +3,17 @@
 namespace Acme.Samples.Select;
 
 
-public class CatalogEntity<TKey> : LookupEntity<TKey>, IHasDisplayOrder<int>
-{
-    public int DisplayOrder { get; set; }
-}
-
 public class SunatCatalogEntity : LookupEntity<string>, IHasDisplayOrder<int>
 {
     public int DisplayOrder { get; set; }
 }
 
 
-public class ExampleSelectOrderable : AbstractEntitySelectAppService<string, CatalogEntity<string>, int>, IExampleSelectOrderable
+public class ExampleSelectOrderable : AbstractEntitySelectAppService<string, CatalogLookupEntity<string>, int>, IExampleSelectOrderable
 {
-    protected override Task<IQueryable<CatalogEntity<string>>> CreateSelectQueryAsync()
+    protected override Task<IQueryable<CatalogLookupEntity<string>>> CreateSelectQueryAsync()
     {
-        var data = TipoTributoOrderable.GetValues().Select(a => new CatalogEntity<string>()
+        var data = TipoTributoOrderable.GetValues().Select(a => new CatalogLookupEntity<string>()
         {
             Id = a.Codigo,
             DisplayName = a.Descripcion,

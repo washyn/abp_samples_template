@@ -6,6 +6,10 @@ namespace Volo.Abp.Application.Services;
 
 #region Entities
 
+public class CatalogLookupEntity<TKey> : LookupEntity<TKey>, IHasDisplayOrder<int>
+{
+    public int DisplayOrder { get; set; }
+}
 
 public class LookupEntity<TKey>
 {
