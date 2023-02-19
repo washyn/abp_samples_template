@@ -101,7 +101,13 @@ public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TOrder
     protected virtual async Task<TLookupEntity> GetEntityByIdAsync(TKey id)
     {
         var query = await CreateSelectQueryAsync();
-        return await AsyncExecuter.FirstAsync(query, entity => entity.Id.Equals(id));
+        var result = await AsyncExecuter.FirstOrDefaultAsync(query, entity => entity.Id.Equals(id));
+        if (result is null)
+        {
+            throw new EntityNotFoundException();
+        }
+
+        return result;
     }
     
     protected virtual IQueryable<TLookupEntity> ApplyPaging(IQueryable<TLookupEntity> query, LookupRequestDto input)
