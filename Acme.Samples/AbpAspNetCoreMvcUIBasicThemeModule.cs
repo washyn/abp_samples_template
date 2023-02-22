@@ -30,11 +30,11 @@ public class AbpAspNetCoreMvcUiBasicThemeModule : AbpModule
     {
         Configure<AbpThemingOptions>(options =>
         {
-            options.Themes.Add<BasicTheme>();
+            options.Themes.Add<SbTheme>();
 
             if (options.DefaultThemeName == null)
             {
-                options.DefaultThemeName = BasicTheme.Name;
+                options.DefaultThemeName = SbTheme.Name;
             }
         });
 

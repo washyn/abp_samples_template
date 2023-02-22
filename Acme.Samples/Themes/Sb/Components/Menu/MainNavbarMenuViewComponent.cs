@@ -16,6 +16,6 @@ public class MainNavbarMenuViewComponent : AbpViewComponent
     public virtual async Task<IViewComponentResult> InvokeAsync()
     {
         var menu = await MenuManager.GetMainMenuAsync();
-        return View("~/Themes/Basic/Components/Menu/Default.cshtml", menu);
+        return View("~/Themes/Sb/Components/Menu/Default.cshtml", menu);
     }
 }

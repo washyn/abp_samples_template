@@ -17,7 +17,7 @@ public class BasicThemeMainTopToolbarContributor : IToolbarContributor
             return;
         }
 
-        if (!(context.Theme is BasicTheme))
+        if (!(context.Theme is SbTheme))
         {
             return;
         }

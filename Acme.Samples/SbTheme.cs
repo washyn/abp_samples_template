@@ -4,22 +4,22 @@ using Volo.Abp.DependencyInjection;
 namespace Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 
 [ThemeName(Name)]
-public class BasicTheme : ITheme, ITransientDependency
+public class SbTheme : ITheme, ITransientDependency
 {
-    public const string Name = "Basic";
+    public const string Name = "Sb";
 
     public virtual string GetLayout(string name, bool fallbackToDefault = true)
     {
         switch (name)
         {
             case StandardLayouts.Application:
-                return "~/Themes/Basic/Layouts/Application.cshtml";
+                return "~/Themes/Sb/Layouts/Application.cshtml";
             case StandardLayouts.Account:
-                return "~/Themes/Basic/Layouts/Account.cshtml";
+                return "~/Themes/Sb/Layouts/Account.cshtml";
             case StandardLayouts.Empty:
-                return "~/Themes/Basic/Layouts/Empty.cshtml";
+                return "~/Themes/Sb/Layouts/Empty.cshtml";
             default:
-                return fallbackToDefault ? "~/Themes/Basic/Layouts/Application.cshtml" : null;
+                return fallbackToDefault ? "~/Themes/Sb/Layouts/Application.cshtml" : null;
         }
     }
 }

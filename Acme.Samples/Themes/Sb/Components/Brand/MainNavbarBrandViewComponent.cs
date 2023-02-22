@@ -6,6 +6,6 @@ public class MainNavbarBrandViewComponent : AbpViewComponent
 {
     public virtual IViewComponentResult Invoke()
     {
-        return View("~/Themes/Basic/Components/Brand/Default.cshtml");
+        return View("~/Themes/Sb/Components/Brand/Default.cshtml");
     }
 }

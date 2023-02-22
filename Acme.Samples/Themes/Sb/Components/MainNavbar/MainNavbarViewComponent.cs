@@ -6,6 +6,6 @@ public class MainNavbarViewComponent : AbpViewComponent
 {
     public virtual IViewComponentResult Invoke()
     {
-        return View("~/Themes/Basic/Components/MainNavbar/Default.cshtml");
+        return View("~/Themes/Sb/Components/MainNavbar/Default.cshtml");
     }
 }
