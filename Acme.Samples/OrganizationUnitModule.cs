@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
 using Volo.Abp.ObjectExtending;
@@ -10,10 +12,108 @@ using Volo.Abp.Validation;
 
 namespace Acme.Samples;
 
+[Area("identity")]
+[RemoteService(true, Name = "AbpIdentity")]
+[ControllerName("OrganizationUnit")]
+[Route("api/identity/organization-units")]
+public class OrganizationUnitController : 
+    AbpController,
+    IOrganizationUnitAppService,
+    IApplicationService,
+    IRemoteService
+{
+    protected IOrganizationUnitAppService OrganizationUnitAppService { get; }
+
+    public OrganizationUnitController(
+        IOrganizationUnitAppService organizationUnitAppService)
+    {
+        // HAX3EZUlfXotIQ9OFd.UYQRQGMwAkptG();
+        // ISSUE: explicit constructor call
+        // base.\u002Ector();
+        this.OrganizationUnitAppService = organizationUnitAppService;
+    }
+
+    [Route("{id}/roles")]
+    [HttpPut]
+    public virtual Task AddRolesAsync(Guid id, OrganizationUnitRoleInput input) => this.OrganizationUnitAppService.AddRolesAsync(id, input);
+
+    [Route("{id}/members")]
+    [HttpPut]
+    public virtual Task AddMembersAsync(Guid id, OrganizationUnitUserInput input) => this.OrganizationUnitAppService.AddMembersAsync(id, input);
+
+    [HttpPost]
+    public virtual Task<OrganizationUnitWithDetailsDto> CreateAsync(OrganizationUnitCreateDto input) => this.OrganizationUnitAppService.CreateAsync(input);
+
+    [HttpDelete]
+    public virtual Task DeleteAsync(Guid id) => this.OrganizationUnitAppService.DeleteAsync(id);
+
+    [Route("{id}")]
+    [HttpGet]
+    public virtual Task<OrganizationUnitWithDetailsDto> GetAsync(Guid id) => this.OrganizationUnitAppService.GetAsync(id);
+
+    [HttpGet]
+    public virtual Task<PagedResultDto<OrganizationUnitWithDetailsDto>> GetListAsync(
+        GetOrganizationUnitInput input)
+    {
+        return this.OrganizationUnitAppService.GetListAsync(input);
+    }
+
+    [HttpGet]
+    [Route("all")]
+    public virtual Task<ListResultDto<OrganizationUnitWithDetailsDto>> GetListAllAsync() => this.OrganizationUnitAppService.GetListAllAsync();
+
+    [HttpGet]
+    [Route("{id}/roles")]
+    public virtual Task<PagedResultDto<IdentityRoleDto>> GetRolesAsync(
+        Guid id,
+        PagedAndSortedResultRequestDto input)
+    {
+        return this.OrganizationUnitAppService.GetRolesAsync(id, input);
+    }
+
+    [Route("{id}/members")]
+    [HttpGet]
+    public virtual Task<PagedResultDto<IdentityUserDto>> GetMembersAsync(
+        Guid id,
+        GetIdentityUsersInput input)
+    {
+        return this.OrganizationUnitAppService.GetMembersAsync(id, input);
+    }
+
+    [Route("{id}/move")]
+    [HttpPut]
+    public virtual Task MoveAsync(Guid id, OrganizationUnitMoveInput input) => this.OrganizationUnitAppService.MoveAsync(id, input);
+
+    [Route("available-users")]
+    [HttpGet]
+    public Task<PagedResultDto<IdentityUserDto>> GetAvailableUsersAsync(GetAvailableUsersInput input) => this.OrganizationUnitAppService.GetAvailableUsersAsync(input);
+
+    [Route("available-roles")]
+    [HttpGet]
+    public Task<PagedResultDto<IdentityRoleDto>> GetAvailableRolesAsync(GetAvailableRolesInput input) => this.OrganizationUnitAppService.GetAvailableRolesAsync(input);
+
+    [HttpPut]
+    [Route("{id}")]
+    public virtual Task<OrganizationUnitWithDetailsDto> UpdateAsync(
+        Guid id,
+        OrganizationUnitUpdateDto input)
+    {
+        return this.OrganizationUnitAppService.UpdateAsync(id, input);
+    }
+
+    [Route("{id}/members/{memberId}")]
+    [HttpDelete]
+    public virtual Task RemoveMemberAsync(Guid id, Guid memberId) => this.OrganizationUnitAppService.RemoveMemberAsync(id, memberId);
+
+    [HttpDelete]
+    [Route("{id}/roles/{roleId}")]
+    public virtual Task RemoveRoleAsync(Guid id, Guid roleId) => this.OrganizationUnitAppService.RemoveRoleAsync(id, roleId);
+}
+
+
+[RemoteService(isEnabled: false)]
 [Authorize("AbpIdentity.OrganizationUnits")]
-public class OrganizationUnitAppService :
-    ApplicationService,
-    IOrganizationUnitAppService
+public class OrganizationUnitAppService : ApplicationService, IOrganizationUnitAppService
 {
     protected OrganizationUnitManager OrganizationUnitManager { get; }
     protected IdentityUserManager UserManager { get; }
@@ -256,29 +356,30 @@ public class OrganizationUnitAppService :
         throw new NotImplementedException();
     }
 
-    public Task RemoveMemberAsync(Guid id, Guid memberId)
-    {
-        throw new NotImplementedException();
-    }
+
+    [Authorize("AbpIdentity.OrganizationUnits.ManageMembers")]
+    public virtual async Task RemoveMemberAsync(Guid id, Guid memberId) => await this.UserManager.RemoveFromOrganizationUnitAsync(memberId, id);
 
     public Task<PagedResultDto<IdentityRoleDto>> GetRolesAsync(Guid id, PagedAndSortedResultRequestDto input)
     {
         throw new NotImplementedException();
     }
+    
+    [Authorize("AbpIdentity.OrganizationUnits.ManageRoles")]
+    public virtual async Task RemoveRoleAsync(Guid id, Guid roleId) => await this.OrganizationUnitManager.RemoveRoleFromOrganizationUnitAsync(roleId, id);
 
-    public Task RemoveRoleAsync(Guid id, Guid roleId)
-    {
-        throw new NotImplementedException();
-    }
     
     public Task<OrganizationUnitWithDetailsDto> CreateAsync(OrganizationUnitCreateDto input)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteAsync(Guid id)
+    [Authorize("AbpIdentity.OrganizationUnits.ManageOU")]
+    public virtual async Task DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        if (await this.OrganizationUnitRepository.FindAsync(id) == null)
+            return;
+        await this.OrganizationUnitManager.DeleteAsync(id);
     }
 
     public Task<OrganizationUnitWithDetailsDto> UpdateAsync(Guid id, OrganizationUnitUpdateDto input)
@@ -286,20 +387,23 @@ public class OrganizationUnitAppService :
         throw new NotImplementedException();
     }
 
-    public Task AddRolesAsync(Guid id, OrganizationUnitRoleInput input)
+    [Authorize("AbpIdentity.OrganizationUnits.ManageRoles")]
+    public virtual async Task AddRolesAsync(Guid id, OrganizationUnitRoleInput input)
     {
-        throw new NotImplementedException();
+        foreach (Guid roleId in input.RoleIds)
+            await this.OrganizationUnitManager.AddRoleToOrganizationUnitAsync(roleId, id);
     }
 
-    public Task AddMembersAsync(Guid id, OrganizationUnitUserInput input)
+    [Authorize("AbpIdentity.OrganizationUnits.ManageMembers")]
+    public virtual async Task AddMembersAsync(Guid id, OrganizationUnitUserInput input)
     {
-        throw new NotImplementedException();
+        foreach (Guid userId in input.UserIds)
+            await this.UserManager.AddToOrganizationUnitAsync(userId, id);
     }
-
-    public Task MoveAsync(Guid id, OrganizationUnitMoveInput input)
-    {
-        throw new NotImplementedException();
-    }
+    
+    
+    [Authorize("AbpIdentity.OrganizationUnits.ManageOU")]
+    public virtual async Task MoveAsync(Guid id, OrganizationUnitMoveInput input) => await this.OrganizationUnitManager.MoveAsync(id, input.NewParentId);
 
     public Task<PagedResultDto<IdentityUserDto>> GetAvailableUsersAsync(GetAvailableUsersInput input)
     {
@@ -309,6 +413,23 @@ public class OrganizationUnitAppService :
     public Task<PagedResultDto<IdentityRoleDto>> GetAvailableRolesAsync(GetAvailableRolesInput input)
     {
         throw new NotImplementedException();
+    }
+    
+    private async Task<Dictionary<Guid, IdentityRole>> vQI351Uli3(
+        IEnumerable<OrganizationUnit> _param1)
+    {
+        return (await this.IdentityRoleRepository.GetListAsync((IEnumerable<Guid>) 
+                    _param1.SelectMany<OrganizationUnit, OrganizationUnitRole>((Func<OrganizationUnit, IEnumerable<OrganizationUnitRole>>) (
+                            q => (IEnumerable<OrganizationUnitRole>) q.Roles))
+                        .Select<OrganizationUnitRole, Guid>((Func<OrganizationUnitRole, Guid>) (t => t.RoleId))
+                        .Distinct<Guid>()
+                        .ToArray<Guid>())
+                .ConfigureAwait(false))
+            .ToDictionary<IdentityRole, Guid, IdentityRole>(
+                (Func<IdentityRole, Guid>)
+                (u => u.Id), 
+                (Func<IdentityRole, IdentityRole>) 
+                (u => u));
     }
 }
 
