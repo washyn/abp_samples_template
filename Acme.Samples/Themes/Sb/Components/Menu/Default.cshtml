@@ -39,34 +39,13 @@
         </a>
         
         <div class="collapse" id="@menuItem.ElementId" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-            <nav class="sb-sidenav-menu-nested nav accordion" id="nav_level1">
+            <nav class="sb-sidenav-menu nav accordion" id="nav_level1">
                 @foreach (var childMenuItem in menuItem.Items)
                 {
                     @await Html.PartialAsync("~/Themes/Sb/Components/Menu/_MenuItem.cshtml", childMenuItem)
                 }
             </nav>
         </div>
-        
-        @* <li class="nav-item"> *@
-        @*     <div class="dropdown"> *@
-        @*         <a class="nav-link dropdown-toggle" href="#" id="Menu_@(menuItem.Name)" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> *@
-        @*             @if (menuItem.Icon != null) *@
-        @*             { *@
-        @*                 if (menuItem.Icon.StartsWith("fa")) *@
-        @*                 { *@
-        @*                     <i class="@menuItem.Icon"></i> *@
-        @*                 } *@
-        @*             } *@
-        @*             @menuItem.DisplayName *@
-        @*         </a> *@
-        @*         <div class="dropdown-menu border-0 shadow-sm" aria-labelledby="Menu_@(menuItem.Name)"> *@
-        @*             @foreach (var childMenuItem in menuItem.Items) *@
-        @*             { *@
-        @*                 @await Html.PartialAsync("~/Themes/Sb/Components/Menu/_MenuItem.cshtml", childMenuItem) *@
-        @*             } *@
-        @*         </div> *@
-        @*     </div> *@
-        @* </li> *@
     }
 }
 

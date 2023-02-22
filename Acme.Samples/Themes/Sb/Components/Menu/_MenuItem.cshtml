@@ -37,31 +37,13 @@ else
         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
     </a>
     <div class="collapse" id="@Model.ElementId" aria-labelledby="" data-bs-parent="#@ViewBag.ParentId.ToString()">
-        <nav class="sb-sidenav-menu-nested nav accordion" id="nav_level2">
+        <nav class="sb-sidenav-menu nav accordion" id="nav_level2">
             @foreach (var childMenuItem in Model.Items)
             {
                 @await Html.PartialAsync("~/Themes/Sb/Components/Menu/_MenuItem.cshtml", childMenuItem)
             }
         </nav>
     </div>
-    
-    @* <div class="dropdown-submenu"> *@
-    @*     <a role="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" *@
-    @*        aria-haspopup="true" aria-expanded="false"> *@
-    @*         <span class="lp-icon"> *@
-    @*             <i class="@(Model.Icon ?? "")"></i> *@
-    @*         </span> *@
-    @*         <span class="lp-text"> *@
-    @*             @Model.DisplayName *@
-    @*         </span> *@
-    @*     </a> *@
-    @*     <div class="dropdown-menu border-0 shadow-sm"> *@
-    @*         @foreach (var childMenuItem in Model.Items) *@
-    @*         { *@
-    @*             @await Html.PartialAsync("~/Themes/Sb/Components/Menu/_MenuItem.cshtml", childMenuItem) *@
-    @*         } *@
-    @*     </div> *@
-    @* </div> *@
 }
 @* <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"> *@
 @*     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div> *@
