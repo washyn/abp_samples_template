@@ -1,4 +1,8 @@
-﻿<nav class="sb-sidenav accordion shadow-sm sb-sidenav-light" id="sidenavAccordion">
+﻿@using Volo.Abp.MultiTenancy
+@using Volo.Abp.Users
+@inject ICurrentTenant CurrentTenant
+@inject ICurrentUser CurrentUser
+<nav class="sb-sidenav accordion shadow-sm sb-sidenav-light" id="sidenavAccordion">
     <div class="sb-sidenav-menu">
         <div class="nav">
             <div class="sb-sidenav-menu-heading">Core</div>
@@ -66,6 +70,13 @@
     </div>
     <div class="sb-sidenav-footer">
         <div class="small">Logged in as:</div>
-        Start Bootstrap
+        @if (CurrentUser.TenantId != null)
+        {
+            <small><i>@CurrentTenant.Name</i>\</small>@CurrentUser.UserName
+        }
+        else
+        {
+            @CurrentUser.UserName
+        }
     </div>
 </nav>

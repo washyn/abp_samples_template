@@ -56,26 +56,22 @@
 
     @(await Component.InvokeAsync<MainNavbarViewComponent>())
 
-    @* <div class="@containerClass"> *@
-    @*     @(await Component.InvokeAsync<PageAlertsViewComponent>()) *@
-    @*     <div id="AbpContentToolbar"> *@
-    @*         <div class="text-end mb-2"> *@
-    @*             @RenderSection("content_toolbar", false) *@
-    @*         </div> *@
-    @*     </div> *@
-    @*     @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application) *@
-    @*     @RenderBody() *@
-    @*     @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application) *@
-    @* </div> *@
-
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             @await Component.InvokeAsync(typeof(SidenavViewComponent))
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid px-4 py-4">
+                <div class="@containerClass px-2 pb-2">
+                    @(await Component.InvokeAsync<PageAlertsViewComponent>())
+                    <div id="AbpContentToolbar">
+                        <div class="text-end mb-2">
+                            @RenderSection("content_toolbar", false)
+                        </div>
+                    </div>
+                    @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application)
                     @RenderBody()
+                    @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application)
                 </div>
             </main>
             @await Component.InvokeAsync(typeof(FooterViewComponent))
