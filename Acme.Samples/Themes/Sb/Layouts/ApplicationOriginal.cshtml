@@ -8,8 +8,6 @@
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
 @using Volo.Abp.Localization
 @using Volo.Abp.Ui.Branding
-@using Acme.Samples.Themes.Sb.Components.Footer
-@using Acme.Samples.Themes.Sb.Components.Sidenav
 @inject IBrandingProvider BrandingProvider
 @inject IPageLayout PageLayout
 @{
@@ -56,30 +54,16 @@
 
     @(await Component.InvokeAsync<MainNavbarViewComponent>())
 
-    @* <div class="@containerClass"> *@
-    @*     @(await Component.InvokeAsync<PageAlertsViewComponent>()) *@
-    @*     <div id="AbpContentToolbar"> *@
-    @*         <div class="text-end mb-2"> *@
-    @*             @RenderSection("content_toolbar", false) *@
-    @*         </div> *@
-    @*     </div> *@
-    @*     @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application) *@
-    @*     @RenderBody() *@
-    @*     @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application) *@
-    @* </div> *@
-
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            @await Component.InvokeAsync(typeof(SidenavViewComponent))
+    <div class="@containerClass">
+        @(await Component.InvokeAsync<PageAlertsViewComponent>())
+        <div id="AbpContentToolbar">
+            <div class="text-end mb-2">
+                @RenderSection("content_toolbar", false)
+            </div>
         </div>
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid px-4 py-4">
-                    @RenderBody()
-                </div>
-            </main>
-            @await Component.InvokeAsync(typeof(FooterViewComponent))
-        </div>
+        @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application)
+        @RenderBody()
+        @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application)
     </div>
 
     <abp-script-bundle name="@BasicThemeBundles.Scripts.Global" />
