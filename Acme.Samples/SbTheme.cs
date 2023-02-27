@@ -23,3 +23,5 @@ public class SbTheme : ITheme, ITransientDependency
         }
     }
 }
+// TODO: make page Account layout and imrprove empty layout and add public layout from 
+// https://startbootstrap.com/previews/bare
