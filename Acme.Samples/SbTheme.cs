@@ -18,6 +18,8 @@ public class SbTheme : ITheme, ITransientDependency
                 return "~/Themes/Sb/Layouts/Account.cshtml";
             case StandardLayouts.Empty:
                 return "~/Themes/Sb/Layouts/Empty.cshtml";
+            case StandardLayouts.Public:
+                return "~/Themes/Sb/Layouts/Public.cshtml";
             default:
                 return fallbackToDefault ? "~/Themes/Sb/Layouts/Application.cshtml" : null;
         }

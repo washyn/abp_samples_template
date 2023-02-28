@@ -9,13 +9,16 @@
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.MainNavbar
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.PageAlerts
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Toolbar.LanguageSwitch
 @using Volo.Abp.AspNetCore.Mvc.UI.Theming
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetScripts
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
 @using Volo.Abp.MultiTenancy
 @using Volo.Abp.Localization
 @using Volo.Abp.Ui.Branding
-@using Volo.Abp.Ui.LayoutHooks
+@using Acme.Samples.Themes.Sb.Components.FooterLanguajeSwitch
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Blockquote
+@* @using Volo.Abp.Ui.LayoutHooks *@
 @inject IBrandingProvider BrandingProvider
 @inject IOptions<AbpMultiTenancyOptions> MultiTenancyOptions
 @inject ICurrentTenant CurrentTenant
@@ -53,7 +56,7 @@
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Account)
 </head>
 <body class="abp-account-layout @rtl">
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Account)
+    @* @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Account) *@
 
     @* @(await Component.InvokeAsync<MainNavbarViewComponent>()) *@
     <div id="layoutAuthentication">
@@ -61,7 +64,8 @@
             <main>
                 <div class="@containerClass">
                     <div class="row justify-content-center">
-                        <div class="col mx-auto my-5" style="max-width: 440px">
+                        <div class="col mx-auto mt-5" style="max-width: 440px">
+                            
                             @if (MultiTenancyOptions.Value.IsEnabled &&
                                  (TenantResolveResultAccessor.Result?.AppliedResolvers?.Contains(CookieTenantResolveContributor.ContributorName) == true ||
                                   TenantResolveResultAccessor.Result?.AppliedResolvers?.Contains(QueryStringTenantResolveContributor.ContributorName) == true))
@@ -104,10 +108,9 @@
             <footer class="py-3 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website @DateTime.Now.Year</div>
+                        <div class="text-muted">&copy; Website @DateTime.Now.Year</div>
+                        @await Component.InvokeAsync(typeof(FooterLanguajeSwitchViewComponent))
                         <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
                             <a href="#">Terms &amp; Conditions</a>
                         </div>
                     </div>
