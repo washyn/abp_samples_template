@@ -56,7 +56,7 @@
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Account)
 </head>
 <body class="abp-account-layout @rtl">
-    @* @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Account) *@
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Account)
 
     @* @(await Component.InvokeAsync<MainNavbarViewComponent>()) *@
     <div id="layoutAuthentication">
@@ -108,7 +108,7 @@
             <footer class="py-3 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">&copy; Website @DateTime.Now.Year</div>
+                        <div class="text-muted"><a href="~/" class="text-black-50">&copy; Website @DateTime.Now.Year</a> </div>
                         @await Component.InvokeAsync(typeof(FooterLanguajeSwitchViewComponent))
                         <div>
                             <a href="#">Terms &amp; Conditions</a>

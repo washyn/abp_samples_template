@@ -1,22 +1,17 @@
 ﻿@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
 @using Volo.Abp.AspNetCore.Mvc.UI.Layout
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling
-@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.MainNavbar
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.PageAlerts
 @using Volo.Abp.AspNetCore.Mvc.UI.Theming
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetScripts
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
 @using Volo.Abp.Localization
 @using Volo.Abp.Ui.Branding
-@using Acme.Samples.Themes.Sb.Components.Footer
-@using Acme.Samples.Themes.Sb.Components.PublicNavBar
-@using Acme.Samples.Themes.Sb.Components.Sidenav
 @using Volo.Abp.AspNetCore.Mvc.UI.Bundling.TagHelpers
-@using Volo.Abp.Users
+@using Acme.Samples.Themes.Sb.Components.PublicNavBar
 @* @using Volo.Abp.Ui.LayoutHooks *@
 @inject IBrandingProvider BrandingProvider
 @inject IPageLayout PageLayout
-@inject ICurrentUser CurrentUser
 @{
     Layout = null;
     var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
@@ -40,45 +35,38 @@
 
 <html lang="@CultureInfo.CurrentCulture.Name" dir="@rtl">
 <head>
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Application)
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Empty)
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>@pageTitle</title>
-
+    @if (ViewBag.Description != null)
+    {
+        <meta name="description" content="@ViewBag.Description" />
+    }
     <abp-style-bundle name="@BasicThemeBundles.Styles.Global" />
 
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
 
     @await RenderSectionAsync("styles", false)
 
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Application)
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Empty)
 </head>
-<body class="abp-application-layout @rtl">
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Application)
-    @await Component.InvokeAsync(typeof(MainNavbarViewComponent))
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            @await Component.InvokeAsync(typeof(SidenavViewComponent))
+<body class="abp-empty-layout @rtl">
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Empty)
+    @await Component.InvokeAsync(typeof(PublicNavBarViewComponent))
+    <div class="@containerClass">
+        @(await Component.InvokeAsync<PageAlertsViewComponent>())
+        <div id="AbpContentToolbar">
+            <div class="text-end mb-2">
+                @RenderSection("content_toolbar", false)
+            </div>
         </div>
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="@containerClass p-2">
-                    @(await Component.InvokeAsync<PageAlertsViewComponent>())
-                    <div id="AbpContentToolbar">
-                        <div class="text-end mb-2">
-                            @RenderSection("content_toolbar", false)
-                        </div>
-                    </div>
-                    @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application)
-                    @RenderBody()
-                    @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application)
-                </div>
-            </main>
-            @await Component.InvokeAsync(typeof(FooterViewComponent))
-        </div>
+        @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Empty)
+        @RenderBody()
+        @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Empty)
     </div>
 
     <abp-script-bundle name="@BasicThemeBundles.Scripts.Global" />
@@ -86,10 +74,10 @@
     <script src="~/Abp/ApplicationConfigurationScript"></script>
     <script src="~/Abp/ServiceProxyScript"></script>
 
-    @await Component.InvokeAsync(typeof(WidgetScriptsViewComponent))
-
     @await RenderSectionAsync("scripts", false)
 
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Application)
+    @await Component.InvokeAsync(typeof(WidgetScriptsViewComponent))
+
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Empty)
 </body>
 </html>
