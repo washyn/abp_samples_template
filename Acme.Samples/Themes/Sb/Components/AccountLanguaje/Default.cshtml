@@ -1,0 +1,35 @@
+﻿@using Volo.Abp.Ui.Branding
+@using Acme.Samples.Themes.Sb.Components.FooterLanguajeSwitch
+@inject IBrandingProvider BrandingProvider
+<div class="row">
+    <div class="col p-4 d-flex justify-content-between">
+        @await Component.InvokeAsync(typeof(FooterLanguajeSwitchViewComponent))
+        <div class="text-muted"><a href="~/" class="text-black-50 text-decoration-none">&copy; @BrandingProvider.AppName @DateTime.Now.Year</a> </div>
+    </div>
+</div>
+
+@* <div class="card shadow-sm rounded mb-3"> *@
+@*     <div class="card-body px-5"> *@
+@*         <div class="row"> *@
+@*             <div class="col"> *@
+@*                 <span style="font-size: .8em;" class="text-uppercase text-muted">Tenant</span><br/> *@
+@*                 <h6 class="m-0 d-inline-block"> *@
+@*                     $1$ @if (CurrentTenant.Id == null) #1# *@
+@*                     $1$ { #1# *@
+@*                     $1$     <span> #1# *@
+@*                     $1$         @MultiTenancyStringLocalizer["NotSelected"] #1# *@
+@*                     $1$     </span> #1# *@
+@*                     $1$ } #1# *@
+@*                     $1$ else #1# *@
+@*                     $1$ { #1# *@
+@*                     $1$     <strong>@(CurrentTenant.Name ?? CurrentTenant.Id.Value.ToString())</strong> #1# *@
+@*                     $1$ } #1# *@
+@*                     hi *@
+@*                 </h6> *@
+@*             </div> *@
+@*             <div class="col-auto"> *@
+@*                 <a id="AbpTenantSwitchLink" href="javascript:;" class="btn btn-sm mt-3 btn-outline-primary">Switch</a> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@

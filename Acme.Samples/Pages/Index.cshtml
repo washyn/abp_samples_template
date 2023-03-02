@@ -9,19 +9,19 @@
 @inject IThemeManager ThemeManager
 @model Acme.Samples.Pages.IndexModel
 @{
-    Layout = ThemeManager.CurrentTheme.GetPublicLayout();
+    
     // var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
     ViewBag.FluidLayout = false;
-    // if (CurrentUser.IsAuthenticated)
-    // {
-    //     Redirect("/Index");
-    // }
-    // else
-    // {
-    //     Redirect("/Internal");
-    // }
+    if (CurrentUser.IsAuthenticated)
+    {
+        Layout = ThemeManager.CurrentTheme.GetApplicationLayout();
+    }
+    else
+    {
+        Layout = ThemeManager.CurrentTheme.GetPublicLayout();
+    }
     
-    // TODO: ver como funciona el public page y hacer algo similar...
+    // TODO: ver como funciona el public page y hacer algo similar..... mejorar lo que ya hat pata qye se pueda presentar y mostrar...
 }
 @section content_toolbar {
     @* @await Component.InvokeAsync(typeof(AbpPageToolbarViewComponent), new { pageName = typeof(IndexModel).FullName }) *@
@@ -32,6 +32,16 @@
 @section scripts {
     <abp-script src="/Pages/Index.cshtml.js" />
 }
+
+
+<!-- Page content-->
+<div class="container">
+    <div class="text-center mt-5">
+        <h1>A Bootstrap 5 Starter Template</h1>
+        <p class="lead">A complete project boilerplate built with Bootstrap</p>
+        <p>Bootstrap v5.1.3</p>
+    </div>
+</div>
 
 <abp-card>
     <abp-card-header>

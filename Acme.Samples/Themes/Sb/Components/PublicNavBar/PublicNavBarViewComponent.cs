@@ -5,7 +5,7 @@ namespace Acme.Samples.Themes.Sb.Components.PublicNavBar;
 
 public class PublicNavBarViewComponent : AbpViewComponent
 {
-    public IViewComponentResult Invoke(string name)
+    public IViewComponentResult Invoke()
     {
         return View("~/Themes/Sb/Components/PublicNavBar/Default.cshtml");
     }
