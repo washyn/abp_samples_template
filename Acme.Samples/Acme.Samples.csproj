@@ -62,6 +62,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Washyn.ProfilePicture\Washyn.ProfilePicture.csproj" />
 
+
+    <_ContentIncludedByDefault Remove="Pages\Components\LogoSetting\Default.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Washyn.Logo\Washyn.Logo.csproj" />
   </ItemGroup>
 
 </Project>

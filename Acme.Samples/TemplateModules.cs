@@ -135,6 +135,7 @@ public class TemplateModules : AbpModule
     {
         Configure<SettingManagementPageOptions>(options =>
         {
+
         });
     }
     
