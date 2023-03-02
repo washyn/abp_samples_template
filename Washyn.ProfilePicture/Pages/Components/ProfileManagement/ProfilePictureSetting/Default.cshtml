@@ -1,0 +1,41 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Alert
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Button
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Card
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Grid
+@using Volo.Abp.SettingManagement
+@using Washyn.ProfilePicture.Pages.Components.ProfileManagement.ProfilePictureSetting
+@inject ISettingManager SettingManager
+@model Washyn.ProfilePicture.Pages.Components.ProfileManagement.ProfilePictureSetting.ShowProfilePictureViewModel
+@{
+    var url = string.IsNullOrEmpty(Model.FileName) ? $"/account/profile-picture-file/default" : $"/account/profile-picture-file/{Model.FileName}";
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-card-title>Imagen de perfil</abp-card-title>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row>
+            <abp-column>
+               <h6>Imagen de perfil</h6>
+                <img id="ProfilePicture" alt="Imagen de perfil" class="image-cropper-container" src="@url">
+            </abp-column>
+        </abp-row>
+        <hr>
+        <div id="@nameof(ProfilePictureViewComponent)">
+            <abp-row>
+                <abp-column>
+                    <div class="form-group">
+                        <label for="formFile" class="form-label">Cambiar imagen de perfil <span>*</span> </label>
+                        <input class="form-control" name="file" type="file" lang="es" id="formFile" accept="image/*" required="required">
+                    </div>
+                </abp-column>
+            </abp-row>
+            
+            <hr class="mt-2">
+            <abp-button button-type="Primary" type="button" id="SaveProfilePicture">Guardar</abp-button>
+            <abp-button button-type="Secondary" type="button" id="RestoreDefault">Reestabler</abp-button>
+        </div>
+    </abp-card-body>
+</abp-card>

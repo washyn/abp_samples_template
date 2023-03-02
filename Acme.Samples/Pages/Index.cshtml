@@ -22,5 +22,18 @@
     <abp-script src="/Pages/Index.cshtml.js" />
 }
 
+<div class="container">
+    <abp-card>
+        <abp-card-header>
+            <abp-card-title>
+                Welcome_Title
+            </abp-card-title>
+        </abp-card-header>
+        <abp-card-body>            
+            Welcome_Text
+        </abp-card-body>
+    </abp-card>
+
+
 <partial abp-if="!CurrentUser.IsAuthenticated" name="Shared/_Landing"/>
 <partial abp-if="CurrentUser.IsAuthenticated" name="Shared/_Home"/>

@@ -1,8 +1,6 @@
 ﻿using Acme.Samples.Data;
-using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
-using OpenIddict.Validation.AspNetCore;
 using Volo.Abp;
 using Volo.Abp.Account;
 using Volo.Abp.Account.Web;
@@ -24,15 +22,15 @@ using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Identity.Web;
+using Volo.Abp.IdentityServer.EntityFrameworkCore;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
-using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.HttpApi;
 using Volo.Abp.PermissionManagement.Identity;
-using Volo.Abp.PermissionManagement.OpenIddict;
+using Volo.Abp.PermissionManagement.IdentityServer;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.Web;
@@ -63,15 +61,15 @@ namespace Acme.Samples;
     // Account module packages
     typeof(AbpAccountApplicationModule),
     typeof(AbpAccountHttpApiModule),
-    typeof(AbpAccountWebOpenIddictModule),
+    typeof(AbpAccountWebIdentityServerModule),
 
     // Identity module packages
     typeof(AbpPermissionManagementDomainIdentityModule),
-    typeof(AbpPermissionManagementDomainOpenIddictModule),
+    typeof(AbpPermissionManagementDomainIdentityServerModule),
     typeof(AbpIdentityApplicationModule),
     typeof(AbpIdentityHttpApiModule),
     typeof(AbpIdentityEntityFrameworkCoreModule),
-    typeof(AbpOpenIddictEntityFrameworkCoreModule),
+    typeof(AbpIdentityServerEntityFrameworkCoreModule),
     typeof(AbpIdentityWebModule),
 
     // Audit logging module packages
@@ -107,15 +105,6 @@ public class TemplateModules : AbpModule
 
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
-        PreConfigure<OpenIddictBuilder>(builder =>
-		{
-			builder.AddValidation(options =>
-			{
-				options.AddAudiences("Samples");
-				options.UseLocalServer();
-				options.UseAspNetCore();
-			});
-		});
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -151,7 +140,6 @@ public class TemplateModules : AbpModule
     
     private void ConfigureAuthentication(ServiceConfigurationContext context)
     {
-        context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
     }
 
     private void ConfigureMultiTenancy()
@@ -314,7 +302,6 @@ public class TemplateModules : AbpModule
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthentication();
-        app.UseAbpOpenIddictValidation();
 
         if (IsMultiTenant)
         {
