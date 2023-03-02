@@ -48,8 +48,8 @@ public class LogoController : AbpController
         }
         await _blobContainer.SaveAsync(fileName, memoryStream, overrideExisting: true);
         await memoryStream.DisposeAsync();
-        // await _settingManager.SetGlobalAsync(LogoSettingDefinitionProvider.LogoSettingName, fileName);
-        await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id, LogoSettingDefinitionProvider.LogoSettingName, fileName);
+        await _settingManager.SetGlobalAsync(LogoSettingDefinitionProvider.LogoSettingName, fileName);
+        // await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id, LogoSettingDefinitionProvider.LogoSettingName, fileName);
     }
     
     // [ResponseCache(Duration = 60*60*24)] // second minute hour

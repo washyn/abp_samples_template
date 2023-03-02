@@ -25,7 +25,7 @@ public class SamplesModule : AbpModule
 [Dependency(ReplaceServices = true)]
 public class ExampleBrandingProvider : DefaultBrandingProvider
 {
-    public override string AppName => "";
+    public override string AppName => "Acme";
     public override string LogoUrl  => "/logo";
     public override string LogoReverseUrl  => "/logo";
 }
