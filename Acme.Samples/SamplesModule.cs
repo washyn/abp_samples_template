@@ -1,6 +1,6 @@
-﻿using Acme.Samples.Pages.Components.ProfileManagement.ProfilePictureSetting;
-using Volo.Abp.Autofac;
+﻿using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
+using Washyn.ProfilePicture.Pages.Components.ProfileManagement.ProfilePictureSetting;
 
 namespace Acme.Samples;
 

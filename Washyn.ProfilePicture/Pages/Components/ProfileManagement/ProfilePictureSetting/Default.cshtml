@@ -1,12 +1,12 @@
-﻿@using Acme.Samples.Pages.Components.ProfileManagement.ProfilePictureSetting
-@using Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Alert
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Button
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Card
 @using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Grid
 @using Volo.Abp.SettingManagement
+@using Washyn.ProfilePicture.Pages.Components.ProfileManagement.ProfilePictureSetting
 @inject ISettingManager SettingManager
-@model Acme.Samples.Pages.Components.ProfileManagement.ProfilePictureSetting.ShowProfilePictureViewModel
+@model Washyn.ProfilePicture.Pages.Components.ProfileManagement.ProfilePictureSetting.ShowProfilePictureViewModel
 @{
     var url = string.IsNullOrEmpty(Model.FileName) ? $"/account/profile-picture-file/default" : $"/account/profile-picture-file/{Model.FileName}";
 }

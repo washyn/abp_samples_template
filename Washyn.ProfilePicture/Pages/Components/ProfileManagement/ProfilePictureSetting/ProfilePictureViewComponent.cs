@@ -7,7 +7,7 @@ using Volo.Abp.Account.Web.ProfileManagement;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Packages.CropperJs;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.BlobStoring.FileSystem;
@@ -19,7 +19,7 @@ using Volo.Abp.Settings;
 using Volo.Abp.Validation.StringValues;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Acme.Samples.Pages.Components.ProfileManagement.ProfilePictureSetting;
+namespace Washyn.ProfilePicture.Pages.Components.ProfileManagement.ProfilePictureSetting;
 
 [Authorize]
 [Route("account/profile-picture-file")]
@@ -203,10 +203,10 @@ public class UserProfileAvatarModule : AbpModule
         {
             options.FileSets.AddEmbedded<UserProfileAvatarModule>();
             
-            if (hostingEnvironment.IsDevelopment())
-            {
-                options.FileSets.ReplaceEmbeddedByPhysical<UserProfileAvatarModule>(hostingEnvironment.ContentRootPath);
-            }
+            // if (hostingEnvironment.IsDevelopment())
+            // {
+            //     options.FileSets.ReplaceEmbeddedByPhysical<UserProfileAvatarModule>(hostingEnvironment.ContentRootPath);
+            // }
         });
 
         Configure<ProfileManagementPageOptions>(options =>
@@ -238,7 +238,7 @@ public class UserProfileAvatarModule : AbpModule
         Configure<AbpBundlingOptions>(options =>
         {
             options.StyleBundles.Configure(
-                BasicThemeBundles.Styles.Global,
+                StandardBundles.Styles.Global,
                 bundle =>
                 {
                     bundle.AddContributors(typeof(CropperJsStyleContributor));

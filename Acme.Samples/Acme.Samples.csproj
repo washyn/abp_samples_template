@@ -45,7 +45,17 @@
 
   <ItemGroup>
     <Folder Include="Migrations" />
+    <Folder Include="Pages\Components" />
     <Folder Include="wwwroot\host\profile-pictures" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Components\LogoSetting\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Components\ProfileManagement\ProfilePictureSetting\Default.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Washyn.ProfilePicture\Washyn.ProfilePicture.csproj" />
   </ItemGroup>
 
 </Project>

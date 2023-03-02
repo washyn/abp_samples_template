@@ -1,10 +1,10 @@
-﻿using Acme.Samples.Pages.Components.ProfileManagement.ProfilePictureSetting;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.Features;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.Users;
+using Washyn.ProfilePicture.Pages.Components.ProfileManagement.ProfilePictureSetting;
 
 namespace Acme.Samples.Pages.Components.UserAvatar;
 
