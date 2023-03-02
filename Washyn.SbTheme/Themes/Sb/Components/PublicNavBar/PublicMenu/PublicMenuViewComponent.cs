@@ -1,7 +1,7 @@
-﻿using Acme.Samples.Menus;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.UI.Navigation;
+using Washyn.SbTheme.Menus;
 
 namespace Acme.Samples.Themes.Sb.Components.PublicNavBar.PublicMenu;
 

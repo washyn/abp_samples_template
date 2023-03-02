@@ -1,5 +1,4 @@
 ﻿using Acme.Samples.Data;
-using Acme.Samples.Menus;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
@@ -10,7 +9,6 @@ using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AuditLogging;
@@ -47,6 +45,7 @@ using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.Uow;
 using Volo.Abp.VirtualFileSystem;
+using Washyn.SbTheme.Bundling;
 
 namespace Acme.Samples;
 
@@ -59,7 +58,7 @@ namespace Acme.Samples;
     typeof(AbpEntityFrameworkCoreSqliteModule),
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+    // typeof(AbpAspNetCoreMvcUiBasicThemeModule),
 
     // Account module packages
     typeof(AbpAccountApplicationModule),
@@ -128,10 +127,6 @@ public class TemplateModules : AbpModule
         {
             context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
         }
-        Configure<AbpNavigationOptions>(options =>
-        {
-            options.MenuContributors.Add(new PublicMenuContributor());
-        });
 
         ConfigureAuthentication(context);
         ConfigureMultiTenancy();
@@ -181,7 +176,7 @@ public class TemplateModules : AbpModule
         Configure<AbpBundlingOptions>(options =>
         {
             options.StyleBundles.Configure(
-                BasicThemeBundles.Styles.Global,
+                SbThemeBundles.Styles.Global,
                 bundle =>
                 {
                     bundle.AddFiles("/global-styles.css");

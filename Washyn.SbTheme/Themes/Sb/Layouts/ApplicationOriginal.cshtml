@@ -1,6 +1,5 @@
 ﻿@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
 @using Volo.Abp.AspNetCore.Mvc.UI.Layout
-@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.MainNavbar
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.PageAlerts
 @using Volo.Abp.AspNetCore.Mvc.UI.Theming
@@ -8,13 +7,10 @@
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
 @using Volo.Abp.Localization
 @using Volo.Abp.Ui.Branding
-@using Acme.Samples.Themes.Sb.Components.Footer
-@using Acme.Samples.Themes.Sb.Components.Sidenav
 @using Volo.Abp.AspNetCore.Mvc.UI.Bundling.TagHelpers
-@using Volo.Abp.Users
+@using Washyn.SbTheme.Bundling
 @inject IBrandingProvider BrandingProvider
 @inject IPageLayout PageLayout
-@inject ICurrentUser CurrentUser
 @{
     Layout = null;
     var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
@@ -46,7 +42,7 @@
 
     <title>@pageTitle</title>
 
-    <abp-style-bundle name="@BasicThemeBundles.Styles.Global" />
+    <abp-style-bundle name="@SbThemeBundles.Styles.Global" />
 
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
 
@@ -56,30 +52,22 @@
 </head>
 <body class="abp-application-layout @rtl">
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Application)
-    @await Component.InvokeAsync(typeof(MainNavbarViewComponent))
-    <div id="layoutSidenav">
-        <div id="layoutSidenav_nav">
-            @await Component.InvokeAsync(typeof(SidenavViewComponent))
+
+    @(await Component.InvokeAsync<MainNavbarViewComponent>())
+
+    <div class="@containerClass">
+        @(await Component.InvokeAsync<PageAlertsViewComponent>())
+        <div id="AbpContentToolbar">
+            <div class="text-end mb-2">
+                @RenderSection("content_toolbar", false)
+            </div>
         </div>
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="@containerClass p-2">
-                    @(await Component.InvokeAsync<PageAlertsViewComponent>())
-                    <div id="AbpContentToolbar">
-                        <div class="text-end mb-2">
-                            @RenderSection("content_toolbar", false)
-                        </div>
-                    </div>
-                    @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application)
-                    @RenderBody()
-                    @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application)
-                </div>
-            </main>
-            @await Component.InvokeAsync(typeof(FooterViewComponent))
-        </div>
+        @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application)
+        @RenderBody()
+        @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application)
     </div>
 
-    <abp-script-bundle name="@BasicThemeBundles.Scripts.Global" />
+    <abp-script-bundle name="@SbThemeBundles.Scripts.Global" />
 
     <script src="~/Abp/ApplicationConfigurationScript"></script>
     <script src="~/Abp/ServiceProxyScript"></script>

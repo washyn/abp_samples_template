@@ -35,6 +35,35 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\sb\layout.css" />
     <_ContentIncludedByDefault Remove="Themes\Sb\Components\Footer\LanguageSwitchFooter\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\AccountBrand\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\AccountLanguaje\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\Brand\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\FooterLanguajeSwitch\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\Footer\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\MainNavbar\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\Menu\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\Menu\_MenuItem.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\PageAlerts\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\PublicNavBar\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\PublicNavBar\PublicMenu\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\Sidenav\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\Toolbar\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\Toolbar\LanguageSwitch\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Components\Toolbar\UserMenu\Default.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Layouts\Account.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Layouts\Application.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Layouts\ApplicationOriginal.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Layouts\Empty.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\Layouts\Public.cshtml" />
+    <_ContentIncludedByDefault Remove="Themes\Sb\_ViewImports.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\sb-admin-styles.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\themes\basic\layout.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\themes\basic\layout.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\themes\sb\layout.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Washyn.SbTheme\Washyn.SbTheme.csproj" />
   </ItemGroup>
 
 </Project>

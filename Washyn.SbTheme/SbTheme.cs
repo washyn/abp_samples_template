@@ -1,7 +1,7 @@
 ﻿using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.DependencyInjection;
 
-namespace Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
+namespace Washyn.SbTheme;
 
 [ThemeName(Name)]
 public class SbTheme : ITheme, ITransientDependency

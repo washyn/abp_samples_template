@@ -1,33 +1,38 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+﻿using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Toolbars;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 using Volo.Abp.Modularity;
+using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using Washyn.SbTheme.Bundling;
+using Washyn.SbTheme.Menus;
+using Washyn.SbTheme.Toolbars;
 
-namespace Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
+namespace Washyn.SbTheme;
 
-[DependsOn(
-    typeof(AbpAspNetCoreMvcUiThemeSharedModule),
-    typeof(AbpAspNetCoreMvcUiMultiTenancyModule)
-    )]
-public class AbpAspNetCoreMvcUiBasicThemeModule : AbpModule
+[DependsOn(typeof(AbpAspNetCoreMvcUiThemeSharedModule))]
+[DependsOn(typeof(AbpAspNetCoreMvcUiMultiTenancyModule))]
+public class WashynSbThemeModule : AbpModule
 {
+    
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
         PreConfigure<IMvcBuilder>(mvcBuilder =>
         {
-            mvcBuilder.AddApplicationPartIfNotExists(typeof(AbpAspNetCoreMvcUiBasicThemeModule).Assembly);
+            mvcBuilder.AddApplicationPartIfNotExists(typeof(WashynSbThemeModule).Assembly);
         });
     }
-
+    
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        Configure<AbpNavigationOptions>(options =>
+        {
+            options.MenuContributors.Add(new PublicMenuContributor());
+        });
+        
         Configure<AbpThemingOptions>(options =>
         {
             options.Themes.Add<SbTheme>();
@@ -40,7 +45,8 @@ public class AbpAspNetCoreMvcUiBasicThemeModule : AbpModule
 
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<AbpAspNetCoreMvcUiBasicThemeModule>("Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic");
+            // options.FileSets.AddEmbedded<AbpAspNetCoreMvcUiBasicThemeModule>("Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic");
+            options.FileSets.AddEmbedded<WashynSbThemeModule>();
         });
 
         Configure<AbpToolbarOptions>(options =>
@@ -52,7 +58,7 @@ public class AbpAspNetCoreMvcUiBasicThemeModule : AbpModule
         {
             options
                 .StyleBundles
-                .Add(BasicThemeBundles.Styles.Global, bundle =>
+                .Add(SbThemeBundles.Styles.Global, bundle =>
                 {
                     bundle
                         .AddBaseBundles(StandardBundles.Styles.Global)
@@ -61,7 +67,7 @@ public class AbpAspNetCoreMvcUiBasicThemeModule : AbpModule
 
             options
                 .ScriptBundles
-                .Add(BasicThemeBundles.Scripts.Global, bundle =>
+                .Add(SbThemeBundles.Scripts.Global, bundle =>
                 {
                     bundle
                         .AddBaseBundles(StandardBundles.Scripts.Global)

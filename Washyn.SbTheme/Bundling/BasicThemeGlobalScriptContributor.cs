@@ -1,12 +1,11 @@
 ﻿using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 
-namespace Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
+namespace Washyn.SbTheme.Bundling;
 
 public class BasicThemeGlobalScriptContributor : BundleContributor
 {
     public override void ConfigureBundle(BundleConfigurationContext context)
     {
-        // context.Files.Add("/themes/sb/layout.js");
         context.Files.Add("/js/scripts.js");
     }
 }

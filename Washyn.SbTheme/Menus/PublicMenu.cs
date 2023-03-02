@@ -1,10 +1,7 @@
 ﻿using Localization.Resources.AbpUi;
-using Volo.Abp.Authorization.Permissions;
-using Volo.Abp.Identity.Web.Navigation;
-using Volo.Abp.SettingManagement.Web.Navigation;
 using Volo.Abp.UI.Navigation;
 
-namespace Acme.Samples.Menus;
+namespace Washyn.SbTheme.Menus;
 
 public class PublicMenuContributor : IMenuContributor
 {
