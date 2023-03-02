@@ -63,7 +63,6 @@ namespace LogoManagment
                     StandardBundles.Scripts.Global,
                     bundle =>
                     {
-                        // bundle.AddFiles("/logo-script.js");
                         bundle.Contributors.Add(typeof(CropperJsScriptContributor));
                     }
                 );
