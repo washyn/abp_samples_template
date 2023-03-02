@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LogoManagment\LogoManagment.csproj" />
+    <ProjectReference Include="..\Washyn.Logo\Washyn.Logo.csproj" />
   </ItemGroup>
 
 </Project>
