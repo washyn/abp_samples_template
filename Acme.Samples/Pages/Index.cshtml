@@ -14,8 +14,6 @@
     {
         Layout = ThemeManager.CurrentTheme.GetPublicLayout();
     }
-    
-    // TODO: ver como funciona el public page y hacer algo similar..... mejorar lo que ya hat pata qye se pueda presentar y mostrar...
 }
 @section styles {
     <abp-style abp-if="!CurrentUser.IsAuthenticated" src="/Pages/Index.cshtml.css" />

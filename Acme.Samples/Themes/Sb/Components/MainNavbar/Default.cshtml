@@ -6,12 +6,9 @@
     @(await Component.InvokeAsync<MainNavbarBrandViewComponent>())
     <!-- Sidebar Toggle-->
     <button class="btn order-1 order-lg-0 me-2 me-lg-0" id="sidebarToggle" type="button"><i class="fas fa-bars"></i></button>
-    @* esto reemplaza el form de busqueda y hace de espaciador *@
     <div class="d-none d-md-inline-block ms-auto me-0 me-md-3 my-2 my-md-0">
     </div>
-    
     <ul class="navbar-nav ms-auto ms-md-0 me-2 me-lg-4">
         @(await Component.InvokeAsync<MainNavbarToolbarViewComponent>())
     </ul>
-    
 </nav>
