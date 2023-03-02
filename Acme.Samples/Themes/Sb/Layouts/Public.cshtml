@@ -9,6 +9,9 @@
 @using Volo.Abp.Ui.Branding
 @using Volo.Abp.AspNetCore.Mvc.UI.Bundling.TagHelpers
 @using Acme.Samples.Themes.Sb.Components.PublicNavBar
+@using Volo.Abp.AspNetCore.Mvc.UI.Packages.Bootstrap
+@using Volo.Abp.AspNetCore.Mvc.UI.Packages.Core
+@using Volo.Abp.AspNetCore.Mvc.UI.Packages.JQuery
 @* @using Volo.Abp.Ui.LayoutHooks *@
 @inject IBrandingProvider BrandingProvider
 @inject IPageLayout PageLayout
@@ -35,7 +38,7 @@
 
 <html lang="@CultureInfo.CurrentCulture.Name" dir="@rtl">
 <head>
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Empty)
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Public)
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -47,30 +50,38 @@
         <meta name="description" content="@ViewBag.Description" />
     }
     <abp-style-bundle name="@BasicThemeBundles.Styles.Global" />
-
+@* <abp-style-bundle> *@
+@*     <abp-style type="typeof(CoreStyleContributor)"></abp-style> *@
+@*     <abp-style type="typeof(BootstrapStyleContributor)"></abp-style> *@
+@* </abp-style-bundle> *@
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
 
     @await RenderSectionAsync("styles", false)
 
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Empty)
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Public)
 </head>
 <body class="abp-empty-layout @rtl">
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Empty)
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Public)
     @await Component.InvokeAsync(typeof(PublicNavBarViewComponent))
-    <div class="@containerClass">
-        @(await Component.InvokeAsync<PageAlertsViewComponent>())
-        <div id="AbpContentToolbar">
-            <div class="text-end mb-2">
-                @RenderSection("content_toolbar", false)
-            </div>
-        </div>
-        @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Empty)
-        @RenderBody()
-        @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Empty)
-    </div>
+    @* <div class="@containerClass"> *@
+    @*     @(await Component.InvokeAsync<PageAlertsViewComponent>()) *@
+    @*     <div id="AbpContentToolbar"> *@
+    @*         <div class="text-end mb-2"> *@
+    @*             @RenderSection("content_toolbar", false) *@
+    @*         </div> *@
+    @*     </div> *@
+    @*     @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Public) *@
+    @*     @RenderBody() *@
+    @*     @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Public) *@
+    @* </div> *@
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Public)
+    @RenderBody()
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Public)
 
     <abp-script-bundle name="@BasicThemeBundles.Scripts.Global" />
-
+@* <abp-script-bundle> *@
+@*     <abp-script type="typeof(JQueryScriptContributor)"></abp-script> *@
+@* </abp-script-bundle> *@
     <script src="~/Abp/ApplicationConfigurationScript"></script>
     <script src="~/Abp/ServiceProxyScript"></script>
 
@@ -78,6 +89,6 @@
 
     @await Component.InvokeAsync(typeof(WidgetScriptsViewComponent))
 
-    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Empty)
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Public)
 </body>
 </html>

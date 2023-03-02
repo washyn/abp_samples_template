@@ -1,4 +1,5 @@
 ﻿using Acme.Samples.Data;
+using Acme.Samples.Menus;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
@@ -127,6 +128,10 @@ public class TemplateModules : AbpModule
         {
             context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
         }
+        Configure<AbpNavigationOptions>(options =>
+        {
+            options.MenuContributors.Add(new PublicMenuContributor());
+        });
 
         ConfigureAuthentication(context);
         ConfigureMultiTenancy();
