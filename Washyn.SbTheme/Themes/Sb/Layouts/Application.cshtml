@@ -10,15 +10,18 @@
 @using Acme.Samples.Themes.Sb.Components.Footer
 @using Acme.Samples.Themes.Sb.Components.Sidenav
 @using Volo.Abp.AspNetCore.Mvc.UI.Bundling.TagHelpers
-@using Volo.Abp.Users
+@using Volo.Abp.SettingManagement
 @using Washyn.SbTheme.Bundling
+@using Washyn.SbTheme.Pages.Components.BoxedLayoutSetting
 @inject IBrandingProvider BrandingProvider
 @inject IPageLayout PageLayout
-@inject ICurrentUser CurrentUser
+@inject ISettingManager SettingManager
 @{
     Layout = null;
-    var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
 
+    var boxed = Convert.ToBoolean(await SettingManager.GetOrNullForCurrentUserAsync(SbAdminThemeSettingNames.Layout.Boxed));
+    var containerClass = boxed ? "container-fluid" : "container";
+    
     var pageTitle = ViewBag.Title == null ? BrandingProvider.AppName : ViewBag.Title; //TODO: Discard to get from Title
 
     if (PageLayout.Content.Title != null)

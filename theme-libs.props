@@ -1,11 +1,9 @@
 <Project>
     <ItemGroup>
         <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="$(AbpVersion)" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="$(AbpVersion)" />
         <PackageReference Include="Volo.Abp.AutoMapper" Version="$(AbpVersion)" />
+        <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="$(AbpVersion)" />
+        <PackageReference Include="Volo.Abp.SettingManagement.Domain" Version="$(AbpVersion)" />
     </ItemGroup>
 
     <ItemGroup>

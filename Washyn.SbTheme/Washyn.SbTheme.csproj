@@ -52,5 +52,8 @@
     <Content Remove="wwwroot\**\*.svg" />
     <Content Remove="wwwroot\**\*.webmanifest" />
     <Content Remove="wwwroot\images\favicon\**" />
+
+    <EmbeddedResource Include="Pages\**\*.js" />
+    <Content Remove="Pages\**\*.js" />
   </ItemGroup>
 </Project>

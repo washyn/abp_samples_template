@@ -1,7 +1,14 @@
 ﻿@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Brand
-@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Menu
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Toolbar
-<nav class="sb-topnav navbar navbar-expand navbar-light bg-light shadow-sm">
+@using Volo.Abp.SettingManagement
+@using Washyn.SbTheme.Pages.Components.BoxedLayoutSetting
+@inject ISettingManager SettingManager
+@{
+    var darkBar = Convert.ToBoolean(await SettingManager.GetOrNullForCurrentUserAsync(SbAdminThemeSettingNames.Layout.DarkNavigationBar));
+    var classBar = darkBar ? "dark" : "light";
+}
+
+<nav class="sb-topnav navbar navbar-expand navbar-@classBar bg-@classBar shadow-sm">
     <!-- Navbar Brand-->
     @(await Component.InvokeAsync<MainNavbarBrandViewComponent>())
     <!-- Sidebar Toggle-->

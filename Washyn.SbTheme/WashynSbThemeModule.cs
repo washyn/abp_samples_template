@@ -9,10 +9,12 @@ using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 using Washyn.SbTheme.Bundling;
 using Washyn.SbTheme.Menus;
+using Washyn.SbTheme.Pages.Components.BoxedLayoutSetting;
 using Washyn.SbTheme.Toolbars;
 
 namespace Washyn.SbTheme;
 
+[DependsOn(typeof(SbThemeSettingModule))]
 [DependsOn(typeof(AbpAspNetCoreMvcUiThemeSharedModule))]
 [DependsOn(typeof(AbpAspNetCoreMvcUiMultiTenancyModule))]
 public class WashynSbThemeModule : AbpModule

@@ -1,9 +1,16 @@
 ﻿@using Volo.Abp.MultiTenancy
 @using Volo.Abp.Users
 @using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Menu
+@using Volo.Abp.SettingManagement
+@using Washyn.SbTheme.Pages.Components.BoxedLayoutSetting
 @inject ICurrentTenant CurrentTenant
 @inject ICurrentUser CurrentUser
-<nav class="sb-sidenav accordion shadow-sm sb-sidenav-light" id="sidenavAccordion">
+@inject ISettingManager SettingManager
+@{
+    var darkBar = Convert.ToBoolean(await SettingManager.GetOrNullForCurrentUserAsync(SbAdminThemeSettingNames.Layout.DarkNavigationBar));
+    var classBar = darkBar ? "dark" : "light";
+}
+<nav class="sb-sidenav accordion shadow-sm sb-sidenav-@classBar" id="sidenavAccordion">
     <div class="sb-sidenav-menu">
         <div class="nav">
             @await Component.InvokeAsync(typeof(MainNavbarMenuViewComponent))
