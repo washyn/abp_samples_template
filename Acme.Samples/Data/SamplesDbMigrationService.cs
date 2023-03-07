@@ -50,6 +50,7 @@ public class SamplesDbMigrationService : ITransientDependency
     private async Task SeedDataAsync()
     {
         Logger.LogInformation($"Executing database seed...");
+        await _dataSeeder.SeedAsync();
     }
     
     private bool AddInitialMigrationIfNotExist()
