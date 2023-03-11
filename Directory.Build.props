@@ -3,6 +3,7 @@
 
     <AbpVersion>6.0.*</AbpVersion>
     <FrameworkVersion>net6.0</FrameworkVersion>
+    <MicrosoftPackageVersion>net6.0</MicrosoftPackageVersion>
     <AspNetFrameworkPackageVersion>6.0.*</AspNetFrameworkPackageVersion>
 
     
