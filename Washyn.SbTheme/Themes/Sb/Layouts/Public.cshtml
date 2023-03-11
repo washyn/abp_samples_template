@@ -51,7 +51,7 @@
         <abp-style type="typeof(BootstrapStyleContributor)"></abp-style>
         <abp-style type="typeof(FontAwesomeStyleContributor)"></abp-style>
     </abp-style-bundle>
-    @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
+    @* @await Component.InvokeAsync(typeof(WidgetStylesViewComponent)) *@
 
     @await RenderSectionAsync("styles", false)
 
@@ -72,7 +72,7 @@
 
     @await RenderSectionAsync("scripts", false)
 
-    @await Component.InvokeAsync(typeof(WidgetScriptsViewComponent))
+    @* @await Component.InvokeAsync(typeof(WidgetScriptsViewComponent)) *@
 
     @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Public)
 </body>
