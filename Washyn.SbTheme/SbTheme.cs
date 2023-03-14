@@ -2,7 +2,6 @@
 using Volo.Abp.DependencyInjection;
 
 namespace Washyn.SbTheme;
-// TODO: add samples pages of tag helpers for view components
 [ThemeName(Name)]
 public class SbTheme : ITheme, ITransientDependency
 {
