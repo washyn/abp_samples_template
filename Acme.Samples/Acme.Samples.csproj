@@ -63,7 +63,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.Demo\Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.Demo.csproj" />
     <ProjectReference Include="..\Washyn.SbTheme\Washyn.SbTheme.csproj" />
   </ItemGroup>
 
