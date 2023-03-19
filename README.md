@@ -1,18 +1,8 @@
-## About this solution
-
-This is a minimalist, non-layered startup solution with the ABP Framework. All the fundamental ABP modules are already installed.
-
-## How to run
-
-The application needs to connect to a database. Run the following command in the `Acme.Samples` directory:
-
-````bash
-dotnet run --migrate-database
-````
-
-This will create and seed the initial database. Then you can run the application with any IDE that supports .NET.
-
-Happy coding..!
+## SbAdmin Theme for abp
 
 
 
+![alt](/images/screencapture-localhost-44352-2023-03-19-14_40_32.png)
+![alt](/images/screencapture-localhost-44352-Account-Login-2023-03-19-14_40_04.png)
+![alt](/images/screencapture-localhost-44352-SettingManagement-2023-03-19-14_40_56.png)
+![alt](/images/Screenshot_599.png)
