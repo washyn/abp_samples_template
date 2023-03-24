@@ -55,11 +55,6 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
         /// </summary>
         public bool RunScriptOnWindowLoad { get; set; }
         
-        /// <summary>
-        /// For set Theme.
-        /// </summary>
-        public string Theme { get; set; }
-        
         public EasySelectorAttribute(
             [NotNull] string getListedDataSourceUrl,
             [NotNull] string getSingleDataSourceUrl,
@@ -68,7 +63,6 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             [CanBeNull] string alternativeTextPropertyName = "id",
             [NotNull] string itemListPropertyName = "items",
             [CanBeNull] string moduleName = null,
-            [CanBeNull] string theme = null,
             int maxResultCount = 10,
             bool hideSubText = false,
             bool runScriptOnWindowLoad = false)
@@ -83,7 +77,6 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             MaxResultCount = maxResultCount;
             HideSubText = hideSubText;
             RunScriptOnWindowLoad = runScriptOnWindowLoad;
-            Theme = theme;
         }
     }
 }

@@ -18,6 +18,7 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.Http.Client;
 using Volo.Abp.Json;
 using Volo.Abp.Localization;
+using Washyn.Abp.Select2;
 
 namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
 {
@@ -25,6 +26,7 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
     [ExposeServices(typeof(IAbpTagHelperService<AbpSelectTagHelper>), typeof(AbpSelectTagHelperService))]
     public class TagHelperPlusAbpSelectTagHelperService : AbpSelectTagHelperService
     {
+        private readonly Select2ThemeOptions _themeOptions;
         private readonly IJsonSerializer _jsonSerializer;
         private readonly AbpRemoteServiceOptions _remoteServiceOptions;
 
@@ -33,10 +35,12 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
             HtmlEncoder encoder,
             IAbpTagHelperLocalizer tagHelperLocalizer,
             IStringLocalizerFactory stringLocalizerFactory,
+            IOptions<Select2ThemeOptions> themeOptions,
             IJsonSerializer jsonSerializer,
             IOptions<AbpRemoteServiceOptions> remoteServiceOptions) : base(generator,
             encoder, tagHelperLocalizer, stringLocalizerFactory)
         {
+            _themeOptions = themeOptions.Value;
             _jsonSerializer = jsonSerializer;
             _remoteServiceOptions = remoteServiceOptions.Value;
         }
@@ -130,7 +134,7 @@ namespace EasyAbp.Abp.TagHelperPlus.TagHelpers
                 : null;
 
             var dropdownParent = easySelectorAttribute.RunScriptOnWindowLoad ? "" : $"dropdownParent: $('#{tagId}').parent().parent(),";
-            var theme = easySelectorAttribute.Theme.IsNullOrEmpty() ? "" : $"theme: '{easySelectorAttribute.Theme}',";
+            var theme = _themeOptions.ThemeName.IsNullOrEmpty() ? "" : $"theme: '{_themeOptions.ThemeName}',";
             var languaje = $"language: '{CultureInfo.CurrentCulture.Name}',";
 
             var baseUrl = configuration?.BaseUrl;
