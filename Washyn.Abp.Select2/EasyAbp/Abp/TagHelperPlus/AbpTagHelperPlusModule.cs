@@ -4,7 +4,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.Http.Client;
 using Volo.Abp.Modularity;
-using Washyn.Billing.Web.Bundling.Select2;
+// using Washyn.Billing.Web.Bundling.Select2;
 
 namespace EasyAbp.Abp.TagHelperPlus
 {
@@ -23,7 +23,7 @@ namespace EasyAbp.Abp.TagHelperPlus
                     StandardBundles.Scripts.Global,
                     bundle =>
                     {
-                        bundle.AddContributors(typeof(Select2LocalizationScriptContributor));
+                        // bundle.AddContributors(typeof(Select2LocalizationScriptContributor));
                     }
                 );
             });

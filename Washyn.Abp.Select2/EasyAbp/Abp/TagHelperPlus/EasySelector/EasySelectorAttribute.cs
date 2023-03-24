@@ -68,7 +68,7 @@ namespace EasyAbp.Abp.TagHelperPlus.EasySelector
             [CanBeNull] string alternativeTextPropertyName = "id",
             [NotNull] string itemListPropertyName = "items",
             [CanBeNull] string moduleName = null,
-            [CanBeNull] string theme = "bootstrap4",
+            [CanBeNull] string theme = null,
             int maxResultCount = 10,
             bool hideSubText = false,
             bool runScriptOnWindowLoad = false)
