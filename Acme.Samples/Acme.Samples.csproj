@@ -32,4 +32,13 @@
     <Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Select\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="SunatCatalogFiles\*.json" />
+    <Content Remove="SunatCatalogFiles\*.json" />
+  </ItemGroup>
+
 </Project>

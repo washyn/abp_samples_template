@@ -1,0 +1,14 @@
+﻿@page
+@model Acme.Samples.Pages.ModalSample
+
+@{
+    Layout = null;
+}
+
+<abp-modal size="Large" >
+    <abp-modal-header title="Titulo"></abp-modal-header>
+    <abp-modal-body>
+        <abp-select asp-for="EntityId"></abp-select>
+    </abp-modal-body>
+    <abp-modal-footer buttons="Close"></abp-modal-footer>
+</abp-modal>
