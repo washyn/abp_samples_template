@@ -59,6 +59,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Volo.Abp.Http.Client" Version="$(AbpVersion)" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="$(AbpVersion)" />
     </ItemGroup>
 

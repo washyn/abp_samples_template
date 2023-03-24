@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\template.props" />
+  <Import Project="..\lang_ver.props" />
+  <PropertyGroup>
+    <TargetFramework>$(FrameworkVersion)</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup>
+
+</Project>
