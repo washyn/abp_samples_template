@@ -5,7 +5,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Packages.Select2;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 
-namespace Select2Localization.Select2
+namespace Washyn.Select2.Localization.Select2
 {
     [DependsOn(typeof(Select2ScriptContributor))]
     public class Select2LocalizationScriptContributor : BundleContributor

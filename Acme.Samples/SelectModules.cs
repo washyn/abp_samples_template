@@ -1,9 +1,9 @@
-﻿using Select2Boostrap5;
-using Select2Boostrap5.Select2;
-using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+﻿using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.Modularity;
+using Washyn.Select2.Boostrap5;
+using Washyn.Select2.Boostrap5.Select2;
 
 namespace Acme.Samples;
 
