@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Acme.Samples.Pages.SunatCatalog;
+namespace Acme.Samples.Pages.Catalog;
 
 public class Index : PageModel
 {

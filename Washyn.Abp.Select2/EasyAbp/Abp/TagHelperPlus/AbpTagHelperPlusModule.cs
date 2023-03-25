@@ -29,11 +29,6 @@ namespace EasyAbp.Abp.TagHelperPlus
                     }
                 );
             });
-            
-            Configure<Select2ThemeOptions>(options =>
-            {
-                options.ThemeName = "";
-            });
         }
     }
 }

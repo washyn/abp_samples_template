@@ -2,6 +2,7 @@
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.Modularity;
+using Washyn.Abp.Select2;
 using Washyn.Select2.Boostrap5;
 using Washyn.Select2.Boostrap5.Select2;
 
@@ -29,6 +30,11 @@ public class SelectModules : AbpModule
                     bundle.AddContributors(typeof(Select2BoostrapScriptContributor));
                 }
             );
+        });
+        
+        Configure<Select2ThemeOptions>(options =>
+        {
+            options.ThemeName = "bootstrap-5";
         });
     }
 }
