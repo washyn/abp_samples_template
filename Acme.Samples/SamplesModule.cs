@@ -7,6 +7,7 @@ namespace Acme.Samples;
 [DependsOn(typeof(AbpAutofacModule))]
 // [DependsOn(typeof(EasyAbp.Abp.TagHelperPlus.AbpTagHelperPlusModule))]
 [DependsOn(typeof(EasyAbp.Abp.TagHelperPlus.AbpTagHelperPlusModule))]
+[DependsOn(typeof(SelectModules))]
 public class SamplesModule : AbpModule
 {
 
