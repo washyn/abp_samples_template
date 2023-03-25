@@ -3,11 +3,10 @@ using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.Auditing;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.Domain.Repositories;
 
-namespace Acme.Samples.Select;
+namespace Washyn.Sunat.Catalog.Select;
 
 [RemoteService(isEnabled: false)]
 public class AuditLogSelectAppService : SelectAppService<AuditLog, Guid>

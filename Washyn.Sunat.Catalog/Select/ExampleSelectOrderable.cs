@@ -1,6 +1,6 @@
 ﻿using Volo.Abp.Application.Services;
 
-namespace Acme.Samples.Select;
+namespace Washyn.Sunat.Catalog.Select;
 
 
 public class SunatCatalogEntity : LookupEntity<string>, IHasDisplayOrder<int>

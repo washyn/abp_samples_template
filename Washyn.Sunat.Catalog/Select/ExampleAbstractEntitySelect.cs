@@ -4,7 +4,7 @@ using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace Acme.Samples.Select;
+namespace Washyn.Sunat.Catalog.Select;
 
 [RemoteService(isEnabled: false)]
 public class ExampleAbstractEntitySelectAppService
