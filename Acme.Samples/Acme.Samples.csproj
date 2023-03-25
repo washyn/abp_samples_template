@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Select2Boostrap5\Select2Boostrap5.csproj" />
+    <ProjectReference Include="..\Washyn.Select2.Boostrap5\Washyn.Select2.Boostrap5.csproj" />
   </ItemGroup>
 
 </Project>

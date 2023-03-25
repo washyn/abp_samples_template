@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Select2Localization\Select2Localization.csproj" />
+    <ProjectReference Include="..\Washyn.Select2.Localization\Washyn.Select2.Localization.csproj" />
   </ItemGroup>
 
 
