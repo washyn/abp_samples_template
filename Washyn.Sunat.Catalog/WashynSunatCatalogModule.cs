@@ -1,41 +1,37 @@
-﻿using Microsoft.Extensions.FileProviders;
+﻿using Localization.Resources.AbpUi;
+using Microsoft.Extensions.FileProviders;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Volo.Abp.Application.Services;
+using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
+using Volo.Abp.Autofac;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Modularity;
+using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Acme.Samples;
+namespace Washyn.Sunat.Catalog;
 
+[DependsOn(typeof(AbpAutofacModule))]
+// [DependsOn(typeof(EasyAbp.Abp.TagHelperPlus.AbpTagHelperPlusModule))]
+[DependsOn(typeof(EasyAbp.Abp.TagHelperPlus.AbpTagHelperPlusModule))]
+// [DependsOn(typeof(SelectModules))]
 [DependsOn(typeof(AbpVirtualFileSystemModule))]
-public class SunatCatalogModule : AbpModule
+[DependsOn(typeof(AbpAspNetCoreMvcUiBootstrapModule))]
+public class WashynSunatCatalogModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<SunatCatalogModule>();
+            options.FileSets.AddEmbedded<WashynSunatCatalogModule>();
+        });
+        
+        Configure<AbpNavigationOptions>(options =>
+        {
+            options.MenuContributors.Add(new SunatCatalogMenuContributor());
         });
     }
 }
-
-#region Catalog Dtos
-
-public class SunatCommonCatalogDto
-{
-    public string Codigo { get; set; }
-    public string Descripcion { get; set; }
-}
-
-public class TipoTributoDto : SunatCommonCatalogDto
-{
-    [JsonProperty("codigo_internacional")]
-    public string CodigoInternacional { get; set; }
-    public string Nombre { get; set; }
-}
-
-#endregion
 
 
 #region SelectServices
@@ -675,70 +671,12 @@ public class C60AppService : AbstractEntitySelectAppService<string>
 
 
 
-
 #region Services
 
-public class TipoDocumentoSelectAppService : AbstractEntitySelectAppService<string>
-{
-    private readonly CatalogData _catalogData;
-
-    public TipoDocumentoSelectAppService(CatalogData catalogData)
-    {
-        _catalogData = catalogData;
-    }
-    protected override Task<IQueryable<LookupEntity<string>>> CreateSelectQueryAsync()
-    {
-        var temp = _catalogData.GetDataTipoDocumento();
-        return Task.FromResult(temp.Select(a => new LookupEntity<string>()
-        {
-            Id = a.Codigo,
-            DisplayName = a.Descripcion
-        }).AsQueryable());
-    }
-}
-
-public class UnidadMedidaComercialSelectAppService : AbstractEntitySelectAppService<string>
-{
-    private readonly CatalogData _catalogData;
-
-    public UnidadMedidaComercialSelectAppService(CatalogData catalogData)
-    {
-        _catalogData = catalogData;
-    }
-    protected override Task<IQueryable<LookupEntity<string>>> CreateSelectQueryAsync()
-    {
-        var temp = _catalogData.GetDataUnidadMedidaComercial();
-        return Task.FromResult(temp.Select(a => new LookupEntity<string>()
-        {
-            Id = a.Codigo,
-            DisplayName = a.Descripcion,
-        }).AsQueryable());
-    }
-}
 
 public class SunatCatalogBase : AbstractEntitySelectAppService<string>
 {
     // esto ya deberia haber injectado el 
-}
-
-public class TipoTributoSelectAppService : AbstractEntitySelectAppService<string>
-{
-    private readonly CatalogData _catalogData;
-
-    public TipoTributoSelectAppService(CatalogData catalogData)
-    {
-        _catalogData = catalogData;
-    }
-    protected override Task<IQueryable<LookupEntity<string>>> CreateSelectQueryAsync()
-    {
-        var temp = _catalogData.GetDataTipoTributo();
-        return Task.FromResult(temp.Select(a => new LookupEntity<string>()
-        {
-            Id = a.Codigo,
-            DisplayName = a.Descripcion,
-            AlternativeText = a.CodigoInternacional
-        }).AsQueryable());
-    }
 }
 
 public class CatalogData : ISingletonDependency
@@ -749,28 +687,7 @@ public class CatalogData : ISingletonDependency
     {
         _fileProvider = fileProvider;
     }
-
-    public List<SunatCommonCatalogDto> GetDataTipoDocumento()
-    {
-        var strFile = _fileProvider.GetFileInfo(FileNames.C01.F01).ReadAsString();
-        return JsonConvert.DeserializeObject<List<SunatCommonCatalogDto>>(strFile, new JsonSerializerSettings() { ContractResolver = new DefaultContractResolver() {NamingStrategy = new SnakeCaseNamingStrategy()} });
-    }
     
-    public List<SunatCommonCatalogDto> GetDataUnidadMedidaComercial()
- 
-    {
-        var strFile = _fileProvider.GetFileInfo(FileNames.C03.F03).ReadAsString();
-        return JsonConvert.DeserializeObject<List<SunatCommonCatalogDto>>(strFile);
-    }
-    
-    public List<TipoTributoDto> GetDataTipoTributo()
-    {
-        var strFile = _fileProvider.GetFileInfo(FileNames.C05.F05).ReadAsString();
-        return JsonConvert.DeserializeObject<List<TipoTributoDto>>(strFile);
-    }
-    
-    // add list...
-
     #region List data
 
     
@@ -958,7 +875,7 @@ public class CatalogData : ISingletonDependency
 
 public class FileNames
 {
-    public const string Folder = "/SunatCatalogFiles/";
+    public const string Folder = "/CatalogFilesJson/";
 
     #region Catalog objects
 
@@ -1737,4 +1654,34 @@ public class FileNames
         {C59.F59,"N° 59 - Medios de Pago"},
         {C60.F60,"N° 60 - Código de tipo de dirección"},
     };
+}
+
+
+
+public class SunatCatalogMenuContributor : IMenuContributor
+{
+    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+    {
+        if (context.Menu.Name == StandardMenus.Main)
+        {
+            await ConfigureMainMenuAsync(context);
+        }
+    }
+
+    private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+    {
+        var administration = context.Menu.GetAdministration();
+        var l = context.GetLocalizer<AbpUiResource>();
+
+        context.Menu.Items.Insert(
+            0,
+            new ApplicationMenuItem(
+                "SunatCatalog.Home",
+                l["Sunat catalog"],
+                "~/catalog",
+                icon: "fas fa-home",
+                order: 0
+            )
+        );
+    }
 }

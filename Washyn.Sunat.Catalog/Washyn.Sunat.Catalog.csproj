@@ -6,5 +6,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
-
+  <ItemGroup>
+    <!-- <Folder Include="Pages" /> -->
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Washyn.Abp.Select2\Washyn.Abp.Select2.csproj" />
+    <ProjectReference Include="..\Washyn.Select2.Boostrap5\Washyn.Select2.Boostrap5.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CatalogFilesJson\*.json" />
+    <Content Remove="CatalogFilesJson\*.json" />
+  </ItemGroup>
 </Project>
