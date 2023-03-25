@@ -41,4 +41,8 @@
     <Content Remove="SunatCatalogFiles\*.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Washyn.Abp.Select2\Washyn.Abp.Select2.csproj" />
+  </ItemGroup>
+
 </Project>

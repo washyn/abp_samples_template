@@ -64,7 +64,7 @@
 
     <ItemGroup>
         <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="$(AbpVersion)" />
-        <PackageReference Include="EasyAbp.Abp.TagHelperPlus" Version="1.2.3" />
+        <!-- <PackageReference Include="EasyAbp.Abp.TagHelperPlus" Version="1.2.3" /> -->
     </ItemGroup>
 
     <ItemGroup>
