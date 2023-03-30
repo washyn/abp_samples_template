@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RequestLocalization;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Toolbar.LanguageSwitch;
 using Volo.Abp.Localization;
+using Washyn.SbTheme.Themes.Sb.Components.Toolbar.LanguageSwitch;
 
-namespace Acme.Samples.Themes.Sb.Components.FooterLanguajeSwitch;
+namespace Washyn.SbTheme.Themes.Sb.Components.FooterLanguajeSwitch;
 
 public class FooterLanguajeSwitchViewComponent: AbpViewComponent
 {

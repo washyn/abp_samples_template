@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Acme.Samples.Themes.Sb.Components.LoginBrand;
+namespace Washyn.SbTheme.Themes.Sb.Components.AccountBrand;
 
 public class AccountBrandViewComponent : ViewComponent
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Acme.Samples.Themes.Sb.Components.Footer;
+namespace Washyn.SbTheme.Themes.Sb.Components.Footer;
 
 public class FooterViewComponent : ViewComponent
 {

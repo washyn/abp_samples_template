@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Acme.Samples.Themes.Sb.Components.Sidenav;
+namespace Washyn.SbTheme.Themes.Sb.Components.Sidenav;
 
 public class SidenavViewComponent: ViewComponent
 {

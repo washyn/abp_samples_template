@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc;
 
-namespace Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Brand;
+namespace Washyn.SbTheme.Themes.Sb.Components.Brand;
 
 public class MainNavbarBrandViewComponent : AbpViewComponent
 {

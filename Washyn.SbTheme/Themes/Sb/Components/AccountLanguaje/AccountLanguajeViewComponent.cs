@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Acme.Samples.Themes.Sb.Components.AccountLanguaje;
+namespace Washyn.SbTheme.Themes.Sb.Components.AccountLanguaje;
 
 public class AccountLanguajeViewComponent : ViewComponent
 {

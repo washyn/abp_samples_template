@@ -1,7 +1,7 @@
-﻿@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Brand
-@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Toolbar
-@using Volo.Abp.SettingManagement
+﻿@using Volo.Abp.SettingManagement
 @using Washyn.SbTheme.Pages.Components.BoxedLayoutSetting
+@using Washyn.SbTheme.Themes.Sb.Components.Brand
+@using Washyn.SbTheme.Themes.Sb.Components.Toolbar
 @inject ISettingManager SettingManager
 @{
     var darkBar = Convert.ToBoolean(await SettingManager.GetOrNullForCurrentUserAsync(SbAdminThemeSettingNames.Layout.DarkNavigationBar));

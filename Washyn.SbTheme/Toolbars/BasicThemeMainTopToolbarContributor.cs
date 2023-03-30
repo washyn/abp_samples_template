@@ -1,8 +1,8 @@
-﻿using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Toolbar.LanguageSwitch;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Toolbar.UserMenu;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
+﻿using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.Localization;
 using Volo.Abp.Users;
+using Washyn.SbTheme.Themes.Sb.Components.Toolbar.LanguageSwitch;
+using Washyn.SbTheme.Themes.Sb.Components.Toolbar.UserMenu;
 
 namespace Washyn.SbTheme.Toolbars;
 
@@ -21,8 +21,7 @@ public class BasicThemeMainTopToolbarContributor : IToolbarContributor
         }
 
         var languageProvider = context.ServiceProvider.GetService<ILanguageProvider>();
-
-        //TODO: This duplicates GetLanguages() usage. Can we eleminate this?
+        
         var languages = await languageProvider.GetLanguagesAsync();
         if (languages.Count > 1)
         {

@@ -3,7 +3,7 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.UI.Navigation;
 using Washyn.SbTheme.Menus;
 
-namespace Acme.Samples.Themes.Sb.Components.PublicNavBar.PublicMenu;
+namespace Washyn.SbTheme.Themes.Sb.Components.PublicNavBar.PublicMenu;
 
 public class PublicMenuViewComponent : AbpViewComponent
 {

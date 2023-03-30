@@ -136,14 +136,5 @@ public class SbThemeSettingModule : AbpModule
         {
             options.Contributors.AddFirst(new SbThemeSettingPageContributor());
         });
-        // Configure<AbpBundlingOptions>(options =>
-        // {
-        //     options.ScriptBundles
-        //         .Configure(typeof(Volo.Abp.SettingManagement.Web.Pages.SettingManagement.IndexModel).FullName,
-        //             configuration =>
-        //             {
-        //                 configuration.AddFiles("/Pages/Components/BoxedLayoutSetting/Default.cshtml.js");
-        //             });
-        // });
     }
 }

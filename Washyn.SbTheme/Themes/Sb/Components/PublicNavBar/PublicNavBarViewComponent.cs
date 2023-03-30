@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace Acme.Samples.Themes.Sb.Components.PublicNavBar;
+namespace Washyn.SbTheme.Themes.Sb.Components.PublicNavBar;
 
 public class PublicNavBarViewComponent : AbpViewComponent
 {

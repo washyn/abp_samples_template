@@ -47,7 +47,6 @@ public class WashynSbThemeModule : AbpModule
 
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            // options.FileSets.AddEmbedded<AbpAspNetCoreMvcUiBasicThemeModule>("Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic");
             options.FileSets.AddEmbedded<WashynSbThemeModule>();
         });
 

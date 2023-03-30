@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Volo.Abp.Localization;
+﻿using Volo.Abp.Localization;
 
-namespace Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Toolbar.LanguageSwitch;
+namespace Washyn.SbTheme.Themes.Sb.Components.Toolbar.LanguageSwitch;
 
 public class LanguageSwitchViewComponentModel
 {
