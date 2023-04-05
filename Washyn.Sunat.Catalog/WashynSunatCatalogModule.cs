@@ -78,8 +78,8 @@ public class C02AppService : AbstractEntitySelectAppService<string>
         var tempData = _catalogData.GetDataC02();
         return tempData.Select(a => new LookupEntity<string>()
         {
-            Id = a.Codigo,
-            DisplayName = a.Descripcion,
+            Id = a.Currency,
+            DisplayName = a.CountryName,
         }).AsQueryable();
     }
 }
@@ -114,8 +114,8 @@ public class C04AppService : AbstractEntitySelectAppService<string>
         var tempData = _catalogData.GetDataC04();
         return tempData.Select(a => new LookupEntity<string>()
         {
-            Id = a.Codigo,
-            DisplayName = a.Descripcion,
+            Id = a.A2,
+            DisplayName = a.Country,
         }).AsQueryable();
     }
 }
@@ -928,8 +928,8 @@ public class FileNames
         /// Json file name.
         /// </summary>
         public const string F02 = Folder + "02.json";
-        public string Codigo { get; set; }
-        public string Descripcion { get; set; }
+        public string Currency { get; set; }
+        public string CountryName { get; set; }
         public List<C02> GetCommons()
         {
             return new List<C02>()
@@ -941,8 +941,8 @@ public class FileNames
         {
             return new C02
             {
-                Codigo = "",
-                Descripcion = "",
+                Currency = "",
+                CountryName = "",
             };
         }
     }
@@ -984,8 +984,8 @@ public class FileNames
         /// Json file name.
         /// </summary>
         public const string F04 = Folder + "04.json";
-        public string Codigo { get; set; }
-        public string Descripcion { get; set; }
+        public string A2 { get; set; }
+        public string Country { get; set; }
         public List<C04> GetCommons()
         {
             return new List<C04>()
@@ -997,8 +997,8 @@ public class FileNames
         {
             return new C04
             {
-                Codigo = "",
-                Descripcion = "",
+                A2 = "",
+                Country = "",
             };
         }
     }
