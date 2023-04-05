@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Packages.Select2;
 using Volo.Abp.Modularity;
-using Washyn.Select2.Localization.Select2;
 
 namespace Washyn.Select2.Boostrap5.Select2
 {
-    [DependsOn(typeof(Select2LocalizationScriptContributor))]
+    [DependsOn(typeof(Select2ScriptContributor))]
     public class Select2BoostrapScriptContributor : BundleContributor
     {
         public override void ConfigureBundle(BundleConfigurationContext context)

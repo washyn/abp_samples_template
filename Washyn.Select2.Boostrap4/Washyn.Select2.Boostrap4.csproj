@@ -10,6 +10,10 @@
     <IsPackable>true</IsPackable>
     <OutputType>Library</OutputType>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="$(AbpVersion)" />
@@ -41,7 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Washyn.Select2.Localization\Washyn.Select2.Localization.csproj" />
+    <!-- <ProjectReference Include="..\Washyn.Select2.Localization\Washyn.Select2.Localization.csproj" /> -->
   </ItemGroup>
 
 

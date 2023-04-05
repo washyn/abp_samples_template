@@ -21,7 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Washyn.Abp.Select2\Washyn.Abp.Select2.csproj" />
-    <ProjectReference Include="..\Washyn.Select2.Boostrap5\Washyn.Select2.Boostrap5.csproj" />
+    <ProjectReference Include="..\Washyn.Select2.Boostrap4\Washyn.Select2.Boostrap4.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CatalogFilesJson\*.json" />

@@ -1,4 +1,4 @@
-﻿namespace Washyn.Abp.Select2;
+﻿namespace Washyn.Select2.Boostrap4;
 
 public class Select2ThemeOptions
 {

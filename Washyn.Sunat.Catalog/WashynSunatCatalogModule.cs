@@ -9,14 +9,13 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using Washyn.Select2.Boostrap4;
 using Washyn.Sunat.Catalog.Select;
 
 namespace Washyn.Sunat.Catalog;
 
 [DependsOn(typeof(AbpAutofacModule))]
-// [DependsOn(typeof(EasyAbp.Abp.TagHelperPlus.AbpTagHelperPlusModule))]
 [DependsOn(typeof(EasyAbp.Abp.TagHelperPlus.AbpTagHelperPlusModule))]
-// [DependsOn(typeof(SelectModules))]
 [DependsOn(typeof(AbpVirtualFileSystemModule))]
 [DependsOn(typeof(AbpAspNetCoreMvcUiBootstrapModule))]
 [DependsOn(typeof(AbpAspNetCoreMvcModule))]
@@ -36,6 +35,11 @@ public class WashynSunatCatalogModule : AbpModule
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
             options.ConventionalControllers.Create(typeof(WashynSunatCatalogModule).Assembly);
+        });
+        
+        Configure<Select2ThemeOptions>(options =>
+        {
+            options.ThemeName = "bootstrap4";
         });
     }
 }

@@ -134,3 +134,6 @@ Happy coding..!
     N° 59 - Medios de Pago
     N° 60 - Código de tipo de dirección
     
+
+## TODO:
+- Para hacer fix del select, se puede usar el yarn.lock de billing con la version de antigua de jQuery que no rompe eso.
