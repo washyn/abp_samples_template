@@ -32,20 +32,13 @@ public class Program
 
         try
         {
-            var builder = WebApplication.CreateBuilder(args);
-            builder.Host.AddAppSettingsSecretsJson()
-                .UseAutofac()
-                .UseSerilog();
-            await builder.AddApplicationAsync<SamplesModule>();
+            var builder = CreateHostBuilder(args);
             var app = builder.Build();
-            await app.InitializeApplicationAsync();
-
             if (IsMigrateDatabase(args))
             {
                 await app.Services.GetRequiredService<SamplesDbMigrationService>().MigrateAsync();
                 return 0;
             }
-
             Log.Information("Starting Acme.Samples.");
             await app.RunAsync();
             return 0;
@@ -69,5 +62,31 @@ public class Program
     private static bool IsMigrateDatabase(string[] args)
     {
         return args.Any(x => x.Contains("--migrate-database", StringComparison.OrdinalIgnoreCase));
+    }
+    
+    internal static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureAppConfiguration(build =>
+            {
+                build.AddJsonFile("appsettings.secrets.json", optional: true);
+            })
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            })
+            .UseAutofac()
+            .UseSerilog();
+}
+
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddApplication<SamplesModule>();
+    }
+
+    public void Configure(IApplicationBuilder app)
+    {
+        app.InitializeApplication();
     }
 }

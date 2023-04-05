@@ -33,16 +33,16 @@
   </ItemGroup>
 
   <ItemGroup>
-
     <_ContentIncludedByDefault Remove="Pages\Select\Index.cshtml" />
   </ItemGroup>
 
 
 
-  <ItemGroup><!-- <ProjectReference Include="..\Washyn.Abp.Select2\Washyn.Abp.Select2.csproj" />
+  <ItemGroup>
+    <!-- <ProjectReference Include="..\Washyn.Abp.Select2\Washyn.Abp.Select2.csproj" />
     <ProjectReference Include="..\Washyn.Select2.Boostrap5\Washyn.Select2.Boostrap5.csproj" /> -->
-  
     <ProjectReference Include="..\Washyn.Sunat.Catalog\Washyn.Sunat.Catalog.csproj" />
+    <Folder Include="Migrations" />
   </ItemGroup>
 
 </Project>
