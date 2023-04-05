@@ -35,7 +35,7 @@ namespace Acme.Samples;
 public class TemplateModules : AbpModule
 {
     /* Single point to enable/disable multi-tenancy */
-    public const bool IsMultiTenant = true;
+    public const bool IsMultiTenant = false;
 
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
