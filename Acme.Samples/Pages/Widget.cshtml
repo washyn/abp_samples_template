@@ -19,42 +19,22 @@
     <abp-card-body>
         <abp-row>
             <abp-column size="_6" class="mb-3">
-                <vc:images-widget></vc:images-widget>
+                @await Component.InvokeAsync(typeof(UserStatisticWidgetViewComponent), new UserStatisticUpdateViewModel
+                       {
+                           StartDate = DateTime.Now.AddDays(-30),
+                           EndDate = DateTime.Now.AddDays(30)
+                       })
             </abp-column>
             <abp-column size="_6" class="mb-3">
-                <vc:images-widget></vc:images-widget>
+                <vc:user-statistic-widget model="argWidged2"></vc:user-statistic-widget>
             </abp-column>
             <abp-column size="_6" class="mb-3">
-                <vc:images-widget></vc:images-widget>
+                <vc:user-statistic-widget model="argWidged2"></vc:user-statistic-widget>
             </abp-column>
             <abp-column size="_6" class="mb-3">
-                <vc:images-widget></vc:images-widget>
+                <vc:user-statistic-widget model="argWidged2"></vc:user-statistic-widget>
             </abp-column>
         </abp-row>
-        
-        
-        
-        @* <abp-row> *@
-        @*     <abp-column size="_6" class="mb-3"> *@
-        @*         @await Component.InvokeAsync(typeof(UserStatisticWidgetViewComponent), new UserStatisticUpdateViewModel *@
-        @*                { *@
-        @*                    StartDate = DateTime.Now.AddDays(-30), *@
-        @*                    EndDate = DateTime.Now.AddDays(30) *@
-        @*                }) *@
-        @*     </abp-column> *@
-        @*     <abp-column size="_6" class="mb-3"> *@
-        @*         <vc:user-statistic-widget model="argWidged2"></vc:user-statistic-widget> *@
-        @*     </abp-column> *@
-        @*     <abp-column size="_6" class="mb-3"> *@
-        @*         <vc:user-statistic-widget model="argWidged2"></vc:user-statistic-widget> *@
-        @*     </abp-column> *@
-        @*     <abp-column size="_6" class="mb-3"> *@
-        @*         <vc:user-statistic-widget model="argWidged2"></vc:user-statistic-widget> *@
-        @*     </abp-column> *@
-        @* </abp-row> *@
-        
-        
-        <hr>
         @* ... *@
         @* @Html.Partial() *@
         @* @Html.RenderPartial() *@

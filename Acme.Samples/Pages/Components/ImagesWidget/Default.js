@@ -67,7 +67,7 @@
                     widgetManager.refresh($wrapper);
                 },
                 error: function (e) {
-                    abp.notify.success("Error al subir archivo.");
+                    abp.notify.error("Error al subir archivo.");
                 },
                 cache: false,
                 contentType: false,
@@ -105,7 +105,7 @@
                                     abp.notify.success("Eliminado correctamente.");
                                 },
                                 error: function (e) {
-                                    abp.notify.success("Error al subir archivo.");
+                                    abp.notify.error("Error al eliminar archivo.");
                                 },
                                 cache: false,
                                 contentType: false,
