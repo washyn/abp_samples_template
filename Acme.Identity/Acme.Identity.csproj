@@ -77,5 +77,14 @@
     <Content Remove="Components\**\*.css" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\**\*.js" />
+    <EmbeddedResource Include="wwwroot\**\*.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\**\*.js" />
+    <Content Remove="wwwroot\**\*.css" />
+  </ItemGroup>
+
 
 </Project>

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
@@ -39,6 +41,8 @@ public class IdentityModule : AbpModule
         ConfigureEfCore(context);
         ConfigureVirtualFiles(context);
         ConfigureAutoApiControllers();
+        ConfigureBundles();
+        
         Configure<AbpNavigationOptions>(options =>
         {
             options.MenuContributors.Add(new IdentityAppMenuContributor());
@@ -99,6 +103,20 @@ public class IdentityModule : AbpModule
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
             options.FileSets.AddEmbedded<IdentityModule>();
+        });
+    }
+    
+    private void ConfigureBundles()
+    {
+        Configure<AbpBundlingOptions>(options =>
+        {
+            options.ScriptBundles.Configure(
+                StandardBundles.Scripts.Global,
+                bundle =>
+                {
+                    bundle.AddFiles("/js/site.js");
+                }
+            );
         });
     }
 }
