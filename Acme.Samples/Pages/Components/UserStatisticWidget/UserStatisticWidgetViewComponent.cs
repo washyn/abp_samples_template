@@ -44,7 +44,7 @@ public class UserStatisticWidgetViewComponent : AbpViewComponent
 {
     public IViewComponentResult Invoke(UserStatisticUpdateViewModel model)
     {
-        return View(model);
+        return View("~/Pages/Components/UserStatisticWidget/Default.cshtml",model);
     }
 }
 
