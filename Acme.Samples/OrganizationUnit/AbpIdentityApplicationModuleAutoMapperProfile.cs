@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Volo.Abp.AutoMapper;
+using Volo.Abp.Identity;
 
 namespace Volo.Abp.Identity
 {
@@ -33,7 +34,7 @@ namespace Volo.Abp.Identity
       // this.CreateMap<IdentityUser, ProfileDto>().ForMember<bool>((Expression<Func<ProfileDto, bool>>) (profileDto => profileDto.HasPassword), (Action<IMemberConfigurationExpression<IdentityUser, ProfileDto, bool>>) (op => op.MapFrom<bool>((Expression<Func<IdentityUser, bool>>) (identityUser => identityUser.PasswordHash != default (string))))).MapExtraProperties<IdentityUser, ProfileDto>();
       // this.CreateMap<OrganizationUnit, OrganizationUnitDto>().MapExtraProperties<OrganizationUnit, OrganizationUnitDto>();
       // this.CreateMap<OrganizationUnitRole, OrganizationUnitRoleDto>();
-      // this.CreateMap<OrganizationUnit, OrganizationUnitWithDetailsDto>().MapExtraProperties<OrganizationUnit, OrganizationUnitWithDetailsDto>().Ignore<OrganizationUnit, OrganizationUnitWithDetailsDto, List<IdentityRoleDto>>((Expression<Func<OrganizationUnitWithDetailsDto, List<IdentityRoleDto>>>) (unitWithDetailsDto => unitWithDetailsDto.Roles));
+      this.CreateMap<OrganizationUnit, OrganizationUnitWithDetailsDto>().MapExtraProperties<OrganizationUnit, OrganizationUnitWithDetailsDto>().Ignore<OrganizationUnit, OrganizationUnitWithDetailsDto, List<IdentityRoleDto>>((Expression<Func<OrganizationUnitWithDetailsDto, List<IdentityRoleDto>>>) (unitWithDetailsDto => unitWithDetailsDto.Roles));
       // this.CreateMap<IdentityRole, OrganizationUnitRoleDto>().ForMember<Guid>((Expression<Func<OrganizationUnitRoleDto, Guid>>) (organizationUnitRoleDto => organizationUnitRoleDto.RoleId), (Action<IMemberConfigurationExpression<IdentityRole, OrganizationUnitRoleDto, Guid>>) (src => src.MapFrom<Guid>((Expression<Func<IdentityRole, Guid>>) (identityRole => identityRole.Id))));
       // this.CreateMap<IdentitySecurityLog, IdentitySecurityLogDto>();
     }
