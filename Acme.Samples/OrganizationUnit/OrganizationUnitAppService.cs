@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\user\.nuget\packages\volo.abp.identity.pro.application\4.4.3\lib\netstandard2.0\Volo.Abp.Identity.Pro.Application.dll
 // XML documentation location: C:\Users\user\.nuget\packages\volo.abp.identity.pro.application\4.4.3\lib\netstandard2.0\Volo.Abp.Identity.Pro.Application.xml
 
-using EGadPK1ol4gX3WNAr3;
+// using EGadPK1ol4gX3WNAr3;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Collections.Generic;
@@ -42,9 +42,9 @@ namespace Volo.Abp.Identity
       IIdentityUserRepository identityUserRepository,
       IIdentityRoleRepository identityRoleRepository)
     {
-      Fxv2nITsk1hSWPF0up.KROIQ43VbLYVb();
+      // Fxv2nITsk1hSWPF0up.KROIQ43VbLYVb();
       // ISSUE: explicit constructor call
-      base.\u002Ector();
+      // base.\u002Ector();
       this.OrganizationUnitManager = organizationUnitManager;
       this.UserManager = userManager;
       this.OrganizationUnitRepository = organizationUnitRepository;

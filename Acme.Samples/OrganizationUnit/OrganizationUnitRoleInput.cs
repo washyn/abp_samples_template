@@ -7,7 +7,7 @@
 
 using System;
 using System.Collections.Generic;
-using VOx7WMMbK7xN2XluUo;
+// using VOx7WMMbK7xN2XluUo;
 
 namespace Volo.Abp.Identity
 {
@@ -17,9 +17,9 @@ namespace Volo.Abp.Identity
 
         public OrganizationUnitRoleInput()
         {
-            Nvfxbjfj5Zt5ZTorHE.wt4YuNHSeVSsG();
+            // Nvfxbjfj5Zt5ZTorHE.wt4YuNHSeVSsG();
             // ISSUE: explicit constructor call
-            base.\u002Ector();
+            // base.\u002Ector();
         }
     }
 }
