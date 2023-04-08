@@ -1,0 +1,20 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Acme.Samples.Pages.Identity.OrganizationUnits.EditModal
+
+@{
+    Layout = null;
+}
+
+<form asp-page="/Identity/OrganizationUnits/EditModal" method="post">
+    <abp-modal>
+        <abp-modal-header title="Editar unidad organizativa"></abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="OrganizationUnit.DisplayName"></abp-input>
+            <abp-input asp-for="OrganizationUnit.Id"></abp-input>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>
