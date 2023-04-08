@@ -10,6 +10,7 @@ using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Identity.Localization;
 using Volo.Abp.Localization;
 using Volo.Abp.MultiTenancy;
+using Volo.Abp.Identity;
 // using VOx7WMMbK7xN2XluUo;
 
 namespace Volo.Abp.Identity
@@ -18,6 +19,14 @@ namespace Volo.Abp.Identity
   {
     public override void Define(IPermissionDefinitionContext context)
     {
+      var group = context.GetGroupOrNull(IdentityPermissions.GroupName);
+      if (group != null)
+      {
+        var permisionDefinition = group.AddPermission(IdentityPermissions.OrganizationUnits.Default);
+        permisionDefinition.AddChild(IdentityPermissions.OrganizationUnits.ManageOU);
+        permisionDefinition.AddChild(IdentityPermissions.OrganizationUnits.ManageRoles);
+        permisionDefinition.AddChild(IdentityPermissions.OrganizationUnits.ManageUsers);
+      }
       // PermissionGroupDefinition permissionGroupDefinition = context.AddGroup(Gl25B4WjEWtG1dbKxj.sEBWxCGA2W(248), (ILocalizableString) IdentityPermissionDefinitionProvider.Qto4LltAS(Gl25B4WjEWtG1dbKxj.sEBWxCGA2W(274)));
       // PermissionDefinition permissionDefinition1 = permissionGroupDefinition.AddPermission(Gl25B4WjEWtG1dbKxj.sEBWxCGA2W(336), (ILocalizableString) IdentityPermissionDefinitionProvider.Qto4LltAS(Gl25B4WjEWtG1dbKxj.sEBWxCGA2W(374)));
       // permissionDefinition1.AddChild(Gl25B4WjEWtG1dbKxj.sEBWxCGA2W(428), (ILocalizableString) IdentityPermissionDefinitionProvider.Qto4LltAS(Gl25B4WjEWtG1dbKxj.sEBWxCGA2W(480)));

@@ -18,6 +18,7 @@ using Volo.Abp.ObjectExtending;
 
 namespace Volo.Abp.Identity
 {
+  [RemoteService(IsEnabled = false)]
   [Authorize("AbpIdentity.OrganizationUnits")]
   public class OrganizationUnitAppService : 
     IdentityAppServiceBase,
