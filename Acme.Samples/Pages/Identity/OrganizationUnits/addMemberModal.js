@@ -64,6 +64,7 @@
                     processing: true,
                     serverSide: true,
                     paging: true,
+                    lengthChange: false,
                     ajax: abp.libs.datatables.createAjax(_organizationoUntAppService.getAvailableUsers, () => {
                         return {
                             id: args.organizationUnitId
