@@ -144,6 +144,7 @@ var ou = {};
                                         ).done(function () {
                                             instance.delete_node(node);
                                             organizationTree.refreshUnitCount();
+                                            abp.notify.success(l('SuccessfullyDeleted'));
                                         }).fail(function (err) {
                                             setTimeout(function () {
                                                 abp.message.error(err.message);
@@ -267,7 +268,7 @@ var ou = {};
                                         _organizationUnitService.move(data.node.id, {
                                             newParentId: data.parent === '#' ? null : data.parent
                                         }).done(function () {
-                                            //abp.notify.success(l('SuccessfullyMoved'));
+                                            abp.notify.success(l('SuccessfullyMoved'));
                                             organizationTree.reload();
                                         }).fail(function (err) {
                                             organizationTree.$tree.jstree('refresh'); //rollback
@@ -436,6 +437,7 @@ var ou = {};
                     serverSide: true,
                     scrollX: true,
                     paging: true,
+                    lengthChange: false,
                     ajax: abp.libs.datatables.createAjax(function () {
                         return _organizationUnitService.getMembers(organizationTree.selectedOu.id, {});
                     }),
@@ -512,6 +514,7 @@ var ou = {};
                     scrollX: true,
                     paging: true,
                     deferLoading: 0,
+                    lengthChange: false,
                     ajax: abp.libs.datatables.createAjax(function (input) {
                         return _organizationUnitService.getMembers(organizationTree.selectedOu.id, input);
                     }),
@@ -669,6 +672,7 @@ var ou = {};
                     serverSide: true,
                     paging: true,
                     deferLoading: 0,
+                    lengthChange: false,
                     ajax: abp.libs.datatables.createAjax(function (input) {
                         return _organizationUnitService.getRoles(organizationTree.selectedOu.id, input);
                     }),
@@ -763,10 +767,6 @@ var ou = {};
 
     const selectDeselect = function (el) {
         $el = $(el);
-        if ($(el.target).is(':checkbox')) {
-            el.preventDefault();
-            return;
-        }
 
         if (!$(el.target).is(':checkbox')) {
             $el = $(el.target).parent().closest('tr').find('[type=checkbox]');
@@ -776,6 +776,10 @@ var ou = {};
             } else if ($el.prop("checked") == false) {
                 $el.prop("checked", true);
             }
+        }
+
+        if ($(el.target).is(':checkbox')) {
+            $el = $(el.target);
         }
 
         if ($el.prop("checked") == true) {

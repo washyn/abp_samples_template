@@ -2,15 +2,18 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Volo.Abp.AspNetCore.Mvc.UI.Packages.JsTree
 @model Acme.Samples.Pages.Identity.OrganizationUnits.IndexModel
-
+@{
+    ViewBag.FluidLayout = true;
+}
 @section styles {
     <abp-style type="typeof(JsTreeStyleContributor)"></abp-style>
 }
+
 @section scripts {
     <abp-script type="typeof(JsTreeScriptContributor)"></abp-script>
-    <abp-script src="/Pages/Ou/Index.js" />
-    <abp-script src="/Pages/Ou/addMemberModal.js" />
-    <abp-script src="/Pages/Ou/addRoleModal.js" />
+    <abp-script src="/Pages/Identity/OrganizationUnits/Index.js"/>
+    <abp-script src="/Pages/Identity/OrganizationUnits/addMemberModal.js"/>
+    <abp-script src="/Pages/Identity/OrganizationUnits/addRoleModal.js"/>
 }
 
 <abp-row>
@@ -37,35 +40,30 @@
             <abp-card-body>
                 <abp-tabs>
                     <abp-tab title="Miembros">
-                        <abp-row class="my-3">
-                            <abp-column>
-                                <h6>Miembros</h6>
-                            </abp-column>
-                            <abp-column>
-                                <abp-button button-type="Outline_Primary" size="Small" text="Agregar miembro"></abp-button>
-                            </abp-column>
-                        </abp-row>
-                        <abp-row>
-                            <abp-column>
-                                Content
-                            </abp-column>
-                        </abp-row>
+                        <div class="mt-3">
+                            <div id="OuMembersTable" style="display: none">
+                                <div class="text-right mb-3">
+                                    <abp-button name="AddMember" button-type="Outline_Primary" size="Small" text="Agregar miembro" icon="plus"></abp-button>
+                                </div>
+                                <abp-table striped-rows="true" class="nowrap"/>
+                            </div>
+                            <div id="OuMembersEmptyInfo" class="text-muted">
+                                Seleccione una unidad organizativa para ver los miembros
+                            </div>
+                        </div>
                     </abp-tab>
                     <abp-tab title="Roles">
-                        <abp-row class="my-3">
-                            <abp-column>
-                                <h6>Miembros</h6>
-                            </abp-column>
-                            <abp-column>
-                                <abp-button button-type="Outline_Primary" size="Small" text="Agregar miembro"></abp-button>
-                            </abp-column>
-                        </abp-row>
-                        <abp-row>
-                            <abp-column>
-                                Content
-                            </abp-column>
-                        </abp-row>
-                        
+                        <div class="mt-3">
+                            <div id="OuRolesTable" style="display: none">
+                                <div class="text-right mb-3">
+                                    <abp-button name="AddRole" button-type="Outline_Primary" size="Small" text="Agregar rol" icon="plus"></abp-button>
+                                </div>
+                                <abp-table striped-rows="true" class="nowrap"/>
+                            </div>
+                            <div id="OuRolesEmptyInfo" class="text-muted">
+                                Seleccione una unidad organizativa para ver los roles
+                            </div>
+                        </div>
                     </abp-tab>
                 </abp-tabs>
             </abp-card-body>
