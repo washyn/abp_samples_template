@@ -19,14 +19,7 @@
     <None Remove="Logs\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Pages\**\*.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Pages\**\*.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+
 
   <ItemGroup>
     <Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*.json" />
@@ -44,11 +37,11 @@
     <EmbeddedResource Include="Pages\**\*.js" />
     <EmbeddedResource Include="Components\**\*.js" />
     <EmbeddedResource Include="Components\**\*.css" />
-    <EmbeddedResource Include="wwwroot\**\*.*" />
+    <!-- <EmbeddedResource Include="wwwroot\**\*.*" /> -->
     <Content Remove="Pages\**\*.css" />
     <Content Remove="Pages\**\*.js" />
     <Content Remove="Components\**\*.js" />
     <Content Remove="Components\**\*.css" />
-    <Content Remove="wwwroot\**\*.*" />
+    <!-- <Content Remove="wwwroot\**\*.*" /> -->
   </ItemGroup>
 </Project>
