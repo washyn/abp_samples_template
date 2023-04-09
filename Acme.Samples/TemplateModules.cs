@@ -1,7 +1,10 @@
-﻿using Acme.Samples.Data;
+﻿using Acme.Identity;
+using Acme.Samples.Data;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
@@ -32,15 +35,50 @@ namespace Acme.Samples;
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpAspNetCoreMvcUiBasicThemeModule)
 )]
+[DependsOn(typeof(IdentityModule))]
 public class TemplateModules : AbpModule
 {
     /* Single point to enable/disable multi-tenancy */
     public const bool IsMultiTenant = false;
-
+    
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
-    }
+                
+        // context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
+        // {
+        //     // options.AddAssemblyResource(
+        //     //     typeof(BillingResource),
+        //     //     typeof(BillingDomainModule).Assembly,
+        //     //     typeof(BillingDomainSharedModule).Assembly,
+        //     //     typeof(BillingApplicationModule).Assembly,
+        //     //     typeof(BillingApplicationContractsModule).Assembly,
+        //     //     typeof(BillingWebModule).Assembly
+        //     // );
+        //     options.AddAssemblyResource(typeof(TemplateModules));
+        // });
+        
+        PreConfigure<IMvcBuilder>(mvcBuilder =>
+        {
+            //Add plugin assembly
+            mvcBuilder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(TemplateModules).Assembly));
+            
+            //Add CompiledRazorAssemblyPart if the PlugIn module contains razor views.
+            mvcBuilder.PartManager.ApplicationParts.Add(
+                new CompiledRazorAssemblyPart(typeof(TemplateModules).Assembly));
+        });
+            
+        // context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
+        // {
+        //     options.AddAssemblyResource(typeof(BookStoreResource), typeof(BookStoreWebModule).Assembly);
+        // });
 
+        PreConfigure<IMvcBuilder>(mvcBuilder =>
+        {
+            mvcBuilder.AddApplicationPartIfNotExists(typeof(TemplateModules).Assembly);
+        });
+
+    }
+    
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
@@ -108,7 +146,7 @@ public class TemplateModules : AbpModule
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<TemplateModules>();
+            options.FileSets.AddEmbedded<TemplateModules>("Acme.Samples");
             // if (hostingEnvironment.IsDevelopment())
             // {
             //     /* Using physical files in development, so we don't need to recompile on changes */

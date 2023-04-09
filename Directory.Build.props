@@ -1,9 +1,9 @@
 <Project>
   <PropertyGroup>
 
-    <AbpVersion>4.4.*</AbpVersion>
-    <FrameworkVersion>net5.0</FrameworkVersion>
-    <AspNetFrameworkPackageVersion>5.0.*</AspNetFrameworkPackageVersion>
+    <AbpVersion>6.0.*</AbpVersion>
+    <FrameworkVersion>net6.0</FrameworkVersion>
+    <AspNetFrameworkPackageVersion>6.0.*</AspNetFrameworkPackageVersion>
 
     
     <!-- Microsoft.NET.Test.Sdk https://www.nuget.org/packages/Microsoft.NET.Test.Sdk -->

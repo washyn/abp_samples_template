@@ -83,8 +83,12 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddApplication<SamplesModule>(options =>
+        services.AddApplication<TemplateModules>(options =>
         {
+            // options.PlugInSources.AddFolder(@"D:\git-proyects\abp_samples_template\Acme.Identity\bin\Release\net5.0\publish");
+            // options.PlugInSources.AddFolder(@"D:\git-proyects\abp_samples_template\Acme.Identity\bin\Debug\net5.0");
+            // options.PlugInSources.AddFolder(@"D:\git-proyects\abp_samples_template\Acme.Identity\bin\Release\net5.0");
+            // options.PlugInSources.AddFolder(@"D:\git-proyects\abp_samples_template\Acme.Identity\bin\Debug\net5.0");
         });
     }
 

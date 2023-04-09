@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Acme.Identity.Pages.Components.UserLoginLink;
+using Acme.Identity.Pages.Shared.Components.UserLoginLink;
 using Localization.Resources.AbpUi;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;

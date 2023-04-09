@@ -1,12 +1,14 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using Acme.Identity.IdentityUser;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Acme.Identity.Pages.Users
 {
+    [Authorize(Roles = Consts.RolConsts.Administrador)]
     public class UpdateModal : PageModel
     {
 
