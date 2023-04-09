@@ -5,7 +5,7 @@ namespace Acme.Identity.Pages.Components.UserLoginLink
 {
     public class UserLoginLinkViewComponent : AbpViewComponent
     {
-        public virtual IViewComponentResult Invoke()
+        public IViewComponentResult Invoke()
         {
             return View("~/Pages/Components/UserLoginLink/Default.cshtml");
         }

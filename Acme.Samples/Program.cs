@@ -2,6 +2,7 @@ using System;
 using Acme.Samples.Data;
 using Serilog;
 using Serilog.Events;
+using Volo.Abp.Modularity.PlugIns;
 
 
 namespace Acme.Samples;
@@ -82,7 +83,9 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddApplication<SamplesModule>();
+        services.AddApplication<SamplesModule>(options =>
+        {
+        });
     }
 
     public void Configure(IApplicationBuilder app)

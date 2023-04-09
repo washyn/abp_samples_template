@@ -1,0 +1,10 @@
+<Project>
+    <PropertyGroup>
+        <!-- <LangVersion>latest</LangVersion> -->
+        <LangVersion>9.0</LangVersion>
+        <AbpProjectType>module</AbpProjectType>
+        <AbpVersion>4.4.*</AbpVersion>
+        <FrameworkVersion>net5.0</FrameworkVersion>
+        <AspNetFrameworkPackageVersion>5.0.*</AspNetFrameworkPackageVersion>
+    </PropertyGroup>
+</Project>

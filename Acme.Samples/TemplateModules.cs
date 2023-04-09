@@ -109,11 +109,11 @@ public class TemplateModules : AbpModule
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
             options.FileSets.AddEmbedded<TemplateModules>();
-            if (hostingEnvironment.IsDevelopment())
-            {
-                /* Using physical files in development, so we don't need to recompile on changes */
-                options.FileSets.ReplaceEmbeddedByPhysical<TemplateModules>(hostingEnvironment.ContentRootPath);
-            }
+            // if (hostingEnvironment.IsDevelopment())
+            // {
+            //     /* Using physical files in development, so we don't need to recompile on changes */
+            //     options.FileSets.ReplaceEmbeddedByPhysical<TemplateModules>(hostingEnvironment.ContentRootPath);
+            // }
         });
     }
 
