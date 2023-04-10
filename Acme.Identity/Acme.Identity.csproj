@@ -27,23 +27,23 @@
 
 
 
-  <!-- <PropertyGroup>
-    <TargetFramework>$(FrameworkVersion)</TargetFramework>
+  <PropertyGroup>
+    <!--<TargetFramework>$(FrameworkVersion)</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
 
 
-    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>-->
     <AssemblyName>Acme.Identity</AssemblyName>
     <PackageId>Acme.Identity</PackageId>
-    <RootNamespace>Acme.Identity</RootNamespace>
+    <!--<RootNamespace>Acme.Identity</RootNamespace>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <IsPackable>true</IsPackable>
-    <OutputType>Library</OutputType>
-  </PropertyGroup> -->
+    <OutputType>Library</OutputType>-->
+  </PropertyGroup>
 
 
   <PropertyGroup>

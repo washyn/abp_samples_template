@@ -1,4 +1,4 @@
-﻿using Acme.Identity.IdentityUser;
+﻿//using Acme.Identity.IdentityUser;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
@@ -19,6 +19,6 @@ public class SamplesDbContext : AbpDbContext<SamplesDbContext>
         /* Include modules to your migration db context */
         /* Configure your own entities here */
         
-        builder.ConfigureIdentity();
+        //builder.ConfigureIdentity();
     }
 }

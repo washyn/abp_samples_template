@@ -1,4 +1,4 @@
-﻿using Acme.Identity;
+﻿//using Acme.Identity;
 using Acme.Samples.Data;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.OpenApi.Models;
@@ -35,7 +35,7 @@ namespace Acme.Samples;
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpAspNetCoreMvcUiBasicThemeModule)
 )]
-[DependsOn(typeof(IdentityModule))]
+//[DependsOn(typeof(IdentityModule))]
 public class TemplateModules : AbpModule
 {
     /* Single point to enable/disable multi-tenancy */
