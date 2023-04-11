@@ -1,4 +1,6 @@
-﻿using Acme.Identity.IdentityUser;
+﻿using System.IO;
+using System.Reflection;
+using Acme.Identity.IdentityUser;
 using Acme.Identity.Others;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
@@ -46,6 +48,22 @@ namespace Acme.Identity
             // {
             //     mvcBuilder.AddApplicationPartIfNotExists(typeof(IdentityModule).Assembly);
             // });
+
+
+            #region Preconfig setting tutorial
+
+            PreConfigure<IMvcBuilder>(mvcBuilder =>
+            {
+                //Add plugin assembly
+                mvcBuilder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(IdentityModule).Assembly));
+
+                //Add views assembly
+                var viewDllPath = Path.Combine(Path.GetDirectoryName(typeof(IdentityModule).Assembly.Location), "Acme.Identity.Views.dll");
+                var viewAssembly = new CompiledRazorAssemblyPart(Assembly.LoadFrom(viewDllPath));
+                mvcBuilder.PartManager.ApplicationParts.Add(viewAssembly);
+            });
+
+            #endregion
         }
 
         public override void ConfigureServices(ServiceConfigurationContext context)

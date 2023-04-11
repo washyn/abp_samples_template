@@ -91,7 +91,9 @@ public class Startup
             // options.PlugInSources.AddFolder(@"D:\git-proyects\abp_samples_template\Acme.Identity\bin\Debug\net5.0");
             // options.PlugInSources.AddFolder(@"D:\git-proyects\abp_samples_template\Acme.Identity\bin\Debug\net6.0");
             // options.PlugInSources.AddFolder(@"D:\git-proyects\abp_samples_template\Acme.Identity\bin\Release\net6.0\publish\");
-            options.PlugInSources.AddFolder(@"D:\git-proyects\abp_samples_template\Acme.Identity\bin\Release\net6.0");
+            // options.PlugInSources.AddFolder(@"D:\git-proyects\abp_samples_template\Acme.Identity\bin\Release\net6.0");
+            // options.PlugInSources.AddFolder(@"D:\git-proyects\abp_samples_template\Acme.Identity\bin\Debug\net7.0");
+            options.PlugInSources.AddFolder(@"D:\git-proyects\abp_samples_template\Acme.Identity\bin\Debug\net5.0");
         });
     }
 
