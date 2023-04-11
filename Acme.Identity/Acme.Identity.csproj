@@ -1,13 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
-  <PropertyGroup>
-    <AbpVersion>6.0.*</AbpVersion>
-    <FrameworkVersion>net6.0</FrameworkVersion>
-    <AspNetFrameworkPackageVersion>6.0.*</AspNetFrameworkPackageVersion>  
-  </PropertyGroup>
-
-
-
   <PropertyGroup>
     <LangVersion>9.0</LangVersion>
     <Version>0.1.0</Version>
@@ -15,13 +6,12 @@
     <AbpProjectType>module</AbpProjectType>
   </PropertyGroup>
   
+  <PropertyGroup>
+    <AbpVersion>6.0.*</AbpVersion>
+    <FrameworkVersion>net6.0</FrameworkVersion>
+    <AspNetFrameworkPackageVersion>6.0.*</AspNetFrameworkPackageVersion>
+  </PropertyGroup>
 
-
-  <Target Name="NoWarnOnRazorViewImportedTypeConflicts" BeforeTargets="RazorCoreCompile">
-    <PropertyGroup>
-      <NoWarn>$(NoWarn);0436</NoWarn>
-    </PropertyGroup>
-  </Target>
 
 
 
@@ -34,8 +24,7 @@
 
 
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>-->
-    <AssemblyName>Acme.Identity</AssemblyName>
-    <PackageId>Acme.Identity</PackageId>
+
     <!--<RootNamespace>Acme.Identity</RootNamespace>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
@@ -51,8 +40,14 @@
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <IsPackable>true</IsPackable>
     <OutputType>Library</OutputType>
+    <AssemblyName>Acme.Identity</AssemblyName>
+    <PackageId>Acme.Identity</PackageId>
     <RootNamespace>Acme.Identity</RootNamespace>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
 
@@ -83,5 +78,17 @@
     <Content Remove="Components\**\*.css" />
     <Content Remove="wwwroot\**\*.*" />
   </ItemGroup>
+
+
+
+  <Target Name="NoWarnOnRazorViewImportedTypeConflicts" BeforeTargets="RazorCoreCompile">
+    <PropertyGroup>
+      <NoWarn>$(NoWarn);0436</NoWarn>
+    </PropertyGroup>
+  </Target>
+
+
+
+
 
 </Project>

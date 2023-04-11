@@ -22,29 +22,30 @@ namespace Acme.Identity
     [DependsOn(typeof(Volo.Abp.AutoMapper.AbpAutoMapperModule))]
     [DependsOn(typeof(Volo.Abp.EntityFrameworkCore.AbpEntityFrameworkCoreModule))]
     [DependsOn(typeof(Volo.Abp.VirtualFileSystem.AbpVirtualFileSystemModule))]
+    [DependsOn(typeof(AbpAspNetCoreMvcModule))]
     public class IdentityModule : AbpModule
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
         {
-            PreConfigure<IMvcBuilder>(mvcBuilder =>
-            {
-                //Add plugin assembly
-                mvcBuilder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(IdentityModule).Assembly));
-            
-                //Add CompiledRazorAssemblyPart if the PlugIn module contains razor views.
-                mvcBuilder.PartManager.ApplicationParts.Add(
-                    new CompiledRazorAssemblyPart(typeof(IdentityModule).Assembly));
-            });
+            // PreConfigure<IMvcBuilder>(mvcBuilder =>
+            // {
+            //     //Add plugin assembly
+            //     mvcBuilder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(IdentityModule).Assembly));
+            //
+            //     //Add CompiledRazorAssemblyPart if the PlugIn module contains razor views.
+            //     mvcBuilder.PartManager.ApplicationParts.Add(
+            //         new CompiledRazorAssemblyPart(typeof(IdentityModule).Assembly));
+            // });
             
             // context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
             // {
             //     options.AddAssemblyResource(typeof(BookStoreResource), typeof(BookStoreWebModule).Assembly);
             // });
 
-            PreConfigure<IMvcBuilder>(mvcBuilder =>
-            {
-                mvcBuilder.AddApplicationPartIfNotExists(typeof(IdentityModule).Assembly);
-            });
+            // PreConfigure<IMvcBuilder>(mvcBuilder =>
+            // {
+            //     mvcBuilder.AddApplicationPartIfNotExists(typeof(IdentityModule).Assembly);
+            // });
         }
 
         public override void ConfigureServices(ServiceConfigurationContext context)

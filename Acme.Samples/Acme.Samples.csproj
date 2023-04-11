@@ -5,6 +5,10 @@
     <TargetFramework>$(FrameworkVersion)</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+
+    <AssemblyName>Acme.Samples</AssemblyName>
+    <RootNamespace>Acme.Samples</RootNamespace>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -44,4 +48,6 @@
     <Content Remove="Components\**\*.css" />
     <!-- <Content Remove="wwwroot\**\*.*" /> -->
   </ItemGroup>
+
+  
 </Project>

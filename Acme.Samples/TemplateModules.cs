@@ -57,26 +57,25 @@ public class TemplateModules : AbpModule
         //     options.AddAssemblyResource(typeof(TemplateModules));
         // });
         
-        PreConfigure<IMvcBuilder>(mvcBuilder =>
-        {
-            //Add plugin assembly
-            mvcBuilder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(TemplateModules).Assembly));
-            
-            //Add CompiledRazorAssemblyPart if the PlugIn module contains razor views.
-            mvcBuilder.PartManager.ApplicationParts.Add(
-                new CompiledRazorAssemblyPart(typeof(TemplateModules).Assembly));
-        });
+        // PreConfigure<IMvcBuilder>(mvcBuilder =>
+        // {
+        //     //Add plugin assembly
+        //     mvcBuilder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(TemplateModules).Assembly));
+        //     
+        //     //Add CompiledRazorAssemblyPart if the PlugIn module contains razor views.
+        //     mvcBuilder.PartManager.ApplicationParts.Add(
+        //         new CompiledRazorAssemblyPart(typeof(TemplateModules).Assembly));
+        // });
             
         // context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
         // {
         //     options.AddAssemblyResource(typeof(BookStoreResource), typeof(BookStoreWebModule).Assembly);
         // });
 
-        PreConfigure<IMvcBuilder>(mvcBuilder =>
-        {
-            mvcBuilder.AddApplicationPartIfNotExists(typeof(TemplateModules).Assembly);
-        });
-
+        // PreConfigure<IMvcBuilder>(mvcBuilder =>
+        // {
+        //     mvcBuilder.AddApplicationPartIfNotExists(typeof(TemplateModules).Assembly);
+        // });
     }
     
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -84,25 +83,16 @@ public class TemplateModules : AbpModule
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
         
-
-        ConfigureAuthentication(context);
         ConfigureMultiTenancy();
         ConfigureUrls(configuration);
-        ConfigureBundles();
         ConfigureAutoMapper(context);
         ConfigureSwagger(context.Services);
-        ConfigureNavigationServices();
         ConfigureAutoApiControllers();
         ConfigureVirtualFiles(hostingEnvironment);
         ConfigureLocalization();
         ConfigureEfCore(context);
     }
     
-    
-    private void ConfigureAuthentication(ServiceConfigurationContext context)
-    {
-    }
-
     private void ConfigureMultiTenancy()
     {
         Configure<AbpMultiTenancyOptions>(options =>
@@ -110,8 +100,7 @@ public class TemplateModules : AbpModule
             options.IsEnabled = IsMultiTenant;
         });
     }
-
-
+    
     private void ConfigureUrls(IConfiguration configuration)
     {
         Configure<AppUrlOptions>(options =>
@@ -119,21 +108,7 @@ public class TemplateModules : AbpModule
             options.Applications["MVC"].RootUrl = configuration["App:SelfUrl"];
         });
     }
-
-    private void ConfigureBundles()
-    {
-        Configure<AbpBundlingOptions>(options =>
-        {
-            options.StyleBundles.Configure(
-                BasicThemeBundles.Styles.Global,
-                bundle =>
-                {
-                    bundle.AddFiles("/global-styles.css");
-                }
-            );
-        });
-    }
-
+    
     private void ConfigureLocalization()
     {
         Configure<AbpLocalizationOptions>(options =>
@@ -152,13 +127,6 @@ public class TemplateModules : AbpModule
             //     /* Using physical files in development, so we don't need to recompile on changes */
             //     options.FileSets.ReplaceEmbeddedByPhysical<TemplateModules>(hostingEnvironment.ContentRootPath);
             // }
-        });
-    }
-
-    private void ConfigureNavigationServices()
-    {
-        Configure<AbpNavigationOptions>(options =>
-        {
         });
     }
 
