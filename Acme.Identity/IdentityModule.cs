@@ -35,11 +35,16 @@ namespace Acme.Identity
             {
                 //Add plugin assembly
                 mvcBuilder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(IdentityModule).Assembly));
-
+                
+#if NET5_0
                 //Add views assembly
                 var viewDllPath = Path.Combine(Path.GetDirectoryName(typeof(IdentityModule).Assembly.Location), "Acme.Identity.Views.dll");
                 var viewAssembly = new CompiledRazorAssemblyPart(Assembly.LoadFrom(viewDllPath));
                 mvcBuilder.PartManager.ApplicationParts.Add(viewAssembly);
+#else
+                //Add CompiledRazorAssemblyPart if the PlugIn module contains razor views.
+                mvcBuilder.PartManager.ApplicationParts.Add(new CompiledRazorAssemblyPart(typeof(IdentityModule).Assembly)); 
+#endif
             });
 
             #endregion
