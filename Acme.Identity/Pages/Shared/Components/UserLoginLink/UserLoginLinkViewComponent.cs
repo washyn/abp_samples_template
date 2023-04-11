@@ -7,8 +7,7 @@ namespace Acme.Identity.Pages.Shared.Components.UserLoginLink
     {
         public IViewComponentResult Invoke()
         {
-            // return View("~/Pages/Components/UserLoginLink/Default.cshtml");
-            return View();
+            return View("~/Pages/Shared/Components/UserLoginLink/Default.cshtml");
         }
     }
 }

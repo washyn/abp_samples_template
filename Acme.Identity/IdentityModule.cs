@@ -29,27 +29,6 @@ namespace Acme.Identity
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
         {
-            // PreConfigure<IMvcBuilder>(mvcBuilder =>
-            // {
-            //     //Add plugin assembly
-            //     mvcBuilder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(IdentityModule).Assembly));
-            //
-            //     //Add CompiledRazorAssemblyPart if the PlugIn module contains razor views.
-            //     mvcBuilder.PartManager.ApplicationParts.Add(
-            //         new CompiledRazorAssemblyPart(typeof(IdentityModule).Assembly));
-            // });
-            
-            // context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
-            // {
-            //     options.AddAssemblyResource(typeof(BookStoreResource), typeof(BookStoreWebModule).Assembly);
-            // });
-
-            // PreConfigure<IMvcBuilder>(mvcBuilder =>
-            // {
-            //     mvcBuilder.AddApplicationPartIfNotExists(typeof(IdentityModule).Assembly);
-            // });
-
-
             #region Preconfig setting tutorial
 
             PreConfigure<IMvcBuilder>(mvcBuilder =>

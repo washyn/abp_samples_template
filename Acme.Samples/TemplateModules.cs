@@ -41,43 +41,6 @@ public class TemplateModules : AbpModule
     /* Single point to enable/disable multi-tenancy */
     public const bool IsMultiTenant = false;
     
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-                
-        // context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
-        // {
-        //     // options.AddAssemblyResource(
-        //     //     typeof(BillingResource),
-        //     //     typeof(BillingDomainModule).Assembly,
-        //     //     typeof(BillingDomainSharedModule).Assembly,
-        //     //     typeof(BillingApplicationModule).Assembly,
-        //     //     typeof(BillingApplicationContractsModule).Assembly,
-        //     //     typeof(BillingWebModule).Assembly
-        //     // );
-        //     options.AddAssemblyResource(typeof(TemplateModules));
-        // });
-        
-        // PreConfigure<IMvcBuilder>(mvcBuilder =>
-        // {
-        //     //Add plugin assembly
-        //     mvcBuilder.PartManager.ApplicationParts.Add(new AssemblyPart(typeof(TemplateModules).Assembly));
-        //     
-        //     //Add CompiledRazorAssemblyPart if the PlugIn module contains razor views.
-        //     mvcBuilder.PartManager.ApplicationParts.Add(
-        //         new CompiledRazorAssemblyPart(typeof(TemplateModules).Assembly));
-        // });
-            
-        // context.Services.PreConfigure<AbpMvcDataAnnotationsLocalizationOptions>(options =>
-        // {
-        //     options.AddAssemblyResource(typeof(BookStoreResource), typeof(BookStoreWebModule).Assembly);
-        // });
-
-        // PreConfigure<IMvcBuilder>(mvcBuilder =>
-        // {
-        //     mvcBuilder.AddApplicationPartIfNotExists(typeof(TemplateModules).Assembly);
-        // });
-    }
-    
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();

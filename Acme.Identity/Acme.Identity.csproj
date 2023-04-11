@@ -13,45 +13,19 @@
   </PropertyGroup>
 
 
-
-
-
-
-  <PropertyGroup>
-    <!--<TargetFramework>$(FrameworkVersion)</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
-
-
-    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>-->
-
-    <!--<RootNamespace>Acme.Identity</RootNamespace>
-    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <IsPackable>true</IsPackable>
-    <OutputType>Library</OutputType>-->
-  </PropertyGroup>
-
-
   <PropertyGroup>
     <TargetFramework>$(FrameworkVersion)</TargetFramework>
-    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
     <IsPackable>true</IsPackable>
     <OutputType>Library</OutputType>
     <AssemblyName>Acme.Identity</AssemblyName>
     <PackageId>Acme.Identity</PackageId>
     <RootNamespace>Acme.Identity</RootNamespace>
     <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
-
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
 
   <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Bootstrap" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Bundling" Version="$(AbpVersion)" />
@@ -79,16 +53,10 @@
     <Content Remove="wwwroot\**\*.*" />
   </ItemGroup>
 
-
-
   <Target Name="NoWarnOnRazorViewImportedTypeConflicts" BeforeTargets="RazorCoreCompile">
     <PropertyGroup>
       <NoWarn>$(NoWarn);0436</NoWarn>
     </PropertyGroup>
   </Target>
-
-
-
-
 
 </Project>
