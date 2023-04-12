@@ -86,41 +86,4 @@ public class Program
     {
         return args.Any(x => x.Contains("--migrate-database", StringComparison.OrdinalIgnoreCase));
     }
-    
-    // internal static IHostBuilder CreateHostBuilder(string[] args) =>
-    //     Host.CreateDefaultBuilder(args)
-    //         .ConfigureAppConfiguration(build =>
-    //         {
-    //             build.AddJsonFile("appsettings.secrets.json", optional: true);
-    //         })
-    //         .ConfigureWebHostDefaults(webBuilder =>
-    //         {
-    //             webBuilder.UseStartup<Startup>();
-    //         })
-    //         .UseAutofac()
-    //         .UseSerilog();
 }
-
-// public class Startup
-// {
-//     public void ConfigureServices(IServiceCollection services)
-//     {
-//         services.AddApplication<TemplateModules>(options =>
-//         {
-//             var path = options.Services.GetHostingEnvironment().ContentRootPath;
-//             var directoryInfo = new DirectoryInfo(path);
-//             var folder = string.Empty;
-// #if DEBUG
-//             folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Debug","net7.0");
-// #else
-//             folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Release","net7.0");
-// #endif
-//             options.PlugInSources.AddFolder(folder);
-//         });
-//     }
-//     //modificar a como se ejecuta en net 6 sin startup...
-//     public void Configure(IApplicationBuilder app)
-//     {
-//         app.InitializeApplication();
-//     }
-// }
