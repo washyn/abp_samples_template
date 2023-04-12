@@ -90,14 +90,14 @@ public class Startup
             var directoryInfo = new DirectoryInfo(path);
             var folder = string.Empty;
 #if DEBUG
-            folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Debug","net5.0");
+            folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Debug","net7.0");
 #else
-            folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Release","net5.0");
+            folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Release","net7.0");
 #endif
             options.PlugInSources.AddFolder(folder);
         });
     }
-
+    //modificar a como se ejecuta en net 6 sin startup...
     public void Configure(IApplicationBuilder app)
     {
         app.InitializeApplication();
