@@ -48,15 +48,31 @@ public class Program
 
             await builder.AddApplicationAsync<TemplateModules>(options =>
             {
+                #region Plugin
+
                 var path = options.Services.GetHostingEnvironment().ContentRootPath;
                 var directoryInfo = new DirectoryInfo(path);
                 var folder = string.Empty;
 #if DEBUG
                 folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Debug","net7.0");
 #else
-            folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Release","net7.0");
+                folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Release","net7.0");
 #endif
-                options.PlugInSources.AddFolder(folder);
+                // options.PlugInSources.AddFolder(folder);
+                
+                #endregion
+
+                var secondPlugin = string.Empty;
+#if DEBUG
+                secondPlugin = Path.Combine(directoryInfo.Parent.FullName, "Washyn.IdentityPlugin","bin","Debug","net7.0");
+#else
+                secondPlugin = Path.Combine(directoryInfo.Parent.FullName, "Washyn.IdentityPlugin","bin","Release","net7.0");
+#endif
+                options.PlugInSources.AddFolder(secondPlugin);
+                Log.Information("secondPlugin");
+                Log.Information("secondPlugin");
+                Log.Information(secondPlugin);
+                
             });
             var app = builder.Build();
             await app.InitializeApplicationAsync();
