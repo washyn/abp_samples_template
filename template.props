@@ -81,4 +81,5 @@
         <PackageReference Include="Volo.Abp.BlobStoring.Database.EntityFrameworkCore" Version="$(AbpVersion)" />
     </ItemGroup>
     
+    </ItemGroup>
 </Project>

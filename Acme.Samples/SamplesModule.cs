@@ -7,6 +7,7 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.Ui.Branding;
 using Washyn.Logo;
 using Washyn.ProfilePicture;
+using Washyn.Widgets;
 
 namespace Acme.Samples;
 
@@ -16,6 +17,7 @@ namespace Acme.Samples;
 [DependsOn(typeof(SecurityLogModule))]
 [DependsOn(typeof(AbpAspNetCoreMvcUiBasicThemeModule))]
 [DependsOn(typeof(ProfilePictureModule))]
+[DependsOn(typeof(WashynWidgetModule))]
 public class SamplesModule : AbpModule
 {
 

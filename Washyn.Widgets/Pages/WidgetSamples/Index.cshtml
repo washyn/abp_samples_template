@@ -1,0 +1,69 @@
+﻿@page
+@using Washyn.Widgets.Pages.Components.UserStatisticWidget
+@model Washyn.Widgets.Pages.WidgetSamples.Index
+
+@{
+    var argWidged2 = new UserStatisticUpdateViewModel
+    {
+        StartDate = DateTime.Now.AddDays(-15),
+        EndDate = DateTime.Now
+    };
+}
+
+<abp-card class="mb-3">
+    <abp-card-header>
+        <abp-card-title>
+            Welcome_Title
+        </abp-card-title>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row>
+            <abp-column size="_6" class="mb-3">
+                <vc:images-widget></vc:images-widget>
+            </abp-column>
+            <abp-column size="_6" class="mb-3">
+                <vc:images-widget></vc:images-widget>
+            </abp-column>
+            <abp-column size="_6" class="mb-3">
+                <vc:images-widget></vc:images-widget>
+            </abp-column>
+            <abp-column size="_6" class="mb-3">
+                <vc:images-widget></vc:images-widget>
+            </abp-column>
+        </abp-row>
+    </abp-card-body>
+</abp-card>
+
+
+<abp-card>
+    <abp-card-header>
+        <abp-card-title>
+            Welcome_Title
+        </abp-card-title>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row>
+            <abp-column size="_6" class="mb-3">
+                @await Component.InvokeAsync(typeof(UserStatisticWidgetViewComponent), new UserStatisticUpdateViewModel
+                       {
+                           StartDate = DateTime.Now.AddDays(-30),
+                           EndDate = DateTime.Now.AddDays(30)
+                       })
+            </abp-column>
+            <abp-column size="_6" class="mb-3">
+                <vc:user-statistic-widget model="argWidged2"></vc:user-statistic-widget>
+            </abp-column>
+            <abp-column size="_6" class="mb-3">
+                <vc:user-statistic-widget model="argWidged2"></vc:user-statistic-widget>
+            </abp-column>
+            <abp-column size="_6" class="mb-3">
+                <vc:user-statistic-widget model="argWidged2"></vc:user-statistic-widget>
+            </abp-column>
+        </abp-row>
+        @* ... *@
+        @* @Html.Partial() *@
+        @* @Html.RenderPartial() *@
+        @* <partial/> *@
+        @* <partial view-data="@("")"/> *@
+    </abp-card-body>
+</abp-card>

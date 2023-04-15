@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Samples", "Acme.Samples\Acme.Samples.csproj", "{64430A23-E2E0-471D-B9F9-31E4E4C834E8}"
 EndProject
 
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.SecurityLogs", "Washyn.SecurityLogs\Washyn.SecurityLogs.csproj", "{8647D078-CCAE-49D5-847C-21DF335D1D9E}"
 
 
@@ -17,6 +18,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.ProfilePicture", "Wa
 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Logo", "Washyn.Logo\Washyn.Logo.csproj", "{AED69DF0-74BB-47C3-813A-273181BBB9F2}"
 
+
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Widgets", "Washyn.Widgets\Washyn.Widgets.csproj", "{26157D91-DD5C-410C-964A-F00AFBD88EF8}"
 
 EndProject
 Global
@@ -53,6 +57,11 @@ Global
 		{AED69DF0-74BB-47C3-813A-273181BBB9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AED69DF0-74BB-47C3-813A-273181BBB9F2}.Release|Any CPU.Build.0 = Release|Any CPU
 
+
+		{26157D91-DD5C-410C-964A-F00AFBD88EF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26157D91-DD5C-410C-964A-F00AFBD88EF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26157D91-DD5C-410C-964A-F00AFBD88EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26157D91-DD5C-410C-964A-F00AFBD88EF8}.Release|Any CPU.Build.0 = Release|Any CPU
 
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
