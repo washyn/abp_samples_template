@@ -1,0 +1,7 @@
+<Project>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Washyn.SecurityLogs\Washyn.SecurityLogs.csproj" />
+    </ItemGroup>
+
+</Project>
