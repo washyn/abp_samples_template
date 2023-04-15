@@ -15,12 +15,14 @@ using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.Users;
+using Volo.Abp.VirtualFileSystem;
 
 namespace Washyn.SecurityLogs;
 
 [DependsOn(typeof(AbpAutoMapperModule))]
 [DependsOn(typeof(AbpAspNetCoreMvcUiThemeSharedModule))]
 [DependsOn(typeof(AbpAspNetCoreMvcModule))]
+[DependsOn(typeof(AbpVirtualFileSystemModule))]
 public class SecurityLogModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -42,6 +44,11 @@ public class SecurityLogModule : AbpModule
         {
             options.ConventionalControllers.Create(typeof(SecurityLogModule).Assembly);
         });
+        
+        Configure<AbpVirtualFileSystemOptions>(options =>
+        {
+            options.FileSets.AddEmbedded<SecurityLogModule>("Washyn.SecurityLogs");
+        });
     }
 }
 
@@ -54,7 +61,7 @@ public class AccountSecurityLogUserMenuContributor : IMenuContributor
             return Task.CompletedTask;
         }
         
-        context.Menu.AddItem(new ApplicationMenuItem("Account.SecurityLogs","Intentos de iniciar sesión", url: "~/SecurityLog"));
+        context.Menu.AddItem(new ApplicationMenuItem("Account.SecurityLogs","Intentos de iniciar sesión", url: "~/SecurityLogs"));
 
         return Task.CompletedTask;
     }

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Washyn.SecurityLogs.Pages;
+namespace Washyn.SecurityLogs.Pages.SecurityLogs;
 
-public class SecurityLog : PageModel
+public class Index : PageModel
 {
     public void OnGet()
     {

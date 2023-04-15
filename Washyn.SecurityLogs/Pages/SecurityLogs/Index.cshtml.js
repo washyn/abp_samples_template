@@ -1,6 +1,6 @@
-$(function () {
+﻿$(function () {
     var l = abp.localization.getResource('temp');
-    var service = acme.samples.securityLog;
+    var service = washyn.securityLogs.securityLog;
     var dataTable = $('#Table').DataTable(abp.libs.datatables.normalizeConfiguration({
         processing: true,
         serverSide: true,
