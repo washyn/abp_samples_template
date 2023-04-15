@@ -5,7 +5,19 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Samples", "Acme.Samples\Acme.Samples.csproj", "{64430A23-E2E0-471D-B9F9-31E4E4C834E8}"
 EndProject
+
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.SecurityLogs", "Washyn.SecurityLogs\Washyn.SecurityLogs.csproj", "{8647D078-CCAE-49D5-847C-21DF335D1D9E}"
+
+
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.SbTheme", "Washyn.SbTheme\Washyn.SbTheme.csproj", "{3C70E625-CC20-4614-BA0F-30BB8A80A7E9}"
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.ProfilePicture", "Washyn.ProfilePicture\Washyn.ProfilePicture.csproj", "{04D30728-064E-4904-9421-8B8870B7BF3C}"
+
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Logo", "Washyn.Logo\Washyn.Logo.csproj", "{AED69DF0-74BB-47C3-813A-273181BBB9F2}"
+
+
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +29,31 @@ Global
 		{64430A23-E2E0-471D-B9F9-31E4E4C834E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64430A23-E2E0-471D-B9F9-31E4E4C834E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64430A23-E2E0-471D-B9F9-31E4E4C834E8}.Release|Any CPU.Build.0 = Release|Any CPU
+
 		{8647D078-CCAE-49D5-847C-21DF335D1D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8647D078-CCAE-49D5-847C-21DF335D1D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8647D078-CCAE-49D5-847C-21DF335D1D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8647D078-CCAE-49D5-847C-21DF335D1D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+
+
+
+		{3C70E625-CC20-4614-BA0F-30BB8A80A7E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C70E625-CC20-4614-BA0F-30BB8A80A7E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C70E625-CC20-4614-BA0F-30BB8A80A7E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C70E625-CC20-4614-BA0F-30BB8A80A7E9}.Release|Any CPU.Build.0 = Release|Any CPU
+
+		{04D30728-064E-4904-9421-8B8870B7BF3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D30728-064E-4904-9421-8B8870B7BF3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04D30728-064E-4904-9421-8B8870B7BF3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04D30728-064E-4904-9421-8B8870B7BF3C}.Release|Any CPU.Build.0 = Release|Any CPU
+
+
+		{AED69DF0-74BB-47C3-813A-273181BBB9F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AED69DF0-74BB-47C3-813A-273181BBB9F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AED69DF0-74BB-47C3-813A-273181BBB9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AED69DF0-74BB-47C3-813A-273181BBB9F2}.Release|Any CPU.Build.0 = Release|Any CPU
+
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

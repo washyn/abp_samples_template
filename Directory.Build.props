@@ -1,8 +1,10 @@
 <Project>
   <PropertyGroup>
-
+    <!-- add only if lang version is greater than 9 -->
+    <ImplicitUsings>enable</ImplicitUsings>
+    
     <LangVersion>latest</LangVersion>
-
+    
     <AbpVersion>6.0.*</AbpVersion>
     <FrameworkVersion>net6.0</FrameworkVersion>
     <AspNetFrameworkPackageVersion>6.0.*</AspNetFrameworkPackageVersion>
