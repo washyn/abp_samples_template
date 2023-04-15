@@ -1,3 +1,4 @@
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using Washyn.SecurityLogs;
@@ -13,7 +14,7 @@ namespace Acme.Samples;
 [DependsOn(typeof(LogoManagmentModule))]
 [DependsOn(typeof(AbpAutofacModule))]
 [DependsOn(typeof(SecurityLogModule))]
-[DependsOn(typeof(WashynSbThemeModule))]
+[DependsOn(typeof(AbpAspNetCoreMvcUiBasicThemeModule))]
 [DependsOn(typeof(ProfilePictureModule))]
 public class SamplesModule : AbpModule
 {
