@@ -4,5 +4,6 @@
         <ProjectReference Include="..\Washyn.Logo\Washyn.Logo.csproj" />
         <ProjectReference Include="..\Washyn.ProfilePicture\Washyn.ProfilePicture.csproj" />
         <ProjectReference Include="..\Washyn.SbTheme\Washyn.SbTheme.csproj" />
+        <ProjectReference Include="..\Washyn.Widgets\Washyn.Widgets.csproj" />
     </ItemGroup>
 </Project>
