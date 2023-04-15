@@ -1,7 +1,8 @@
 <Project>
-
     <ItemGroup>
         <ProjectReference Include="..\Washyn.SecurityLogs\Washyn.SecurityLogs.csproj" />
+        <ProjectReference Include="..\Washyn.Logo\Washyn.Logo.csproj" />
+        <ProjectReference Include="..\Washyn.ProfilePicture\Washyn.ProfilePicture.csproj" />
+        <ProjectReference Include="..\Washyn.SbTheme\Washyn.SbTheme.csproj" />
     </ItemGroup>
-
 </Project>
