@@ -4,28 +4,20 @@
     abp.widgets.UserStatisticWidget = function ($wrapper) {
         var _chart;
         var _latestFilters = {};
-        // abp.log.debug("$wrapper");
-        // abp.log.debug($wrapper);
+
         var getFilters = function () {
             let objREs = $wrapper.find('.filterForm').serializeFormToObject();
-            // abp.log.debug("widged filter")
-            // abp.log.debug(objREs)
             return objREs;
         }
 
         var refresh = function (filters) {
             _latestFilters = filters;
-            acme.samples.pages.components.userStatisticWidget.userStatistic
-            .getUserStatisticWidget(filters)
+            washyn.widgets.userStatistic.getUserStatisticWidget(filters)
                 .then(function (result) {
-                    // abp.log.debug(result)
-                    // abp.log.debug(result.data)
                     let dataProcessed = {};
                     $.each(result.data,function (key,value) {
                         dataProcessed[abp.libs.datatables.defaultRenderers.date(key)] = value;
                     });
-                    // abp.log.debug("dataProcessed")
-                    // abp.log.debug(dataProcessed)
                     _chart.data = {
                         datasets:[
                             {

@@ -1,15 +1,40 @@
 ﻿@page
-@using Acme.Samples.Pages.Components.UserStatisticWidget
-@model Acme.Samples.Pages.Widget
+@using Washyn.Widgets.Pages.Components.UserStatisticWidget
+@model Washyn.Widgets.Pages.WidgetSamples.Index
 
 @{
-    // Layout = null;
     var argWidged2 = new UserStatisticUpdateViewModel
     {
         StartDate = DateTime.Now.AddDays(-15),
         EndDate = DateTime.Now
     };
 }
+
+<abp-card class="mb-3">
+    <abp-card-header>
+        <abp-card-title>
+            Welcome_Title
+        </abp-card-title>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row>
+            <abp-column size="_6" class="mb-3">
+                <vc:images-widget></vc:images-widget>
+            </abp-column>
+            <abp-column size="_6" class="mb-3">
+                <vc:images-widget></vc:images-widget>
+            </abp-column>
+            <abp-column size="_6" class="mb-3">
+                <vc:images-widget></vc:images-widget>
+            </abp-column>
+            <abp-column size="_6" class="mb-3">
+                <vc:images-widget></vc:images-widget>
+            </abp-column>
+        </abp-row>
+    </abp-card-body>
+</abp-card>
+
+
 <abp-card>
     <abp-card-header>
         <abp-card-title>

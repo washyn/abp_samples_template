@@ -1,6 +1,9 @@
 <Project>
   <PropertyGroup>
-
+    
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    
     <AbpVersion>6.0.*</AbpVersion>
     <FrameworkVersion>net6.0</FrameworkVersion>
     <AspNetFrameworkPackageVersion>6.0.*</AspNetFrameworkPackageVersion>
