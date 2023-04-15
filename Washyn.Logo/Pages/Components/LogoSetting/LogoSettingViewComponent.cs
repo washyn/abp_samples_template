@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace LogoManagment.Pages.Components.LogoSetting;
+namespace Washyn.Logo.Pages.Components.LogoSetting;
 
 public class LogoSettingViewComponent : AbpViewComponent
 {

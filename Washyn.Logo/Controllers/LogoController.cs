@@ -1,23 +1,16 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.MultiTenancy;
-using Volo.Abp.SettingManagement;
-using Volo.Abp.Settings;
-using System.Linq;
-using LogoManagment.Pages.Components.LogoSetting;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Localization;
+using Volo.Abp.SettingManagement;
 using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
+using Volo.Abp.Settings;
+using Washyn.Logo.Pages.Components.LogoSetting;
 
-namespace LogoManagment.Controllers;
+namespace Washyn.Logo.Controllers;
 
 [Authorize]
 [Route("logo")]
@@ -48,8 +41,14 @@ public class LogoController : AbpController
         }
         await _blobContainer.SaveAsync(fileName, memoryStream, overrideExisting: true);
         await memoryStream.DisposeAsync();
-        await _settingManager.SetGlobalAsync(LogoSettingDefinitionProvider.LogoSettingName, fileName);
-        // await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id, LogoSettingDefinitionProvider.LogoSettingName, fileName);
+        if (CurrentTenant.IsAvailable)
+        {
+            await _settingManager.SetForCurrentTenantAsync(LogoSettingDefinitionProvider.LogoSettingName, fileName);
+        }
+        else
+        {
+            await _settingManager.SetGlobalAsync(LogoSettingDefinitionProvider.LogoSettingName, fileName);
+        }
     }
     
     // [ResponseCache(Duration = 60*60*24)] // second minute hour
@@ -75,7 +74,7 @@ public class LogoController : AbpController
         var logo = await _settingManager.GetOrNullGlobalAsync(LogoSettingDefinitionProvider.LogoSettingName);
         if (CurrentTenant.IsAvailable)
         {
-            logo = await _settingManager.GetOrNullForTenantAsync(LogoSettingDefinitionProvider.LogoSettingName, CurrentTenant.GetId(), false);
+            logo = await _settingManager.GetOrNullForCurrentTenantAsync(LogoSettingDefinitionProvider.LogoSettingName, false);
         }
         return logo;
     }

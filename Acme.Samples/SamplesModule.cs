@@ -1,14 +1,10 @@
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using Washyn.SbTheme;
-using Washyn.ProfilePicture.Pages.Components.ProfileManagement.ProfilePictureSetting;
-using LogoManagment;
-using Volo.Abp.Autofac;
 using Volo.Abp.DependencyInjection;
-using Volo.Abp.Modularity;
 using Volo.Abp.Ui.Branding;
-
+using Washyn.Logo;
+using Washyn.ProfilePicture;
 
 namespace Acme.Samples;
 
@@ -16,7 +12,7 @@ namespace Acme.Samples;
 [DependsOn(typeof(LogoManagmentModule))]
 [DependsOn(typeof(AbpAutofacModule))]
 [DependsOn(typeof(WashynSbThemeModule))]
-[DependsOn(typeof(UserProfileAvatarModule))]
+[DependsOn(typeof(ProfilePictureModule))]
 public class SamplesModule : AbpModule
 {
 

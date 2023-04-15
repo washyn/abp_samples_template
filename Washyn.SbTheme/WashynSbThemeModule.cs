@@ -17,15 +17,6 @@ namespace Washyn.SbTheme;
 [DependsOn(typeof(AbpAspNetCoreMvcUiMultiTenancyModule))]
 public class WashynSbThemeModule : AbpModule
 {
-    
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-        PreConfigure<IMvcBuilder>(mvcBuilder =>
-        {
-            mvcBuilder.AddApplicationPartIfNotExists(typeof(WashynSbThemeModule).Assembly);
-        });
-    }
-    
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         Configure<AbpNavigationOptions>(options =>
@@ -36,7 +27,6 @@ public class WashynSbThemeModule : AbpModule
         Configure<AbpThemingOptions>(options =>
         {
             options.Themes.Add<SbTheme>();
-
             if (options.DefaultThemeName == null)
             {
                 options.DefaultThemeName = SbTheme.Name;
@@ -45,8 +35,7 @@ public class WashynSbThemeModule : AbpModule
 
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            // options.FileSets.AddEmbedded<AbpAspNetCoreMvcUiBasicThemeModule>("Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic");
-            options.FileSets.AddEmbedded<WashynSbThemeModule>();
+            options.FileSets.AddEmbedded<WashynSbThemeModule>("Washyn.SbTheme");
         });
 
         Configure<AbpToolbarOptions>(options =>

@@ -44,30 +44,9 @@
   </ItemGroup>
 
   <ItemGroup>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Washyn.SbTheme\Washyn.SbTheme.csproj" />
-
-    <Folder Include="Migrations" />
-    <Folder Include="Pages\Components" />
-    <Folder Include="wwwroot\host\profile-pictures" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Components\LogoSetting\Default.cshtml" />
-    <_ContentIncludedByDefault Remove="Pages\Components\ProfileManagement\ProfilePictureSetting\Default.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Washyn.ProfilePicture\Washyn.ProfilePicture.csproj" />
-
-
-    <_ContentIncludedByDefault Remove="Pages\Components\LogoSetting\Default.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Washyn.Logo\Washyn.Logo.csproj" />
+    <ProjectReference Include="..\Washyn.ProfilePicture\Washyn.ProfilePicture.csproj" />
+    <ProjectReference Include="..\Washyn.SbTheme\Washyn.SbTheme.csproj" />
   </ItemGroup>
 
 </Project>
