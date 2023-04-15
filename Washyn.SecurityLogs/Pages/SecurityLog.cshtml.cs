@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Acme.Samples.Pages;
+namespace Washyn.SecurityLogs.Pages;
 
 public class SecurityLog : PageModel
 {

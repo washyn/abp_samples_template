@@ -1,5 +1,6 @@
 ﻿using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
+using Washyn.SecurityLogs;
 
 namespace Acme.Samples;
 

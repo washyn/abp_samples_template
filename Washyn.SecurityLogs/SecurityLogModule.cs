@@ -1,28 +1,46 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using AutoMapper;
-using Localization.Resources.AbpUi;
 using Microsoft.AspNetCore.Authorization;
-using Volo.Abp.Account.Localization;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
+using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
+using Volo.Abp.AutoMapper;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Identity;
-using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
-using Volo.Abp.SecurityLog;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.Users;
 
-namespace Acme.Samples;
+namespace Washyn.SecurityLogs;
 
+[DependsOn(typeof(AbpAutoMapperModule))]
+[DependsOn(typeof(AbpAspNetCoreMvcUiThemeSharedModule))]
+[DependsOn(typeof(AbpAspNetCoreMvcModule))]
 public class SecurityLogModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         // add ...
+        context.Services.AddAutoMapperObjectMapper<SecurityLogModule>();
+        
+        Configure<AbpAutoMapperOptions>(options =>
+        {
+            options.AddMaps<SecurityLogModule>();
+        });
+        
         Configure<AbpNavigationOptions>(options =>
         {
             options.MenuContributors.Add(new AccountSecurityLogUserMenuContributor());
+        });
+        
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ConventionalControllers.Create(typeof(SecurityLogModule).Assembly);
         });
     }
 }
@@ -79,7 +97,7 @@ public class SecurityLogFilter : PagedAndSortedResultRequestDto
         return new List<ValidationResult>();
     }
 }
-// TODO: convert to module
+
 public class SecurityLogProfile : Profile
 {
     public SecurityLogProfile()
