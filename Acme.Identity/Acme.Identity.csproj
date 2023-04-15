@@ -1,26 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-  <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
-    <Version>0.1.0</Version>
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
-    <AbpProjectType>module</AbpProjectType>
-  </PropertyGroup>
-  
-  <PropertyGroup>
-    <AbpVersion>7.0.*</AbpVersion>
-    <FrameworkVersion>net7.0</FrameworkVersion>
-    <AspNetFrameworkPackageVersion>7.0.*</AspNetFrameworkPackageVersion>
-  </PropertyGroup>
-
 
   <PropertyGroup>
     <TargetFramework>$(FrameworkVersion)</TargetFramework>
     <IsPackable>true</IsPackable>
     <OutputType>Library</OutputType>
-    <AssemblyName>Acme.Identity</AssemblyName>
-    <PackageId>Acme.Identity</PackageId>
-    <RootNamespace>Acme.Identity</RootNamespace>
-    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
 
 
@@ -52,11 +35,5 @@
     <Content Remove="Components\**\*.css" />
     <Content Remove="wwwroot\**\*.*" />
   </ItemGroup>
-
-  <Target Name="NoWarnOnRazorViewImportedTypeConflicts" BeforeTargets="RazorCoreCompile">
-    <PropertyGroup>
-      <NoWarn>$(NoWarn);0436</NoWarn>
-    </PropertyGroup>
-  </Target>
 
 </Project>
