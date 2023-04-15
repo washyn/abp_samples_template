@@ -32,4 +32,8 @@
     <Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Washyn.SecurityLogs\Washyn.SecurityLogs.csproj" />
+  </ItemGroup>
+
 </Project>

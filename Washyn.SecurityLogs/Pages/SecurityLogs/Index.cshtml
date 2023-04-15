@@ -1,0 +1,20 @@
+﻿@page
+@model Washyn.SecurityLogs.Pages.SecurityLogs.Index
+
+@{
+    // Layout = null;
+    ViewBag.FluidLayout = true;
+}
+@section scripts {
+    <abp-script src="/Pages/SecurityLogs/Index.cshtml.js" />
+}
+<abp-card>
+    <abp-card-header>
+        <abp-card-title>
+            Intentos de inicio de sesión
+        </abp-card-title>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="Table" class="nowrap"/>
+    </abp-card-body>
+</abp-card>
