@@ -8,6 +8,7 @@ using Volo.Abp.Localization;
 using Volo.Abp.SettingManagement;
 using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
 using Volo.Abp.Settings;
+using Volo.Abp.VirtualFileSystem;
 using Washyn.Logo.Pages.Components.LogoSetting;
 
 namespace Washyn.Logo.Controllers;
@@ -17,12 +18,15 @@ namespace Washyn.Logo.Controllers;
 public class LogoController : AbpController
 {
     private readonly IBlobContainer<LogoPictureContainer> _blobContainer;
+    private readonly IVirtualFileProvider _virtualFileProvider;
     private readonly ISettingManager _settingManager;
 
     public LogoController(IBlobContainer<LogoPictureContainer> blobContainer,
+        IVirtualFileProvider virtualFileProvider,
         ISettingManager settingManager)
     {
         _blobContainer = blobContainer;
+        _virtualFileProvider = virtualFileProvider;
         _settingManager = settingManager;
     }
     
@@ -64,7 +68,7 @@ public class LogoController : AbpController
         var res = await _blobContainer.GetOrNullAsync(logo);
         if (res is null)
         {
-            return NotFound();
+            res = _virtualFileProvider.GetFileInfo("/Pages/Components/Screenshot_601.png").CreateReadStream();
         }
         return File(res, "image/*");
     }
