@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Application.Services;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
@@ -59,6 +60,9 @@ public class UserStatisticWidgetScriptContrib : BundleContributor
 
 public class UserStatisticUpdateViewModel
 {
+    [DataType(DataType.Date)]
     public DateTime StartDate { get; set; }
+    
+    [DataType(DataType.Date)]
     public DateTime EndDate { get; set; }
 }
