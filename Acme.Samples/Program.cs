@@ -1,7 +1,9 @@
 using System;
+using System.Runtime.InteropServices;
 using Acme.Samples.Data;
 using Serilog;
 using Serilog.Events;
+using Volo.Abp.Modularity.PlugIns;
 
 
 namespace Acme.Samples;
@@ -32,14 +34,36 @@ public class Program
 
         try
         {
-            var builder = CreateHostBuilder(args);
-            var app = builder.Build();
+            // var builder = CreateHostBuilder(args);
+            var builder = WebApplication.CreateBuilder(args);
+            builder.Host.AddAppSettingsSecretsJson()
+                .UseAutofac()
+                .UseSerilog();
+            // var app = builder.Build();
             if (IsMigrateDatabase(args))
             {
-                await app.Services.GetRequiredService<SamplesDbMigrationService>().MigrateAsync();
+                await builder.Services.GetRequiredService<SamplesDbMigrationService>().MigrateAsync();
                 return 0;
             }
+
+            await builder.AddApplicationAsync<TemplateModules>(options =>
+            {
+                var path = options.Services.GetHostingEnvironment().ContentRootPath;
+                var directoryInfo = new DirectoryInfo(path);
+                var folder = string.Empty;
+#if DEBUG
+                folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Debug","net7.0");
+#else
+                folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Release","net7.0");
+#endif
+                options.PlugInSources.AddFolder(folder);
+                
+            });
+            var app = builder.Build();
+            await app.InitializeApplicationAsync();
+            
             Log.Information("Starting Acme.Samples.");
+            
             await app.RunAsync();
             return 0;
         }
@@ -62,31 +86,5 @@ public class Program
     private static bool IsMigrateDatabase(string[] args)
     {
         return args.Any(x => x.Contains("--migrate-database", StringComparison.OrdinalIgnoreCase));
-    }
-    
-    internal static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration(build =>
-            {
-                build.AddJsonFile("appsettings.secrets.json", optional: true);
-            })
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            })
-            .UseAutofac()
-            .UseSerilog();
-}
-
-public class Startup
-{
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddApplication<SamplesModule>();
-    }
-
-    public void Configure(IApplicationBuilder app)
-    {
-        app.InitializeApplication();
     }
 }

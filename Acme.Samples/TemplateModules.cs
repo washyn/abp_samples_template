@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Acme.Samples.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,44 +8,21 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
-using Volo.Abp.Account;
-using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
-using Volo.Abp.AuditLogging;
-using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
-using Volo.Abp.Domain.Repositories.EntityFrameworkCore;
-using Volo.Abp.Emailing;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Sqlite;
-using Volo.Abp.FeatureManagement;
-using Volo.Abp.FeatureManagement.EntityFrameworkCore;
-using Volo.Abp.Identity;
-using Volo.Abp.Identity.EntityFrameworkCore;
-using Volo.Abp.Identity.Web;
-using Volo.Abp.IdentityServer.EntityFrameworkCore;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
-using Volo.Abp.PermissionManagement;
-using Volo.Abp.PermissionManagement.EntityFrameworkCore;
-using Volo.Abp.PermissionManagement.HttpApi;
-using Volo.Abp.PermissionManagement.Identity;
-using Volo.Abp.PermissionManagement.IdentityServer;
-using Volo.Abp.SettingManagement;
-using Volo.Abp.SettingManagement.EntityFrameworkCore;
-using Volo.Abp.SettingManagement.Web;
-using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
 using Volo.Abp.Swashbuckle;
-using Volo.Abp.TenantManagement;
-using Volo.Abp.TenantManagement.EntityFrameworkCore;
-using Volo.Abp.TenantManagement.Web;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.Uow;
@@ -54,7 +31,6 @@ using Volo.Abp.VirtualFileSystem;
 // using Washyn.SbTheme.Bundling;
 
 namespace Acme.Samples;
-
 
 [DependsOn(
     // ABP Framework packages
@@ -105,7 +81,11 @@ namespace Acme.Samples;
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
     typeof(AbpSettingManagementHttpApiModule),
     typeof(AbpSettingManagementWebModule)
+
+    typeof(AbpAspNetCoreMvcUiBasicThemeModule)
+
 )]
+//[DependsOn(typeof(IdentityModule))]
 public class TemplateModules : AbpModule
 {
     /* Single point to enable/disable multi-tenancy */
@@ -116,19 +96,11 @@ public class TemplateModules : AbpModule
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
-
-        if (hostingEnvironment.IsDevelopment())
-        {
-            context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
-        }
-
-        ConfigureAuthentication(context);
+        
         ConfigureMultiTenancy();
         ConfigureUrls(configuration);
-        ConfigureBundles();
         ConfigureAutoMapper(context);
         ConfigureSwagger(context.Services);
-        ConfigureNavigationServices();
         ConfigureAutoApiControllers();
         ConfigureVirtualFiles(hostingEnvironment);
         ConfigureLocalization();
@@ -142,12 +114,9 @@ public class TemplateModules : AbpModule
         {
 
         });
+
     }
     
-    private void ConfigureAuthentication(ServiceConfigurationContext context)
-    {
-    }
-
     private void ConfigureMultiTenancy()
     {
         Configure<AbpMultiTenancyOptions>(options =>
@@ -155,8 +124,7 @@ public class TemplateModules : AbpModule
             options.IsEnabled = IsMultiTenant;
         });
     }
-
-
+    
     private void ConfigureUrls(IConfiguration configuration)
     {
         Configure<AppUrlOptions>(options =>
@@ -182,26 +150,7 @@ public class TemplateModules : AbpModule
     {
         Configure<AbpLocalizationOptions>(options =>
         {
-            options.Languages.Add(new LanguageInfo("en", "en", "English"));
-            options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
-            options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
-            options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
-            options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
-            options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
-            options.Languages.Add(new LanguageInfo("fi", "fi", "Finnish"));
-            options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
-            options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi", "in"));
-            options.Languages.Add(new LanguageInfo("is", "is", "Icelandic", "is"));
-            options.Languages.Add(new LanguageInfo("it", "it", "Italiano", "it"));
-            options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
-            options.Languages.Add(new LanguageInfo("ro-RO", "ro-RO", "Română"));
-            options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
-            options.Languages.Add(new LanguageInfo("sk", "sk", "Slovak"));
-            options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
-            options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
-            options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch", "de"));
             options.Languages.Add(new LanguageInfo("es", "es", "Español"));
-            options.Languages.Add(new LanguageInfo("el", "el", "Ελληνικά"));
         });
     }
 
@@ -209,19 +158,12 @@ public class TemplateModules : AbpModule
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<TemplateModules>();
-            if (hostingEnvironment.IsDevelopment())
-            {
-                /* Using physical files in development, so we don't need to recompile on changes */
-                options.FileSets.ReplaceEmbeddedByPhysical<TemplateModules>(hostingEnvironment.ContentRootPath);
-            }
-        });
-    }
-
-    private void ConfigureNavigationServices()
-    {
-        Configure<AbpNavigationOptions>(options =>
-        {
+            options.FileSets.AddEmbedded<TemplateModules>("Acme.Samples");
+            // if (hostingEnvironment.IsDevelopment())
+            // {
+            //     /* Using physical files in development, so we don't need to recompile on changes */
+            //     options.FileSets.ReplaceEmbeddedByPhysical<TemplateModules>(hostingEnvironment.ContentRootPath);
+            // }
         });
     }
 
