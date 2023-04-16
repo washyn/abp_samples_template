@@ -1,0 +1,22 @@
+﻿@page
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@model Acme.Identity.Pages.Login
+@inject IThemeManager ThemeManager
+@{
+    Layout = ThemeManager.CurrentTheme.GetAccountLayout();
+}
+
+<abp-card>
+    <abp-card-header>
+        <abp-card-title>
+            Login
+        </abp-card-title>
+    </abp-card-header>
+    <abp-card-body>
+        <form method="post">
+            <abp-input asp-for="Model.UserName"></abp-input>
+            <abp-input asp-for="Model.Password"></abp-input>
+            <abp-button text="Login" size="Block" button-type="Outline_Primary" type="submit"></abp-button>
+        </form>
+    </abp-card-body>
+</abp-card>

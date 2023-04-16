@@ -1,0 +1,32 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Acme.Identity.Pages.Users.UpdateModal
+
+@{
+    Layout = null;
+}
+
+<abp-modal size="Large">
+    <abp-modal-header title="Actualizar"></abp-modal-header>
+    <form data-ajaxForm="true" asp-page="/Users/UpdateModal">
+        <abp-modal-body>
+            <abp-input asp-for="Id"></abp-input>
+            @* <abp-input asp-for="Model.Password"></abp-input> *@
+            @* <hr> *@
+            <abp-row>
+                <abp-column>
+                    <abp-input asp-for="Model.Name"></abp-input>
+                </abp-column>
+                <abp-column>
+                    <abp-input asp-for="Model.Surname"></abp-input>
+                </abp-column>
+            </abp-row>
+            <abp-input asp-for="Model.Email"></abp-input>
+            <abp-input asp-for="Model.PhoneNumber"></abp-input>
+            <abp-select asp-for="Model.Roles"></abp-select>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </form>
+</abp-modal>
