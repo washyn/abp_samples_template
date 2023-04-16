@@ -1,6 +1,5 @@
 @using Washyn.Billing.OtherSettings.Pages.Components.BillingLogoSetting
 <abp-script src="/Pages/Components/BillingLogoSetting/Default.cshtml.js"></abp-script>
-<abp-style src="/Pages/Components/BillingLogoSetting/Default.cshtml.css"></abp-style>
 
 <abp-card>
     <abp-card-header>
@@ -25,3 +24,13 @@
         <abp-button button-type="Primary" type="button" id="SaveButton">Guardar</abp-button>
     </abp-card-body>
 </abp-card>
+
+<style>
+    /* Ensure the size of the image fit the container perfectly */
+    .image-cropper-container {
+        display: block;
+    
+        /* This rule is very important, please don't ignore this */
+        max-width: 100%;
+    }
+</style>
