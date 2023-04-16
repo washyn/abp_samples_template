@@ -5,7 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Samples", "Acme.Samples\Acme.Samples.csproj", "{64430A23-E2E0-471D-B9F9-31E4E4C834E8}"
 EndProject
-
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.SecurityLogs", "Washyn.SecurityLogs\Washyn.SecurityLogs.csproj", "{8647D078-CCAE-49D5-847C-21DF335D1D9E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.SbTheme", "Washyn.SbTheme\Washyn.SbTheme.csproj", "{3C70E625-CC20-4614-BA0F-30BB8A80A7E9}"
@@ -17,9 +16,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Widgets", "Washyn.Widgets\Washyn.Widgets.csproj", "{26157D91-DD5C-410C-964A-F00AFBD88EF8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Billing.OtherSettings", "Washyn.Billing.OtherSettings\Washyn.Billing.OtherSettings.csproj", "{72F87B4D-2C25-446B-B4DF-641C6DB5F3CA}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.OrganizationUnit", "Washyn.OrganizationUnit\Washyn.OrganizationUnit.csproj", "{861958DB-1986-498B-9242-8200BAAC0311}"
-
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Abp.Select2", "Washyn.Abp.Select2\Washyn.Abp.Select2.csproj", "{ECAF3B5F-2A8A-401F-BE6A-5C91BF6602E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Sunat.Catalog", "Washyn.Sunat.Catalog\Washyn.Sunat.Catalog.csproj", "{216BE632-B0CB-4958-BFF4-E9899CEA6F4E}"
 EndProject
@@ -28,7 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Select2.Boostrap4", "Washyn.Select2.Boostrap4\Washyn.Select2.Boostrap4.csproj", "{230B06D9-1205-496F-BD1B-8E466EFA6292}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Select2.Localization", "Washyn.Select2.Localization\Washyn.Select2.Localization.csproj", "{C8BF7BEB-8075-46E1-A3F7-98FC9CD6DDAC}"
-
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyAbp.LoggingManagement.Web", "EasyAbp.LoggingManagement.Web\EasyAbp.LoggingManagement.Web.csproj", "{136FF913-7C50-4085-AB7B-842060AF993E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,7 +37,6 @@ Global
 		{64430A23-E2E0-471D-B9F9-31E4E4C834E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64430A23-E2E0-471D-B9F9-31E4E4C834E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64430A23-E2E0-471D-B9F9-31E4E4C834E8}.Release|Any CPU.Build.0 = Release|Any CPU
-
 		{8647D078-CCAE-49D5-847C-21DF335D1D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8647D078-CCAE-49D5-847C-21DF335D1D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8647D078-CCAE-49D5-847C-21DF335D1D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,8 +65,6 @@ Global
 		{861958DB-1986-498B-9242-8200BAAC0311}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{861958DB-1986-498B-9242-8200BAAC0311}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{861958DB-1986-498B-9242-8200BAAC0311}.Release|Any CPU.Build.0 = Release|Any CPU
-
-
 		{ECAF3B5F-2A8A-401F-BE6A-5C91BF6602E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECAF3B5F-2A8A-401F-BE6A-5C91BF6602E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECAF3B5F-2A8A-401F-BE6A-5C91BF6602E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -95,7 +89,10 @@ Global
 		{C8BF7BEB-8075-46E1-A3F7-98FC9CD6DDAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8BF7BEB-8075-46E1-A3F7-98FC9CD6DDAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8BF7BEB-8075-46E1-A3F7-98FC9CD6DDAC}.Release|Any CPU.Build.0 = Release|Any CPU
-
+		{136FF913-7C50-4085-AB7B-842060AF993E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{136FF913-7C50-4085-AB7B-842060AF993E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{136FF913-7C50-4085-AB7B-842060AF993E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{136FF913-7C50-4085-AB7B-842060AF993E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

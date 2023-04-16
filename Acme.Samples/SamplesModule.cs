@@ -1,3 +1,4 @@
+using EasyAbp.LoggingManagement.Web;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
@@ -32,8 +33,8 @@ namespace Acme.Samples;
 [DependsOn(typeof(ProfilePictureModule))]
 [DependsOn(typeof(WashynWidgetModule))]
 [DependsOn(typeof(BillingOtherSettingsModule))]
-
 [DependsOn(typeof(WashynSunatCatalogModule))]
+[DependsOn(typeof(LoggingManagementWebModule))]
 public class SamplesModule : AbpModule
 {
 

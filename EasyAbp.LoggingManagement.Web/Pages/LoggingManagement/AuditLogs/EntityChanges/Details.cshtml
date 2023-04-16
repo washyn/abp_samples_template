@@ -1,0 +1,105 @@
+﻿@page
+@model EasyAbp.LoggingManagement.Web.Pages.LoggingManagement.AuditLogs.EntityChanges.Details
+
+@{
+    // Layout = null;
+}
+@* TODO: crear una master detail de las entidades, de auditoria y mejorar el mostrar las propiedades una vez obtenido el dato *@
+<abp-card>
+    <abp-card-header>
+        <abp-card-title>
+            Cambios de la entidad
+        </abp-card-title>
+    </abp-card-header>
+    <abp-card-body>
+        
+        <abp-row>
+            <abp-column><strong>Id:</strong> @Model.EntityId</abp-column>
+            <abp-column><strong>Entidad:</strong> @Model.EntityTypeFullName</abp-column>
+        </abp-row>
+        
+        <hr>
+        
+        <table class="table table-sm table-bordered">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre de propiedad</th>
+                <th>Fecha</th>
+                <th>Tipo de dato</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>1</th>
+                <td>NeedAction</td>
+                <td>@DateTime.Now.AddDays(3)</td>
+                <td>System.Boolean</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table class="table table-sm table-bordered mb-0">
+                        <thead>
+                        <tr>
+                            <td>Original</td>
+                            <td>New</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td>Valor inicial</td>
+                        </tr>
+                        <tr>
+                            <td>Valor cambiado</td>
+                            <td>Valor cambiado</td>
+                        </tr>
+                        <tr>
+                            <td>Valor cambiado otra vez</td>
+                            <td>Valor cambiado otra vez</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    
+                </td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>NeedAction</td>
+                <td>@DateTime.Now.AddDays(3)</td>
+                <td>System.Boolean</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table class="table table-sm table-bordered mb-0">
+                        <thead>
+                        <tr>
+                            <td>Original</td>
+                            <td>New</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td>Valor inicial</td>
+                        </tr>
+                        <tr>
+                            <td>Valor cambiado</td>
+                            <td>Valor cambiado</td>
+                        </tr>
+                        <tr>
+                            <td>Valor cambiado otra vez</td>
+                            <td>Valor cambiado otra vez</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                                
+                </td>
+            </tr>
+            
+            </tbody>
+        </table>
+        
+        
+    </abp-card-body>
+</abp-card>
