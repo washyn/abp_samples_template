@@ -22,23 +22,14 @@ namespace Washyn.OrganizationUnit
                 options.FileSets.AddEmbedded<OrganizationUnitModule>("Washyn.OrganizationUnit");
             });
             
-            ConfigureNavigationServices();
-            ConfigureAutoMapper();
-        }
-    
-        private void ConfigureAutoMapper()
-        {
-            Configure<AbpAutoMapperOptions>(options =>
-            {
-                options.AddMaps<OrganizationUnitModule>();
-            });
-        }
-    
-        private void ConfigureNavigationServices()
-        {
             Configure<AbpNavigationOptions>(options =>
             {
                 options.MenuContributors.Add(new AbpOuWebMainMenuContributor());
+            });
+            
+            Configure<AbpAutoMapperOptions>(options =>
+            {
+                options.AddMaps<OrganizationUnitModule>();
             });
         }
     }

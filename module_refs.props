@@ -8,6 +8,6 @@
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\Washyn.Billing.OtherSettings\Washyn.Billing.OtherSettings.csproj" />
-        <!-- <ProjectReference Include="..\Washyn.OrganizationUnit\Washyn.OrganizationUnit.csproj" /> -->
+        <ProjectReference Include="..\Washyn.OrganizationUnit\Washyn.OrganizationUnit.csproj" />
     </ItemGroup>
 </Project>

@@ -4,19 +4,17 @@ using Volo.Abp.Modularity;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Ui.Branding;
 
-// using Washyn.SecurityLogs;
-// using Washyn.SbTheme;
-// using Washyn.Billing.OtherSettings;
-// using Washyn.Logo;
-// using Washyn.OrganizationUnit;
-// using Washyn.SecurityLogs;
-// using Washyn.SbTheme;
-using Volo.Abp.DependencyInjection;
-using Volo.Abp.Ui.Branding;
-// using Washyn.Billing.OtherSettings;
-// using Washyn.Logo;
-// using Washyn.ProfilePicture;
-// using Washyn.Widgets;
+using Washyn.SecurityLogs;
+using Washyn.SbTheme;
+using Washyn.Billing.OtherSettings;
+using Washyn.Logo;
+using Washyn.OrganizationUnit;
+using Washyn.SecurityLogs;
+using Washyn.SbTheme;
+using Washyn.Billing.OtherSettings;
+using Washyn.Logo;
+using Washyn.ProfilePicture;
+using Washyn.Widgets;
 
 namespace Acme.Samples;
 
@@ -24,20 +22,17 @@ namespace Acme.Samples;
 [DependsOn(typeof(AbpAspNetCoreMvcUiBasicThemeModule))]
 [DependsOn(typeof(TemplateModules))]
 
-// [DependsOn(typeof(LogoManagmentModule))]
-// [DependsOn(typeof(SecurityLogModule))]
-// [DependsOn(typeof(ProfilePictureModule))]
-// [DependsOn(typeof(WashynWidgetModule))]
-// [DependsOn(typeof(BillingOtherSettingsModule))]
-// [DependsOn(typeof(OrganizationUnitModule))]
-[DependsOn(typeof(TemplateModules))]
-// [DependsOn(typeof(LogoManagmentModule))]
-[DependsOn(typeof(AbpAutofacModule))]
-// [DependsOn(typeof(SecurityLogModule))]
-[DependsOn(typeof(AbpAspNetCoreMvcUiBasicThemeModule))]
-// [DependsOn(typeof(ProfilePictureModule))]
-// [DependsOn(typeof(WashynWidgetModule))]
-// [DependsOn(typeof(BillingOtherSettingsModule))]
+[DependsOn(typeof(LogoManagmentModule))]
+[DependsOn(typeof(SecurityLogModule))]
+[DependsOn(typeof(ProfilePictureModule))]
+[DependsOn(typeof(WashynWidgetModule))]
+[DependsOn(typeof(BillingOtherSettingsModule))]
+[DependsOn(typeof(OrganizationUnitModule))]
+[DependsOn(typeof(LogoManagmentModule))]
+[DependsOn(typeof(SecurityLogModule))]
+[DependsOn(typeof(ProfilePictureModule))]
+[DependsOn(typeof(WashynWidgetModule))]
+[DependsOn(typeof(BillingOtherSettingsModule))]
 public class SamplesModule : AbpModule
 {
 
