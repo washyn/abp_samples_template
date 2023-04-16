@@ -1,5 +1,6 @@
 ## TODO
 - Improve logging managment
+- Improve Sample, desacoplando del los modulos identity por default
 
 
 
