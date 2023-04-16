@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.AspNetCore.Mvc;
+﻿using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Packages.CropperJs;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
@@ -9,9 +8,9 @@ using Volo.Abp.BlobStoring.FileSystem;
 using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
 using Volo.Abp.VirtualFileSystem;
-using Washyn.BillingOtherSettings.Controllers;
+using Washyn.Billing.OtherSettings.Controllers;
 
-namespace Washyn.BillingOtherSettings
+namespace Washyn.Billing.OtherSettings
 {
     [DependsOn(typeof(AbpAspNetCoreMvcUiThemeSharedModule))]
     [DependsOn(typeof(AbpAspNetCoreMvcModule))]
@@ -35,7 +34,7 @@ namespace Washyn.BillingOtherSettings
 
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                options.FileSets.AddEmbedded<BillingOtherSettingsModule>();
+                options.FileSets.AddEmbedded<BillingOtherSettingsModule>("Washyn.Billing.OtherSettings");
             });
             
             Configure<SettingManagementPageOptions>(options =>
@@ -55,10 +54,6 @@ namespace Washyn.BillingOtherSettings
                         bundle.Contributors.Add(typeof(CropperJsStyleContributor));
                     }
                 );
-            });
-            
-            Configure<AbpBundlingOptions>(options =>
-            {
                 options.ScriptBundles.Configure(
                     StandardBundles.Scripts.Global,
                     bundle =>

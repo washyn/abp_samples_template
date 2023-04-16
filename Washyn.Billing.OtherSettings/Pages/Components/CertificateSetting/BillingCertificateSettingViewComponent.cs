@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
-using Washyn.BillingOtherSettings.Controllers;
+using Washyn.Billing.OtherSettings.Controllers;
 
-namespace Washyn.BillingOtherSettings.Pages.Components.CertificateSetting;
+namespace Washyn.Billing.OtherSettings.Pages.Components.CertificateSetting;
 
 public class BillingCertificateSettingViewComponent : AbpViewComponent
 {
