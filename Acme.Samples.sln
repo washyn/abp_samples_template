@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Select2.Localization
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyAbp.LoggingManagement.Web", "EasyAbp.LoggingManagement.Web\EasyAbp.LoggingManagement.Web.csproj", "{136FF913-7C50-4085-AB7B-842060AF993E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Identity", "Acme.Identity\Acme.Identity.csproj", "{F37058E8-9E45-4C07-8E32-0999478822BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{136FF913-7C50-4085-AB7B-842060AF993E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{136FF913-7C50-4085-AB7B-842060AF993E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{136FF913-7C50-4085-AB7B-842060AF993E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F37058E8-9E45-4C07-8E32-0999478822BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F37058E8-9E45-4C07-8E32-0999478822BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F37058E8-9E45-4C07-8E32-0999478822BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F37058E8-9E45-4C07-8E32-0999478822BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
