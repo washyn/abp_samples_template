@@ -9,5 +9,6 @@
     <ItemGroup>
         <ProjectReference Include="..\Washyn.Billing.OtherSettings\Washyn.Billing.OtherSettings.csproj" />
         <ProjectReference Include="..\Washyn.OrganizationUnit\Washyn.OrganizationUnit.csproj" />
+        <ProjectReference Include="..\Washyn.Sunat.Catalog\Washyn.Sunat.Catalog.csproj" />
     </ItemGroup>
 </Project>
