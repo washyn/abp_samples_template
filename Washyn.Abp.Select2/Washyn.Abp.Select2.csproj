@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\template.props" />
+  <Import Project="..\lang_ver.props" />
+  <!-- <PropertyGroup>
+    <TargetFramework>$(FrameworkVersion)</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>  
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+  </PropertyGroup> -->
+
+  <PropertyGroup>
+    <TargetFramework>$(FrameworkVersion)</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+    <IsPackable>true</IsPackable>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Washyn.Select2.Boostrap4\Washyn.Select2.Boostrap4.csproj" />
+    <ProjectReference Include="..\Washyn.Select2.Localization\Washyn.Select2.Localization.csproj" />
+  </ItemGroup>
+
+</Project>

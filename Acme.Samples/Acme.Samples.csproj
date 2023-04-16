@@ -38,5 +38,4 @@
   <ItemGroup>
     <Content Remove="$(UserProfile)\.nuget\packages\*\*\contentFiles\any\*\*.abppkg*.json" />
   </ItemGroup>
-
 </Project>

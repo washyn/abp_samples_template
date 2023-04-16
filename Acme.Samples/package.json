@@ -6,6 +6,8 @@
     "@abp/aspnetcore.mvc.ui.theme.basic": "6.0.3",
     "@abp/cropperjs": "6.0.3",
     "@abp/chart.js": "6.0.3",
-    "@abp/jstree": "6.0.3"
+    "@abp/jstree": "6.0.3",
+    "@ttskch/select2-bootstrap4-theme": "^1.5.2",
+    "jspdf": "^2.5.1"
   }
 }

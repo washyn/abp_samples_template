@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "name": "my-app",
+  "private": true,
+  "dependencies": {
+    "@ttskch/select2-bootstrap4-theme": "^1.5.2"
+  }
+}

@@ -267,9 +267,7 @@ public class TemplateModules : AbpModule
              * Documentation: https://docs.abp.io/en/abp/latest/Entity-Framework-Core#add-default-repositories
              */
             options.AddDefaultRepositories(includeAllEntities: true);
-            options.AddRepository<AuditLogAction,  EfCoreRepository<SamplesDbContext, AuditLogAction, Guid>>();
-            options.AddRepository<EntityChange,  EfCoreRepository<SamplesDbContext, EntityChange, Guid>>();
-            options.AddRepository<EntityPropertyChange,  EfCoreRepository<SamplesDbContext, EntityPropertyChange, Guid>>();
+            options.AddRepository<AuditLog, EfCoreAuditLogRepository>();
         });
 
         Configure<AbpDbContextOptions>(options =>
