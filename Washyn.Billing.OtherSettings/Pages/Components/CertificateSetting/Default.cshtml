@@ -1,0 +1,49 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Alert
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Button
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Card
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Grid
+@using Volo.Abp.AspNetCore.Mvc.UI.Bundling.TagHelpers
+@model Washyn.BillingOtherSettings.Controllers.CertificatePasswordViewModel
+<abp-script src="/Pages/Components/CertificateSetting/Default.cshtml.js"></abp-script>
+<abp-style src="/Pages/Components/CertificateSetting/Default.cshtml.css"></abp-style>
+
+
+<form class="formFileCert" enctype="multipart/form-data" method="post" action="/billing-certificate/file">
+<abp-card>
+    <abp-card-header>
+        <abp-card-title>Configuración de certificado</abp-card-title>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-row>
+            <abp-column>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Cambiar certificado <span>*</span> </label>
+                    <input class="form-control" name="certificate" type="file" id="formFile" accept="" required="required">
+                </div>
+            </abp-column>
+        </abp-row>
+        <hr class="mt-2">
+        <abp-button button-type="Primary" type="submit">Guardar</abp-button>
+    </abp-card-body>
+</abp-card>
+</form>
+<br>
+
+<form class="formPassword">
+    <abp-card>
+        <abp-card-header>
+            <abp-card-title>Configuración de contraseña de certificado</abp-card-title>
+        </abp-card-header>
+        <abp-card-body>
+            <abp-row>
+                <abp-column>
+                    <abp-input asp-for="Password"></abp-input>
+                </abp-column>
+            </abp-row>
+            <hr class="mt-2">
+            <abp-button button-type="Primary" type="submit">Guardar</abp-button>
+        </abp-card-body>
+    </abp-card>
+</form>

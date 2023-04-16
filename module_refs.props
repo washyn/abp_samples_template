@@ -6,4 +6,7 @@
         <ProjectReference Include="..\Washyn.SbTheme\Washyn.SbTheme.csproj" />
         <ProjectReference Include="..\Washyn.Widgets\Washyn.Widgets.csproj" />
     </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Washyn.Billing.OtherSettings\Washyn.Billing.OtherSettings.csproj" />
+    </ItemGroup>
 </Project>

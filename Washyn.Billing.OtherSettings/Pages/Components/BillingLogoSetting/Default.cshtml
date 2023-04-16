@@ -1,0 +1,27 @@
+@using Washyn.BillingOtherSettings.Pages.Components.BillingLogoSetting
+<abp-script src="/Pages/Components/BillingLogoSetting/Default.cshtml.js"></abp-script>
+<abp-style src="/Pages/Components/BillingLogoSetting/Default.cshtml.css"></abp-style>
+
+<abp-card>
+    <abp-card-header>
+        <abp-card-title>Configuración de logo de comprobante</abp-card-title>
+    </abp-card-header>
+    <abp-card-body>
+        <div id="@nameof(BillingLogoSettingViewComponent)">
+            <img src="/billing-logo" id="logoImage" class="image-cropper-container" alt="Logo image">
+        </div>
+        <hr>
+        <abp-row>
+            <abp-column>
+                <form>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Cambiar logo de comprobante <span>*</span> </label>
+                        <input class="form-control" name="logo" type="file" id="formFile" accept="image/*" required="required">
+                    </div>
+                </form>
+            </abp-column>
+        </abp-row>
+        <hr class="mt-2">
+        <abp-button button-type="Primary" type="button" id="SaveButton">Guardar</abp-button>
+    </abp-card-body>
+</abp-card>
