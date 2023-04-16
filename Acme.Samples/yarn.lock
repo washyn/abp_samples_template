@@ -134,10 +134,25 @@
     "@abp/core" "~6.0.3"
     jquery "~3.6.0"
 
+<<<<<<< HEAD
 "@abp/lodash@~6.0.3":
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/@abp/lodash/-/lodash-6.0.3.tgz#97435b26f2fb7d89dcfdf0a9a2a846116d83e093"
   integrity sha512-6DSoYorOAdi0v9keyduiNRCiRuLUvQNwY90XnDI/nPFOBktPkGvMb69mCC7uHl8ywAR4BlLcOtuL4D+sIzMWog==
+=======
+"@abp/jstree@4.4.4":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@abp/jstree/-/jstree-4.4.4.tgz#2435a2a56c97d30e26199a01d32ed0a3b4642972"
+  integrity sha512-f6hhXaO14rc2RSaIxmchj7dOljiNf1HMg76QHqci+EGCoHdQLvoEhbwFfMRyRF/c34n+RDNNMdAXAcFUEMQupg==
+  dependencies:
+    "@abp/jquery" "~4.4.4"
+    jstree "^3.3.9"
+
+"@abp/lodash@~4.4.4":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@abp/lodash/-/lodash-4.4.4.tgz#8abd3986bcf64561ecbc86f23f53677b3c34eda9"
+  integrity sha512-IyAZHiR1vPYhbla0lTH/iYK38PCR+9wP5zgrWGD0JSP9R642GEEhdeiuzwclv1aNGretg+TSATr+zSWB5V1DYQ==
+>>>>>>> a280b3eb7c0dc31948962de6bb4f3e77602a7a46
   dependencies:
     "@abp/core" "~6.0.3"
     lodash "^4.17.21"
@@ -1436,10 +1451,22 @@ jquery@>=1.12.0, "jquery@>=1.5.0 <4.0", jquery@>=1.7, "jquery@>=1.7.1 <4.0.0", j
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.4.tgz#ba065c188142100be4833699852bf7c24dc0252f"
   integrity sha512-v28EW9DWDFpzcD9O5iyJXg3R3+q+mET5JhnjJzQUZMHOv67bpSIHq81GEYpPNZHG+XXHsfSme3nxp/hndKEcsQ==
 
+jquery@^3.5.0:
+  version "3.6.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.4.tgz#ba065c188142100be4833699852bf7c24dc0252f"
+  integrity sha512-v28EW9DWDFpzcD9O5iyJXg3R3+q+mET5JhnjJzQUZMHOv67bpSIHq81GEYpPNZHG+XXHsfSme3nxp/hndKEcsQ==
+
 json-stable-stringify-without-jsonify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
   integrity sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==
+
+jstree@^3.3.9:
+  version "3.3.15"
+  resolved "https://registry.yarnpkg.com/jstree/-/jstree-3.3.15.tgz#364bfa0fc4c0b1b7b5bc122cda44a0f09e59eba4"
+  integrity sha512-fNK2EBgGjaJQ3cJuINX/80vDeAufYWtM0csudgYl3eJG+eRAH/1r1IJVUOvAlJIa+uSgg+Fi8uGrt+Xbs92eKg==
+  dependencies:
+    jquery "^3.5.0"
 
 just-compare@^1.3.0:
   version "1.5.1"

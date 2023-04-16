@@ -1,5 +1,7 @@
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.Autofac;
+using Volo.Abp.Autofac;
+using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
 using Washyn.SecurityLogs;
 using Washyn.SbTheme;
@@ -20,6 +22,7 @@ namespace Acme.Samples;
 [DependsOn(typeof(ProfilePictureModule))]
 [DependsOn(typeof(WashynWidgetModule))]
 [DependsOn(typeof(BillingOtherSettingsModule))]
+[DependsOn(typeof(OrganizationUnitModule))]
 public class SamplesModule : AbpModule
 {
 

@@ -1,0 +1,72 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Packages.JsTree
+@model Washyn.OrganizationUnit.Pages.Identity.OrganizationUnits.IndexModel
+@{
+    ViewBag.FluidLayout = true;
+}
+@section styles {
+    <abp-style type="typeof(JsTreeStyleContributor)"></abp-style>
+}
+
+@section scripts {
+    <abp-script type="typeof(JsTreeScriptContributor)"></abp-script>
+    <abp-script src="/Pages/Identity/OrganizationUnits/Index.js"/>
+    <abp-script src="/Pages/Identity/OrganizationUnits/addMemberModal.js"/>
+    <abp-script src="/Pages/Identity/OrganizationUnits/addRoleModal.js"/>
+}
+
+<abp-row>
+    <abp-column class="mb-3" size-lg="_6" size-md="_12">
+        <abp-card>
+            <abp-card-header>
+                <abp-row>
+                    <abp-column>
+                        <h6>Unidades organizativas</h6>
+                    </abp-column>
+                    <abp-column class="text-right">
+                        <abp-button button-type="Outline_Primary" name="CreateOrganizationUnit" size="Small" text="Agregar unidad raiz"></abp-button>
+                    </abp-column>
+                </abp-row>
+            </abp-card-header>
+            <abp-card-body>
+                <div id="OrganizationUnitEditTree"></div>
+                <div id="OrganizationUnitTreeEmptyInfo" class="text-muted">No hay unidades organizativas registradas!</div>
+            </abp-card-body>
+        </abp-card>
+    </abp-column>
+    <abp-column class="mb-3" size-lg="_6" size-md="_12">
+        <abp-card>
+            <abp-card-body>
+                <abp-tabs>
+                    <abp-tab title="Miembros">
+                        <div class="mt-3">
+                            <div id="OuMembersTable" style="display: none">
+                                <div class="text-right mb-3">
+                                    <abp-button name="AddMember" button-type="Outline_Primary" size="Small" text="Agregar miembro" icon="plus"></abp-button>
+                                </div>
+                                <abp-table striped-rows="true" class="nowrap"/>
+                            </div>
+                            <div id="OuMembersEmptyInfo" class="text-muted">
+                                Seleccione una unidad organizativa para ver los miembros
+                            </div>
+                        </div>
+                    </abp-tab>
+                    <abp-tab title="Roles">
+                        <div class="mt-3">
+                            <div id="OuRolesTable" style="display: none">
+                                <div class="text-right mb-3">
+                                    <abp-button name="AddRole" button-type="Outline_Primary" size="Small" text="Agregar rol" icon="plus"></abp-button>
+                                </div>
+                                <abp-table striped-rows="true" class="nowrap"/>
+                            </div>
+                            <div id="OuRolesEmptyInfo" class="text-muted">
+                                Seleccione una unidad organizativa para ver los roles
+                            </div>
+                        </div>
+                    </abp-tab>
+                </abp-tabs>
+            </abp-card-body>
+        </abp-card>
+    </abp-column>
+</abp-row>

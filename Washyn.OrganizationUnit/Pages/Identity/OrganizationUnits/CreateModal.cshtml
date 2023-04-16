@@ -1,0 +1,17 @@
+﻿@page
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Washyn.OrganizationUnit.Pages.Identity.OrganizationUnits.CreateModal
+
+@{
+    // Layout = null;
+}
+<form asp-page="/Identity/OrganizationUnits/CreateModal" method="post">
+    <abp-modal>
+        <abp-modal-header title="Agregar unidad organizativa"></abp-modal-header>
+        <abp-modal-body>
+            <abp-input asp-for="OrganizationUnit.DisplayName"></abp-input>
+            <abp-input asp-for="OrganizationUnit.ParentId"></abp-input>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</form>
