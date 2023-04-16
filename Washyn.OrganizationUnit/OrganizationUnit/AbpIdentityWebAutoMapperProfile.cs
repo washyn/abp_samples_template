@@ -13,6 +13,7 @@ using System.Linq.Expressions;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Identity.Web.Pages.Identity.Users;
 using Volo.Abp.Identity.Web;
+using Washyn.OrganizationUnit.Pages.Identity.OrganizationUnits;
 
 namespace Volo.Abp.Identity.Web
 {
@@ -64,9 +65,9 @@ namespace Volo.Abp.Identity.Web
     //
     protected virtual void CreateOrganizationUnitMappings()
     {
-      this.CreateMap<Acme.Samples.Pages.Identity.OrganizationUnits.CreateModal.OrganizationUnitInfoModel, OrganizationUnitCreateDto>().MapExtraProperties<Acme.Samples.Pages.Identity.OrganizationUnits.CreateModal.OrganizationUnitInfoModel, OrganizationUnitCreateDto>();
-      this.CreateMap<OrganizationUnitWithDetailsDto, Acme.Samples.Pages.Identity.OrganizationUnits.EditModal.OrganizationUnitInfoModel>();
-      this.CreateMap<Acme.Samples.Pages.Identity.OrganizationUnits.EditModal.OrganizationUnitInfoModel, OrganizationUnitUpdateDto>().MapExtraProperties<Acme.Samples.Pages.Identity.OrganizationUnits.EditModal.OrganizationUnitInfoModel, OrganizationUnitUpdateDto>();
+      this.CreateMap<CreateModal.OrganizationUnitInfoModel, OrganizationUnitCreateDto>().MapExtraProperties<CreateModal.OrganizationUnitInfoModel, OrganizationUnitCreateDto>();
+      this.CreateMap<OrganizationUnitWithDetailsDto, EditModal.OrganizationUnitInfoModel>();
+      this.CreateMap<EditModal.OrganizationUnitInfoModel, OrganizationUnitUpdateDto>().MapExtraProperties<EditModal.OrganizationUnitInfoModel, OrganizationUnitUpdateDto>();
     }
   }
 }

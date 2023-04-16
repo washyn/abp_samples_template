@@ -46,4 +46,8 @@
     <Folder Include="Pages\Identity" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Washyn.OrganizationUnit\Washyn.OrganizationUnit.csproj" />
+  </ItemGroup>
+
 </Project>

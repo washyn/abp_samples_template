@@ -2,6 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>$(FrameworkVersion)</TargetFramework>
+    <OutputType>Library</OutputType>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity"
+      Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.Identity.Web" Version="$(AbpVersion)" />
+  </ItemGroup>
 
 </Project>
