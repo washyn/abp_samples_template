@@ -9,7 +9,7 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
-using Washyn.Select2.Boostrap4;
+using Washyn.Abp.Select2;
 using Washyn.Sunat.Catalog.Select;
 
 namespace Washyn.Sunat.Catalog;
@@ -25,7 +25,7 @@ public class WashynSunatCatalogModule : AbpModule
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<WashynSunatCatalogModule>();
+            options.FileSets.AddEmbedded<WashynSunatCatalogModule>("Washyn.Sunat.Catalog");
         });
         
         Configure<AbpNavigationOptions>(options =>
@@ -39,7 +39,7 @@ public class WashynSunatCatalogModule : AbpModule
         
         Configure<Select2ThemeOptions>(options =>
         {
-            options.ThemeName = "bootstrap4";
+            options.ThemeName = "bootstrap-5";
         });
     }
 }

@@ -17,7 +17,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Http.Client;
 using Volo.Abp.Json;
-using Washyn.Select2.Boostrap4;
+using Washyn.Abp.Select2;
 
 
 namespace EasyAbp.Abp.TagHelperPlus.TagHelpers

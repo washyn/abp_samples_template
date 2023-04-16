@@ -1,10 +1,8 @@
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
-
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Ui.Branding;
-
 using Washyn.SecurityLogs;
 using Washyn.SbTheme;
 using Washyn.Billing.OtherSettings;
@@ -16,16 +14,13 @@ using Washyn.Billing.OtherSettings;
 using Washyn.Logo;
 using Washyn.ProfilePicture;
 using Washyn.Widgets;
-
 using Washyn.Sunat.Catalog;
 
 namespace Acme.Samples;
 
 [DependsOn(typeof(AbpAutofacModule))]
-
 [DependsOn(typeof(AbpAspNetCoreMvcUiBasicThemeModule))]
 [DependsOn(typeof(TemplateModules))]
-
 [DependsOn(typeof(LogoManagmentModule))]
 [DependsOn(typeof(SecurityLogModule))]
 [DependsOn(typeof(ProfilePictureModule))]

@@ -13,7 +13,7 @@ namespace Washyn.Select2.Boostrap5
         {
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                options.FileSets.AddEmbedded<Select2BoostrapModule>();
+                options.FileSets.AddEmbedded<Select2BoostrapModule>("Washyn.Select2.Boostrap5");
             });
         }
     }

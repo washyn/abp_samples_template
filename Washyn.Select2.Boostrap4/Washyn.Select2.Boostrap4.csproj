@@ -2,18 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>$(FrameworkVersion)</TargetFramework>
-    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
     <IsPackable>true</IsPackable>
     <OutputType>Library</OutputType>
   </PropertyGroup>
-  
-  <PropertyGroup>
-    <LangVersion>latest</LangVersion>
-</PropertyGroup>
+    
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="$(AbpVersion)" />
@@ -34,19 +26,21 @@
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="$(AspNetFrameworkPackageVersion)" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\**\*.css" />
-    <EmbeddedResource Include="Pages\**\*.js" />
-    <EmbeddedResource Include="wwwroot\**\*.*" />
-    <Content Remove="Pages\**\*.css" />
-    <Content Remove="Pages\**\*.js" />
-    <Content Remove="wwwroot\**\*.*" />
+
+    <ItemGroup>
+        <EmbeddedResource Include="Pages\**\*.css" />
+        <EmbeddedResource Include="Pages\**\*.js" />
+        <EmbeddedResource Include="Components\**\*.js" />
+        <EmbeddedResource Include="Components\**\*.css" />
+        <EmbeddedResource Include="wwwroot\**\*.*" />
+        <Content Remove="Pages\**\*.css" />
+        <Content Remove="Pages\**\*.js" />
+        <Content Remove="Components\**\*.js" />
+        <Content Remove="Components\**\*.css" />
+        <Content Remove="wwwroot\**\*.*" />
+
+        <EmbeddedResource Include="Images\**\*.jpeg" />
+        <Content Remove="Images\**\*.jpeg" />
+    </ItemGroup>
     
-  </ItemGroup>
-
-  <ItemGroup>
-    <!-- <ProjectReference Include="..\Washyn.Select2.Localization\Washyn.Select2.Localization.csproj" /> -->
-  </ItemGroup>
-
-
 </Project>

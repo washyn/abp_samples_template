@@ -1,7 +1,8 @@
 ﻿using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
-namespace Washyn.Select2.Boostrap5
+
+namespace Washyn.Select2.Boostrap4
 {
     [DependsOn(typeof(AbpAspNetCoreMvcUiThemeSharedModule))]
     public class Select2BoostrapModule : AbpModule
@@ -10,7 +11,7 @@ namespace Washyn.Select2.Boostrap5
         {
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                options.FileSets.AddEmbedded<Select2BoostrapModule>();
+                options.FileSets.AddEmbedded<Select2BoostrapModule>("Washyn.Select2.Boostrap4");
             });
         }
     }
