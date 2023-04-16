@@ -107,13 +107,10 @@ namespace Acme.Samples;
 )]
 public class TemplateModules : AbpModule
 {
-        /* Single point to enable/disable multi-tenancy */
+    /* Single point to enable/disable multi-tenancy */
     public const bool IsMultiTenant = true;
 
-    public override void PreConfigureServices(ServiceConfigurationContext context)
-    {
-    }
-
+    
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
