@@ -1,29 +1,42 @@
-using System;
 using Acme.Samples.Data;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
+using Volo.Abp.Account;
+using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
+using Volo.Abp.AuditLogging;
+using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Sqlite;
+using Volo.Abp.FeatureManagement;
+using Volo.Abp.FeatureManagement.EntityFrameworkCore;
+using Volo.Abp.Identity;
+using Volo.Abp.Identity.EntityFrameworkCore;
+using Volo.Abp.Identity.Web;
+using Volo.Abp.IdentityServer.EntityFrameworkCore;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
+using Volo.Abp.PermissionManagement;
+using Volo.Abp.PermissionManagement.EntityFrameworkCore;
+using Volo.Abp.PermissionManagement.HttpApi;
+using Volo.Abp.PermissionManagement.Identity;
+using Volo.Abp.PermissionManagement.IdentityServer;
+using Volo.Abp.SettingManagement;
+using Volo.Abp.SettingManagement.EntityFrameworkCore;
+using Volo.Abp.SettingManagement.Web;
+using Volo.Abp.SettingManagement.Web.Pages.SettingManagement;
 using Volo.Abp.Swashbuckle;
-using Volo.Abp.UI.Navigation;
+using Volo.Abp.TenantManagement;
+using Volo.Abp.TenantManagement.EntityFrameworkCore;
+using Volo.Abp.TenantManagement.Web;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.Uow;
 using Volo.Abp.VirtualFileSystem;
@@ -81,9 +94,6 @@ namespace Acme.Samples;
     typeof(AbpSettingManagementEntityFrameworkCoreModule),
     typeof(AbpSettingManagementHttpApiModule),
     typeof(AbpSettingManagementWebModule)
-
-    typeof(AbpAspNetCoreMvcUiBasicThemeModule)
-
 )]
 //[DependsOn(typeof(IdentityModule))]
 public class TemplateModules : AbpModule
