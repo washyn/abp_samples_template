@@ -14,7 +14,7 @@
 
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference
-            Include="..\EasyAbp.LoggingManagement.Web\EasyAbp.LoggingManagement.Web.csproj" />
+        <ProjectReference Include="..\EasyAbp.LoggingManagement.Web\EasyAbp.LoggingManagement.Web.csproj" />
+        <ProjectReference Include="..\Acme.Identity\Acme.Identity.csproj" />
     </ItemGroup>
 </Project>

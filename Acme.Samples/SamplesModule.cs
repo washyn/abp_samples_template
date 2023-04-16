@@ -35,6 +35,7 @@ namespace Acme.Samples;
 [DependsOn(typeof(BillingOtherSettingsModule))]
 [DependsOn(typeof(WashynSunatCatalogModule))]
 [DependsOn(typeof(LoggingManagementWebModule))]
+// [DependsOn(typeof(Acme.Identity.IdentityModule))]
 public class SamplesModule : AbpModule
 {
 

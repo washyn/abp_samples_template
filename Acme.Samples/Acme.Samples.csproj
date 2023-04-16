@@ -3,8 +3,6 @@
   <Import Project="..\module_refs.props" />
   <PropertyGroup>
     <TargetFramework>$(FrameworkVersion)</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
   </PropertyGroup>
 
   <ItemGroup>
