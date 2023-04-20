@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Application.Dtos;
@@ -105,7 +104,7 @@ public class SecurityLogFilter : PagedAndSortedResultRequestDto
     }
 }
 
-public class SecurityLogProfile : Profile
+public class SecurityLogProfile : AutoMapper.Profile
 {
     public SecurityLogProfile()
     {

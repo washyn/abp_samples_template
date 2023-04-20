@@ -44,8 +44,14 @@ public class BillingCertificateController : AbpController
         }
         await _blobContainer.SaveAsync(fileName, memoryStream, overrideExisting: true);
         await memoryStream.DisposeAsync();
-        // await _settingManager.SetGlobalAsync(LogoSettingDefinitionProvider.LogoSettingName, fileName);
-        await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id, OtherSettingDefinitionProvider.BillingCertificateSettingName, fileName);
+        if (CurrentTenant.IsAvailable)
+        {
+            await _settingManager.SetForCurrentTenantAsync(OtherSettingDefinitionProvider.BillingCertificateSettingName, fileName);
+        }
+        else
+        {
+            await _settingManager.SetGlobalAsync(OtherSettingDefinitionProvider.BillingCertificateSettingName, fileName);
+        }
     }
 
     [Route("password")]
@@ -53,8 +59,14 @@ public class BillingCertificateController : AbpController
     public async Task UpdatePassword([FromBody]CertificatePasswordViewModel model)
     {
         ValidateModel();
-        // await _settingManager.SetGlobalAsync(LogoSettingDefinitionProvider.LogoSettingName, fileName);
-        await _settingManager.SetForTenantOrGlobalAsync(CurrentTenant.Id, OtherSettingDefinitionProvider.BillingCertificatePasswordSettingName, model.Password);
+        if (CurrentTenant.IsAvailable)
+        {
+            await _settingManager.SetForCurrentTenantAsync(OtherSettingDefinitionProvider.BillingCertificatePasswordSettingName, model.Password);
+        }
+        else
+        {
+            await _settingManager.SetGlobalAsync(OtherSettingDefinitionProvider.BillingCertificatePasswordSettingName, model.Password);
+        }
     }
     
     private async Task<string> GetCurrentCert()
