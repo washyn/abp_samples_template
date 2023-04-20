@@ -2,6 +2,7 @@ using System;
 using Acme.Samples.Data;
 using Serilog;
 using Serilog.Events;
+using Volo.Abp.Modularity.PlugIns;
 
 
 namespace Acme.Samples;
@@ -84,15 +85,40 @@ public class Startup
     {
         services.AddApplication<SamplesModule>(options =>
         {
-            var path = options.Services.GetHostingEnvironment().ContentRootPath;
-            var directoryInfo = new DirectoryInfo(path);
-            var folder = string.Empty;
+            void AddRefForNet7()
+            {
+                var path = options.Services.GetHostingEnvironment().ContentRootPath;
+                var directoryInfo = new DirectoryInfo(path);
+                var folder = string.Empty;
+    #if DEBUG
+                folder = Path.Combine(directoryInfo.Parent.FullName, "Washyn.Samples","bin","Debug","net7.0");
+    #else
+                    folder = Path.Combine(directoryInfo.Parent.FullName, "Washyn.Samples","bin","Release","net7.0");
+    #endif
+                options.PlugInSources.AddFolder(folder);
+            }
+            void AddNet6()
+            {
+                var path = options.Services.GetHostingEnvironment().ContentRootPath;
+                var directoryInfo = new DirectoryInfo(path);
+                var folder = string.Empty;
 #if DEBUG
-            folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Debug","net7.0");
+                folder = Path.Combine(directoryInfo.Parent.FullName, "Washyn.Samples","bin","Debug","net6.0");
 #else
-                folder = Path.Combine(directoryInfo.Parent.FullName, "Acme.Identity","bin","Release","net7.0");
+                folder = Path.Combine(directoryInfo.Parent.FullName, "Washyn.Samples","bin","Release","net6.0");
 #endif
-            // options.PlugInSources.AddFolder(folder);
+                options.PlugInSources.AddFolder(folder);
+            }
+            
+#if NET_7
+            AddRefForNet7();
+#endif
+            
+#if NET6_0
+            AddNet6();
+#endif
+
+
         });
     }
 
