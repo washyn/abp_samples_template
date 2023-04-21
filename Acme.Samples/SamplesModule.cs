@@ -12,6 +12,7 @@ using Washyn.OrganizationUnit;
 using Washyn.SecurityLogs;
 using Washyn.SbTheme;
 using Washyn.Billing.OtherSettings;
+using Washyn.Dastone;
 using Washyn.Logo;
 using Washyn.ProfilePicture;
 using Washyn.Widgets;
@@ -20,7 +21,7 @@ using Washyn.Sunat.Catalog;
 namespace Acme.Samples;
 
 [DependsOn(typeof(AbpAutofacModule))]
-[DependsOn(typeof(AbpAspNetCoreMvcUiBasicThemeModule))]
+// [DependsOn(typeof(AbpAspNetCoreMvcUiBasicThemeModule))]
 [DependsOn(typeof(TemplateModules))]
 [DependsOn(typeof(LogoManagmentModule))]
 [DependsOn(typeof(SecurityLogModule))]

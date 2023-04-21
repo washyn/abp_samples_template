@@ -17,4 +17,8 @@
         <ProjectReference Include="..\EasyAbp.LoggingManagement.Web\EasyAbp.LoggingManagement.Web.csproj" />
         <ProjectReference Include="..\Acme.Identity\Acme.Identity.csproj" />
     </ItemGroup>
+    
+  <ItemGroup>
+    <ProjectReference Include="..\Washyn.Dastone\Washyn.Dastone.csproj" />
+  </ItemGroup>
 </Project>

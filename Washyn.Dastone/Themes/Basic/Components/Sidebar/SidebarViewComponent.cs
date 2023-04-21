@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
-using Volo.Abp.AspNetCore.Mvc.UI.Alerts;
 
-namespace Acme.Samples.Themes.Basic.Components.Sidebar;
+namespace Washyn.Dastone.Themes.Basic.Components.Sidebar;
 
 public class SidebarViewComponent:AbpViewComponent
 {

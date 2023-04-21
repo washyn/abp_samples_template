@@ -6,7 +6,7 @@ namespace Washyn.Dastone;
 [ThemeName(Name)]
 public class DastoneTheme : ITheme, ITransientDependency
 {
-    public const string Name = "Basic";
+    public const string Name = "Dastone";
 
     public virtual string GetLayout(string name, bool fallbackToDefault = true)
     {
@@ -19,7 +19,7 @@ public class DastoneTheme : ITheme, ITransientDependency
             case StandardLayouts.Empty:
                 return "~/Themes/Basic/Layouts/Empty.cshtml";
             default:
-                return fallbackToDefault ? "~/Themes/Basic/Layouts/Application.cshtml" : null;
+                return fallbackToDefault ? "~/Themes/Basic/Layouts/App.cshtml" : null;
         }
     }
 }

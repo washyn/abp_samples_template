@@ -53,7 +53,7 @@ public class AbpAspNetCoreMvcUiDastoneThemeModule : AbpModule
         {
             options
                 .StyleBundles
-                .Add(BasicThemeBundles.Styles.Global, bundle =>
+                .Add(DafstoneAppContributor.Styles.Global, bundle =>
                 {
                     bundle
                         .AddBaseBundles(StandardBundles.Styles.Global)
@@ -65,7 +65,7 @@ public class AbpAspNetCoreMvcUiDastoneThemeModule : AbpModule
 
             options
                 .ScriptBundles
-                .Add(BasicThemeBundles.Scripts.Global, bundle =>
+                .Add(DafstoneAppContributor.Scripts.Global, bundle =>
                 {
                     bundle
                         .AddBaseBundles(StandardBundles.Scripts.Global)

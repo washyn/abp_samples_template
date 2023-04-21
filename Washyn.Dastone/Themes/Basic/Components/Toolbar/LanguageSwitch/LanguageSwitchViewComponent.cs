@@ -4,9 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RequestLocalization;
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Localization;
 
-namespace Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Toolbar.LanguageSwitch;
+namespace Washyn.Dastone.Themes.Basic.Components.Toolbar.LanguageSwitch;
 
 public class LanguageSwitchViewComponent : AbpViewComponent
 {

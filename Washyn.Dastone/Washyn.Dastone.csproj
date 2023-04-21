@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
+  <Import Project="..\theme-libs.props" />
   <PropertyGroup>
     <TargetFramework>$(FrameworkVersion)</TargetFramework>
     <OutputType>Library</OutputType>
@@ -43,5 +44,24 @@
     <Content Remove="Components\**\*.js" />
     <Content Remove="Components\**\*.css" />
     <Content Remove="wwwroot\**\*.*" />
+    <Content Remove="Themes\Basic\Layouts\Application.cshtml" />
+    <Content Remove="Themes\Basic\Layouts\Account.cshtml" />
+    <Content Remove="Themes\Basic\Layouts\Application copy.cshtml" />
+    <Content Remove="Themes\Basic\Layouts\Account copy.cshtml" />
+    <Content Remove="Themes\Basic\Layouts\Empty copy.cshtml" />
+    <EmbeddedResource Remove="Themes\Basic\Components\MainNavbar\**" />
+    <Content Remove="Themes\Basic\Components\MainNavbar\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Themes\Basic\Components\MainNavbar\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Themes\Basic\Components\MainNavbar\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Themes\Basic\Components\MainNavbar\Default.cshtml" />
   </ItemGroup>
 </Project>

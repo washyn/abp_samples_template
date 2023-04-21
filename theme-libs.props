@@ -1,10 +1,10 @@
 <Project>
     <ItemGroup>
         <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="$(AbpVersion)" />
+        <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="$(AbpVersion)" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="$(AbpVersion)" />
         <PackageReference Include="Volo.Abp.AutoMapper" Version="$(AbpVersion)" />
     </ItemGroup>
 

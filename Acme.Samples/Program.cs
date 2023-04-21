@@ -111,11 +111,11 @@ public class Startup
             }
             
 #if NET_7
-            AddRefForNet7();
+            // AddRefForNet7();
 #endif
             
 #if NET6_0
-            AddNet6();
+            // AddNet6();
 #endif
 
 
