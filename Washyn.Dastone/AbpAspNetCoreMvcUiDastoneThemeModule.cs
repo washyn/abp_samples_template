@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
@@ -53,7 +52,7 @@ public class AbpAspNetCoreMvcUiDastoneThemeModule : AbpModule
         {
             options
                 .StyleBundles
-                .Add(DafstoneAppContributor.Styles.Global, bundle =>
+                .Add(BasicThemeBundles.Styles.Global, bundle =>
                 {
                     bundle
                         .AddBaseBundles(StandardBundles.Styles.Global)
@@ -65,7 +64,7 @@ public class AbpAspNetCoreMvcUiDastoneThemeModule : AbpModule
 
             options
                 .ScriptBundles
-                .Add(DafstoneAppContributor.Scripts.Global, bundle =>
+                .Add(BasicThemeBundles.Scripts.Global, bundle =>
                 {
                     bundle
                         .AddBaseBundles(StandardBundles.Scripts.Global)

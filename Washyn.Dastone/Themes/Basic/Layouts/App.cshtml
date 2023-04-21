@@ -1,6 +1,5 @@
 ﻿@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
 @using Volo.Abp.AspNetCore.Mvc.UI.Layout
-@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.PageAlerts
 @using Volo.Abp.AspNetCore.Mvc.UI.Theming
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetScripts
 @using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
@@ -9,6 +8,7 @@
 @using Volo.Abp.AspNetCore.Mvc.UI.Bundling.TagHelpers
 @using Washyn.Dastone.Bundling
 @using Washyn.Dastone.Themes.Basic.Components.Brand
+@using Washyn.Dastone.Themes.Basic.Components.PageAlerts
 @using Washyn.Dastone.Themes.Basic.Components.Sidebar
 @inject IBrandingProvider BrandingProvider
 @inject IPageLayout PageLayout
@@ -43,7 +43,7 @@
 
     <title>@pageTitle</title>
 
-    <abp-style-bundle name="@DafstoneAppContributor.Styles.Global" />
+    <abp-style-bundle name="@BasicThemeBundles.Styles.Global" />
 
     @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
 
@@ -96,7 +96,7 @@
     @*     @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application) *@
     @* </div> *@
 @* --------------------------------------------------------------------------------------- *@
-    <abp-script-bundle name="@DafstoneAppContributor.Scripts.Global" />
+    <abp-script-bundle name="@BasicThemeBundles.Scripts.Global" />
 
     <script src="~/Abp/ApplicationConfigurationScript"></script>
     <script src="~/Abp/ServiceProxyScript"></script>

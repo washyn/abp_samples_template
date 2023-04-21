@@ -80,7 +80,7 @@ public class DafstoneAppStyleContributor : BundleContributor
         context.Files.Add("/assets/css/icons.min.css");
         context.Files.Add("/assets/css/metisMenu.min.css");
 
-        context.Files.Add("/themes/dastone/layout.css");
+        context.Files.Add("/themes/basic/layout.css");
     }
 }
 
