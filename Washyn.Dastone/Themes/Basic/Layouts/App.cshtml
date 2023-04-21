@@ -1,0 +1,111 @@
+﻿@using Volo.Abp.AspNetCore.Mvc.UI.Components.LayoutHook
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Brand
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.MainNavbar
+@using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.PageAlerts
+@using Volo.Abp.AspNetCore.Mvc.UI.Theming
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetScripts
+@using Volo.Abp.AspNetCore.Mvc.UI.Widgets.Components.WidgetStyles
+@using Volo.Abp.Localization
+@using Volo.Abp.Ui.Branding
+@using Acme.Samples.Themes.Basic.Components.Sidebar
+@using Volo.Abp.AspNetCore.Mvc.UI.Bundling.TagHelpers
+@using Washyn.Dastone.Bundling
+@inject IBrandingProvider BrandingProvider
+@inject IPageLayout PageLayout
+@{
+    Layout = null;
+    var containerClass = ViewBag.FluidLayout == true ? "container-fluid" : "container"; //TODO: Better and type-safe options
+
+    var pageTitle = ViewBag.Title == null ? BrandingProvider.AppName : ViewBag.Title; //TODO: Discard to get from Title
+
+    if (PageLayout.Content.Title != null)
+    {
+        if (!string.IsNullOrWhiteSpace(pageTitle))
+        {
+            pageTitle = " | " + pageTitle;
+        }
+
+        pageTitle = PageLayout.Content.Title + pageTitle;
+    }
+
+    var rtl = CultureHelper.IsRtl ? "rtl" : string.Empty;
+}
+
+<!DOCTYPE html>
+
+<html lang="@CultureInfo.CurrentCulture.Name" dir="@rtl">
+<head>
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.First, StandardLayouts.Application)
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>@pageTitle</title>
+
+    <abp-style-bundle name="@BasicThemeBundles.Styles.Global" />
+
+    @await Component.InvokeAsync(typeof(WidgetStylesViewComponent))
+
+    @await RenderSectionAsync("styles", false)
+
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Head.Last, StandardLayouts.Application)
+</head>
+<body class="abp-application-layout @rtl">
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.First, StandardLayouts.Application)
+@* --------------------------------------------------------------------------------------- *@
+    <!-- Left Sidenav -->
+    <div class="left-sidenav">
+        @(await Component.InvokeAsync<MainNavbarBrandViewComponent>())
+        @(await Component.InvokeAsync<SidebarViewComponent>())
+    </div>
+    <!-- end left-sidenav-->
+
+    <div class="page-wrapper">
+        <partial name="/Themes/Basic/Shared/Topbar.cshtml"/>
+        <!-- Page Content-->
+        <div class="page-content">
+            <div class="@containerClass">
+                @(await Component.InvokeAsync<PageAlertsViewComponent>())
+                <div id="AbpContentToolbar">
+                    <div class="mb-2">
+                         @* TODO: for content toolbar *@
+                         @* <partial name="/Themes/Basic/Shared/Breadcrumb.cshtml"/> *@
+                         @* Improvement: para mejorar se puede crear el componente de content toolbar  *@
+                        @RenderSection("content_toolbar", false)
+                    </div>
+                </div>
+                @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application)
+                @RenderBody()
+                @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application)
+            </div><!-- container -->
+            <partial name="/Themes/Basic/Shared/Footer.cshtml"/>
+        </div>
+        <!-- end page content -->
+    </div>
+
+    @* <div class="@containerClass"> *@
+    @*     @(await Component.InvokeAsync<PageAlertsViewComponent>()) *@
+    @*     <div id="AbpContentToolbar"> *@
+    @*         <div class="text-end mb-2"> *@
+    @*             @RenderSection("content_toolbar", false) *@
+    @*         </div> *@
+    @*     </div> *@
+    @*     @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.First, StandardLayouts.Application) *@
+    @*     @RenderBody() *@
+    @*     @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application) *@
+    @* </div> *@
+@* --------------------------------------------------------------------------------------- *@
+    <abp-script-bundle name="@BasicThemeBundles.Scripts.Global" />
+
+    <script src="~/Abp/ApplicationConfigurationScript"></script>
+    <script src="~/Abp/ServiceProxyScript"></script>
+
+    @await Component.InvokeAsync(typeof(WidgetScriptsViewComponent))
+
+    @await RenderSectionAsync("scripts", false)
+
+    @await Component.InvokeLayoutHookAsync(LayoutHooks.Body.Last, StandardLayouts.Application)
+</body>
+</html>

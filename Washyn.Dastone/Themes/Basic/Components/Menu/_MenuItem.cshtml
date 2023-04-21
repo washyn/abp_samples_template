@@ -1,0 +1,47 @@
+﻿@using Volo.Abp.UI.Navigation
+@model ApplicationMenuItem
+@{
+    var elementId = string.IsNullOrEmpty(Model.ElementId) ? string.Empty : $"id=\"{Model.ElementId}\"";
+    var cssClass = string.IsNullOrEmpty(Model.CssClass) ? string.Empty : Model.CssClass;
+    var disabled = Model.IsDisabled ? "disabled" : string.Empty;
+    var url = string.IsNullOrEmpty(Model.Url) ? "#" : Url.IsLocalUrl(Model.Url) ? Url.Content(Model.Url.EnsureStartsWith('~')) : Model.Url;
+}
+@if (Model.IsLeaf)
+{
+    if (Model.Url != null)
+    {
+        @* <li> *@
+        @*     <a href="apps-ecommerce-products.html">Products</a> *@
+        @* </li> *@
+        <li class="nav-item">
+            <a class="nav-link @cssClass @disabled" href="@url" target="@Model.Target" @Html.Raw(elementId)>
+                @if (Model.Icon != null)
+                {
+                    if (Model.Icon.StartsWith("fa"))
+                    {
+                        <i class="@Model.Icon"></i>
+                    }
+                }
+                @Model.DisplayName
+            </a>
+        </li>
+    }
+}
+else
+{
+    <li>
+        <a href="javascript: void(0);">
+            <i class="@(Model.Icon ?? "")"></i>
+            @Model.DisplayName
+            <span class="menu-arrow left-has-menu">
+                <i class="mdi mdi-chevron-right"></i>
+            </span>
+        </a>
+        <ul class="nav-second-level" aria-expanded="false">
+            @foreach (var childMenuItem in Model.Items)
+            {
+                @await Html.PartialAsync("~/Themes/Basic/Components/Menu/_MenuItem.cshtml", childMenuItem)
+            }
+        </ul>
+    </li>
+}

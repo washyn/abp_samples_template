@@ -1,0 +1,28 @@
+﻿@using Volo.Abp.Ui.Branding
+@inject IBrandingProvider BrandingProvider
+<!-- LOGO -->
+<div class="brand">
+    <a href="~/" class="logo">
+        <span>
+            @if (!BrandingProvider.LogoUrl.IsNullOrWhiteSpace())
+            {
+                <img src="@BrandingProvider.LogoUrl" alt="@BrandingProvider.AppName" class="logo-sm">
+            }
+        </span>
+        <span>
+            @* @if (!BrandingProvider.LogoUrl.IsNullOrWhiteSpace()) *@
+            @* { *@
+            @*     <img src="@BrandingProvider.LogoUrl" alt="@BrandingProvider.AppName" class="logo-lg logo-light"> *@
+            @* } *@
+            @* @if (!BrandingProvider.LogoUrl.IsNullOrWhiteSpace()) *@
+            @* { *@
+            @*     <img src="@BrandingProvider.LogoReverseUrl" alt="@BrandingProvider.AppName" class="logo-lg logo-dark"> *@
+            @* } *@
+            <span class="h5">
+                &nbsp; &nbsp;
+                @BrandingProvider.AppName
+            </span>
+        </span>
+    </a>
+</div>
+<!--end logo-->
