@@ -16,6 +16,11 @@
     <EmbeddedResource Remove="Logs\**" />
     <None Remove="Logs\**" />
     <Compile Remove="AbpStandalone.cs" />
+    <Content Remove="Themes\Basic\Layouts\Application.cshtml" />
+    <Content Remove="Themes\Basic\Layouts\Application copy.cshtml" />
+    <Content Remove="Themes\Basic\Layouts\Account.cshtml" />
+    <Content Remove="Themes\Basic\Layouts\Account copy.cshtml" />
+    <Content Remove="Themes\Basic\Layouts\Empty copy.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
