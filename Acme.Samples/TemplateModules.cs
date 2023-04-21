@@ -15,6 +15,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -172,12 +173,13 @@ public class TemplateModules : AbpModule
     {
         Configure<AbpBundlingOptions>(options =>
         {
-            // options.StyleBundles.Configure(
-            //     BasicThemeBundles.Styles.Global,
-            //     bundle =>
-            //     {
-            //     }
-            // );
+            options.StyleBundles.Configure(
+                StandardBundles.Scripts.Global,
+                bundle =>
+                {
+                    // bundle.AddFiles("/global-scripts.js");
+                }
+            );
         });
     }
 
