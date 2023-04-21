@@ -15,6 +15,7 @@
     <Content Remove="Logs\**" />
     <EmbeddedResource Remove="Logs\**" />
     <None Remove="Logs\**" />
+    <Compile Remove="AbpStandalone.cs" />
   </ItemGroup>
 
   <ItemGroup>
