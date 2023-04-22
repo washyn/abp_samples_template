@@ -22,6 +22,10 @@
                         <i class="@Model.Icon"></i>
                     }
                 }
+                else
+                {
+                    <i class="ti-control-record"></i>
+                }
                 @Model.DisplayName
             </a>
         </li>
@@ -31,7 +35,14 @@ else
 {
     <li>
         <a href="javascript: void(0);">
-            <i class="@(Model.Icon ?? "")"></i>
+            @if (string.IsNullOrEmpty(Model.Icon))
+            {
+                <i class="ti-control-record"></i>
+            }
+            else
+            {
+                <i class="@(Model.Icon)"></i>
+            }
             @Model.DisplayName
             <span class="menu-arrow left-has-menu">
                 <i class="mdi mdi-chevron-right"></i>
