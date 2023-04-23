@@ -11,7 +11,7 @@ using Washyn.Dastone.Bundling;
 using Washyn.Dastone.Toolbars;
 
 namespace Washyn.Dastone;
-
+// TODO: fix tooltips, not works, and improve lang in auth page for deploy
 [DependsOn(
     typeof(AbpAspNetCoreMvcUiThemeSharedModule),
     typeof(AbpAspNetCoreMvcUiMultiTenancyModule)

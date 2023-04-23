@@ -43,10 +43,10 @@
     <Content Remove="Components\**\*.js" />
     <Content Remove="Components\**\*.css" />
     <Content Remove="wwwroot\**\*.*" />
-    <Content Remove="Themes\Basic\Layouts\Empty copy.cshtml" />
-    <Content Remove="Themes\Basic\Layouts\Application copy.cshtml" />
-    <Content Remove="Themes\Basic\Layouts\Application.cshtml" />
-    <Content Remove="Themes\Basic\Layouts\Account copy.cshtml" />
-    <Content Remove="Themes\Basic\Layouts\Account.cshtml" />
+    <Content Remove="Basic\Layouts\Account.cshtml" />
+    <Content Remove="Basic\Layouts\Account copy.cshtml" />
+    <Content Remove="Basic\Layouts\Application.cshtml" />
+    <Content Remove="Basic\Layouts\Application copy.cshtml" />
+    <Content Remove="Basic\Layouts\Empty copy.cshtml" />
   </ItemGroup>
 </Project>
