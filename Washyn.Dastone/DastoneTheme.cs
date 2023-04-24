@@ -13,13 +13,13 @@ public class DastoneTheme : ITheme, ITransientDependency
         switch (name)
         {
             case StandardLayouts.Application:
-                return "~/Themes/Basic/Layouts/App.cshtml";
+                return "~/Themes/Dastone/Layouts/App.cshtml";
             case StandardLayouts.Account:
-                return "~/Themes/Basic/Layouts/Auth.cshtml";
+                return "~/Themes/Dastone/Layouts/Auth.cshtml";
             case StandardLayouts.Empty:
-                return "~/Themes/Basic/Layouts/Empty.cshtml";
+                return "~/Themes/Dastone/Layouts/Empty.cshtml";
             default:
-                return fallbackToDefault ? "~/Themes/Basic/Layouts/App.cshtml" : null;
+                return fallbackToDefault ? "~/Themes/Dastone/Layouts/App.cshtml" : null;
         }
     }
 }

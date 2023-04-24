@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Themes.Basic.Components.Toolbar.LanguageSwitch;
 
 namespace Washyn.Dastone.Themes.Basic.Components.Toolbar.LanguageSwitch;
 
@@ -53,6 +54,6 @@ public class LanguageSwitchViewComponent : AbpViewComponent
             OtherLanguages = languages.Where(l => l != currentLanguage).ToList()
         };
 
-        return View("~/Themes/Basic/Components/Toolbar/LanguageSwitch/Default.cshtml", model);
+        return View("~/Themes/Dastone/Components/Toolbar/LanguageSwitch/Default.cshtml", model);
     }
 }

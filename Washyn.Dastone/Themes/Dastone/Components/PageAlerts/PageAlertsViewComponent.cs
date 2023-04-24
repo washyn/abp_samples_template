@@ -15,6 +15,6 @@ public class PageAlertsViewComponent : AbpViewComponent
 
     public IViewComponentResult Invoke(string name)
     {
-        return View("~/Themes/Basic/Components/PageAlerts/Default.cshtml", AlertManager.Alerts);
+        return View("~/Themes/Dastone/Components/PageAlerts/Default.cshtml", AlertManager.Alerts);
     }
 }

@@ -66,7 +66,7 @@
                 <ul class="nav-second-level" aria-expanded="false">
                     @foreach (var childMenuItem in menuItem.Items)
                     {
-                        @await Html.PartialAsync("~/Themes/Basic/Components/Menu/_MenuItem.cshtml", childMenuItem)
+                        @await Html.PartialAsync("~/Themes/Dastone/Components/Menu/_MenuItem.cshtml", childMenuItem)
                     }
                 </ul>
             </a>
@@ -85,7 +85,7 @@
             @*     <div class="dropdown-menu border-0 shadow-sm" aria-labelledby="Menu_@(menuItem.Name)"> *@
             @*         @foreach (var childMenuItem in menuItem.Items) *@
             @*         { *@
-            @*             @await Html.PartialAsync("~/Themes/Basic/Components/Menu/_MenuItem.cshtml", childMenuItem) *@
+            @*             @await Html.PartialAsync("~/Themes/Dastone/Components/Menu/_MenuItem.cshtml", childMenuItem) *@
             @*         } *@
             @*     </div> *@
             @* </div> *@

@@ -7,6 +7,6 @@ public class SidebarViewComponent:AbpViewComponent
 {
     public IViewComponentResult Invoke()
     {
-        return View("~/Themes/Basic/Components/Sidebar/Default.cshtml");
+        return View("~/Themes/Dastone/Components/Sidebar/Default.cshtml");
     }
 }

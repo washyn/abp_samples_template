@@ -62,7 +62,7 @@
     <!-- end left-sidenav-->
 
     <div class="page-wrapper">
-        <partial name="/Themes/Basic/Shared/Topbar.cshtml"/>
+        <partial name="~/Themes/Dastone/Shared/Topbar.cshtml"/>
         <!-- Page Content-->
         <div class="page-content">
             <div class="@containerClass">
@@ -70,7 +70,7 @@
                 <div id="AbpContentToolbar">
                     <div class="mb-2">
                          @* TODO: for content toolbar *@
-                         @* <partial name="/Themes/Basic/Shared/Breadcrumb.cshtml"/> *@
+                         @* <partial name="/Themes/Dastone/Shared/Breadcrumb.cshtml"/> *@
                          @* Improvement: para mejorar se puede crear el componente de content toolbar  *@
                         @RenderSection("content_toolbar", false)
                     </div>
@@ -79,7 +79,7 @@
                 @RenderBody()
                 @await Component.InvokeLayoutHookAsync(LayoutHooks.PageContent.Last, StandardLayouts.Application)
             </div><!-- container -->
-            <partial name="/Themes/Basic/Shared/Footer.cshtml"/>
+            <partial name="~/Themes/Dastone/Shared/Footer.cshtml"/>
         </div>
         <!-- end page content -->
     </div>

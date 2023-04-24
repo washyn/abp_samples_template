@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.AutoMapper" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="$(AbpVersion)" />
@@ -43,10 +44,5 @@
     <Content Remove="Components\**\*.js" />
     <Content Remove="Components\**\*.css" />
     <Content Remove="wwwroot\**\*.*" />
-    <Content Remove="Basic\Layouts\Account.cshtml" />
-    <Content Remove="Basic\Layouts\Account copy.cshtml" />
-    <Content Remove="Basic\Layouts\Application.cshtml" />
-    <Content Remove="Basic\Layouts\Application copy.cshtml" />
-    <Content Remove="Basic\Layouts\Empty copy.cshtml" />
   </ItemGroup>
 </Project>

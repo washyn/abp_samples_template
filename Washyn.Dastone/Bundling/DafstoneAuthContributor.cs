@@ -80,7 +80,7 @@ public class DafstoneAppStyleContributor : BundleContributor
         context.Files.Add("/assets/css/icons.min.css");
         context.Files.Add("/assets/css/metisMenu.min.css");
 
-        context.Files.Add("/themes/basic/layout.css");
+        context.Files.Add("/themes/dastone/layout.css");
     }
 }
 
@@ -96,5 +96,7 @@ public class DafstoneAppScriptContributor : BundleContributor
         context.Files.Add("/assets/js/feather.min.js");
         context.Files.Add("/assets/js/simplebar.min.js");
         context.Files.Add("/assets/js/moment.js");
+        
+        context.Files.Add("/themes/dastone/global-scripts.js");
     }
 }
