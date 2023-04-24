@@ -2,6 +2,7 @@
 - Improve logging managment
 - Improve Sample, desacoplando del los modulos identity por default
 - Add HTML to PDF gen with dinktopdf
+- Todo, integrate billing settings
 
 
 ## About this solution
