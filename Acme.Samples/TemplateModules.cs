@@ -52,9 +52,7 @@ using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.Uow;
 using Volo.Abp.VirtualFileSystem;
-using Washyn.Dastone;
 
-// using Washyn.SbTheme.Bundling;
 
 namespace Acme.Samples;
 
@@ -67,7 +65,6 @@ namespace Acme.Samples;
     typeof(AbpEntityFrameworkCoreSqliteModule),
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpAspNetCoreMvcUiDastoneThemeModule),
     // typeof(AbpAspNetCoreMvcUiBasicThemeModule),
 
     // Account module packages
@@ -110,7 +107,7 @@ namespace Acme.Samples;
     typeof(AbpSettingManagementHttpApiModule),
     typeof(AbpSettingManagementWebModule)
 )]
-// [DependsOn(typeof(AbpAspNetCoreMvcUiDastoneThemeModule))]
+
 public class TemplateModules : AbpModule
 {
     /* Single point to enable/disable multi-tenancy */
