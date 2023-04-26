@@ -3,39 +3,24 @@ using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Ui.Branding;
-// using Washyn.SecurityLogs;
-// using Washyn.SbTheme;
-// using Washyn.Billing.OtherSettings;
-// using Washyn.Logo;
-// using Washyn.OrganizationUnit;
-// using Washyn.SecurityLogs;
-// using Washyn.SbTheme;
-// using Washyn.Billing.OtherSettings;
-// using Washyn.Dastone;
-// using Washyn.Logo;
-// using Washyn.ProfilePicture;
-// using Washyn.Widgets;
-// using Washyn.Sunat.Catalog;
-// using EasyAbp.LoggingManagement.Web;
 
 namespace Acme.Samples;
 
 [DependsOn(typeof(AbpAspNetCoreMvcUiBasicThemeModule))]
 [DependsOn(typeof(AbpAutofacModule))]
 [DependsOn(typeof(TemplateModules))]
-// [DependsOn(typeof(LogoManagmentModule))]
-// [DependsOn(typeof(SecurityLogModule))]
-// [DependsOn(typeof(ProfilePictureModule))]
-// [DependsOn(typeof(WashynWidgetModule))]
-// [DependsOn(typeof(BillingOtherSettingsModule))]
-// [DependsOn(typeof(OrganizationUnitModule))]
-// [DependsOn(typeof(LogoManagmentModule))]
-// [DependsOn(typeof(SecurityLogModule))]
-// [DependsOn(typeof(ProfilePictureModule))]
-// [DependsOn(typeof(WashynWidgetModule))]
-// [DependsOn(typeof(BillingOtherSettingsModule))]
-// [DependsOn(typeof(WashynSunatCatalogModule))]
-// [DependsOn(typeof(LoggingManagementWebModule))]
+
+[DependsOn(typeof(Washyn.Logo.LogoManagmentModule))]
+[DependsOn(typeof(Washyn.SecurityLogs.SecurityLogModule))]
+[DependsOn(typeof(Washyn.ProfilePicture.ProfilePictureModule))]
+[DependsOn(typeof(Washyn.Billing.OtherSettings.BillingOtherSettingsModule))]
+[DependsOn(typeof(Washyn.OrganizationUnit.OrganizationUnitModule))]
+[DependsOn(typeof(Washyn.ProfilePicture.ProfilePictureModule))]
+[DependsOn(typeof(Washyn.Widgets.WashynWidgetModule))]
+[DependsOn(typeof(Washyn.Sunat.Catalog.WashynSunatCatalogModule))]
+[DependsOn(typeof(EasyAbp.LoggingManagement.Web.LoggingManagementWebModule))]
+// [DependsOn(typeof(Washyn.SbTheme.WashynSbThemeModule))]
+// [DependsOn(typeof(Washyn.Dastone.AbpAspNetCoreMvcUiDastoneThemeModule))]
 // [DependsOn(typeof(Acme.Identity.IdentityModule))]
 public class SamplesModule : AbpModule
 {
