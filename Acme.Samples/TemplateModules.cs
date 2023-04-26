@@ -17,6 +17,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Serilog;
+using Volo.Abp.Auditing;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.Autofac;
@@ -126,12 +127,20 @@ public class TemplateModules : AbpModule
             context.Services.Replace(ServiceDescriptor.Singleton<IEmailSender, NullEmailSender>());
         }
 
+        Configure<AbpAuditingOptions>(options =>
+        {
+            options.IsEnabled = false;
+        });
+        
         ConfigureAuthentication(context);
         ConfigureMultiTenancy();
         ConfigureUrls(configuration);
         ConfigureBundles();
         ConfigureAutoMapper(context);
-        ConfigureSwagger(context.Services);
+        if (hostingEnvironment.IsDevelopment())
+        {
+            ConfigureSwagger(context.Services);
+        }
         ConfigureNavigationServices();
         ConfigureAutoApiControllers();
         ConfigureVirtualFiles(hostingEnvironment);
@@ -319,11 +328,14 @@ public class TemplateModules : AbpModule
         app.UseUnitOfWork();
         app.UseAuthorization();
 
-        app.UseSwagger();
-        app.UseAbpSwaggerUI(options =>
+        if (env.IsDevelopment())
         {
-            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Samples API");
-        });
+            app.UseSwagger();
+            app.UseAbpSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Samples API");
+            });
+        }
 
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
