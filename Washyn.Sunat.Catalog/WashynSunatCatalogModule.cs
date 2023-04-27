@@ -47,7 +47,8 @@ public class WashynSunatCatalogModule : AbpModule
 
 #region SelectServices
 
-
+// crear controllers directamente y no app service para agregarle cache, y desarctivar el remote service en esto app services...
+// 60*60*24*30*12
 public class C01AppService : AbstractEntitySelectAppService<string>
 {
     private readonly CatalogData _catalogData;

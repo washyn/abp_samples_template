@@ -3,7 +3,8 @@
 - Improve Sample, desacoplando del los modulos identity por default
 - Add HTML to PDF gen with dinktopdf
 - Todo, integrate billing settings
-
+- imrpoove widget for move
+- improve catalog for integrate
 
 ## About this solution
 
