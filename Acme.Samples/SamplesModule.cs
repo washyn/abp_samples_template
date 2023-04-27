@@ -1,8 +1,7 @@
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
-using Volo.Abp.DependencyInjection;
-using Volo.Abp.Ui.Branding;
+
 
 namespace Acme.Samples;
 
@@ -10,15 +9,18 @@ namespace Acme.Samples;
 [DependsOn(typeof(AbpAutofacModule))]
 [DependsOn(typeof(TemplateModules))]
 
-[DependsOn(typeof(Washyn.Logo.LogoManagmentModule))]
-[DependsOn(typeof(Washyn.SecurityLogs.SecurityLogModule))]
-[DependsOn(typeof(Washyn.ProfilePicture.ProfilePictureModule))]
-[DependsOn(typeof(Washyn.Billing.OtherSettings.BillingOtherSettingsModule))]
-[DependsOn(typeof(Washyn.OrganizationUnit.OrganizationUnitModule))]
-[DependsOn(typeof(Washyn.ProfilePicture.ProfilePictureModule))]
-[DependsOn(typeof(Washyn.Widgets.WashynWidgetModule))]
-[DependsOn(typeof(Washyn.Sunat.Catalog.WashynSunatCatalogModule))]
-[DependsOn(typeof(EasyAbp.LoggingManagement.Web.LoggingManagementWebModule))]
+// [DependsOn(typeof(EasyAbp.LoggingManagement.Web.LoggingManagementWebModule))]
+
+// [DependsOn(typeof(Washyn.Logo.LogoManagmentModule))]
+// [DependsOn(typeof(Washyn.SecurityLogs.SecurityLogModule))]
+// [DependsOn(typeof(Washyn.ProfilePicture.ProfilePictureModule))]
+// [DependsOn(typeof(Washyn.Billing.OtherSettings.BillingOtherSettingsModule))]
+// [DependsOn(typeof(Washyn.OrganizationUnit.OrganizationUnitModule))]
+// [DependsOn(typeof(Washyn.ProfilePicture.ProfilePictureModule))]
+// [DependsOn(typeof(Washyn.Widgets.WashynWidgetModule))]
+// [DependsOn(typeof(Washyn.Sunat.Catalog.WashynSunatCatalogModule))]
+
+[DependsOn(typeof(Washyn.ComprobantePdf.ComprobantePdfModule))]
 // [DependsOn(typeof(Washyn.SbTheme.WashynSbThemeModule))]
 // [DependsOn(typeof(Washyn.Dastone.AbpAspNetCoreMvcUiDastoneThemeModule))]
 // [DependsOn(typeof(Acme.Identity.IdentityModule))]

@@ -1,0 +1,120 @@
+@using System
+@using System.Globalization
+@inherits Volo.Abp.TextTemplating.Razor.RazorTemplatePageBase<Washyn.ComprobantePdf.Templates.ComprobanteAndItems>
+@{
+    // Layout = null;
+    var count = 1;
+    var culturePeru = new CultureInfo("es-pe");
+    var shortDateFormat = culturePeru.DateTimeFormat.ShortDatePattern;
+    var percentage = 0.18;
+    var percentageDecimal = Convert.ToDecimal(percentage);
+    decimal cantidad = 45.567m;
+    var tax = percentageDecimal * Model.Details.Amount;
+}
+<div class="allContent p-4">
+    <div class="empresa " style="overflow: auto">
+        
+        <div class="empresa  d-inline-block">
+            <div class="text-center">
+                <h3>
+                    MIPTEL - MIPTEL EIRL
+                </h3>
+                <strong>
+                    Contacto: + 51 951 006 007
+                </strong> <br>
+                <strong>
+                    Dirección: Av. Floral N° 522
+                </strong>
+            </div>
+        </div>
+        
+        <div class="border  p-1 d-inline-block float-right">
+            <div class="text-center">
+                RUC - 20602955720
+                            <hr class="m-1">
+                            <strong style="text-transform: uppercase">Comprobante electronico</strong>
+                            <hr class="m-1">
+                B001 - @Model.Details.Number
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="border p-2 my-2">
+        <dl class="mb-0">
+            <div class="float-right">
+                <dt class="d-inline">Fecha de emisión: &nbsp;</dt><dd class="d-inline">@Model.Details.Date.ToString(shortDateFormat)</dd>
+            </div>
+            <dt class="d-inline">Cliente: &nbsp;</dt><dd class="d-inline">
+                @Model.Details.FullName
+            </dd>
+            <br>
+            <dt class="d-inline">DNI: &nbsp;</dt><dd class="d-inline">
+                @Model.Details.Document
+            </dd>
+        </dl>
+    </div>
+    
+    <div class="table-data">
+      <table class="table table-sm border-bottom border-left border-right border-top mb-2">
+        <thead>
+        <tr>
+          <td style="width: 5%; padding: 0px 6px;">#</td>
+          <td style="width: 75%; padding: 0px 6px;">DESCRIPCIÓN (CONCEPTO)</td>
+          <td style="width: 10%; padding: 0px 6px;">P.U.</td>
+          <td style="width: 10%; padding: 0px 6px;">TOTAL</td>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td style="padding: 0px 6px;">@(count++)</td>
+                <td style="padding: 0px 6px;">@item.Description</td>
+                <td style="padding: 0px 6px;">@item.Price.ToString("C", culturePeru)</td>
+                <td style="padding: 0px 6px;">@item.Price.ToString("C", culturePeru)</td>
+            </tr>
+        }
+        </tbody>
+      </table>
+    </div>
+    <div class="fotter-info">
+        <div class="row">
+            <div class="col-12">
+                <div class="col-auto float-left">
+                    @* @(NumberConverter.ConvertToLetterSolesSufix(Model.Comprobante.Details.Amount)) *@
+                    Son ....
+                </div>
+                <div class="col-3 float-right border p-0">
+                    <div class="px-0">
+                        @* TODO: add when factura *@
+                        @* <div class="my-1 mx-2"> *@
+                        @*     <span>Total grabado</span> *@
+                        @*     <span class="float-right"> *@
+                        @*         @Model.Details.Amount.ToString("C", culturePeru) *@
+                        @*     </span> *@
+                        @* </div> *@
+                        @* <hr class="my-0 mx-0"> *@
+                        <div class="my-1 mx-2">
+                            <span>Total IGV (@(percentage.ToString("P2", culturePeru)))</span>
+                            <span class="float-right">
+                                @tax.ToString("C", culturePeru)
+                            </span>
+                        </div>
+                        <hr class="my-0 mx-0">
+                        <div class="my-1 mx-2">
+                            <strong>
+                                <span>
+                                    Total a pagar
+                                </span>
+                                <span class="float-right">
+                                    @Model.Details.Amount.ToString("C", culturePeru)
+                                </span>
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

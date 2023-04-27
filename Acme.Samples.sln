@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Samples", "Washyn.Sa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Dastone", "Washyn.Dastone\Washyn.Dastone.csproj", "{94FF38B2-F7BE-4F08-B719-9023BD7D22B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.ComprobantePdf", "Washyn.ComprobantePdf\Washyn.ComprobantePdf.csproj", "{0F2D2A04-3F28-454C-A907-EBB389431D5F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,10 @@ Global
 		{94FF38B2-F7BE-4F08-B719-9023BD7D22B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94FF38B2-F7BE-4F08-B719-9023BD7D22B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94FF38B2-F7BE-4F08-B719-9023BD7D22B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F2D2A04-3F28-454C-A907-EBB389431D5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F2D2A04-3F28-454C-A907-EBB389431D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F2D2A04-3F28-454C-A907-EBB389431D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F2D2A04-3F28-454C-A907-EBB389431D5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

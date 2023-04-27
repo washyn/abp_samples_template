@@ -1,0 +1,31 @@
+﻿@inherits Volo.Abp.TextTemplating.Razor.RazorTemplatePageBase
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Document</title>
+    @* <link href="/bootstrap.css" rel="stylesheet"> *@
+    <style>
+        /*add raw bootstrap*/
+        @GlobalContext["bootstrap"]
+        body{
+            color: #5d5d5d;
+        }
+    </style>
+</head>
+<body>
+@Body
+</body>
+</html>
+
+@* <!DOCTYPE html> *@
+@* <html lang="es" xmlns="http://www.w3.org/1999/xhtml"> *@
+@* <head> *@
+@*     <meta charset="UTF-8"> *@
+@*     <meta http-equiv="X-UA-Compatible" content="IE=edge"> *@
+@*     <meta name="viewport" content="width=device-width, initial-scale=1.0"> *@
+@* </head> *@
+@* <body> *@
+@* *@
+@* </body> *@
+@* </html> *@
