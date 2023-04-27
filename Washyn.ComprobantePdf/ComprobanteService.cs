@@ -65,7 +65,6 @@ public class ComprobanteService : ITransientDependency
 }
 
 
-// [DependsOn(typeof(AbpTextTemplatingScribanModule))]
 [DependsOn(typeof(AbpTextTemplatingRazorModule))]
 [DependsOn(typeof(Volo.Abp.UI.Navigation.AbpUiNavigationModule))]
 public class ComprobantePdfModule : AbpModule
@@ -145,8 +144,7 @@ public class ComprobantePdfMenuContributor : IMenuContributor
 
 public static class PdfConfig
 {
-    // Styles not works
-    public static HtmlToPdfDocument GetDefaut(string htmlContent, string cssPath = "")
+    public static HtmlToPdfDocument GetDefaut(string htmlContent)
     {
         var globalSettings = new GlobalSettings()
         {
@@ -162,7 +160,7 @@ public static class PdfConfig
             WebSettings = new WebSettings()
             {
                 DefaultEncoding = System.Text.Encoding.UTF8.BodyName,
-                UserStyleSheet = cssPath
+                // UserStyleSheet = cssPath // styles not works
             },
             // Page = "http://google.com/"
             // HeaderSettings = {FontSize = 9, Right = "Pagina [page] de [toPage]", Line = true, Spacing = 2.812}

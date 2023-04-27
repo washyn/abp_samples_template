@@ -7,7 +7,6 @@
   
   <ItemGroup>
     <PackageReference Include="Haukcode.WkHtmlToPdfDotNet" Version="1.5.86" />
-    <PackageReference Include="Volo.Abp.TextTemplating.Scriban" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.TextTemplating.Razor" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.UI.Navigation" Version="$(AbpVersion)" />
   </ItemGroup>
