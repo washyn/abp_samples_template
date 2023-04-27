@@ -53,6 +53,8 @@ public class ComprobanteService : ITransientDependency
                 }
             }
         };
+        // Improvement: Create service for send only Model and template name, styles by default add...
+        // add pdf generator... and chache for return pdf, client cache one year ...
         var boostrapContent = _virtualFileProvider.GetFileInfo("/Templates/bootstrap.css").ReadAsString();
         var result = await _templateRenderer.RenderAsync("Comprobante", model, globalContext: new Dictionary<string, object>()
         {

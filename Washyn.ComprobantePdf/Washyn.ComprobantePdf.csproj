@@ -36,7 +36,7 @@
     <EmbeddedResource Include="Templates\Layout.cshtml" />
     <Content Remove="Templates\bootstrap.css" />
     <EmbeddedResource Include="Templates\bootstrap.css" />
-    <Content Include="Templates\Comprobante.cshtml" />
+    <Content Remove="Templates\Comprobante.cshtml" />
     <EmbeddedResource Include="Templates\Comprobante.cshtml" />
   </ItemGroup>
 
