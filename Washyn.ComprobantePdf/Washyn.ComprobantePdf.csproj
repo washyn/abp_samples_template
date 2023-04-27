@@ -16,7 +16,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <EmbeddedResource Include="Templates\Comprobante.cshtml" />
+    
     
     <EmbeddedResource Include="Pages\**\*.png" />
     <EmbeddedResource Include="Pages\**\*.css" />
@@ -36,6 +36,8 @@
     <EmbeddedResource Include="Templates\Layout.cshtml" />
     <Content Remove="Templates\bootstrap.css" />
     <EmbeddedResource Include="Templates\bootstrap.css" />
+    <Content Include="Templates\Comprobante.cshtml" />
+    <EmbeddedResource Include="Templates\Comprobante.cshtml" />
   </ItemGroup>
 
   
