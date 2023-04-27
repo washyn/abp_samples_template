@@ -20,7 +20,7 @@ namespace Acme.Samples;
 // [DependsOn(typeof(Washyn.Widgets.WashynWidgetModule))]
 // [DependsOn(typeof(Washyn.Sunat.Catalog.WashynSunatCatalogModule))]
 
-[DependsOn(typeof(Washyn.ComprobantePdf.ComprobantePdfModule))]
+// [DependsOn(typeof(Washyn.ComprobantePdf.ComprobantePdfModule))]
 // [DependsOn(typeof(Washyn.SbTheme.WashynSbThemeModule))]
 // [DependsOn(typeof(Washyn.Dastone.AbpAspNetCoreMvcUiDastoneThemeModule))]
 // [DependsOn(typeof(Acme.Identity.IdentityModule))]
