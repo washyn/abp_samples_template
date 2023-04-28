@@ -5,6 +5,7 @@
 - Todo, integrate billing settings
 - imrpoove widget for move
 - improve catalog for integrate
+- agregar componente text area...
 
 ## About this solution
 
