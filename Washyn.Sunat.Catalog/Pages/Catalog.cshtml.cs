@@ -9,7 +9,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C01",
         getSingleDataSourceUrl: "/api/app/C01/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -20,7 +19,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C02",
         getSingleDataSourceUrl: "/api/app/C02/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -31,7 +29,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C03",
         getSingleDataSourceUrl: "/api/app/C03/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -42,7 +39,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C04",
         getSingleDataSourceUrl: "/api/app/C04/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -53,7 +49,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C05",
         getSingleDataSourceUrl: "/api/app/C05/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -64,7 +59,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C06",
         getSingleDataSourceUrl: "/api/app/C06/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -75,7 +69,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C07",
         getSingleDataSourceUrl: "/api/app/C07/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -86,7 +79,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C08",
         getSingleDataSourceUrl: "/api/app/C08/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -97,7 +89,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C09",
         getSingleDataSourceUrl: "/api/app/C09/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -108,7 +99,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C10",
         getSingleDataSourceUrl: "/api/app/C10/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -119,7 +109,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C11",
         getSingleDataSourceUrl: "/api/app/C11/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -130,7 +119,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C12",
         getSingleDataSourceUrl: "/api/app/C12/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -141,7 +129,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C14",
         getSingleDataSourceUrl: "/api/app/C14/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -152,7 +139,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C15",
         getSingleDataSourceUrl: "/api/app/C15/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -163,7 +149,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C16",
         getSingleDataSourceUrl: "/api/app/C16/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -174,7 +159,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C17",
         getSingleDataSourceUrl: "/api/app/C17/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -185,7 +169,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C18",
         getSingleDataSourceUrl: "/api/app/C18/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -196,7 +179,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C19",
         getSingleDataSourceUrl: "/api/app/C19/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -207,7 +189,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C20",
         getSingleDataSourceUrl: "/api/app/C20/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -218,7 +199,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C21",
         getSingleDataSourceUrl: "/api/app/C21/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -229,7 +209,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C22",
         getSingleDataSourceUrl: "/api/app/C22/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -240,7 +219,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C23",
         getSingleDataSourceUrl: "/api/app/C23/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -251,7 +229,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C24",
         getSingleDataSourceUrl: "/api/app/C24/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -262,7 +239,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C26",
         getSingleDataSourceUrl: "/api/app/C26/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -273,7 +249,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C27",
         getSingleDataSourceUrl: "/api/app/C27/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -284,7 +259,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C51",
         getSingleDataSourceUrl: "/api/app/C51/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -295,7 +269,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C52",
         getSingleDataSourceUrl: "/api/app/C52/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -306,7 +279,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C53",
         getSingleDataSourceUrl: "/api/app/C53/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -317,7 +289,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C54",
         getSingleDataSourceUrl: "/api/app/C54/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -328,7 +299,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C55",
         getSingleDataSourceUrl: "/api/app/C55/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -339,7 +309,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C56",
         getSingleDataSourceUrl: "/api/app/C56/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -350,7 +319,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C57",
         getSingleDataSourceUrl: "/api/app/C57/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -361,7 +329,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C58",
         getSingleDataSourceUrl: "/api/app/C58/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -372,7 +339,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C59",
         getSingleDataSourceUrl: "/api/app/C59/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
@@ -383,7 +349,6 @@ public class Index : PageModel
     [EasySelector(
         getListedDataSourceUrl: "/api/app/C60",
         getSingleDataSourceUrl: "/api/app/C60/{id}",
-        textPropertyName: "displayName",
         runScriptOnWindowLoad: true
     )]
     [Required]
