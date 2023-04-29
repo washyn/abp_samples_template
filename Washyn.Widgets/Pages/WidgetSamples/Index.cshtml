@@ -5,7 +5,7 @@
 @{
     var argWidged2 = new UserStatisticUpdateViewModel
     {
-        StartDate = DateTime.Now.AddDays(-15),
+        StartDate = DateTime.Now.AddMonths(-1),
         EndDate = DateTime.Now
     };
 }
@@ -46,8 +46,8 @@
             <abp-column size="_6" class="mb-3">
                 @await Component.InvokeAsync(typeof(UserStatisticWidgetViewComponent), new UserStatisticUpdateViewModel
                        {
-                           StartDate = DateTime.Now.AddDays(-30),
-                           EndDate = DateTime.Now.AddDays(30)
+                           StartDate = DateTime.Now.AddMonths(-2),
+                           EndDate = DateTime.Now
                        })
             </abp-column>
             <abp-column size="_6" class="mb-3">

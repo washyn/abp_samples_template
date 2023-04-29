@@ -22,7 +22,7 @@
                         datasets:[
                             {
                                 data: dataProcessed,
-                                label: 'Estadisticas de uso por dias',
+                                label: 'Duración promedio de request por día',
                                 backgroundColor: 'rgba(255, 132, 132, 1)'
                             }
                         ]
