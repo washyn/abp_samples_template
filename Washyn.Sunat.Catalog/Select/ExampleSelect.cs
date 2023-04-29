@@ -5,6 +5,7 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.Domain.Repositories;
+using Washyn.Abp.Select2;
 
 namespace Washyn.Sunat.Catalog.Select;
 

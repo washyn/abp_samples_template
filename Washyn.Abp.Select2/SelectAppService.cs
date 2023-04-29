@@ -1,16 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
 
-namespace Washyn.Sunat.Catalog.Select;
+namespace Washyn.Abp.Select2;
 
 #region Entities
 
 public class CatalogLookupEntity<TKey> : LookupEntity<TKey>, IHasDisplayOrder<int>
 {
     public int DisplayOrder { get; set; }
+}
+
+public interface IHasDisplayOrder<T>
+{
+    T DisplayOrder { get; set; }
 }
 
 public class LookupEntity<TKey>
@@ -20,6 +26,8 @@ public class LookupEntity<TKey>
     public string AlternativeText { get; set; }
 }
 
+
+
 public class LookupDto<TKey>
 {
     public TKey Id { get; set; }
@@ -27,15 +35,9 @@ public class LookupDto<TKey>
     public string AlternativeText { get; set; }
 }
 
-
 public class LookupRequestDto : PagedResultRequestDto
 {
     public string Filter { get; set; }
-}
-
-public interface IHasDisplayOrder<T>
-{
-    T DisplayOrder { get; set; }
 }
 
 #endregion
@@ -48,8 +50,15 @@ public interface ISelectAppService<TKey>
     Task<PagedResultDto<LookupDto<TKey>>> GetListAsync(LookupRequestDto input);
 }
 
+#region Classes
 
-public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TOrder>
+/// <summary>
+/// Service for generate select2 api.
+/// </summary>
+/// <typeparam name="TKey">Type of primary key.</typeparam>
+/// <typeparam name="TLookupEntity">Object for select automatic and inherit from TLookupEntity class.</typeparam>
+/// <typeparam name="TDisplayOrder">Type of interface IHasDisplayOrder.</typeparam>
+public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TDisplayOrder>
     : ApplicationService
         , ISelectAppService<TKey>
     where TLookupEntity : LookupEntity<TKey>
@@ -104,7 +113,7 @@ public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TOrder
     {
         var query = await CreateSelectQueryAsync();
         var result = await AsyncExecuter.FirstOrDefaultAsync(query, entity => entity.Id.Equals(id));
-        if (result is null)
+        if (result == null)
         {
             throw new EntityNotFoundException();
         }
@@ -131,9 +140,9 @@ public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TOrder
     }
     private IQueryable<TLookupEntity> ApplySorting(IQueryable<TLookupEntity> query)
     {
-        if (typeof(TLookupEntity).IsAssignableTo<IHasDisplayOrder<TOrder>>())
+        if (typeof(TLookupEntity).IsAssignableTo<IHasDisplayOrder<TDisplayOrder>>())
         {
-            return query.OrderByDescending(e => ((IHasDisplayOrder<TOrder>)e).DisplayOrder);
+            return query.OrderByDescending(e => ((IHasDisplayOrder<TDisplayOrder>)e).DisplayOrder);
         }
         return query;
     }
@@ -151,18 +160,20 @@ public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TOrder
     #endregion
 }
 
+public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity>
+    : AbstractEntitySelectAppService<TKey, TLookupEntity, int>
+    where TLookupEntity : LookupEntity<TKey>
+{
+
+}
+
 public abstract class AbstractEntitySelectAppService<TKey>
     : AbstractEntitySelectAppService<TKey, LookupEntity<TKey>>
 {
 
 }
 
-public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity>
-    : AbstractEntitySelectAppService<TKey, TLookupEntity, TKey>
-    where TLookupEntity : LookupEntity<TKey>
-{
 
-}
 
 public abstract class SelectAppService<TEntity, TKey>
     : AbstractEntitySelectAppService<TKey>
@@ -191,3 +202,5 @@ public abstract class SelectAppService<TEntity, TKey>
             .AsNoTracking();
     }
 }
+
+#endregion

@@ -43,18 +43,18 @@
   </ItemGroup>
   
   <ItemGroup>
-    <!-- <ProjectReference Include="..\Washyn.SecurityLogs\Washyn.SecurityLogs.csproj" />
-    <ProjectReference Include="..\Washyn.Logo\Washyn.Logo.csproj" />
-    <ProjectReference Include="..\Washyn.ProfilePicture\Washyn.ProfilePicture.csproj" />
-    <ProjectReference Include="..\Washyn.SbTheme\Washyn.SbTheme.csproj" />
+<!--    <ProjectReference Include="..\Washyn.SecurityLogs\Washyn.SecurityLogs.csproj" />-->
+<!--    <ProjectReference Include="..\Washyn.Logo\Washyn.Logo.csproj" />-->
+<!--    <ProjectReference Include="..\Washyn.ProfilePicture\Washyn.ProfilePicture.csproj" />-->
+<!--    <ProjectReference Include="..\Washyn.SbTheme\Washyn.SbTheme.csproj" />-->
     <ProjectReference Include="..\Washyn.Widgets\Washyn.Widgets.csproj" />
-    <ProjectReference Include="..\Washyn.Billing.OtherSettings\Washyn.Billing.OtherSettings.csproj" />
-    <ProjectReference Include="..\Washyn.OrganizationUnit\Washyn.OrganizationUnit.csproj" />
+<!--    <ProjectReference Include="..\Washyn.Billing.OtherSettings\Washyn.Billing.OtherSettings.csproj" />-->
+<!--    <ProjectReference Include="..\Washyn.OrganizationUnit\Washyn.OrganizationUnit.csproj" />-->
     <ProjectReference Include="..\Washyn.Sunat.Catalog\Washyn.Sunat.Catalog.csproj" />
-    <ProjectReference Include="..\EasyAbp.LoggingManagement.Web\EasyAbp.LoggingManagement.Web.csproj" />
-    <ProjectReference Include="..\Acme.Identity\Acme.Identity.csproj" />
-    <ProjectReference Include="..\Washyn.Dastone\Washyn.Dastone.csproj" />
-    <ProjectReference Include="..\Washyn.ComprobantePdf\Washyn.ComprobantePdf.csproj" /> -->
+<!--    <ProjectReference Include="..\EasyAbp.LoggingManagement.Web\EasyAbp.LoggingManagement.Web.csproj" />-->
+<!--    <ProjectReference Include="..\Acme.Identity\Acme.Identity.csproj" />-->
+<!--    <ProjectReference Include="..\Washyn.Dastone\Washyn.Dastone.csproj" />-->
+<!--    <ProjectReference Include="..\Washyn.ComprobantePdf\Washyn.ComprobantePdf.csproj" />-->
   </ItemGroup>
   
 </Project>

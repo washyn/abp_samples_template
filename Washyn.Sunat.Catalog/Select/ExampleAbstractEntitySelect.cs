@@ -3,6 +3,7 @@ using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.AspNetCore.Mvc;
+using Washyn.Abp.Select2;
 
 namespace Washyn.Sunat.Catalog.Select;
 

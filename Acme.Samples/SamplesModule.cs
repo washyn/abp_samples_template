@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
@@ -17,8 +18,8 @@ namespace Acme.Samples;
 // [DependsOn(typeof(Washyn.Billing.OtherSettings.BillingOtherSettingsModule))]
 // [DependsOn(typeof(Washyn.OrganizationUnit.OrganizationUnitModule))]
 // [DependsOn(typeof(Washyn.ProfilePicture.ProfilePictureModule))]
-// [DependsOn(typeof(Washyn.Widgets.WashynWidgetModule))]
-// [DependsOn(typeof(Washyn.Sunat.Catalog.WashynSunatCatalogModule))]
+[DependsOn(typeof(Washyn.Widgets.WashynWidgetModule))]
+[DependsOn(typeof(Washyn.Sunat.Catalog.WashynSunatCatalogModule))]
 
 // [DependsOn(typeof(Washyn.ComprobantePdf.ComprobantePdfModule))]
 // [DependsOn(typeof(Washyn.SbTheme.WashynSbThemeModule))]
@@ -26,7 +27,6 @@ namespace Acme.Samples;
 // [DependsOn(typeof(Acme.Identity.IdentityModule))]
 public class SamplesModule : AbpModule
 {
-
 }
 
 // [Dependency(ReplaceServices = true)]
