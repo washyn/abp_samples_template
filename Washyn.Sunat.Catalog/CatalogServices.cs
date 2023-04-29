@@ -11,7 +11,7 @@ namespace Washyn.Sunat.Catalog;
 
 // crear controllers directamente y no app service para agregarle cache, y desarctivar el remote service en esto app services...
 // 60*60*24*30*12
-public class C01AppService : SunatCatalogBase
+public class C01AppService : SunatCatalogBase, IC01AppService
 {
     public C01AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -27,7 +27,7 @@ public class C01AppService : SunatCatalogBase
     }
 }
 
-public class C02AppService : SunatCatalogBase
+public class C02AppService : SunatCatalogBase, IC02AppService
 {
     public C02AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -43,7 +43,7 @@ public class C02AppService : SunatCatalogBase
     }
 }
 
-public class C03AppService : SunatCatalogBase
+public class C03AppService : SunatCatalogBase, IC03AppService
 {
     public C03AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -59,7 +59,7 @@ public class C03AppService : SunatCatalogBase
     }
 }
 
-public class C04AppService : SunatCatalogBase
+public class C04AppService : SunatCatalogBase, IC04AppService
 {
     public C04AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -75,7 +75,7 @@ public class C04AppService : SunatCatalogBase
     }
 }
 
-public class C05AppService : SunatCatalogBase
+public class C05AppService : SunatCatalogBase, IC05AppService
 {
     public C05AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -91,7 +91,7 @@ public class C05AppService : SunatCatalogBase
     }
 }
 
-public class C06AppService : SunatCatalogBase
+public class C06AppService : SunatCatalogBase, IC06AppService
 {
     public C06AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -107,7 +107,7 @@ public class C06AppService : SunatCatalogBase
     }
 }
 
-public class C07AppService : SunatCatalogBase
+public class C07AppService : SunatCatalogBase, IC07AppService
 {
     public C07AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -123,7 +123,7 @@ public class C07AppService : SunatCatalogBase
     }
 }
 
-public class C08AppService : SunatCatalogBase
+public class C08AppService : SunatCatalogBase, IC08AppService
 {
     public C08AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -139,7 +139,7 @@ public class C08AppService : SunatCatalogBase
     }
 }
 
-public class C09AppService : SunatCatalogBase
+public class C09AppService : SunatCatalogBase, IC09AppService
 {
     public C09AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -155,7 +155,7 @@ public class C09AppService : SunatCatalogBase
     }
 }
 
-public class C10AppService : SunatCatalogBase
+public class C10AppService : SunatCatalogBase, IC10AppService
 {
     public C10AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -171,7 +171,7 @@ public class C10AppService : SunatCatalogBase
     }
 }
 
-public class C11AppService : SunatCatalogBase
+public class C11AppService : SunatCatalogBase, IC11AppService
 {
     public C11AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -187,7 +187,7 @@ public class C11AppService : SunatCatalogBase
     }
 }
 
-public class C12AppService : SunatCatalogBase
+public class C12AppService : SunatCatalogBase, IC12AppService
 {
     public C12AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -203,7 +203,7 @@ public class C12AppService : SunatCatalogBase
     }
 }
 
-public class C14AppService : SunatCatalogBase
+public class C14AppService : SunatCatalogBase, IC14AppService
 {
     public C14AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -219,7 +219,7 @@ public class C14AppService : SunatCatalogBase
     }
 }
 
-public class C15AppService : SunatCatalogBase
+public class C15AppService : SunatCatalogBase, IC15AppService
 {
     public C15AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -235,7 +235,7 @@ public class C15AppService : SunatCatalogBase
     }
 }
 
-public class C16AppService : SunatCatalogBase
+public class C16AppService : SunatCatalogBase, IC16AppService
 {
     public C16AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -251,7 +251,7 @@ public class C16AppService : SunatCatalogBase
     }
 }
 
-public class C17AppService : SunatCatalogBase
+public class C17AppService : SunatCatalogBase, IC17AppService
 {
     public C17AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -267,7 +267,7 @@ public class C17AppService : SunatCatalogBase
     }
 }
 
-public class C18AppService : SunatCatalogBase
+public class C18AppService : SunatCatalogBase, IC18AppService
 {
     public C18AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -283,7 +283,7 @@ public class C18AppService : SunatCatalogBase
     }
 }
 
-public class C19AppService : SunatCatalogBase
+public class C19AppService : SunatCatalogBase, IC19AppService
 {
     public C19AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -299,7 +299,7 @@ public class C19AppService : SunatCatalogBase
     }
 }
 
-public class C20AppService : SunatCatalogBase
+public class C20AppService : SunatCatalogBase, IC20AppService
 {
     public C20AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -315,7 +315,7 @@ public class C20AppService : SunatCatalogBase
     }
 }
 
-public class C21AppService : SunatCatalogBase
+public class C21AppService : SunatCatalogBase, IC21AppService
 {
     public C21AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -331,7 +331,7 @@ public class C21AppService : SunatCatalogBase
     }
 }
 
-public class C22AppService : SunatCatalogBase
+public class C22AppService : SunatCatalogBase, IC22AppService
 {
     public C22AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -347,7 +347,7 @@ public class C22AppService : SunatCatalogBase
     }
 }
 
-public class C23AppService : SunatCatalogBase
+public class C23AppService : SunatCatalogBase, IC23AppService
 {
     public C23AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -363,7 +363,7 @@ public class C23AppService : SunatCatalogBase
     }
 }
 
-public class C24AppService : SunatCatalogBase
+public class C24AppService : SunatCatalogBase, IC24AppService
 {
     public C24AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -379,7 +379,7 @@ public class C24AppService : SunatCatalogBase
     }
 }
 
-public class C26AppService : SunatCatalogBase
+public class C26AppService : SunatCatalogBase, IC26AppService
 {
     public C26AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -395,7 +395,7 @@ public class C26AppService : SunatCatalogBase
     }
 }
 
-public class C27AppService : SunatCatalogBase
+public class C27AppService : SunatCatalogBase, IC27AppService
 {
     public C27AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -411,7 +411,7 @@ public class C27AppService : SunatCatalogBase
     }
 }
 
-public class C51AppService : SunatCatalogBase
+public class C51AppService : SunatCatalogBase, IC51AppService
 {
     public C51AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -427,7 +427,7 @@ public class C51AppService : SunatCatalogBase
     }
 }
 
-public class C52AppService : SunatCatalogBase
+public class C52AppService : SunatCatalogBase, IC52AppService
 {
     public C52AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -443,7 +443,7 @@ public class C52AppService : SunatCatalogBase
     }
 }
 
-public class C53AppService : SunatCatalogBase
+public class C53AppService : SunatCatalogBase, IC53AppService
 {
     public C53AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -459,7 +459,7 @@ public class C53AppService : SunatCatalogBase
     }
 }
 
-public class C54AppService : SunatCatalogBase
+public class C54AppService : SunatCatalogBase, IC54AppService
 {
     public C54AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -475,7 +475,7 @@ public class C54AppService : SunatCatalogBase
     }
 }
 
-public class C55AppService : SunatCatalogBase
+public class C55AppService : SunatCatalogBase, IC55AppService
 {
     public C55AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -491,7 +491,7 @@ public class C55AppService : SunatCatalogBase
     }
 }
 
-public class C56AppService : SunatCatalogBase
+public class C56AppService : SunatCatalogBase, IC56AppService
 {
     public C56AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -507,7 +507,7 @@ public class C56AppService : SunatCatalogBase
     }
 }
 
-public class C57AppService : SunatCatalogBase
+public class C57AppService : SunatCatalogBase, IC57AppService
 {
     public C57AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -523,7 +523,7 @@ public class C57AppService : SunatCatalogBase
     }
 }
 
-public class C58AppService : SunatCatalogBase
+public class C58AppService : SunatCatalogBase, IC58AppService
 {
     public C58AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -539,7 +539,7 @@ public class C58AppService : SunatCatalogBase
     }
 }
 
-public class C59AppService : SunatCatalogBase
+public class C59AppService : SunatCatalogBase, IC59AppService
 {
     public C59AppService(CatalogData catalogData) : base(catalogData)
     {
@@ -555,7 +555,7 @@ public class C59AppService : SunatCatalogBase
     }
 }
 
-public class C60AppService : SunatCatalogBase
+public class C60AppService : SunatCatalogBase, IC60AppService
 {
     public C60AppService(CatalogData catalogData) : base(catalogData)
     {

@@ -6,6 +6,7 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.Autofac;
 using Volo.Abp.DependencyInjection;
+using Volo.Abp.Http.ProxyScripting.Generators.JQuery;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
@@ -32,11 +33,21 @@ public class WashynSunatCatalogModule : AbpModule
         {
             options.MenuContributors.Add(new SunatCatalogMenuContributor());
         });
-        Configure<AbpAspNetCoreMvcOptions>(options =>
+
+        // Configure<AbpAspNetCoreMvcOptions>(options =>
+        // {
+        //     options.ConventionalControllers.Create(typeof(WashynSunatCatalogModule).Assembly);
+        // });
+        // TODO: Improve, disabling api
+        Configure<DynamicJavaScriptProxyOptions>(options =>
         {
-            options.ConventionalControllers.Create(typeof(WashynSunatCatalogModule).Assembly);
+            // options.DisableModule("WashynSunatCatalogModule");
+            // options.DisableModule("washyn.sunat.catalog.controllers");
+            // options.DisableModule("app");
+            // options.DisableModule("catalog");
+            // options.DisableModule("washyn.sunat.catalog.controllers");
         });
-        
+
         Configure<Select2ThemeOptions>(options =>
         {
             options.ThemeName = "bootstrap-5";
