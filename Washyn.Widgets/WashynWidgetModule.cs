@@ -4,7 +4,6 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BlobStoring;
-using Volo.Abp.BlobStoring.FileSystem;
 using Volo.Abp.Http;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
@@ -13,7 +12,7 @@ using Washyn.Widgets.Pages.Components.ImagesWidget;
 
 namespace Washyn.Widgets;
 
-[DependsOn(typeof(AbpBlobStoringFileSystemModule))]
+[DependsOn(typeof(AbpBlobStoringModule))]
 [DependsOn(typeof(AbpAspNetCoreMvcModule))]
 [DependsOn(typeof(AbpAuditLoggingDomainModule))]
 [DependsOn(typeof(AbpVirtualFileSystemModule))]
@@ -22,13 +21,6 @@ public class WashynWidgetModule : AbpModule
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var host = context.Services.GetHostingEnvironment();
-        Configure<AbpBlobStoringOptions>(options =>
-        {
-            options.Containers.ConfigureDefault(container =>
-            {
-                container.UseFileSystem(fileSystem => { fileSystem.BasePath = host.WebRootPath; });
-            });
-        });
         
         Configure<AbpNavigationOptions>(options =>
         {

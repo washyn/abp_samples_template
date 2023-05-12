@@ -10,7 +10,6 @@ using Volo.Abp.AspNetCore.Mvc.UI.Packages.CropperJs;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Toolbars;
 using Volo.Abp.BlobStoring;
-using Volo.Abp.BlobStoring.FileSystem;
 using Volo.Abp.Features;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
@@ -88,7 +87,7 @@ public class ProfilePictureController : AbpController
     }
 }
 
-[DependsOn(typeof(AbpBlobStoringFileSystemModule))]
+[DependsOn(typeof(AbpBlobStoringModule))]
 [DependsOn(typeof(AbpLocalizationModule))]
 [DependsOn(typeof(AbpAccountWebModule))]
 [DependsOn(typeof(AbpSettingsModule))]
@@ -103,14 +102,6 @@ public class ProfilePictureModule : AbpModule
         Configure<ProfileManagementPageOptions>(options =>
         {
             options.Contributors.AddFirst(new ProfilePicturePageContributor());
-        });
-
-        Configure<AbpBlobStoringOptions>(options =>
-        {
-            options.Containers.ConfigureDefault(container =>
-            {
-                container.UseFileSystem(fileSystem => { fileSystem.BasePath = hosting.WebRootPath; });
-            });
         });
 
         Configure<AbpToolbarOptions>(options => { options.Contributors.Add(new UserAvatarToolbarContributor()); });

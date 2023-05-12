@@ -51,7 +51,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.BlobStoring.FileSystem" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.BlobStoring" Version="$(AbpVersion)" />
   </ItemGroup>
 
   <ItemGroup>

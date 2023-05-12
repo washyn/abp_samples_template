@@ -4,7 +4,6 @@ using Volo.Abp.AspNetCore.Mvc.UI.Packages.CropperJs;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared.Bundling;
 using Volo.Abp.BlobStoring;
-using Volo.Abp.BlobStoring.FileSystem;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.SettingManagement.Web;
@@ -18,7 +17,7 @@ namespace Washyn.Logo
     [DependsOn(typeof(AbpAspNetCoreMvcUiThemeSharedModule))]
     [DependsOn(typeof(AbpAspNetCoreMvcModule))]
     [DependsOn(typeof(Volo.Abp.Settings.AbpSettingsModule))]
-    [DependsOn(typeof(AbpBlobStoringFileSystemModule))]
+    [DependsOn(typeof(AbpBlobStoringModule))]
     [DependsOn(typeof(AbpLocalizationModule))]
     [DependsOn(typeof(AbpSettingManagementWebModule))]
     public class LogoManagmentModule : AbpModule
@@ -26,16 +25,7 @@ namespace Washyn.Logo
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             var hostingEnvironment = context.Services.GetHostingEnvironment();
-            Configure<AbpBlobStoringOptions>(options =>
-            {
-                options.Containers.ConfigureDefault(container =>
-                {
-                    container.UseFileSystem(fileSystem =>
-                    {
-                        fileSystem.BasePath = hostingEnvironment.WebRootPath;
-                    });
-                });
-            });
+
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
                 options.FileSets.AddEmbedded<LogoManagmentModule>("Washyn.Logo");
