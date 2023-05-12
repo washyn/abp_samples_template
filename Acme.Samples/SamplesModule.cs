@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.Autofac;
+using Volo.Abp.BlobStoring;
 using Volo.Abp.Modularity;
 
 
@@ -27,6 +28,20 @@ namespace Acme.Samples;
 // [DependsOn(typeof(Acme.Identity.IdentityModule))]
 public class SamplesModule : AbpModule
 {
+    public override void ConfigureServices(ServiceConfigurationContext context)
+    {
+        Configure<AbpBlobStoringOptions>(options =>
+        {
+            options.Containers.ConfigureDefault(container =>
+            {
+                // TODO: set storage 
+                // container.UseFileSystem(fileSystem =>
+                // {
+                //     fileSystem.BasePath = "C:\\my-files";
+                // });
+            });
+        });
+    }
 }
 
 // [Dependency(ReplaceServices = true)]
