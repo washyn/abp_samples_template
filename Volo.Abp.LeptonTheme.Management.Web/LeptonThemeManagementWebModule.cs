@@ -41,7 +41,7 @@ namespace Volo.Abp.LeptonTheme.Management
 
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                options.FileSets.AddEmbedded<LeptonThemeManagementWebModule>();
+                options.FileSets.AddEmbedded<LeptonThemeManagementWebModule>("Volo.Abp.LeptonTheme.Management");
             });
 
             context.Services.AddAutoMapperObjectMapper<LeptonThemeManagementWebModule>();

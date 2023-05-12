@@ -2,13 +2,6 @@
 # yarn lockfile v1
 
 
-"@abp/aspnetcore.mvc.ui.theme.basic@4.4.4":
-  version "4.4.4"
-  resolved "https://registry.yarnpkg.com/@abp/aspnetcore.mvc.ui.theme.basic/-/aspnetcore.mvc.ui.theme.basic-4.4.4.tgz#ecaaee9d8af8e14a1c9fa65bf3cb6e56c6a82e99"
-  integrity sha512-FBctV4JuYnTqCCzA/1EG2wUdTYYcilTNSWvk/4YZkndvu9T5iu48qdac1Gq3Ux8JIFer9D0oAPld0YlweYYOGw==
-  dependencies:
-    "@abp/aspnetcore.mvc.ui.theme.shared" "~4.4.4"
-
 "@abp/aspnetcore.mvc.ui.theme.shared@~4.4.4":
   version "4.4.4"
   resolved "https://registry.yarnpkg.com/@abp/aspnetcore.mvc.ui.theme.shared/-/aspnetcore.mvc.ui.theme.shared-4.4.4.tgz#22191efb159572abbd071e12cce847768721a2ee"
@@ -79,6 +72,13 @@
   dependencies:
     "@abp/jquery" "~4.4.4"
     datatables.net "^1.10.21"
+
+"@abp/flag-icon-css@~4.4.4":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@abp/flag-icon-css/-/flag-icon-css-4.4.4.tgz#afa7bf060e1576131f978d07f064759594b63260"
+  integrity sha512-73y4reK9uHp6dBpxCPsVylns37ZGAnZq5a+De+U2VXO8egRUwxRtvwvzYw1ABYXB4rvVMsdu1TI9oksbeDdYAw==
+  dependencies:
+    flag-icon-css "^3.5.0"
 
 "@abp/font-awesome@~4.4.4":
   version "4.4.4"
@@ -187,6 +187,21 @@
   version "5.15.4"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.4.tgz#ecda5712b61ac852c760d8b3c79c96adca5554e5"
   integrity sha512-eYm8vijH/hpzr/6/1CJ/V/Eb1xQFW2nnUKArb3z+yUWv7HTwj6M7SP957oMjfZjAHU6qpoNc2wQvIxBLWYa/Jg==
+
+"@volo/abp.aspnetcore.mvc.ui.theme.commercial@~4.4.4":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@volo/abp.aspnetcore.mvc.ui.theme.commercial/-/abp.aspnetcore.mvc.ui.theme.commercial-4.4.4.tgz#26edac86eeee761bbc1acee41cf5ed18f38c1fb8"
+  integrity sha512-fixiC+TRjG1vxss4974pMg1p9GWaOJfMvN7kBAcG9AnwMQdiTr2ou+66Qj7n7VA1VUMAVG404g2MH4vJmQE7bg==
+  dependencies:
+    "@abp/aspnetcore.mvc.ui.theme.shared" "~4.4.4"
+
+"@volo/abp.aspnetcore.mvc.ui.theme.lepton@4.4.4":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@volo/abp.aspnetcore.mvc.ui.theme.lepton/-/abp.aspnetcore.mvc.ui.theme.lepton-4.4.4.tgz#099ab6e358459c33a088599ac30cd6cd8d5273ae"
+  integrity sha512-3KCesG+inhX4ziGAfhpw3Jj6di8UQQA6FglT0Y1fnAonsoGVvCjSfzT7TG3W6Y0BZDLtl07Rxnzy/YGUbxX1xw==
+  dependencies:
+    "@abp/flag-icon-css" "~4.4.4"
+    "@volo/abp.aspnetcore.mvc.ui.theme.commercial" "~4.4.4"
 
 ansi-colors@^1.0.1:
   version "1.1.0"
@@ -908,6 +923,11 @@ fined@^1.0.1:
     object.defaults "^1.1.0"
     object.pick "^1.2.0"
     parse-filepath "^1.0.1"
+
+flag-icon-css@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/flag-icon-css/-/flag-icon-css-3.5.0.tgz#430747d5cb91e60babf85494de99173c16dc7cf2"
+  integrity sha512-pgJnJLrtb0tcDgU1fzGaQXmR8h++nXvILJ+r5SmOXaaL/2pocunQo2a8TAXhjQnBpRLPtZ1KCz/TYpqeNuE2ew==
 
 flagged-respawn@^1.0.0:
   version "1.0.1"

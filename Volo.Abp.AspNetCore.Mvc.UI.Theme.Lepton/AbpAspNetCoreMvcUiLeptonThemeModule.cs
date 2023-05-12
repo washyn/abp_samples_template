@@ -56,7 +56,7 @@ namespace Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton
 
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                options.FileSets.AddEmbedded<AbpAspNetCoreMvcUiLeptonThemeModule>();
+                options.FileSets.AddEmbedded<AbpAspNetCoreMvcUiLeptonThemeModule>("Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton");
             });
 
             Configure<AbpToolbarOptions>(options =>

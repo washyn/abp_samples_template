@@ -15,7 +15,7 @@ namespace Volo.Abp.LeptonTheme.Management
         {
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
-                options.FileSets.AddEmbedded<LeptonThemeManagementDomainSharedModule>();
+                options.FileSets.AddEmbedded<LeptonThemeManagementDomainSharedModule>("Volo.Abp.LeptonTheme.Management");
             });
 
             Configure<AbpLocalizationOptions>(options =>

@@ -8,6 +8,7 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AuditLogging;
@@ -24,6 +25,7 @@ using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Identity.Web;
 using Volo.Abp.IdentityServer.EntityFrameworkCore;
+using Volo.Abp.LeptonTheme.Management;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
@@ -56,7 +58,9 @@ namespace Acme.Samples;
     typeof(AbpEntityFrameworkCoreSqliteModule),
     typeof(AbpSwashbuckleModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+    // typeof(AbpAspNetCoreMvcUiBasicThemeModule),
+    typeof(AbpAspNetCoreMvcUiLeptonThemeModule),
+    typeof(LeptonThemeManagementWebModule),
 
     // Account module packages
     typeof(AbpAccountApplicationModule),

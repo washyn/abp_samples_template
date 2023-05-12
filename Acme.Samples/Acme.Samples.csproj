@@ -36,4 +36,9 @@
     <Folder Include="Migrations" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton\Volo.Abp.AspNetCore.Mvc.UI.Theme.Lepton.csproj" />
+    <ProjectReference Include="..\Volo.Abp.LeptonTheme.Management.Web\Volo.Abp.LeptonTheme.Management.Web.csproj" />
+  </ItemGroup>
+
 </Project>
