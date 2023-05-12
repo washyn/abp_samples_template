@@ -28,6 +28,7 @@ using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.Sqlite;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
+using Volo.Abp.Http.ProxyScripting.Generators.JQuery;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Identity.Web;
@@ -127,6 +128,14 @@ public class TemplateModules : AbpModule
         Configure<AbpAuditingOptions>(options =>
         {
             options.IsEnabled = false;
+        });
+        
+        Configure<DynamicJavaScriptProxyOptions>(options =>
+        {
+            // TODO: check how to works this for disable catalog proxy js generation.
+            // options.DisableModule("catalog");
+            // options.DisableModule("WashynSunatCatalogModule");
+            // options.DisableModule("api.catalog");
         });
         
         ConfigureAuthentication(context);
