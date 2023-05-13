@@ -287,8 +287,8 @@ public class CatalogMenuContributor : IMenuContributor
 
     private async Task ConfigureMainMenuAsync(MenuConfigurationContext context)
     {
-        context.Menu.Items.Insert(0,
-            new ApplicationMenuItem("Washyn.Catalog.Module", "Catalog managment", "~/catalog"));
+        context.Menu.Items.Insert(0, new ApplicationMenuItem("Washyn.Catalog", "Catalog managment", "~/catalog"));
+        context.Menu.Items.Insert(0, new ApplicationMenuItem("Washyn.CatalogManage", "Catalog managment 2", "~/catalogmanage"));
     }
 }
 

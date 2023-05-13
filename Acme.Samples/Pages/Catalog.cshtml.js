@@ -102,10 +102,9 @@ $(function () {
                     
                     let editBtn = `<button class="btn btn-sm btn-outline-warning editRow" data-id="${data.id}" data-code="${data.code}">Editar</button>`
                     let verDa = "";
-                    let agregarr = "";
+                    let agregarr = `<button class="btn btn-sm btn-outline-primary addChild" data-id="${data.id}" data-code="${data.code}">Add child</button>`;
                     if (!data.parentCode){
                         verDa = `<button class="btn btn-sm btn-outline-success showDetaile" data-code="${data.code}">Ver</button>`;
-                        // agregarr = `<button class="btn btn-sm btn-outline-secondary addItem" data-code="${data.code}">Agregar</button>`;
                     }
                     return `${editBtn} ${verDa} ${agregarr}`;
                 }

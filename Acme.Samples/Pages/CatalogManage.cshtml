@@ -1,0 +1,47 @@
+﻿@page
+@model Acme.Samples.Pages.CatalogManage
+
+@{
+    // Layout = null;
+}
+
+<abp-card>
+    <abp-card-body>
+        <abp-table class="nowrap table-sm table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Descripcion</th>
+                <th>Extra</th>
+                <th>Order</th>
+                <th>Options</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.RootDtos)
+            {
+                <tr>
+                    <td>@item.Code</td>
+                    <td>@item.Description</td>
+                    <td>@item.ExtraDescription</td>
+                    <td>@item.DisplayOrder</td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-primary" href="~/CatalogManage?Code=@item.Code">Ver</a>
+                        <a class="btn btn-sm btn-outline-success">Add child</a>
+                        <a class="btn btn-sm btn-outline-warning">Editar</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <div class="d-grid">
+                        <abp-button  button-type="Outline_Primary" size="Small" text="Agregar" id="addButton"></abp-button>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </abp-table>
+    </abp-card-body>
+</abp-card>
