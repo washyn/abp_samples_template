@@ -1,8 +1,6 @@
 using Acme.Samples.Pages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.Autofac;
-using Volo.Abp.BlobStoring;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
 
@@ -21,8 +19,8 @@ namespace Acme.Samples;
 // [DependsOn(typeof(Washyn.Billing.OtherSettings.BillingOtherSettingsModule))]
 // [DependsOn(typeof(Washyn.OrganizationUnit.OrganizationUnitModule))]
 // [DependsOn(typeof(Washyn.ProfilePicture.ProfilePictureModule))]
-[DependsOn(typeof(Washyn.Widgets.WashynWidgetModule))]
-[DependsOn(typeof(Washyn.Sunat.Catalog.WashynSunatCatalogModule))]
+// [DependsOn(typeof(Washyn.Widgets.WashynWidgetModule))]
+// [DependsOn(typeof(Washyn.Sunat.Catalog.WashynSunatCatalogModule))]
 
 // [DependsOn(typeof(Washyn.ComprobantePdf.ComprobantePdfModule))]
 // [DependsOn(typeof(Washyn.SbTheme.WashynSbThemeModule))]
@@ -32,17 +30,17 @@ public class SamplesModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        Configure<AbpBlobStoringOptions>(options =>
-        {
-            options.Containers.ConfigureDefault(container =>
-            {
-                // TODO: set storage 
-                // container.UseFileSystem(fileSystem =>
-                // {
-                //     fileSystem.BasePath = "C:\\my-files";
-                // });
-            });
-        });
+        // Configure<AbpBlobStoringOptions>(options =>
+        // {
+        //     options.Containers.ConfigureDefault(container =>
+        //     {
+        //         // TODO: set storage 
+        //         container.UseFileSystem(fileSystem =>
+        //         {
+        //             fileSystem.BasePath = "C:\\my-files";
+        //         });
+        //     });
+        // });
         
         Configure<AbpNavigationOptions>(options =>
         {
