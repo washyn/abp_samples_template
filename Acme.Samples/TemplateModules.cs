@@ -1,5 +1,6 @@
 using System;
 using Acme.Samples.Data;
+using Acme.Samples.Pages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

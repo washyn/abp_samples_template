@@ -1,8 +1,10 @@
+using Acme.Samples.Pages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
 using Volo.Abp.Autofac;
 using Volo.Abp.BlobStoring;
 using Volo.Abp.Modularity;
+using Volo.Abp.UI.Navigation;
 
 
 namespace Acme.Samples;
@@ -40,6 +42,11 @@ public class SamplesModule : AbpModule
                 //     fileSystem.BasePath = "C:\\my-files";
                 // });
             });
+        });
+        
+        Configure<AbpNavigationOptions>(options =>
+        {
+            options.MenuContributors.Add(new CatalogMenuContributor());
         });
     }
 }
