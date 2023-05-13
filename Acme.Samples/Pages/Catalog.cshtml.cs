@@ -33,6 +33,7 @@ public class CatalogModule : AbpModule
 {
 }
 
+// TODO: add test for validate... use cases...add folder test
 // agregar y editar para un child...
 // se puede mejorar, removiendo este app service y teniendo solo el appservice para implementarlo en el controller y usar el repo para insertar en el controller.
 // [Authorize]
@@ -156,16 +157,6 @@ public class CatalogFilter : PagedAndSortedResultRequestDto
     [CanBeNull] public string Code { get; set; }
     [CanBeNull] public string Grouper { get; set; }
     [CanBeNull] public string ParentCode { get; set; }
-
-    // public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    // {
-    //     base.Validate(validationContext);
-    //     if (string.IsNullOrEmpty(Code))
-    //     {
-    //         Code = "";
-    //     }
-    //     return new List<ValidationResult>();
-    // }
 }
 
 public class CreateEntityChild
@@ -320,6 +311,7 @@ public class CatalogRepository : EfCoreRepository<SamplesDbContext, CatalogEntit
                 Description = a.Description,
                 ExtraDescription = a.ExtraDescription,
             })
+            .AsNoTracking()
             .ToListAsync();
     }
     
@@ -339,11 +331,20 @@ public class CatalogRepository : EfCoreRepository<SamplesDbContext, CatalogEntit
                 Description = a.Description,
                 ExtraDescription = a.ExtraDescription,
             })
+            .AsNoTracking()
             .ToListAsync();
     }
     
     public async Task InsertRootAsync(CreateEntityRoot root)
     {
+        var roots = await GetRootAsync();
+        if (roots.Any(a => a.Code == root.Code))
+        {
+            throw new AbpValidationException(new List<ValidationResult>()
+            {
+                new ValidationResult("El codigo ya existe.", new []{nameof(CreateEntityRoot.Code)})
+            });
+        }
         await this.InsertAsync(new CatalogEntity()
         {
             Code = root.Code,
