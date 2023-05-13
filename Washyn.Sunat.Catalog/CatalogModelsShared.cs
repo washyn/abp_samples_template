@@ -1033,4 +1033,3 @@ public class CatalogViewDataObjects
         {C60.F60,"N° 60 - Código de tipo de dirección"},
     };
 }
-

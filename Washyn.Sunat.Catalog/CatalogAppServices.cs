@@ -6,7 +6,6 @@ using Washyn.Abp.Select2;
 
 namespace Washyn.Sunat.Catalog;
 
-
 #region Select app services
 
 // crear controllers directamente y no app service para agregarle cache, y desarctivar el remote service en esto app services...
@@ -572,7 +571,3 @@ public class C60AppService : SunatCatalogBase, IC60AppService
 }
 
 #endregion
-
-
-
-

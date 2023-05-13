@@ -1,34 +1,22 @@
 ﻿using Localization.Resources.AbpUi;
-using Microsoft.Extensions.FileProviders;
-using Newtonsoft.Json;
-using Volo.Abp.Application.Services;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap;
 using Volo.Abp.Autofac;
-using Volo.Abp.DependencyInjection;
 using Volo.Abp.Http.ProxyScripting.Generators.JQuery;
 using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation;
-using Volo.Abp.VirtualFileSystem;
 using Washyn.Abp.Select2;
-using Washyn.Sunat.Catalog.Select;
 
 namespace Washyn.Sunat.Catalog;
 
-[DependsOn(typeof(AbpAutofacModule))]
+[DependsOn(typeof(SunatCatalogSharedModule))]
 [DependsOn(typeof(EasyAbp.Abp.TagHelperPlus.AbpTagHelperPlusModule))]
-[DependsOn(typeof(AbpVirtualFileSystemModule))]
 [DependsOn(typeof(AbpAspNetCoreMvcUiBootstrapModule))]
 [DependsOn(typeof(AbpAspNetCoreMvcModule))]
 public class WashynSunatCatalogModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        Configure<AbpVirtualFileSystemOptions>(options =>
-        {
-            options.FileSets.AddEmbedded<WashynSunatCatalogModule>("Washyn.Sunat.Catalog");
-        });
-        
         Configure<AbpNavigationOptions>(options =>
         {
             options.MenuContributors.Add(new SunatCatalogMenuContributor());

@@ -8,8 +8,6 @@ namespace Washyn.Sunat.Catalog;
 
 #region Catalog data provider
 
-// esto ya deberia haber injectado el 
-// esto ya deberia haber injectado el 
 public abstract class SunatCatalogBase : AbstractEntitySelectAppService<string>
 {
     public readonly CatalogDataProvider CatalogDataProvider;
