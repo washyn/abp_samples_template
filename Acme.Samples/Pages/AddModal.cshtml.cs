@@ -4,15 +4,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Acme.Samples.Pages;
 
-public class AddChildModal : PageModel
+public class AddModal : PageModel
 {
-
     [BindProperty]
-    public CreateEntityChild EntityChild { get; set; }
+    public CreateEntityRoot EntityRoot { get; set; }
 
-    [HiddenInput]
-    [BindProperty(SupportsGet = true)]
-    public string ParentCode { get; set; }
 
     [Inject]
     public ICatalogEntityAppService AppService { get; set; }
@@ -20,9 +16,8 @@ public class AddChildModal : PageModel
     {
         
     }
-    
     public async Task OnPostAsync()
     {
-        await AppService.CreateChildAsync(ParentCode, EntityChild);
+        await AppService.CreateRootAsync(EntityRoot);
     }
 }

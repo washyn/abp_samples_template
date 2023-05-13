@@ -1,0 +1,20 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model Acme.Samples.Pages.AddModal
+
+@{
+    Layout = null;
+}
+<abp-modal size="Large">
+    <abp-modal-header title="Crear"></abp-modal-header>
+    <form asp-page="AddModal">
+        <abp-modal-body>
+            <abp-input asp-for="@Model.EntityRoot.Code"></abp-input>
+            <abp-input asp-for="@Model.EntityRoot.Description"></abp-input>
+            <abp-input asp-for="@Model.EntityRoot.ExtraDescription"></abp-input>
+            <abp-input asp-for="@Model.EntityRoot.DisplayOrder"></abp-input>
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel | AbpModalButtons.Save)"></abp-modal-footer>
+    </form>
+</abp-modal>

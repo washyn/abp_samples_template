@@ -7,10 +7,14 @@
     Layout = null;
 }
 <abp-modal size="Large">
-    <abp-modal-header title="Crear child"></abp-modal-header>
+    <abp-modal-header title="@($"Crear child {Model.ParentCode}")"></abp-modal-header>
     <form asp-page="AddChildModal">
         <abp-modal-body>
-            
+            <abp-input asp-for="EntityChild.Code"></abp-input>
+            <abp-input asp-for="EntityChild.Description"></abp-input>
+            <abp-input asp-for="EntityChild.ExtraDescription"></abp-input>
+            <abp-input asp-for="EntityChild.DisplayOrder"></abp-input>
+            <abp-input asp-for="ParentCode"></abp-input>
         </abp-modal-body>
         <abp-modal-footer buttons="@(AbpModalButtons.Cancel | AbpModalButtons.Save)"></abp-modal-footer>
     </form>

@@ -323,6 +323,7 @@ public class CatalogRepository : EfCoreRepository<SamplesDbContext, CatalogEntit
         {
             throw new EntityNotFoundException();
         }
+        // todo: deberia filtrar en base al parencode y grouper se asume que todos estos tienen un mismo grouper...
         return await dbSet.Where(a => a.ParentCode == root.Code)
             .Select(a => new CatalogEntityChildDto
             {

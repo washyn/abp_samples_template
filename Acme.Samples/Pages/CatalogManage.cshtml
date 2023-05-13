@@ -5,6 +5,10 @@
     // Layout = null;
 }
 
+@section scripts {
+    <abp-script src="/Pages/CatalogManage.cshtml.js"></abp-script>
+}
+
 <abp-card>
     <abp-card-body>
         <abp-table class="nowrap table-sm table-striped table-bordered">
@@ -27,7 +31,7 @@
                     <td>@item.DisplayOrder</td>
                     <td>
                         <a class="btn btn-sm btn-outline-primary" href="~/CatalogManage?Code=@item.Code">Ver</a>
-                        <a class="btn btn-sm btn-outline-success">Add child</a>
+                        <a class="btn btn-sm btn-outline-success addChild" data-code="@item.Code">Add child</a>
                         <a class="btn btn-sm btn-outline-warning">Editar</a>
                     </td>
                 </tr>
