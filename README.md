@@ -6,7 +6,7 @@
 - imrpoove widget for move
 - improve catalog for integrate
 - agregar componente text area...
-
+- hay un modulo de catalogo, convertir a modulo
 ## About this solution
 
 This is a minimalist, non-layered startup solution with the ABP Framework. All the fundamental ABP modules are already installed.
