@@ -91,9 +91,9 @@ public class Startup
                 var directoryInfo = new DirectoryInfo(path);
                 var folder = string.Empty;
     #if DEBUG
-                folder = Path.Combine(directoryInfo.Parent.FullName, "Washyn.Samples","bin","Debug","net7.0");
+                folder = Path.Combine(directoryInfo.Parent.FullName, "Washyn.Identity","bin","Debug","net7.0");
     #else
-                    folder = Path.Combine(directoryInfo.Parent.FullName, "Washyn.Samples","bin","Release","net7.0");
+                    folder = Path.Combine(directoryInfo.Parent.FullName, "Washyn.Identity","bin","Release","net7.0");
     #endif
                 options.PlugInSources.AddFolder(folder);
             }
@@ -103,9 +103,9 @@ public class Startup
                 var directoryInfo = new DirectoryInfo(path);
                 var folder = string.Empty;
 #if DEBUG
-                folder = Path.Combine(directoryInfo.Parent.FullName, "Washyn.Samples","bin","Debug","net6.0");
+                folder = Path.Combine(directoryInfo.Parent.FullName, "Washyn.Identity","bin","Debug","net6.0");
 #else
-                folder = Path.Combine(directoryInfo.Parent.FullName, "Washyn.Samples","bin","Release","net6.0");
+                folder = Path.Combine(directoryInfo.Parent.FullName, "Washyn.Identity","bin","Release","net6.0");
 #endif
                 options.PlugInSources.AddFolder(folder);
             }

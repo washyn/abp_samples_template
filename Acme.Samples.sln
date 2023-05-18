@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Select2.Localization
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyAbp.LoggingManagement.Web", "EasyAbp.LoggingManagement.Web\EasyAbp.LoggingManagement.Web.csproj", "{136FF913-7C50-4085-AB7B-842060AF993E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Identity", "Acme.Identity\Acme.Identity.csproj", "{F37058E8-9E45-4C07-8E32-0999478822BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.Identity", "Washyn.Identity\Washyn.Identity.csproj", "{F37058E8-9E45-4C07-8E32-0999478822BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.OrganizationUnit", "Washyn.OrganizationUnit\Washyn.OrganizationUnit.csproj", "{0E299FD3-9B7A-460B-8E97-CFEAA97337FC}"
 EndProject
@@ -38,6 +38,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Dastone", "Washyn.Dastone\Washyn.Dastone.csproj", "{94FF38B2-F7BE-4F08-B719-9023BD7D22B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.ComprobantePdf", "Washyn.ComprobantePdf\Washyn.ComprobantePdf.csproj", "{0F2D2A04-3F28-454C-A907-EBB389431D5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Washyn.Identity", "Washyn.Identity\Washyn.Identity.csproj", "{600C8E9E-F8B0-4940-B395-614B442EF70C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,6 +131,10 @@ Global
 		{0F2D2A04-3F28-454C-A907-EBB389431D5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F2D2A04-3F28-454C-A907-EBB389431D5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F2D2A04-3F28-454C-A907-EBB389431D5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{600C8E9E-F8B0-4940-B395-614B442EF70C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{600C8E9E-F8B0-4940-B395-614B442EF70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{600C8E9E-F8B0-4940-B395-614B442EF70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{600C8E9E-F8B0-4940-B395-614B442EF70C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
