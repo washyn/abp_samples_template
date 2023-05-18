@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using EasyAbp.LoggingManagement.Web.EasyAbp.LoggingManagement.SystemLogs;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.Auditing;

@@ -1,4 +1,5 @@
-﻿using Localization.Resources.AbpUi;
+﻿using System.Threading.Tasks;
+using Localization.Resources.AbpUi;
 using Volo.Abp.UI.Navigation;
 
 namespace Washyn.SbTheme.Menus;

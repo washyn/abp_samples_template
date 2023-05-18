@@ -1,4 +1,7 @@
-﻿namespace Washyn.ComprobantePdf.Templates;
+﻿using System;
+using System.Collections.Generic;
+
+namespace Washyn.ComprobantePdf.Templates;
 
 public class ComprobanteModel
 {

@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc;
 
-namespace Washyn.Billing.OtherSettings.Pages.Components.BillingLogoSetting;
-
-public class BillingLogoSettingViewComponent : AbpViewComponent
+namespace Washyn.Billing.OtherSettings.Pages.Components.BillingLogoSetting
 {
-    public IViewComponentResult Invoke()
+    public class BillingLogoSettingViewComponent : AbpViewComponent
     {
-        return View("~/Pages/Components/BillingLogoSetting/Default.cshtml");
+        public IViewComponentResult Invoke()
+        {
+            return View("~/Pages/Components/BillingLogoSetting/Default.cshtml");
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Volo.Abp.AspNetCore.Mvc;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Packages.CropperJs;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;

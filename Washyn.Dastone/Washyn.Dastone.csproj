@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
+    <LangVersion>11</LangVersion>
     <TargetFramework>$(FrameworkVersion)</TargetFramework>
     <OutputType>Library</OutputType>
     <IsPackable>true</IsPackable>
