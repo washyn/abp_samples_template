@@ -1,9 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Washyn.Abp.Select2;
 
@@ -63,7 +67,7 @@ public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TDispl
         , ISelectAppService<TKey>
     where TLookupEntity : LookupEntity<TKey>
 {
-    
+
     #region Publics
     public virtual async Task<LookupDto<TKey>> GetAsync(TKey id)
     {
@@ -81,7 +85,7 @@ public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TDispl
         var entityDtos = await MapToGetListOutputDtosAsync(entities);
         return new PagedResultDto<LookupDto<TKey>>(totalCount, entityDtos);
     }
-    
+
     #endregion
 
     #region Maps
@@ -108,7 +112,7 @@ public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TDispl
     #endregion
 
     #region Select queriable
-    
+
     protected virtual async Task<TLookupEntity> GetEntityByIdAsync(TKey id)
     {
         var query = await CreateSelectQueryAsync();
@@ -120,7 +124,7 @@ public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TDispl
 
         return result;
     }
-    
+
     protected virtual IQueryable<TLookupEntity> ApplyPaging(IQueryable<TLookupEntity> query, LookupRequestDto input)
     {
         //Try to use paging if available
@@ -148,7 +152,7 @@ public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TDispl
     }
     protected virtual IQueryable<TLookupEntity> ApplyFilter(IQueryable<TLookupEntity> query, LookupRequestDto input)
     {
-        return query.WhereIf(!string.IsNullOrEmpty(input.Filter), 
+        return query.WhereIf(!string.IsNullOrEmpty(input.Filter),
             entity => entity.DisplayName.Contains(input.Filter)
                       || entity.Id.ToString().Contains(input.Filter));
     }
@@ -156,7 +160,7 @@ public abstract class AbstractEntitySelectAppService<TKey, TLookupEntity, TDispl
     {
         throw new NotImplementedException();
     }
-    
+
     #endregion
 }
 
@@ -185,7 +189,7 @@ public abstract class SelectAppService<TEntity, TKey>
     {
         Repository = repository;
     }
-    
+
     /// <summary>
     /// Override this for customize display name.
     /// </summary>
@@ -195,10 +199,10 @@ public abstract class SelectAppService<TEntity, TKey>
         var queryAble = await Repository.GetQueryableAsync();
         Logger.LogWarning("Select by default display name show Id.");
         return queryAble.Select(a => new LookupEntity<TKey>()
-            {
-                Id = a.Id,
-                DisplayName = a.Id.ToString(),
-            })
+        {
+            Id = a.Id,
+            DisplayName = a.Id.ToString(),
+        })
             .AsNoTracking();
     }
 }

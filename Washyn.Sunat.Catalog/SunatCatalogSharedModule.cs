@@ -1,16 +1,18 @@
 ﻿using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
 
-namespace Washyn.Sunat.Catalog;
-
-[DependsOn(typeof(AbpVirtualFileSystemModule))]
-public class SunatCatalogSharedModule : AbpModule
+namespace Washyn.Sunat.Catalog
 {
-    public override void ConfigureServices(ServiceConfigurationContext context)
+
+    [DependsOn(typeof(AbpVirtualFileSystemModule))]
+    public class SunatCatalogSharedModule : AbpModule
     {
-        Configure<AbpVirtualFileSystemOptions>(options =>
+        public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            options.FileSets.AddEmbedded<SunatCatalogSharedModule>("Washyn.Sunat.Catalog");
-        });
+            Configure<AbpVirtualFileSystemOptions>(options =>
+            {
+                options.FileSets.AddEmbedded<SunatCatalogSharedModule>("Washyn.Sunat.Catalog");
+            });
+        }
     }
 }

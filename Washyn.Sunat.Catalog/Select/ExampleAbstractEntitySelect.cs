@@ -1,63 +1,66 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.AspNetCore.Mvc;
 using Washyn.Abp.Select2;
 
-namespace Washyn.Sunat.Catalog.Select;
-
-[RemoteService(isEnabled: false)]
-public class ExampleAbstractEntitySelectAppService
+namespace Washyn.Sunat.Catalog.Select
+{
+    [RemoteService(isEnabled: false)]
+    public class ExampleAbstractEntitySelectAppService
     : AbstractEntitySelectAppService<string>
         , IExampleAbstractEntitySelectAppService
-{
-    protected override Task<IQueryable<LookupEntity<string>>> CreateSelectQueryAsync()
     {
-        return Task.FromResult(TipoUnidadMedidaComercial.GetValues().Select(a => new LookupEntity<string>()
+        protected override Task<IQueryable<LookupEntity<string>>> CreateSelectQueryAsync()
         {
-            Id = a.Codigo,
-            DisplayName = a.Descripcion,
-        }));
+            return Task.FromResult(TipoUnidadMedidaComercial.GetValues().Select(a => new LookupEntity<string>()
+            {
+                Id = a.Codigo,
+                DisplayName = a.Descripcion,
+            }));
+        }
     }
-}
 
-public interface IExampleAbstractEntitySelectAppService : ISelectAppService<string>
-{
-    
-}
+    public interface IExampleAbstractEntitySelectAppService : ISelectAppService<string>
+    {
 
-[Route("api/app/example-abstract-entity-select")]
-public class ExampleAbstractEntitySelectController : AbpController, IExampleAbstractEntitySelectAppService
-{
-    private readonly IExampleAbstractEntitySelectAppService _appService;
-    
-    public ExampleAbstractEntitySelectController(IExampleAbstractEntitySelectAppService appService)
-    {
-        _appService = appService;
     }
-    
-    [HttpGet]
-    [Route("{id}")]
-    public async Task<LookupDto<string>> GetAsync(string id)
-    {
-        return await _appService.GetAsync(id);
-    }
-    [HttpGet]
-    public async Task<PagedResultDto<LookupDto<string>>> GetListAsync(LookupRequestDto input)
-    {
-        return await _appService.GetListAsync(input);
-    }
-}
 
-public class TipoUnidadMedidaComercial
-{
-    public string Codigo { get; set; }
-    public string Descripcion { get; set; }
-    
-    public static IQueryable<TipoUnidadMedidaComercial> GetValues()
+    [Route("api/app/example-abstract-entity-select")]
+    public class ExampleAbstractEntitySelectController : AbpController, IExampleAbstractEntitySelectAppService
     {
-        var a = new List<TipoUnidadMedidaComercial>()
+        private readonly IExampleAbstractEntitySelectAppService _appService;
+
+        public ExampleAbstractEntitySelectController(IExampleAbstractEntitySelectAppService appService)
+        {
+            _appService = appService;
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<LookupDto<string>> GetAsync(string id)
+        {
+            return await _appService.GetAsync(id);
+        }
+        [HttpGet]
+        public async Task<PagedResultDto<LookupDto<string>>> GetListAsync(LookupRequestDto input)
+        {
+            return await _appService.GetListAsync(input);
+        }
+    }
+
+    public class TipoUnidadMedidaComercial
+    {
+        public string Codigo { get; set; }
+        public string Descripcion { get; set; }
+
+        public static IQueryable<TipoUnidadMedidaComercial> GetValues()
+        {
+            var a = new List<TipoUnidadMedidaComercial>()
         {
             new TipoUnidadMedidaComercial()
             {
@@ -370,83 +373,83 @@ public class TipoUnidadMedidaComercial
                 Descripcion = "YARDA CUADRADA"
             }
         };
-        return a.AsQueryable();
+            return a.AsQueryable();
+        }
     }
-}
 
-public class TipoTributo
-{
-    public string Codigo { get; set; }
-    public string Descripcion { get; set; }
-    public string Nombre { get; set; }
-    public string CodigoInternacional { get; set; }
-        
-    public static List<TipoTributo> GetValues()
+    public class TipoTributo
     {
-        // [
-        // {
-        //     "codigo": "1000",
-        //     "descripcion": "IGV Impuesto General a las Ventas",
-        //     "codigo_internacional": "VAT",
-        //     "nombre": "IGV"
-        // },
-        // {
-        //     "codigo": "1016",
-        //     "descripcion": "Impuesto a la Venta Arroz Pilado",
-        //     "codigo_internacional": "VAT",
-        //     "nombre": "IVAP"
-        // },
-        // {
-        //     "codigo": "2000",
-        //     "descripcion": "ISC Impuesto Selectivo al Consumo",
-        //     "codigo_internacional": "EXC",
-        //     "nombre": "ISC"
-        // },
-        // {
-        //     "codigo": "3000",
-        //     "descripcion": "Impuesto a la Renta",
-        //     "codigo_internacional": "TOX",
-        //     "nombre": "IR"
-        // },
-        // {
-        //     "codigo": "7152",
-        //     "descripcion": "Impuesto a la bolsa plastica",
-        //     "codigo_internacional": "OTH",
-        //     "nombre": "ICBPER"
-        // },
-        // {
-        //     "codigo": "9995",
-        //     "descripcion": "Exportación",
-        //     "codigo_internacional": "FRE",
-        //     "nombre": "EXP"
-        // },
-        // {
-        //     "codigo": "9996",
-        //     "descripcion": "Gratuito",
-        //     "codigo_internacional": "FRE",
-        //     "nombre": "GRA"
-        // },
-        // {
-        //     "codigo": "9997",
-        //     "descripcion": "Exonerado",
-        //     "codigo_internacional": "VAT",
-        //     "nombre": "EXO"
-        // },
-        // {
-        //     "codigo": "9998",
-        //     "descripcion": "Inafecto",
-        //     "codigo_internacional": "FRE",
-        //     "nombre": "INA"
-        // },
-        // {
-        //     "codigo": "9999",
-        //     "descripcion": "Otros tributos",
-        //     "codigo_internacional": "OTH",
-        //     "nombre": "OTROS"
-        // }
-        // ]
+        public string Codigo { get; set; }
+        public string Descripcion { get; set; }
+        public string Nombre { get; set; }
+        public string CodigoInternacional { get; set; }
 
-        return new List<TipoTributo>()
+        public static List<TipoTributo> GetValues()
+        {
+            // [
+            // {
+            //     "codigo": "1000",
+            //     "descripcion": "IGV Impuesto General a las Ventas",
+            //     "codigo_internacional": "VAT",
+            //     "nombre": "IGV"
+            // },
+            // {
+            //     "codigo": "1016",
+            //     "descripcion": "Impuesto a la Venta Arroz Pilado",
+            //     "codigo_internacional": "VAT",
+            //     "nombre": "IVAP"
+            // },
+            // {
+            //     "codigo": "2000",
+            //     "descripcion": "ISC Impuesto Selectivo al Consumo",
+            //     "codigo_internacional": "EXC",
+            //     "nombre": "ISC"
+            // },
+            // {
+            //     "codigo": "3000",
+            //     "descripcion": "Impuesto a la Renta",
+            //     "codigo_internacional": "TOX",
+            //     "nombre": "IR"
+            // },
+            // {
+            //     "codigo": "7152",
+            //     "descripcion": "Impuesto a la bolsa plastica",
+            //     "codigo_internacional": "OTH",
+            //     "nombre": "ICBPER"
+            // },
+            // {
+            //     "codigo": "9995",
+            //     "descripcion": "Exportación",
+            //     "codigo_internacional": "FRE",
+            //     "nombre": "EXP"
+            // },
+            // {
+            //     "codigo": "9996",
+            //     "descripcion": "Gratuito",
+            //     "codigo_internacional": "FRE",
+            //     "nombre": "GRA"
+            // },
+            // {
+            //     "codigo": "9997",
+            //     "descripcion": "Exonerado",
+            //     "codigo_internacional": "VAT",
+            //     "nombre": "EXO"
+            // },
+            // {
+            //     "codigo": "9998",
+            //     "descripcion": "Inafecto",
+            //     "codigo_internacional": "FRE",
+            //     "nombre": "INA"
+            // },
+            // {
+            //     "codigo": "9999",
+            //     "descripcion": "Otros tributos",
+            //     "codigo_internacional": "OTH",
+            //     "nombre": "OTROS"
+            // }
+            // ]
+
+            return new List<TipoTributo>()
         {
             new TipoTributo
             {
@@ -519,5 +522,6 @@ public class TipoTributo
                 Nombre = "OTROS"
             }
         };
+        }
     }
 }

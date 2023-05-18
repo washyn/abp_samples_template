@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\template.props" />
   <PropertyGroup>
+
+    <LangVersion>11</LangVersion>
     <TargetFramework>$(FrameworkVersion)</TargetFramework>
     <IsPackable>true</IsPackable>
     <OutputType>Library</OutputType>

@@ -13,29 +13,32 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 
 //using Acme.Identity.IdentityUser;
 
-namespace Acme.Samples.Data;
-
-[ConnectionStringName("Default")]
-public class SamplesDbContext : AbpDbContext<SamplesDbContext>
+namespace Acme.Samples.Data
 {
-    public SamplesDbContext(DbContextOptions<SamplesDbContext> options)
-        : base(options)
+    
+    [ConnectionStringName("Default")]
+    public class SamplesDbContext : AbpDbContext<SamplesDbContext>
     {
+        public SamplesDbContext(DbContextOptions<SamplesDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<CatalogEntity> CatalogEntities { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            /* Include modules to your migration db context */
+            /* Configure your own entities here */
+        
+            builder.ConfigurePermissionManagement();
+            builder.ConfigureSettingManagement();
+            builder.ConfigureAuditLogging();
+            builder.ConfigureIdentity();
+            builder.ConfigureIdentityServer();
+            builder.ConfigureFeatureManagement();
+            builder.ConfigureTenantManagement();
+        }
     }
 
-    public DbSet<CatalogEntity> CatalogEntities { get; set; }
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
-        /* Include modules to your migration db context */
-        /* Configure your own entities here */
-        
-        builder.ConfigurePermissionManagement();
-        builder.ConfigureSettingManagement();
-        builder.ConfigureAuditLogging();
-        builder.ConfigureIdentity();
-        builder.ConfigureIdentityServer();
-        builder.ConfigureFeatureManagement();
-        builder.ConfigureTenantManagement();
-    }
 }

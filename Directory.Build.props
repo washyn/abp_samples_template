@@ -2,15 +2,15 @@
   <PropertyGroup>
 
     <!-- add only if lang version is greater than 9 -->
-    <ImplicitUsings>enable</ImplicitUsings>
-    
-    <LangVersion>latest</LangVersion>
-    
+    <!-- <ImplicitUsings>enable</ImplicitUsings> -->
+
+    <LangVersion>9</LangVersion>
+
     <AbpVersion>6.0.*</AbpVersion>
     <FrameworkVersion>net6.0</FrameworkVersion>
     <AspNetFrameworkPackageVersion>6.0.*</AspNetFrameworkPackageVersion>
 
-    
+
     <!-- Microsoft.NET.Test.Sdk https://www.nuget.org/packages/Microsoft.NET.Test.Sdk -->
     <MicrosoftNETTestSdkPackageVersion>16.9.1</MicrosoftNETTestSdkPackageVersion>
 
@@ -31,7 +31,6 @@
 
     <!-- Mongo2Go https://www.nuget.org/packages/Mongo2Go -->
     <Mongo2GoPackageVersion>3.1.1</Mongo2GoPackageVersion>
-
 
 
   </PropertyGroup>

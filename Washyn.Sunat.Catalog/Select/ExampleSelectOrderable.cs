@@ -1,44 +1,47 @@
-﻿using Volo.Abp.Application.Services;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Volo.Abp.Application.Services;
 using Washyn.Abp.Select2;
 
-namespace Washyn.Sunat.Catalog.Select;
-
-
-public class SunatCatalogEntity : LookupEntity<string>, IHasDisplayOrder<int>
+namespace Washyn.Sunat.Catalog.Select
 {
-    public int DisplayOrder { get; set; }
-}
 
-
-public class ExampleSelectOrderable : AbstractEntitySelectAppService<string, CatalogLookupEntity<string>, int>, IExampleSelectOrderable
-{
-    protected override Task<IQueryable<CatalogLookupEntity<string>>> CreateSelectQueryAsync()
+    public class SunatCatalogEntity : LookupEntity<string>, IHasDisplayOrder<int>
     {
-        var data = TipoTributoOrderable.GetValues().Select(a => new CatalogLookupEntity<string>()
-        {
-            Id = a.Codigo,
-            DisplayName = a.Descripcion,
-            DisplayOrder = a.DisplayOrder,
-        });
-        return Task.FromResult(data.AsQueryable());
+        public int DisplayOrder { get; set; }
     }
-}
 
-public interface IExampleSelectOrderable : ISelectAppService<string>
-{
-    
-}
 
-public class TipoTributoOrderable : IHasDisplayOrder<int>
-{
-    public string Codigo { get; set; }
-    public string Descripcion { get; set; }
-    public string Nombre { get; set; }
-    public string CodigoInternacional { get; set; }
-        
-    public static List<TipoTributoOrderable> GetValues()
+    public class ExampleSelectOrderable : AbstractEntitySelectAppService<string, CatalogLookupEntity<string>, int>, IExampleSelectOrderable
     {
-        return new List<TipoTributoOrderable>()
+        protected override Task<IQueryable<CatalogLookupEntity<string>>> CreateSelectQueryAsync()
+        {
+            var data = TipoTributoOrderable.GetValues().Select(a => new CatalogLookupEntity<string>()
+            {
+                Id = a.Codigo,
+                DisplayName = a.Descripcion,
+                DisplayOrder = a.DisplayOrder,
+            });
+            return Task.FromResult(data.AsQueryable());
+        }
+    }
+
+    public interface IExampleSelectOrderable : ISelectAppService<string>
+    {
+
+    }
+
+    public class TipoTributoOrderable : IHasDisplayOrder<int>
+    {
+        public string Codigo { get; set; }
+        public string Descripcion { get; set; }
+        public string Nombre { get; set; }
+        public string CodigoInternacional { get; set; }
+
+        public static List<TipoTributoOrderable> GetValues()
+        {
+            return new List<TipoTributoOrderable>()
         {
             new TipoTributoOrderable
             {
@@ -113,7 +116,8 @@ public class TipoTributoOrderable : IHasDisplayOrder<int>
                 Nombre = "OTROS"
             }
         };
-    }
+        }
 
-    public int DisplayOrder { get; set; }
+        public int DisplayOrder { get; set; }
+    }
 }
