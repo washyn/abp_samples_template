@@ -10,7 +10,7 @@ public class SunatCatalogSharedModule : AbpModule
     {
         Configure<AbpVirtualFileSystemOptions>(options =>
         {
-            options.FileSets.AddEmbedded<WashynSunatCatalogModule>("Washyn.Sunat.Catalog");
+            options.FileSets.AddEmbedded<SunatCatalogSharedModule>("Washyn.Sunat.Catalog");
         });
     }
 }

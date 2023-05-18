@@ -8,16 +8,6 @@ namespace Washyn.Sunat.Catalog;
 
 #region Catalog data provider
 
-public abstract class SunatCatalogBase : AbstractEntitySelectAppService<string>
-{
-    public readonly CatalogDataProvider CatalogDataProvider;
-
-    public SunatCatalogBase(CatalogDataProvider catalogDataProvider)
-    {
-        CatalogDataProvider = catalogDataProvider;
-    }
-}
-
 public class CatalogDataProvider : ISingletonDependency
 {
     private readonly IVirtualFileProvider _fileProvider;
@@ -26,10 +16,10 @@ public class CatalogDataProvider : ISingletonDependency
     {
         _fileProvider = fileProvider;
     }
-    
+
     #region Functions for list catalog data(read json files and parse).
 
-    
+
     public IEnumerable<CatalogViewDataObjects.C01> GetDataC01()
     {
         var strFileContent = _fileProvider.GetFileInfo(CatalogViewDataObjects.C01.F01).ReadAsString();

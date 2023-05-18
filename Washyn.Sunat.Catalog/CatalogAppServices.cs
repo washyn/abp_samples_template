@@ -6,6 +6,18 @@ using Washyn.Abp.Select2;
 
 namespace Washyn.Sunat.Catalog;
 
+
+
+public abstract class SunatCatalogBase : AbstractEntitySelectAppService<string>
+{
+    public readonly CatalogDataProvider CatalogDataProvider;
+
+    public SunatCatalogBase(CatalogDataProvider catalogDataProvider)
+    {
+        CatalogDataProvider = catalogDataProvider;
+    }
+}
+
 #region Select app services
 
 // crear controllers directamente y no app service para agregarle cache, y desarctivar el remote service en esto app services...
